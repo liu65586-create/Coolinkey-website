@@ -1,40 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { AdminProductsPanel } from "../admin/AdminProductsPanel";
+import { BiInput } from "../components/admin/BiInput";
 import { useSiteConfig } from "../context/SiteConfigContext";
-import type { Bilingual, SiteConfig } from "../types/siteConfig";
+import type { SiteConfig } from "../types/siteConfig";
 
 const SESSION_KEY = "coolinkey_admin";
-
-function BiInput({
-  label,
-  value,
-  onChange,
-}: {
-  label: string;
-  value: Bilingual;
-  onChange: (next: Bilingual) => void;
-}) {
-  return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <label className="block text-sm text-[#cccccc]">
-        <span className="mb-1 block text-xs font-semibold text-white/80">{label} · EN</span>
-        <textarea
-          className="min-h-[72px] w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
-          value={value.en}
-          onChange={(e) => onChange({ ...value, en: e.target.value })}
-        />
-      </label>
-      <label className="block text-sm text-[#cccccc]">
-        <span className="mb-1 block text-xs font-semibold text-white/80">{label} · 中文</span>
-        <textarea
-          className="min-h-[72px] w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
-          value={value.zh}
-          onChange={(e) => onChange({ ...value, zh: e.target.value })}
-        />
-      </label>
-    </div>
-  );
-}
 
 function useAdminGate() {
   const isProd = import.meta.env.PROD;
@@ -74,6 +45,7 @@ export function Admin() {
   const { config, loading, error, saveLocalOverride, resetToRepoFile, reload } = useSiteConfig();
   const [draft, setDraft] = useState<SiteConfig | null>(null);
   const [pinInput, setPinInput] = useState("");
+  const [mainTab, setMainTab] = useState<"site" | "products">("site");
   const [tab, setTab] = useState<"content" | "json">("content");
   const [rawJson, setRawJson] = useState("");
   const gate = useAdminGate();
@@ -110,14 +82,6 @@ export function Admin() {
     if (!draft || !config) return false;
     return JSON.stringify(draft) !== JSON.stringify(config);
   }, [draft, config]);
-
-  if (loading || !draft) {
-    return (
-      <div className="min-h-dvh bg-black px-4 py-16 text-white">
-        <p className="text-[#cccccc]">{error ?? "Loading…"}</p>
-      </div>
-    );
-  }
 
   if (gate.blocked) {
     return (
@@ -166,13 +130,23 @@ export function Admin() {
     );
   }
 
+  if (mainTab === "site" && (loading || !draft)) {
+    return (
+      <div className="min-h-dvh bg-black px-4 py-16 text-white">
+        <p className="text-[#cccccc]">{error ?? "Loading…"}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-dvh bg-black text-white">
       <header className="border-b border-[rgba(255,255,255,0.1)] px-4 py-4 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="text-xs font-semibold text-[#00b51a]">COOLINKEY</div>
-            <div className="text-lg font-bold">Site configuration</div>
+            <div className="text-lg font-bold">
+              {mainTab === "site" ? "Site configuration" : "Products & manuals"}
+            </div>
           </div>
           <div className="flex flex-wrap gap-2">
             <Link className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00b51a]" to="/">
@@ -189,15 +163,39 @@ export function Admin() {
         </div>
       </header>
 
-      <div className="mx-auto max-w-5xl space-y-6 px-4 py-8 sm:px-6">
+      <div className="mx-auto max-w-5xl space-y-6 px-4 py-6 sm:px-6">
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "site" ? "bg-[#00b51a] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
+            onClick={() => setMainTab("site")}
+          >
+            站点与文案
+          </button>
+          <button
+            type="button"
+            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "products" ? "bg-[#00b51a] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
+            onClick={() => setMainTab("products")}
+          >
+            产品与说明书
+          </button>
+        </div>
+
+        {mainTab === "products" ? (
+          <AdminProductsPanel />
+        ) : null}
+
+        {mainTab === "site" && draft ? (
+          <>
         <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-4 text-sm text-[#cccccc]">
           <p>
             <strong className="text-white">How publishing works:</strong> “Save in this browser” stores overrides in{" "}
             <code className="text-[#00b51a]">localStorage</code> for preview. To update the public site for everyone,
             click <strong className="text-white">Export JSON</strong>, replace{" "}
             <code className="text-[#00b51a]">public/cms/site.config.json</code> in the repo, then push to GitHub (Vercel
-            redeploys). Product images, PDFs, and specs remain in <code className="text-[#00b51a]">public/cms/products.json</code>{" "}
-            and <code className="text-[#00b51a]">public/manuals/</code>.
+            redeploys). Product catalog is edited in the <strong className="text-white">产品与说明书</strong> tab and
+            saved to <code className="text-[#00b51a]">public/cms/products.json</code>; PDF files live under{" "}
+            <code className="text-[#00b51a]">public/manuals/</code>.
           </p>
         </div>
 
@@ -472,6 +470,8 @@ export function Admin() {
             Reset to repo file (clear browser override)
           </button>
         </div>
+          </>
+        ) : null}
       </div>
     </div>
   );

@@ -31,7 +31,9 @@ Sample PDFs live under `public/manuals/{en,zh}/`. Replace with real assets while
 - **Logo image file**: place assets under `public/brand/` (default: `/brand/coolinkey-logo.png`).
 - **Admin UI**: open `/admin` locally or on your deployed domain.
   - **Production**: set `VITE_ADMIN_PIN` in Vercel env vars, redeploy, then unlock with the PIN.
-  - **Publish changes for all visitors**: use **Export JSON** in admin, replace `public/cms/site.config.json` in the repo, commit, and push (or merge `deepMerge` output carefully).
-- **Products, galleries, specs, purchase links, manual PDF paths**: still edited in `public/cms/products.json` (until a headless CMS API is wired).
+  - **Site tab → publish**: **Export JSON** → replace `public/cms/site.config.json` → push.
+  - **Products tab → publish**: **Export products.json** → replace `public/cms/products.json` → push.
+  - **Browser-only preview**: each tab has “Save in this browser” (`localStorage` keys `coolinkey_site_config_full` and `coolinkey_products_override`).
+- **Products, galleries, specs, purchase links, manual PDF paths**: edited in admin **产品与说明书** tab or directly in `public/cms/products.json` (until a headless CMS API is wired).
 
 `public/robots.txt` discourages indexing `/admin`.
