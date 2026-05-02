@@ -1,0 +1,118 @@
+{
+  "products": [
+    {
+      "slug": "smart-chain-lock",
+      "name": { "en": "Smart Chain Lock", "zh": "智能链条锁" },
+      "shortDescription": {
+        "en": "Fingerprint-enabled smart chain lock with IP67 sealing and hardened stainless steel for daily security.",
+        "zh": "支持指纹识别的智能链条锁，IP67 防护与不锈钢加固结构，适合日常安防场景。"
+      },
+      "mainImage": "https://picsum.photos/seed/coolinkeyp1/900/700",
+      "galleryImages": [
+        "https://picsum.photos/seed/coolinkeyp2/900/700",
+        "https://picsum.photos/seed/coolinkeyp3/900/700",
+        "https://picsum.photos/seed/coolinkeyp4/900/700"
+      ],
+      "specs": [
+        {
+          "key": { "en": "Protection rating", "zh": "防护等级" },
+          "value": { "en": "IP67", "zh": "IP67" }
+        },
+        {
+          "key": { "en": "Unlock", "zh": "解锁方式" },
+          "value": { "en": "Fingerprint (<0.3s)", "zh": "指纹（<0.3 秒）" }
+        },
+        {
+          "key": { "en": "Material", "zh": "材质" },
+          "value": { "en": "Stainless steel body & chain", "zh": "不锈钢锁体与链条" }
+        },
+        {
+          "key": { "en": "Power", "zh": "供电" },
+          "value": { "en": "Rechargeable Li-ion (placeholder)", "zh": "可充电锂电池（示例）" }
+        }
+      ],
+      "purchaseLinkEn": "https://www.amazon.com/",
+      "purchaseLinkZh": "https://www.jd.com/",
+      "manuals": [
+        {
+          "id": "installation",
+          "title": { "en": "Installation Guide", "zh": "安装指南" },
+          "type": "installation",
+          "pdfFileEn": "/manuals/en/chainlock_install.pdf",
+          "pdfFileZh": "/manuals/zh/chainlock_install.pdf"
+        },
+        {
+          "id": "user_manual",
+          "title": { "en": "User Manual", "zh": "用户手册" },
+          "type": "user_manual",
+          "pdfFileEn": "/manuals/en/chainlock_manual.pdf",
+          "pdfFileZh": "/manuals/zh/chainlock_manual.pdf"
+        },
+        {
+          "id": "faq",
+          "title": { "en": "FAQs", "zh": "常见问题" },
+          "type": "faq",
+          "pdfFileEn": "/manuals/en/chainlock_faq.pdf",
+          "pdfFileZh": "/manuals/zh/chainlock_faq.pdf"
+        },
+        {
+          "id": "video",
+          "title": { "en": "Video Tutorials", "zh": "视频教程" },
+          "type": "video",
+          "pdfFileEn": null,
+          "pdfFileZh": null,
+          "videoUrlEn": "https://www.youtube.com/embed/lYfkl-ZXSuw",
+          "videoUrlZh": "https://www.youtube.com/embed/lYfkl-ZXSuw"
+        }
+      ]
+    },
+    {
+      "slug": "padlock",
+      "name": { "en": "Padlock", "zh": "挂锁" },
+      "shortDescription": {
+        "en": "Example entry for future CMS-managed products.",
+        "zh": "示例：未来由 CMS 上架的挂锁产品占位数据。"
+      },
+      "mainImage": "https://picsum.photos/seed/coolinkeypad1/900/700",
+      "galleryImages": ["https://picsum.photos/seed/coolinkeypad2/900/700"],
+      "specs": [
+        {
+          "key": { "en": "Status", "zh": "状态" },
+          "value": { "en": "Sample listing", "zh": "示例列表" }
+        }
+      ],
+      "purchaseLinkEn": "https://www.amazon.com/",
+      "purchaseLinkZh": "https://www.jd.com/",
+      "manuals": [
+        {
+          "id": "installation",
+          "title": { "en": "Installation Guide", "zh": "安装指南" },
+          "type": "installation",
+          "pdfFileEn": "/manuals/en/chainlock_install.pdf",
+          "pdfFileZh": "/manuals/zh/chainlock_install.pdf"
+        },
+        {
+          "id": "user_manual",
+          "title": { "en": "User Manual", "zh": "用户手册" },
+          "type": "user_manual",
+          "pdfFileEn": "/manuals/en/chainlock_manual.pdf",
+          "pdfFileZh": "/manuals/zh/chainlock_manual.pdf"
+        },
+        {
+          "id": "faq",
+          "title": { "en": "FAQs", "zh": "常见问题" },
+          "type": "faq",
+          "pdfFileEn": "/manuals/en/chainlock_faq.pdf",
+          "pdfFileZh": "/manuals/zh/chainlock_faq.pdf"
+        },
+        {
+          "id": "video",
+          "title": { "en": "Video Tutorials", "zh": "视频教程" },
+          "type": "video",
+          "videoUrlEn": "https://www.youtube.com/embed/lYfkl-ZXSuw",
+          "videoUrlZh": "https://www.youtube.com/embed/lYfkl-ZXSuw"
+        }
+      ]
+    }
+  ]
+}

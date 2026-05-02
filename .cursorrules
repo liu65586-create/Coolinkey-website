@@ -1,0 +1,74 @@
+# COOLINKEY Website — Cursor Rules (MANDATORY)
+
+## Deployment (ENFORCED)
+
+After **every code-writing completion** for this repository, you MUST:
+
+1. **Commit and push** changes to **GitHub** (clear commit messages).
+2. **Deploy** to **Vercel** (production deploy when applicable).
+
+Local-only changes are not acceptable as a stopping point when work is finished.
+
+## Planning & UI/UX skills (mandatory references — do not free-style UI/UX)
+
+- **Superpowers** (planning / testing framework): https://github.com/obra/superpowers  
+- **Frontend Design** (production UI): https://github.com/nextlevelbuilder/ui-ux-pro-max-skill  
+
+Follow the product spec in-repo and these references; **do not invent** colors, spacing, or layout outside the documented COOLINKEY specification.
+
+## Brand & goals
+
+- Brand: **COOLINKEY** — text-only logo `coolinkey` (Inter Bold / Sora SemiBold style), lowercase consistent.  
+- First product: smart chain lock; future: padlock, bike lock.  
+- Markets: EU/US + China, **same template**, **EN / 中文** via i18n.  
+- Goals: brand + outbound purchase links + manuals preview/download (**no checkout**).
+
+## Visual tokens (strict)
+
+| Token | Hex |
+|-------|-----|
+| Background / footer / primary button border | `#000000` |
+| Text | `#ffffff` |
+| Accent (buttons, links, hover, emphasis) | `#00b51a` |
+| Muted text | `#cccccc` |
+| Card dark | `#0a0a0a`, `#111111` |
+| Nav bottom border | `1px solid rgba(255,255,255,0.1)` |
+| Nav height | `80px` |
+
+## Navigation
+
+- Items: **HOME / PRODUCT / ABOUT / CONTACT**; language switcher rightmost; mobile hamburger.  
+- Nav links: white; **hover** text `#00b51a`.  
+- Language switch changes **all copy**, **manual paths**, and **purchase URL params** (`source=coolinkey_website`, `lang=`).
+
+## Footer
+
+- `© COOLINKEY`, Privacy, GDPR/cookie statement, **grey WeChat placeholders** (no links, **no hover color change**), `support@coolinkey.com`.  
+- **ICP** line: `ICP备XXXX号` (placeholder until real filing).  
+- Comment near WeChat: `// TODO: integrate WeChat ecosystem.`
+
+## Home
+
+- Hero: `80vh`, `min-height: 600px`; gradient `#000000` → `#111111`; product image overlay **opacity 0.2**.  
+- H1: EN `COOLINKEY Smart Chain Lock` / ZH `COOLINKEY 智能链条锁`; desktop `64px`, mobile `36px`, weight `700`.  
+- Subtitle: IP67 · fingerprint · steel chain (both languages).  
+- CTAs: primary green `#00b51a`, hover `#00cc1a`; secondary black, `2px` green border, hover `rgba(0,181,26,0.1)`; gap `20px`, padding `12px 32px`, radius `8px`, font `16px` / `600`.  
+- Purchase: **region-aware** (CN vs global stores) + `?source=coolinkey_website`.  
+- Learn more: scroll to `#features` or `/product`.  
+- Three feature columns / one on mobile; spacing per spec; copy exactly as product brief.  
+- **Resources & Manuals**: four cards; modal `80vw`×`80vh`; PDF via **PDF.js**; download + close; no “coming soon” product section on home.  
+- Home manuals = **default product** (smart chain lock) only.
+
+## Product page
+
+- Dropdown (CMS-driven): black bg, white text, green border, `8px` radius.  
+- Layout: carousel + lightbox; name, description, striped specs table, buy button, manuals block.
+
+## Compliance
+
+- **react-cookie-consent**: show **only** for **EU/EEA/UK/US** geo (approximation for “欧美”).  
+- Manual paths: `/manuals/en/...` and `/manuals/zh/...`.
+
+## Stack
+
+- React + Vite; React Router; Context for locale + shopping region; i18next; JSON **CMS** under `public/cms/` (replaceable with Strapi/Contentful API later).

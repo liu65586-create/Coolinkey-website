@@ -1,0 +1,69 @@
+{
+  "nav": {
+    "home": "HOME",
+    "product": "PRODUCT",
+    "about": "ABOUT",
+    "contact": "CONTACT",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "lang": {
+    "en": "EN",
+    "zh": "中文"
+  },
+  "hero": {
+    "title": "COOLINKEY Smart Chain Lock",
+    "subtitle": "IP67 waterproof · Fingerprint unlock · Steel chain protection",
+    "buy": "Buy now",
+    "learnMore": "Learn more"
+  },
+  "features": {
+    "title_ip67": "IP67 Waterproof Design",
+    "desc_ip67": "Rated IP67, resistant to rain and dust. Works perfectly outdoors.",
+    "title_fp": "Rapid Fingerprint Unlock",
+    "desc_fp": "One-touch fingerprint sensor unlocks in under 0.3 seconds.",
+    "title_steel": "Reinforced Stainless Steel Body & Chain",
+    "desc_steel": "High-strength stainless steel resists cutting and sawing."
+  },
+  "manualsSection": {
+    "heading": "Resources & Manuals",
+    "preview": "Preview",
+    "downloadPdf": "Download PDF",
+    "close": "Close",
+    "videoNote": "YouTube (EN) — add Bilibili embed URL in CMS for ZH when available."
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "cookie": "GDPR & Cookie Statement",
+    "icp": "ICP备XXXX号",
+    "shoppingRegion": "Purchase region",
+    "regionAuto": "Auto (IP)",
+    "regionCn": "China stores",
+    "regionGlobal": "Global (Amazon)"
+  },
+  "about": {
+    "title": "About COOLINKEY",
+    "body": "COOLINKEY focuses on smart security hardware. Our first product is a fingerprint smart chain lock engineered for outdoor resilience and everyday convenience."
+  },
+  "contact": {
+    "title": "Contact",
+    "body": "For partnerships and support, email us at support@coolinkey.com."
+  },
+  "legal": {
+    "privacyTitle": "Privacy Policy",
+    "privacyBody": "This placeholder page describes how COOLINKEY processes data on this marketing site. Replace with counsel-approved text before launch.",
+    "cookieTitle": "GDPR & Cookie Statement",
+    "cookieBody": "We use first-party cookies where necessary for language preference and consent. Replace with counsel-approved text before launch."
+  },
+  "product": {
+    "selectProduct": "Product family",
+    "specs": "Specifications",
+    "manuals": "Manuals & resources",
+    "zoomHint": "Click image to enlarge"
+  },
+  "cookieBanner": {
+    "message": "We use cookies for language preference and analytics where allowed.",
+    "accept": "Accept",
+    "learnMore": "Learn more"
+  }
+}
