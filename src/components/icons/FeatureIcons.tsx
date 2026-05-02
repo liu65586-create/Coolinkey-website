@@ -1,3 +1,5 @@
+import type { FeatureIconKey } from "../../types/siteConfig";
+
 export function IconWater() {
   return (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden>
@@ -33,4 +35,16 @@ export function IconChain() {
       <path d="M16 20V14c0-2 2-4 4-4h8c2 0 4 2 4 4v6" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
+}
+
+export function renderFeatureIcon(key: FeatureIconKey) {
+  switch (key) {
+    case "fingerprint":
+      return <IconFingerprint />;
+    case "chain":
+      return <IconChain />;
+    case "water":
+    default:
+      return <IconWater />;
+  }
 }

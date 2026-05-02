@@ -6,7 +6,10 @@ import { ManualsGrid } from "../components/ManualsGrid";
 import { ProductDropdown } from "../components/ProductDropdown";
 import { ProductGallery } from "../components/ProductGallery";
 import { useCms } from "../context/CmsContext";
+import { useSiteConfig } from "../context/SiteConfigContext";
 import { useShoppingRegion } from "../context/ShoppingRegionContext";
+import type { Lang } from "../utils/siteCopy";
+import { pickBilingual } from "../utils/siteCopy";
 import { openPurchase } from "../utils/purchaseLinks";
 
 export function Product() {
@@ -14,8 +17,11 @@ export function Product() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { products, loading, getBySlug, defaultProduct } = useCms();
+  const { config } = useSiteConfig();
   const { useChinaStores } = useShoppingRegion();
-  const lang = i18n.language.startsWith("zh") ? "zh" : "en";
+  const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
+
+  const manualsHeading = pickBilingual(lang, config?.productPage?.manualsHeading, t("product.manuals"));
 
   const active = useMemo(() => {
     if (slug) return getBySlug(slug) ?? defaultProduct;
@@ -91,7 +97,7 @@ export function Product() {
           </div>
 
           <div className="mt-16 border-t border-[rgba(255,255,255,0.06)] pt-6">
-            <h2 className="mb-2 text-center text-[32px] font-bold text-white">{t("product.manuals")}</h2>
+            <h2 className="mb-2 text-center text-[32px] font-bold text-white">{manualsHeading}</h2>
             <div className="mx-auto mb-8 h-1 w-28 bg-[#00b51a]" />
             <ManualsGrid manuals={active.manuals} showHeading={false} />
           </div>

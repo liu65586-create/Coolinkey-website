@@ -2,17 +2,26 @@ import CookieConsent from "react-cookie-consent";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useGeoIpContext } from "../context/GeoIpContext";
+import { useSiteConfig } from "../context/SiteConfigContext";
+import type { Lang } from "../utils/siteCopy";
+import { pickBilingual } from "../utils/siteCopy";
 
 export function CookieConsentBanner() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { config } = useSiteConfig();
   const { showCookieBanner, loading } = useGeoIpContext();
+  const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
 
   if (loading || !showCookieBanner) return null;
+
+  const accept = pickBilingual(lang, config?.cookieBanner?.accept, t("cookieBanner.accept"));
+  const message = pickBilingual(lang, config?.cookieBanner?.message, t("cookieBanner.message"));
+  const learnMore = pickBilingual(lang, config?.cookieBanner?.learnMore, t("cookieBanner.learnMore"));
 
   return (
     <CookieConsent
       location="bottom"
-      buttonText={t("cookieBanner.accept")}
+      buttonText={accept}
       cookieName="coolinkey_cookie_consent"
       expires={180}
       style={{
@@ -32,9 +41,9 @@ export function CookieConsentBanner() {
       buttonWrapperClasses="!ml-4"
     >
       <span>
-        {t("cookieBanner.message")}{" "}
+        {message}{" "}
         <Link className="text-[#00b51a] hover:underline" to="/cookie-policy">
-          {t("cookieBanner.learnMore")}
+          {learnMore}
         </Link>
       </span>
     </CookieConsent>

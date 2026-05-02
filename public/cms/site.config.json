@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "brand": {
+    "logoSrc": "/brand/coolinkey-logo.png",
+    "logoAlt": "COOLINKEY",
+    "logoMaxHeightPx": 30
+  },
+  "modules": {
+    "homeHero": true,
+    "homeFeatures": true,
+    "homeManuals": true
+  },
+  "hero": {
+    "title": { "en": "", "zh": "" },
+    "subtitle": { "en": "", "zh": "" },
+    "backgroundImageUrl": "",
+    "overlayUsesProductImage": true
+  },
+  "features": [
+    {
+      "icon": "water",
+      "title": { "en": "", "zh": "" },
+      "description": { "en": "", "zh": "" }
+    },
+    {
+      "icon": "fingerprint",
+      "title": { "en": "", "zh": "" },
+      "description": { "en": "", "zh": "" }
+    },
+    {
+      "icon": "chain",
+      "title": { "en": "", "zh": "" },
+      "description": { "en": "", "zh": "" }
+    }
+  ],
+  "manualsSection": {
+    "heading": { "en": "", "zh": "" }
+  },
+  "productPage": {
+    "manualsHeading": { "en": "", "zh": "" }
+  },
+  "about": {
+    "title": { "en": "", "zh": "" },
+    "body": { "en": "", "zh": "" }
+  },
+  "contact": {
+    "title": { "en": "", "zh": "" },
+    "body": { "en": "", "zh": "" }
+  },
+  "legal": {
+    "privacyTitle": { "en": "", "zh": "" },
+    "privacyBody": { "en": "", "zh": "" },
+    "cookieTitle": { "en": "", "zh": "" },
+    "cookieBody": { "en": "", "zh": "" }
+  },
+  "cookieBanner": {
+    "message": { "en": "", "zh": "" },
+    "accept": { "en": "", "zh": "" },
+    "learnMore": { "en": "", "zh": "" }
+  }
+}

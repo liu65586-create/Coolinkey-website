@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import { useSiteConfig } from "../../context/SiteConfigContext";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 
 const navCls = ({ isActive }: { isActive: boolean }) =>
@@ -11,13 +12,34 @@ const navCls = ({ isActive }: { isActive: boolean }) =>
 
 export function Navbar() {
   const { t } = useTranslation();
+  const { config } = useSiteConfig();
   const [open, setOpen] = useState(false);
+
+  const logoSrc = config?.brand.logoSrc;
+  const logoAlt = config?.brand.logoAlt ?? "COOLINKEY";
+  const logoH = config?.brand.logoMaxHeightPx ?? 30;
 
   return (
     <header className="sticky top-0 z-[100] h-[80px] border-b border-[rgba(255,255,255,0.1)] bg-black">
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
-        <NavLink to="/" className="select-none font-['Sora','Inter',sans-serif] text-[22px] font-bold tracking-tight text-white hover:text-[#00b51a] sm:text-[24px]">
-          coolinkey
+        <NavLink
+          to="/"
+          className="flex select-none items-center text-white hover:opacity-90"
+          aria-label={logoAlt}
+        >
+          {logoSrc ? (
+            <img
+              src={logoSrc}
+              alt={logoAlt}
+              className="w-auto max-w-[200px] object-contain"
+              style={{ maxHeight: logoH }}
+              decoding="async"
+            />
+          ) : (
+            <span className="font-['Sora','Inter',sans-serif] text-[22px] font-bold tracking-tight sm:text-[24px]">
+              coolinkey
+            </span>
+          )}
         </NavLink>
 
         <nav className="hidden items-center gap-8 md:flex">

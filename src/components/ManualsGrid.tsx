@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSiteConfig } from "../context/SiteConfigContext";
 import type { CmsManual } from "../types/cms";
+import type { Lang } from "../utils/siteCopy";
+import { pickBilingual } from "../utils/siteCopy";
 import { ManualCard } from "./ManualCard";
 import { ManualModal } from "./ManualModal";
 
@@ -12,8 +15,11 @@ type Props = {
 
 export function ManualsGrid({ manuals, showHeading = true }: Props) {
   const { i18n, t } = useTranslation();
-  const lang = i18n.language.startsWith("zh") ? "zh" : "en";
+  const { config } = useSiteConfig();
+  const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const [active, setActive] = useState<CmsManual | null>(null);
+
+  const heading = pickBilingual(lang, config?.manualsSection?.heading, t("manualsSection.heading"));
 
   const sorted = useMemo(() => {
     const order = ["installation", "user_manual", "faq", "video"] as const;
@@ -27,7 +33,7 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
     >
       {showHeading ? (
         <>
-          <h2 className="text-center text-[32px] font-bold text-white">{t("manualsSection.heading")}</h2>
+          <h2 className="text-center text-[32px] font-bold text-white">{heading}</h2>
           <div className="mx-auto mt-4 h-1 w-28 bg-[#00b51a]" />
         </>
       ) : null}
