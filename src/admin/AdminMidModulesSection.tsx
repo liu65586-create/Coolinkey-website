@@ -3,8 +3,7 @@ import type { ManualType } from "../types/cms";
 import type { MidModuleBlock, MidSlide, MidSlideMediaKind, SiteConfig } from "../types/siteConfig";
 import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
 
-/** installation / user_manual always show when present in products.json; only these may be hidden. */
-const manualTypeOptions: ManualType[] = ["faq", "video"];
+const manualTypeOptions: ManualType[] = ["installation", "user_manual", "faq", "video"];
 
 function emptySlide(): MidSlide {
   return { mediaUrl: "", mediaKind: "image", text: { en: "", zh: "" } };
@@ -124,10 +123,10 @@ export function AdminMidModulesSection({
   return (
     <div className="space-y-10">
       <section className="space-y-3 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
-        <h2 className="text-lg font-semibold text-white">Resources & Manuals · 可隐藏类型</h2>
+        <h2 className="text-lg font-semibold text-white">Resources & Manuals · 隐藏类型</h2>
         <p className="text-sm text-[#cccccc]">
-          安装指南（installation）与用户手册（user_manual）若有数据则始终显示，不可在此隐藏。仅可隐藏 FAQ / 视频教程卡片；勾选后首页与产品页将不显示对应类型，其余卡片自动重排。若使用「仅本浏览器保存」，其他访客需导出 JSON 并更新仓库中的{" "}
-          <code className="text-[#00b51a]">public/cms/site.config.json</code> 后部署才会生效。
+          勾选后，首页与产品页不显示对应说明书卡片（installation / user_manual / faq / video），其余卡片自动重排。若使用「仅本浏览器保存」，全站访客需将导出后的{" "}
+          <code className="text-[#00b51a]">public/cms/site.config.json</code> 提交并部署后才会生效。
         </p>
         <div className="flex flex-wrap gap-4">
           {manualTypeOptions.map((t) => (
