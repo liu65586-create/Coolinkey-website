@@ -353,7 +353,9 @@ export function Admin() {
               <BiInput
                 label="Home manuals heading"
                 value={draft.manualsSection.heading}
-                onChange={(v) => setDraft({ ...draft, manualsSection: { heading: v } })}
+                onChange={(v) =>
+                  setDraft({ ...draft, manualsSection: { ...draft.manualsSection, heading: v } })
+                }
               />
               <BiInput
                 label="Product page manuals heading"
