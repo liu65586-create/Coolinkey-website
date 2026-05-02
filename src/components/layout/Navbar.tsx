@@ -20,7 +20,7 @@ export function Navbar() {
   const logoH = config?.brand.logoMaxHeightPx ?? 30;
 
   return (
-    <header className="sticky top-0 z-[100] h-[80px] border-b border-[rgba(255,255,255,0.1)] bg-[#313131]">
+    <header className="sticky top-0 z-[100] h-[80px] border-b border-[rgba(255,255,255,0.1)] bg-black">
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
         <NavLink
           to="/"
@@ -74,7 +74,7 @@ export function Navbar() {
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="border-b border-[rgba(255,255,255,0.1)] bg-[#313131] md:hidden">
+        <div id="mobile-nav" className="border-b border-[rgba(255,255,255,0.1)] bg-black md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-4">
             <NavLink to="/" end className={navCls} onClick={() => setOpen(false)}>
               {t("nav.home")}

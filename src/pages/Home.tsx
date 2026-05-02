@@ -92,7 +92,7 @@ export function Home() {
       ) : null}
 
       {modules?.homeFeatures !== false ? (
-        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-[#313131] py-20">
+        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-black py-20">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:px-6 md:grid-cols-3 md:gap-6">
             {featureDefaults.map((fd, i) => {
               const row = features[i];
