@@ -9,6 +9,7 @@ import {
 } from "react";
 import type { SiteConfig } from "../types/siteConfig";
 import { deepMerge } from "../utils/deepMerge";
+import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
 
 const STORAGE_KEY = "coolinkey_site_config_full";
 
@@ -53,7 +54,7 @@ export function SiteConfigProvider({ children }: { children: ReactNode }) {
     try {
       const repo = await fetchRepoConfig();
       const local = readLocalOverride();
-      setConfig(local ? deepMerge(repo, local) : repo);
+      setConfig(normalizeSiteConfig(local ? deepMerge(repo, local) : repo));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unknown error");
       setConfig(null);
@@ -89,8 +90,9 @@ export function SiteConfigProvider({ children }: { children: ReactNode }) {
   }, [reload]);
 
   const saveLocalOverride = useCallback((next: SiteConfig) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    setConfig(next);
+    const normalized = normalizeSiteConfig(next);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+    setConfig(normalized);
     window.dispatchEvent(new Event("coolinkey-site-config"));
   }, []);
 

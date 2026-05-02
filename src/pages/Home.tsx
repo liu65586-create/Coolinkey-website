@@ -3,11 +3,13 @@ import { Button } from "../components/Button";
 import { FeatureCard } from "../components/FeatureCard";
 import { renderFeatureIcon } from "../components/icons/FeatureIcons";
 import { ManualsGrid } from "../components/ManualsGrid";
+import { MidSplitCarousel } from "../components/MidSplitCarousel";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import { useShoppingRegion } from "../context/ShoppingRegionContext";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
+import { getVisibleManuals } from "../utils/manualsVisibility";
 import { openPurchase } from "../utils/purchaseLinks";
 
 export function Home() {
@@ -38,6 +40,14 @@ export function Home() {
   ];
 
   if (siteLoading || !config) return <div className="px-4 py-20 text-[#cccccc]">…</div>;
+
+  const hiddenManualTypes = config.manualsSection.hiddenManualTypes;
+  const visibleManuals = defaultProduct?.manuals?.length
+    ? getVisibleManuals(defaultProduct.manuals, hiddenManualTypes)
+    : [];
+
+  const midSlides = (slides: (typeof config.midModules.a.slides)[number][]) =>
+    slides.filter((s) => Boolean(s.mediaUrl?.trim()));
 
   return (
     <div>
@@ -82,7 +92,7 @@ export function Home() {
       ) : null}
 
       {modules?.homeFeatures !== false ? (
-        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-black py-20">
+        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-[#313131] py-20">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:px-6 md:grid-cols-3 md:gap-6">
             {featureDefaults.map((fd, i) => {
               const row = features[i];
@@ -102,8 +112,41 @@ export function Home() {
         </section>
       ) : null}
 
-      {modules?.homeManuals !== false && defaultProduct?.manuals?.length ? (
-        <ManualsGrid manuals={defaultProduct.manuals} />
+      {config.midModules.a.enabled && midSlides(config.midModules.a.slides).length ? (
+        <section className="border-t border-[rgba(255,255,255,0.06)] py-16">
+          <MidSplitCarousel
+            variant="imageLeft"
+            title={config.midModules.a.title}
+            slides={midSlides(config.midModules.a.slides)}
+            lang={lang}
+          />
+        </section>
+      ) : null}
+
+      {config.midModules.b.enabled && midSlides(config.midModules.b.slides).length ? (
+        <section className="border-t border-[rgba(255,255,255,0.06)] py-16">
+          <MidSplitCarousel
+            variant="textLeft"
+            title={config.midModules.b.title}
+            slides={midSlides(config.midModules.b.slides)}
+            lang={lang}
+          />
+        </section>
+      ) : null}
+
+      {config.midModules.d.enabled && midSlides(config.midModules.d.slides).length ? (
+        <section className="border-t border-[rgba(255,255,255,0.06)] py-16">
+          <MidSplitCarousel
+            variant="imageLeft"
+            title={config.midModules.d.title}
+            slides={midSlides(config.midModules.d.slides)}
+            lang={lang}
+          />
+        </section>
+      ) : null}
+
+      {modules?.homeManuals !== false && visibleManuals.length ? (
+        <ManualsGrid manuals={visibleManuals} />
       ) : null}
     </div>
   );

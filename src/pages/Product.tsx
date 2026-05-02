@@ -10,6 +10,7 @@ import { useSiteConfig } from "../context/SiteConfigContext";
 import { useShoppingRegion } from "../context/ShoppingRegionContext";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
+import { getVisibleManuals } from "../utils/manualsVisibility";
 import { openPurchase } from "../utils/purchaseLinks";
 
 export function Product() {
@@ -38,6 +39,9 @@ export function Product() {
   const name = active ? (lang === "zh" ? active.name.zh : active.name.en) : "";
   const desc = active ? (lang === "zh" ? active.shortDescription.zh : active.shortDescription.en) : "";
   const gallery = active ? [active.mainImage, ...active.galleryImages] : [];
+  const visibleManuals = active
+    ? getVisibleManuals(active.manuals, config?.manualsSection?.hiddenManualTypes)
+    : [];
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -96,11 +100,13 @@ export function Product() {
             </div>
           </div>
 
-          <div className="mt-16 border-t border-[rgba(255,255,255,0.06)] pt-6">
-            <h2 className="mb-2 text-center text-[32px] font-bold text-white">{manualsHeading}</h2>
-            <div className="mx-auto mb-8 h-1 w-28 bg-[#00b51a]" />
-            <ManualsGrid manuals={active.manuals} showHeading={false} />
-          </div>
+          {visibleManuals.length ? (
+            <div className="mt-16 border-t border-[rgba(255,255,255,0.06)] pt-6">
+              <h2 className="mb-2 text-center text-[32px] font-bold text-white">{manualsHeading}</h2>
+              <div className="mx-auto mb-8 h-1 w-28 bg-[#00b51a]" />
+              <ManualsGrid manuals={visibleManuals} showHeading={false} />
+            </div>
+          ) : null}
         </>
       )}
     </div>

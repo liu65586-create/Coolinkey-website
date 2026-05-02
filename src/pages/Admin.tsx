@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { AdminMidModulesSection } from "../admin/AdminMidModulesSection";
 import { AdminProductsPanel } from "../admin/AdminProductsPanel";
 import { BiInput } from "../components/admin/BiInput";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import type { SiteConfig } from "../types/siteConfig";
+import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
 
 const SESSION_KEY = "coolinkey_admin";
 
@@ -52,8 +54,9 @@ export function Admin() {
 
   useEffect(() => {
     if (config) {
-      setDraft(structuredClone(config));
-      setRawJson(JSON.stringify(config, null, 2));
+      const c = normalizeSiteConfig(structuredClone(config));
+      setDraft(c);
+      setRawJson(JSON.stringify(c, null, 2));
     }
   }, [config]);
 
@@ -73,7 +76,7 @@ export function Admin() {
   const onImportFile = async (file: File | null) => {
     if (!file) return;
     const text = await file.text();
-    const parsed = JSON.parse(text) as SiteConfig;
+    const parsed = normalizeSiteConfig(JSON.parse(text) as SiteConfig);
     setDraft(parsed);
     setRawJson(JSON.stringify(parsed, null, 2));
   };
@@ -85,7 +88,7 @@ export function Admin() {
 
   if (gate.blocked) {
     return (
-      <div className="min-h-dvh bg-black px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#313131] px-4 py-16 text-white">
         <h1 className="text-2xl font-bold">Admin disabled</h1>
         <p className="mt-4 max-w-2xl text-[#cccccc]">
           Production deployments must set <code className="text-[#00b51a]">VITE_ADMIN_PIN</code> in Vercel
@@ -100,7 +103,7 @@ export function Admin() {
 
   if (!canEdit) {
     return (
-      <div className="min-h-dvh bg-black px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#313131] px-4 py-16 text-white">
         <h1 className="text-2xl font-bold">COOLINKEY Admin</h1>
         {!import.meta.env.PROD && !import.meta.env.VITE_ADMIN_PIN ? (
           <p className="mt-3 max-w-2xl text-sm text-amber-200">
@@ -132,14 +135,14 @@ export function Admin() {
 
   if (mainTab === "site" && (loading || !draft)) {
     return (
-      <div className="min-h-dvh bg-black px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#313131] px-4 py-16 text-white">
         <p className="text-[#cccccc]">{error ?? "Loading…"}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-dvh bg-black text-white">
+    <div className="min-h-dvh bg-[#313131] text-white">
       <header className="border-b border-[rgba(255,255,255,0.1)] px-4 py-4 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -273,6 +276,8 @@ export function Admin() {
                 </label>
               ))}
             </section>
+
+            <AdminMidModulesSection draft={draft} setDraft={setDraft} />
 
             <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
               <h2 className="text-lg font-semibold">Hero</h2>
@@ -428,7 +433,7 @@ export function Admin() {
               className="rounded-lg border border-[#00b51a] px-4 py-2 text-sm font-semibold text-[#00b51a] hover:bg-[rgba(0,181,26,0.1)]"
               onClick={() => {
                 try {
-                  const parsed = JSON.parse(rawJson) as SiteConfig;
+                  const parsed = normalizeSiteConfig(JSON.parse(rawJson) as SiteConfig);
                   setDraft(parsed);
                   setRawJson(JSON.stringify(parsed, null, 2));
                 } catch {
@@ -446,7 +451,7 @@ export function Admin() {
             type="button"
             className="rounded-lg bg-[#00b51a] px-4 py-2 font-semibold text-white hover:bg-[#00cc1a] disabled:opacity-50"
             disabled={!dirty}
-            onClick={() => saveLocalOverride(draft)}
+            onClick={() => saveLocalOverride(normalizeSiteConfig(draft))}
           >
             Save in this browser
           </button>

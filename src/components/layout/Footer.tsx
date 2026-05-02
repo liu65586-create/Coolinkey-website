@@ -34,7 +34,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.1)] bg-black">
+    <footer className="border-t border-[rgba(255,255,255,0.1)] bg-[#313131]">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm text-white">© COOLINKEY</div>

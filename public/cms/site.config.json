@@ -16,6 +16,23 @@
     "backgroundImageUrl": "",
     "overlayUsesProductImage": true
   },
+  "midModules": {
+    "a": {
+      "enabled": false,
+      "title": { "en": "", "zh": "" },
+      "slides": []
+    },
+    "b": {
+      "enabled": false,
+      "title": { "en": "", "zh": "" },
+      "slides": []
+    },
+    "d": {
+      "enabled": false,
+      "title": { "en": "", "zh": "" },
+      "slides": []
+    }
+  },
   "features": [
     {
       "icon": "water",
@@ -34,7 +51,8 @@
     }
   ],
   "manualsSection": {
-    "heading": { "en": "", "zh": "" }
+    "heading": { "en": "", "zh": "" },
+    "hiddenManualTypes": []
   },
   "productPage": {
     "manualsHeading": { "en": "", "zh": "" }

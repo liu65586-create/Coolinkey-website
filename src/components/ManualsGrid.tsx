@@ -26,6 +26,12 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
     return [...manuals].sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
   }, [manuals]);
 
+  const n = sorted.length;
+  const lgCols =
+    n >= 4 ? "lg:grid-cols-4" : n === 3 ? "lg:grid-cols-3" : n === 2 ? "lg:grid-cols-2" : "lg:grid-cols-1";
+
+  if (sorted.length === 0) return null;
+
   return (
     <section
       id="manuals"
@@ -38,7 +44,9 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
         </>
       ) : null}
 
-      <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 ${showHeading ? "mt-10" : "mt-0"}`}>
+      <div
+        className={`grid grid-cols-1 gap-6 sm:grid-cols-2 ${lgCols} ${showHeading ? "mt-10" : "mt-0"}`}
+      >
         {sorted.map((m) => (
           <ManualCard key={m.id} manual={m} onOpen={setActive} />
         ))}
