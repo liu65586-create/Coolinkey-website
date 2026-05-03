@@ -95,7 +95,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="flex max-h-[80vh] w-[80vw] max-w-6xl flex-col overflow-hidden rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] shadow-xl"
+        className="flex max-h-[80vh] w-[80vw] max-w-6xl flex-col overflow-hidden rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] shadow-xl"
       >
         <header className="flex items-center justify-between gap-4 border-b border-[rgba(255,255,255,0.1)] px-5 py-4">
           <h2 id={titleId} className="text-lg font-semibold text-white">

@@ -1,0 +1,24 @@
+COOLINKEY site — suggested image specs (replace with your own assets; export WebP when possible)
+
+1) Hero background (site.config hero.backgroundImageUrl)
+   - 2400 × 1350 px (16:9), or 1920 × 1080 px
+   - WebP ≤ 350 KB ideal; JPG fallback ≤ 600 KB
+   - Safe area: keep subject / text contrast in center 60% width
+
+2) Product main + gallery (products.json mainImage, galleryImages[])
+   - Main: 1200 × 900 px (4:3) or 1600 × 1000 (16:10)
+   - Gallery: same aspect per image; width 1600–2000 px for retina
+   - WebP; file ≤ 400 KB each for LCP
+
+3) Mid modules A / B / D carousel (site.config midModules.*.slides[].mediaUrl)
+   - Image/GIF: 1600 × 1000 px (≈16:10) — matches split layout max-h ~420 CSS
+   - Video poster optional same size; mp4 1080p h264, ≤ 15 MB short loops
+   - Safe subject in center — sides may crop on mobile
+
+4) Brand logo (site.config brand.logoSrc)
+   - SVG preferred; PNG transparent ~ 512 × 512 max, height displayed ≤ 40 px
+
+5) Open Graph / social (future)
+   - 1200 × 630 px
+
+Default placeholder PNGs in /images/defaults/ ship with repo for A/B/D first slide.

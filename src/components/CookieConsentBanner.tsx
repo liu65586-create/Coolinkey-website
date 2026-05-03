@@ -25,7 +25,7 @@ export function CookieConsentBanner() {
       cookieName="coolinkey_cookie_consent"
       expires={180}
       style={{
-        background: "#111111",
+        background: "#2e3440",
         color: "#ffffff",
         borderTop: "1px solid rgba(255,255,255,0.1)",
         alignItems: "center",

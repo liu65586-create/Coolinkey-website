@@ -88,7 +88,7 @@ export function Admin() {
 
   if (gate.blocked) {
     return (
-      <div className="min-h-dvh bg-[#0a0a0b] px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#1e2028] px-4 py-16 text-white">
         <h1 className="text-2xl font-bold">Admin disabled</h1>
         <p className="mt-4 max-w-2xl text-[#cccccc]">
           Production deployments must set <code className="text-[#00e676]">VITE_ADMIN_PIN</code> in Vercel
@@ -103,7 +103,7 @@ export function Admin() {
 
   if (!canEdit) {
     return (
-      <div className="min-h-dvh bg-[#0a0a0b] px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#1e2028] px-4 py-16 text-white">
         <h1 className="text-2xl font-bold">COOLINKEY Admin</h1>
         {!import.meta.env.PROD && !import.meta.env.VITE_ADMIN_PIN ? (
           <p className="mt-3 max-w-2xl text-sm text-amber-200">
@@ -135,14 +135,14 @@ export function Admin() {
 
   if (mainTab === "site" && (loading || !draft)) {
     return (
-      <div className="min-h-dvh bg-[#0a0a0b] px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#1e2028] px-4 py-16 text-white">
         <p className="text-[#cccccc]">{error ?? "Loading…"}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-dvh bg-[#0a0a0b] text-white">
+    <div className="min-h-dvh bg-[#1e2028] text-white">
       <header className="border-b border-[rgba(255,255,255,0.1)] px-4 py-4 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -190,7 +190,7 @@ export function Admin() {
 
         {mainTab === "site" && draft ? (
           <>
-        <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-4 text-sm text-[#cccccc]">
+        <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-4 text-sm text-[#cccccc]">
           <p>
             <strong className="text-white">How publishing works:</strong> “Save in this browser” stores overrides in{" "}
             <code className="text-[#00e676]">localStorage</code> for preview. To update the public site for everyone,
@@ -222,7 +222,7 @@ export function Admin() {
 
         {tab === "content" ? (
           <div className="space-y-10">
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Branding</h2>
               <label className="block text-sm text-[#cccccc]">
                 <span className="mb-1 block text-xs font-semibold text-white/80">Logo URL (site root path recommended)</span>
@@ -256,7 +256,7 @@ export function Admin() {
               </label>
             </section>
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Home modules</h2>
               {(
                 [
@@ -280,7 +280,7 @@ export function Admin() {
 
             <AdminMidModulesSection draft={draft} setDraft={setDraft} />
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Hero</h2>
               <BiInput label="Title" value={draft.hero.title} onChange={(v) => setDraft({ ...draft, hero: { ...draft.hero, title: v } })} />
               <BiInput label="Subtitle" value={draft.hero.subtitle} onChange={(v) => setDraft({ ...draft, hero: { ...draft.hero, subtitle: v } })} />
@@ -307,7 +307,7 @@ export function Admin() {
               </label>
             </section>
 
-            <section className="space-y-6 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+            <section className="space-y-6 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Three features</h2>
               {draft.features.map((f, idx) => (
                 <div key={idx} className="space-y-3 border-t border-[rgba(255,255,255,0.08)] pt-4 first:border-t-0 first:pt-0">
@@ -349,7 +349,7 @@ export function Admin() {
               ))}
             </section>
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Manuals section heading</h2>
               <BiInput
                 label="Home manuals heading"
@@ -365,7 +365,7 @@ export function Admin() {
               />
             </section>
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">About / Contact</h2>
               <BiInput label="About title" value={draft.about.title} onChange={(v) => setDraft({ ...draft, about: { ...draft.about, title: v } })} />
               <BiInput label="About body" value={draft.about.body} onChange={(v) => setDraft({ ...draft, about: { ...draft.about, body: v } })} />
@@ -381,7 +381,7 @@ export function Admin() {
               />
             </section>
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Legal pages</h2>
               <BiInput
                 label="Privacy title"
@@ -405,7 +405,7 @@ export function Admin() {
               />
             </section>
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Cookie banner (EU/US)</h2>
               <BiInput
                 label="Message"

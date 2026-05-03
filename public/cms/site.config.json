@@ -22,7 +22,7 @@
       "title": { "en": "Use cases", "zh": "应用场景" },
       "slides": [
         {
-          "mediaUrl": "https://picsum.photos/seed/coolinkey-mid-a/900/560",
+          "mediaUrl": "/images/defaults/mid-module-a-use-case.png",
           "mediaKind": "image",
           "text": {
             "en": "Placeholder slide — edit Module A in Admin (export site.config.json) or replace this file under public/cms.",
@@ -36,7 +36,7 @@
       "title": { "en": "Test results", "zh": "测试结果" },
       "slides": [
         {
-          "mediaUrl": "https://picsum.photos/seed/coolinkey-mid-b/900/560",
+          "mediaUrl": "/images/defaults/mid-module-b-test.png",
           "mediaKind": "image",
           "text": {
             "en": "Placeholder for lab or field test content (Module B, text left / image right).",
@@ -50,7 +50,7 @@
       "title": { "en": "Production", "zh": "生产实拍" },
       "slides": [
         {
-          "mediaUrl": "https://picsum.photos/seed/coolinkey-mid-d/900/560",
+          "mediaUrl": "/images/defaults/mid-module-d-production.png",
           "mediaKind": "image",
           "text": {
             "en": "Placeholder for factory or assembly footage (Module D). Use image or mp4 URL and set media type in Admin.",

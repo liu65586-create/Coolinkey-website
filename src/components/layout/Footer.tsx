@@ -5,7 +5,7 @@ import { useShoppingRegion, type ShoppingRegionMode } from "../../context/Shoppi
 function WeChatIcon({ label }: { label: string }) {
   return (
     <span
-      className="pointer-events-none inline-flex h-10 w-10 cursor-default items-center justify-center rounded-md bg-[#1a1a1a] text-[#777777] hover:text-[#777777]"
+      className="pointer-events-none inline-flex h-10 w-10 cursor-default items-center justify-center rounded-md bg-[#2a303c] text-[#8b92a4] hover:text-[#8b92a4]"
       aria-label={label}
       title={label}
     >
@@ -34,7 +34,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.1)] bg-[#0a0a0b]">
+    <footer className="border-t border-[rgba(255,255,255,0.1)] bg-[#1e2028]">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm text-white">© COOLINKEY</div>

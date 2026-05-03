@@ -17,7 +17,7 @@ const variants: Record<Variant, string> = {
   primary:
     "border-2 border-transparent bg-[#00e676] text-white hover:bg-[#00c853] active:bg-[#00c853]",
   secondary:
-    "border-2 border-[#00e676] bg-[#0a0a0b] text-white hover:bg-[rgba(0,230,118,0.1)] active:bg-[rgba(0,230,118,0.1)]",
+    "border-2 border-[#00e676] bg-[#1e2028] text-white hover:bg-[rgba(0,230,118,0.1)] active:bg-[rgba(0,230,118,0.1)]",
 };
 
 export function Button({ variant, children, onClick, href, className = "", ...rest }: Props) {

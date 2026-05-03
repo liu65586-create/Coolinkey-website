@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 import { Button } from "../components/Button";
 import { FeatureCard } from "../components/FeatureCard";
 import { renderFeatureIcon } from "../components/icons/FeatureIcons";
@@ -56,7 +56,7 @@ export function Home() {
           className="relative isolate flex min-h-[max(80vh,600px)] items-center"
           aria-label="Hero"
         >
-          <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#0a0a0b] to-[#141418]" />
+          <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#1e2028] to-[#2a303c]" />
           {heroBgUrl ? (
             <div
               className="absolute inset-0 -z-10 opacity-20"
@@ -92,7 +92,7 @@ export function Home() {
       ) : null}
 
       {modules?.homeFeatures !== false ? (
-        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-[#0a0a0b] py-20">
+        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-[#1e2028] py-20">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:px-6 md:grid-cols-3 md:gap-6">
             {featureDefaults.map((fd, i) => {
               const row = features[i];

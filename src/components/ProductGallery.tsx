@@ -21,7 +21,7 @@ export function ProductGallery({ images, productName }: Props) {
       <button
         type="button"
         onClick={() => setLightbox(current)}
-        className="relative w-full overflow-hidden rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a]"
+        className="relative w-full overflow-hidden rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33]"
         aria-label={t("product.zoomHint")}
       >
         <img src={current} alt={productName} className="mx-auto max-h-[420px] w-full object-contain" />

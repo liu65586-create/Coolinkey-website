@@ -43,7 +43,7 @@ export function AdminMidModulesSection({
   const block = (key: "a" | "b" | "d", label: string) => {
     const m = d.midModules[key];
     return (
-      <section key={key} className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+      <section key={key} className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
         <h2 className="text-lg font-semibold text-white">{label}</h2>
         <label className="flex items-center gap-2 text-sm text-[#cccccc]">
           <input
@@ -125,7 +125,7 @@ export function AdminMidModulesSection({
 
   return (
     <div className="space-y-10">
-      <section className="space-y-3 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+      <section className="space-y-3 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
         <h2 className="text-lg font-semibold text-white">Resources & Manuals · 隐藏类型</h2>
         <p className="text-sm text-[#cccccc]">
           勾选后，首页与产品页不显示对应说明书卡片（installation / user_manual / faq / video），其余卡片自动重排。若使用「仅本浏览器保存」，全站访客需将导出后的{" "}

@@ -135,7 +135,7 @@ export function AdminProductsPanel() {
 
   return (
     <div className="space-y-8">
-      <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-4 text-sm text-[#cccccc]">
+      <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-4 text-sm text-[#cccccc]">
         <p>
           编辑 <code className="text-[#00e676]">public/cms/products.json</code> 的等价数据：主图/轮播、多语言名称与描述、规格表、购买链接、说明书（PDF 与视频均可填<strong className="text-white">完整 https 链接</strong>
           ，无需上传到 GitHub；也可继续用 <code className="text-[#00e676]">/manuals/…</code> 相对路径指向仓库内文件）。保存到浏览器后仅本机预览；<strong className="text-white">Export</strong> 下载的文件请覆盖仓库中的{" "}
@@ -188,7 +188,7 @@ export function AdminProductsPanel() {
         </button>
       </div>
 
-      <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+      <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
         <h3 className="text-base font-semibold text-white">基础信息</h3>
         <label className="block text-sm text-[#cccccc]">
           <span className="mb-1 block text-xs font-semibold text-white/80">Slug（URL 段，唯一）</span>
@@ -227,7 +227,7 @@ export function AdminProductsPanel() {
         </label>
       </section>
 
-      <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+      <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-base font-semibold text-white">轮播图 URL 列表</h3>
           <button
@@ -270,7 +270,7 @@ export function AdminProductsPanel() {
         )}
       </section>
 
-      <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+      <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-base font-semibold text-white">技术规格</h3>
           <button
@@ -312,7 +312,7 @@ export function AdminProductsPanel() {
         )}
       </section>
 
-      <section className="space-y-6 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+      <section className="space-y-6 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-base font-semibold text-white">说明书与视频</h3>
           <button
@@ -438,7 +438,7 @@ export function AdminProductsPanel() {
         )}
       </section>
 
-      <section className="space-y-3 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
+      <section className="space-y-3 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
         <h3 className="text-base font-semibold text-white">Raw JSON（整块 products）</h3>
         <textarea
           className="min-h-[280px] w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black p-3 font-mono text-xs text-white outline-none focus:border-[#00e676]"
