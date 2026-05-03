@@ -1,24 +1,38 @@
-COOLINKEY site — suggested image specs (replace with your own assets; export WebP when possible)
+================================================================================
+给平面设计师 — COOLINKEY 官网图片交付规格（中英）
+================================================================================
+色彩：网页使用 sRGB。主色建议 — 页面浅冷灰 #E8ECF1～#F8FAFC；正文 #0F172A；
+      辅助灰 #475569；品牌强调色（与产品织唛一致）#00C853 / #00E676。
+出血：纯网页 Banner 一般无需印刷出血；若同一素材用于印刷折页，四边各留 3 mm 出血。
+格式：优先 WebP（透明区域用 PNG）；保留同名 JPG/PNG 作后备。Logo 优先矢量 SVG。
+命名：英文小写 + 连字符，例如 hero-bike-golden-hour.webp。
 
-1) Hero background (site.config hero.backgroundImageUrl)
-   - 2400 × 1350 px (16:9), or 1920 × 1080 px
-   - WebP ≤ 350 KB ideal; JPG fallback ≤ 600 KB
-   - Safe area: keep subject / text contrast in center 60% width
+--------------------------------------------------------------------------------
+1) 首页 Hero 背景（site.config.json → hero.backgroundImageUrl）
+   - 尺寸：2400 × 1350 px（16∶9），或 1920 × 1080 px
+   - 主体（车 + 锁 + 场景）建议落在画面中下 60% 宽度内，顶部与左右留足“空气感”
+     以便叠浅色渐变后仍清晰；避免纯黑大块贴边（与浅色 UI 冲突）。
+   - WebP 目标 ≤ 350 KB；JPG 后备 ≤ 600 KB
 
-2) Product main + gallery (products.json mainImage, galleryImages[])
-   - Main: 1200 × 900 px (4:3) or 1600 × 1000 (16:10)
-   - Gallery: same aspect per image; width 1600–2000 px for retina
-   - WebP; file ≤ 400 KB each for LCP
+2) 产品主图 + 画廊（products.json → mainImage, galleryImages[]）
+   - 主图：1600 × 1000 px（16∶10）或 1200 × 900 px（4∶3），白底或浅灰底均可
+   - 画廊：各张统一长宽比；宽度 1600–2000 px 便于高分屏
+   - 单张 WebP ≤ 400 KB（利于 LCP）
 
-3) Mid modules A / B / D carousel (site.config midModules.*.slides[].mediaUrl)
-   - Image/GIF: 1600 × 1000 px (≈16:10) — matches split layout max-h ~420 CSS
-   - Video poster optional same size; mp4 1080p h264, ≤ 15 MB short loops
-   - Safe subject in center — sides may crop on mobile
+3) 首页中部轮播 A / B / D（site.config.json → midModules.*.slides[].mediaUrl）
+   - 图片或 GIF：1600 × 1000 px（≈16∶10），与分栏最大高度约 420 CSS px 对应
+   - 重要信息避开最左/最右 8%（移动端可能裁切）；视频可为 mp4 1080p H.264，短循环 ≤ 15 MB
+   - 可选单独一帧 1600×1000 作视频封面（poster）
 
-4) Brand logo (site.config brand.logoSrc)
-   - SVG preferred; PNG transparent ~ 512 × 512 max, height displayed ≤ 40 px
+4) 品牌 Logo（site.config.json → brand.logoSrc）
+   - SVG 优先；PNG 透明底约 512 × 512 px，显示高度 ≤ 40 px
 
-5) Open Graph / social (future)
+5) 社交分享 / Open Graph（后续如需）
    - 1200 × 630 px
 
-Default placeholder PNGs in /images/defaults/ ship with repo for A/B/D first slide.
+默认占位图位于 /images/defaults/，上线前请替换为正式摄影或渲染图。
+================================================================================
+COOLINKEY site — technical image specs (English summary)
+================================================================================
+Same numbers as above: Hero 16:9; product 16:10 or 4:3; mid-carousel 1600×1000;
+logo SVG preferred; OG 1200×630. Export WebP when possible; keep PNG fallback.

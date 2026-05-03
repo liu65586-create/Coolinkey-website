@@ -17,11 +17,11 @@ export function ManualCard({ manual, onOpen }: Props) {
     <button
       type="button"
       onClick={() => onOpen(manual)}
-      className="group w-full rounded-[12px] bg-[#2e3440] p-6 text-center shadow-[0_0_0_1px_rgba(255,255,255,0.06)] transition-shadow hover:shadow-[0_0_0_1px_#00e676,0_12px_40px_rgba(0,0,0,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00e676]"
+      className="group w-full rounded-[12px] border border-slate-200 bg-white p-6 text-center shadow-sm shadow-slate-200/50 transition-shadow hover:border-emerald-400 hover:shadow-md hover:shadow-emerald-100/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
     >
-      <div className="text-[16px] font-semibold text-white">{title}</div>
-      <div className="mt-4 flex justify-center text-[#00e676]">{isVideo ? <IconVideo /> : <IconDoc />}</div>
-      <div className="mt-4 text-sm font-semibold text-[#00e676]">{t("manualsSection.preview")}</div>
+      <div className="text-[16px] font-semibold text-slate-900">{title}</div>
+      <div className="mt-4 flex justify-center text-emerald-600">{isVideo ? <IconVideo /> : <IconDoc />}</div>
+      <div className="mt-4 text-sm font-semibold text-emerald-700">{t("manualsSection.preview")}</div>
     </button>
   );
 }

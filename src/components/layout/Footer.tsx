@@ -5,7 +5,7 @@ import { useShoppingRegion, type ShoppingRegionMode } from "../../context/Shoppi
 function WeChatIcon({ label }: { label: string }) {
   return (
     <span
-      className="pointer-events-none inline-flex h-10 w-10 cursor-default items-center justify-center rounded-md bg-[#2a303c] text-[#8b92a4] hover:text-[#8b92a4]"
+      className="pointer-events-none inline-flex h-10 w-10 cursor-default items-center justify-center rounded-md border border-slate-200 bg-slate-100 text-slate-500 hover:text-slate-500"
       aria-label={label}
       title={label}
     >
@@ -34,18 +34,18 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.1)] bg-[#1e2028]">
+    <footer className="border-t border-slate-200 bg-[#e8ecf1]">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm text-white">© COOLINKEY</div>
+          <div className="text-sm text-slate-700">© COOLINKEY</div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-            <Link className="text-[#00e676] hover:underline" to="/privacy">
+            <Link className="font-medium text-emerald-700 hover:underline" to="/privacy">
               {t("footer.privacy")}
             </Link>
-            <Link className="text-[#00e676] hover:underline" to="/cookie-policy">
+            <Link className="font-medium text-emerald-700 hover:underline" to="/cookie-policy">
               {t("footer.cookie")}
             </Link>
-            <a className="text-[#00e676] hover:underline" href="mailto:support@coolinkey.com">
+            <a className="font-medium text-emerald-700 hover:underline" href="mailto:support@coolinkey.com">
               support@coolinkey.com
             </a>
           </div>
@@ -59,7 +59,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-2 sm:items-end">
-            <div className="text-xs text-[#cccccc]">{t("footer.shoppingRegion")}</div>
+            <div className="text-xs text-slate-600">{t("footer.shoppingRegion")}</div>
             <div className="flex flex-wrap gap-2">
               {(
                 [
@@ -75,8 +75,8 @@ export function Footer() {
                   className={[
                     "rounded-[8px] border px-3 py-2 text-xs font-semibold transition-colors",
                     mode === key
-                      ? "border-[#00e676] bg-[rgba(0,230,118,0.12)] text-white"
-                      : "border-[rgba(255,255,255,0.15)] text-white hover:border-[#00e676] hover:text-[#00e676]",
+                      ? "border-emerald-600 bg-emerald-50 text-emerald-800"
+                      : "border-slate-300 text-slate-700 hover:border-emerald-500 hover:text-emerald-700",
                   ].join(" ")}
                 >
                   {label}
@@ -86,7 +86,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="text-center text-xs text-[#888888]">{t("footer.icp")}</div>
+        <div className="text-center text-xs text-slate-500">{t("footer.icp")}</div>
       </div>
     </footer>
   );

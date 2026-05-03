@@ -21,7 +21,7 @@ export function ProductGallery({ images, productName }: Props) {
       <button
         type="button"
         onClick={() => setLightbox(current)}
-        className="relative w-full overflow-hidden rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33]"
+        className="relative w-full overflow-hidden rounded-xl border border-slate-200 bg-white"
         aria-label={t("product.zoomHint")}
       >
         <img src={current} alt={productName} className="mx-auto max-h-[420px] w-full object-contain" />
@@ -30,7 +30,7 @@ export function ProductGallery({ images, productName }: Props) {
       <div className="flex items-center justify-between gap-3">
         <button
           type="button"
-          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00e676] hover:text-[#00e676] disabled:opacity-40"
+          className="rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:border-emerald-500 hover:text-emerald-700 disabled:opacity-40"
           disabled={idx === 0}
           onClick={() => setIdx((i) => Math.max(0, i - 1))}
         >
@@ -44,7 +44,7 @@ export function ProductGallery({ images, productName }: Props) {
               onClick={() => setIdx(i)}
               className={[
                 "h-14 w-20 shrink-0 overflow-hidden rounded-md border",
-                i === idx ? "border-[#00e676]" : "border-[rgba(255,255,255,0.12)] hover:border-[#00e676]",
+                i === idx ? "border-emerald-600" : "border-slate-200 hover:border-emerald-500",
               ].join(" ")}
             >
               <img src={src} alt="" className="h-full w-full object-cover" />
@@ -53,7 +53,7 @@ export function ProductGallery({ images, productName }: Props) {
         </div>
         <button
           type="button"
-          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00e676] hover:text-[#00e676] disabled:opacity-40"
+          className="rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:border-emerald-500 hover:text-emerald-700 disabled:opacity-40"
           disabled={idx >= list.length - 1}
           onClick={() => setIdx((i) => Math.min(list.length - 1, i + 1))}
         >

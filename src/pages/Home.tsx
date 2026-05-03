@@ -39,7 +39,7 @@ export function Home() {
     { title: t("features.title_steel"), desc: t("features.desc_steel"), key: "chain" as const },
   ];
 
-  if (siteLoading || !config) return <div className="px-4 py-20 text-[#cccccc]">…</div>;
+  if (siteLoading || !config) return <div className="px-4 py-20 text-slate-500">…</div>;
 
   const hiddenManualTypes = config.manualsSection.hiddenManualTypes;
   const visibleManuals = defaultProduct?.manuals?.length
@@ -56,10 +56,10 @@ export function Home() {
           className="relative isolate flex min-h-[max(80vh,600px)] items-center"
           aria-label="Hero"
         >
-          <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#1e2028] to-[#2a303c]" />
+          <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#f8fafc] via-[#eef2f7] to-[#e2e8f0]" />
           {heroBgUrl ? (
             <div
-              className="absolute inset-0 -z-10 opacity-20"
+              className="absolute inset-0 -z-10 opacity-[0.18]"
               style={{
                 backgroundImage: `url(${heroBgUrl})`,
                 backgroundSize: "cover",
@@ -69,8 +69,8 @@ export function Home() {
           ) : null}
 
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-16 sm:px-6">
-            <h1 className="max-w-4xl text-[36px] font-bold leading-tight sm:text-[64px]">{heroTitle}</h1>
-            <p className="max-w-3xl text-base text-[#cccccc] sm:text-lg">{heroSubtitle}</p>
+            <h1 className="max-w-4xl text-[36px] font-bold leading-tight text-slate-900 sm:text-[64px]">{heroTitle}</h1>
+            <p className="max-w-3xl text-base text-slate-600 sm:text-lg">{heroSubtitle}</p>
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-[20px]">
               <Button
@@ -92,7 +92,7 @@ export function Home() {
       ) : null}
 
       {modules?.homeFeatures !== false ? (
-        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-[#1e2028] py-20">
+        <section id="features" className="border-t border-slate-200/80 bg-[#f1f5f9] py-20">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:px-6 md:grid-cols-3 md:gap-6">
             {featureDefaults.map((fd, i) => {
               const row = features[i];
@@ -113,7 +113,7 @@ export function Home() {
       ) : null}
 
       {config.midModules.a.enabled && midSlides(config.midModules.a.slides).length ? (
-        <section className="border-t border-[rgba(255,255,255,0.06)] py-16">
+        <section className="border-t border-slate-200/80 bg-white py-16">
           <MidSplitCarousel
             variant="imageLeft"
             title={config.midModules.a.title}
@@ -124,7 +124,7 @@ export function Home() {
       ) : null}
 
       {config.midModules.b.enabled && midSlides(config.midModules.b.slides).length ? (
-        <section className="border-t border-[rgba(255,255,255,0.06)] py-16">
+        <section className="border-t border-slate-200/80 bg-[#f8fafc] py-16">
           <MidSplitCarousel
             variant="textLeft"
             title={config.midModules.b.title}
@@ -135,7 +135,7 @@ export function Home() {
       ) : null}
 
       {config.midModules.d.enabled && midSlides(config.midModules.d.slides).length ? (
-        <section className="border-t border-[rgba(255,255,255,0.06)] py-16">
+        <section className="border-t border-slate-200/80 bg-white py-16">
           <MidSplitCarousel
             variant="imageLeft"
             title={config.midModules.d.title}
@@ -146,7 +146,9 @@ export function Home() {
       ) : null}
 
       {modules?.homeManuals !== false && visibleManuals.length ? (
-        <ManualsGrid manuals={visibleManuals} />
+        <section className="border-t border-slate-200/80 bg-[#f8fafc] py-4">
+          <ManualsGrid manuals={visibleManuals} />
+        </section>
       ) : null}
     </div>
   );

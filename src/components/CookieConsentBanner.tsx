@@ -25,13 +25,14 @@ export function CookieConsentBanner() {
       cookieName="coolinkey_cookie_consent"
       expires={180}
       style={{
-        background: "#2e3440",
-        color: "#ffffff",
-        borderTop: "1px solid rgba(255,255,255,0.1)",
+        background: "#ffffff",
+        color: "#0f172a",
+        borderTop: "1px solid #e2e8f0",
         alignItems: "center",
+        boxShadow: "0 -4px 24px rgba(15, 23, 42, 0.06)",
       }}
       buttonStyle={{
-        background: "#00e676",
+        background: "#059669",
         color: "#ffffff",
         fontSize: "14px",
         fontWeight: 700,
@@ -42,7 +43,7 @@ export function CookieConsentBanner() {
     >
       <span>
         {message}{" "}
-        <Link className="text-[#00e676] hover:underline" to="/cookie-policy">
+        <Link className="font-medium text-emerald-700 hover:underline" to="/cookie-policy">
           {learnMore}
         </Link>
       </span>

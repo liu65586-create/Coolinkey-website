@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
-/* Tech-gray shell + surfaces (see also Tailwind arbitrary classes in layout) */
+/* Light “tech grey” shell — matte black / silver product on pale cool grey page */
 @theme {
   --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
   --font-display: Sora, Inter, ui-sans-serif, system-ui, sans-serif;
-  --color-page: #1e2028;
-  --color-surface: #252a33;
-  --color-surface-raised: #2e3440;
-  --color-accent: #00e676;
-  --color-accent-dim: #5eead4;
+  --color-page: #e8ecf1;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f5f9;
+  --color-accent: #00c853;
+  --color-accent-bright: #00e676;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
 }
 
 html,
@@ -19,7 +21,7 @@ body {
 body {
   margin: 0;
   background: var(--color-page);
-  color: #e8eaef;
+  color: var(--color-text);
   font-family: var(--font-sans);
 }
 

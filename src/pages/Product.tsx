@@ -46,7 +46,7 @@ export function Product() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <div className="max-w-xl">
-        <div className="mb-2 text-sm font-semibold text-[#cccccc]">{t("product.selectProduct")}</div>
+        <div className="mb-2 text-sm font-semibold text-slate-600">{t("product.selectProduct")}</div>
         <ProductDropdown
           products={products}
           valueSlug={active?.slug ?? ""}
@@ -56,15 +56,15 @@ export function Product() {
       </div>
 
       {!active ? (
-        <p className="mt-10 text-[#cccccc]">{loading ? "…" : "—"}</p>
+        <p className="mt-10 text-slate-600">{loading ? "…" : "—"}</p>
       ) : (
         <>
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
             <ProductGallery images={gallery} productName={name} />
 
             <div>
-              <h1 className="text-3xl font-bold sm:text-4xl">{name}</h1>
-              <p className="mt-4 text-[15px] leading-relaxed text-[#cccccc]">{desc}</p>
+              <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">{name}</h1>
+              <p className="mt-4 text-[15px] leading-relaxed text-slate-600">{desc}</p>
 
               <div className="mt-8">
                 <Button
@@ -76,19 +76,19 @@ export function Product() {
               </div>
 
               <div className="mt-10">
-                <h2 className="text-xl font-semibold">{t("product.specs")}</h2>
-                <div className="mt-4 overflow-hidden rounded-lg border border-[rgba(255,255,255,0.18)]">
-                  <table className="w-full border-collapse text-left text-sm text-white">
+                <h2 className="text-xl font-semibold text-slate-900">{t("product.specs")}</h2>
+                <div className="mt-4 overflow-hidden rounded-lg border border-slate-200">
+                  <table className="w-full border-collapse text-left text-sm text-slate-900">
                     <tbody>
                       {active.specs.map((row, i) => (
                         <tr
                           key={i}
-                          className={i % 2 === 1 ? "bg-[rgba(255,255,255,0.04)]" : "bg-transparent"}
+                          className={i % 2 === 1 ? "bg-slate-50" : "bg-white"}
                         >
-                          <th className="border-b border-[rgba(255,255,255,0.12)] px-4 py-3 font-semibold text-white">
+                          <th className="border-b border-slate-200 px-4 py-3 font-semibold text-slate-800">
                             {lang === "zh" ? row.key.zh : row.key.en}
                           </th>
-                          <td className="border-b border-[rgba(255,255,255,0.12)] px-4 py-3 text-[#cccccc]">
+                          <td className="border-b border-slate-200 px-4 py-3 text-slate-600">
                             {lang === "zh" ? row.value.zh : row.value.en}
                           </td>
                         </tr>
@@ -101,9 +101,9 @@ export function Product() {
           </div>
 
           {visibleManuals.length ? (
-            <div className="mt-16 border-t border-[rgba(255,255,255,0.06)] pt-6">
-              <h2 className="mb-2 text-center text-[32px] font-bold text-white">{manualsHeading}</h2>
-              <div className="mx-auto mb-8 h-1 w-28 bg-[#00e676]" />
+            <div className="mt-16 border-t border-slate-200 pt-6">
+              <h2 className="mb-2 text-center text-[32px] font-bold text-slate-900">{manualsHeading}</h2>
+              <div className="mx-auto mb-8 h-1 w-28 bg-emerald-600" />
               <ManualsGrid manuals={visibleManuals} showHeading={false} />
             </div>
           ) : null}

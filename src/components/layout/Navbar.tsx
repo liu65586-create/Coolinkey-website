@@ -7,7 +7,7 @@ import { LanguageSwitcher } from "../LanguageSwitcher";
 const navCls = ({ isActive }: { isActive: boolean }) =>
   [
     "text-[15px] font-semibold tracking-wide transition-colors",
-    isActive ? "text-[#00e676]" : "text-white hover:text-[#00e676]",
+    isActive ? "text-emerald-600" : "text-slate-700 hover:text-emerald-600",
   ].join(" ");
 
 export function Navbar() {
@@ -20,11 +20,11 @@ export function Navbar() {
   const logoH = config?.brand.logoMaxHeightPx ?? 30;
 
   return (
-    <header className="sticky top-0 z-[100] h-[80px] border-b border-[rgba(255,255,255,0.1)] bg-[#1e2028]">
+    <header className="sticky top-0 z-[100] h-[80px] border-b border-slate-200/90 bg-[#e8ecf1]/95 backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
         <NavLink
           to="/"
-          className="flex select-none items-center text-white hover:opacity-90"
+          className="flex select-none items-center text-slate-900 hover:opacity-90"
           aria-label={logoAlt}
         >
           {logoSrc ? (
@@ -62,7 +62,7 @@ export function Navbar() {
           <LanguageSwitcher />
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-[rgba(255,255,255,0.15)] text-white hover:text-[#00e676]"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-slate-300 text-slate-700 hover:border-emerald-500 hover:text-emerald-600"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
@@ -74,7 +74,7 @@ export function Navbar() {
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="border-b border-[rgba(255,255,255,0.1)] bg-[#1e2028] md:hidden">
+        <div id="mobile-nav" className="border-b border-slate-200 bg-[#e8ecf1] md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-4">
             <NavLink to="/" end className={navCls} onClick={() => setOpen(false)}>
               {t("nav.home")}

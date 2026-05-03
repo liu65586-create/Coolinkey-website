@@ -18,7 +18,7 @@ export function LanguageSwitcher() {
 
   return (
     <div
-      className="flex items-center gap-1 rounded-[8px] border border-[rgba(255,255,255,0.2)] p-1"
+      className="flex items-center gap-1 rounded-[8px] border border-slate-300 bg-white/80 p-1"
       role="group"
       aria-label="Language"
     >
@@ -26,8 +26,8 @@ export function LanguageSwitcher() {
         type="button"
         className={`rounded-[6px] px-3 py-1.5 text-sm font-semibold transition-colors ${
           i18n.language.startsWith("zh")
-            ? "text-white/50 hover:text-[#00e676]"
-            : "bg-[#2e3440] text-[#00e676]"
+            ? "text-slate-500 hover:text-emerald-700"
+            : "bg-emerald-600 text-white shadow-sm"
         }`}
         onClick={() => setLang("en")}
       >
@@ -37,8 +37,8 @@ export function LanguageSwitcher() {
         type="button"
         className={`rounded-[6px] px-3 py-1.5 text-sm font-semibold transition-colors ${
           i18n.language.startsWith("zh")
-            ? "bg-[#2e3440] text-[#00e676]"
-            : "text-white/50 hover:text-[#00e676]"
+            ? "bg-emerald-600 text-white shadow-sm"
+            : "text-slate-500 hover:text-emerald-700"
         }`}
         onClick={() => setLang("zh")}
       >

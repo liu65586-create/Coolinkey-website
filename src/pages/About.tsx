@@ -11,8 +11,8 @@ export function About() {
   const body = pickBilingual(lang, config?.about?.body, t("about.body"));
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <h1 className="text-4xl font-bold">{title}</h1>
-      <p className="mt-6 text-[15px] leading-relaxed text-[#cccccc]">{body}</p>
+      <h1 className="text-4xl font-bold text-slate-900">{title}</h1>
+      <p className="mt-6 text-[15px] leading-relaxed text-slate-600">{body}</p>
     </div>
   );
 }

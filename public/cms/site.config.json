@@ -11,50 +11,64 @@
     "homeManuals": true
   },
   "hero": {
-    "title": { "en": "", "zh": "" },
-    "subtitle": { "en": "", "zh": "" },
+    "title": {
+      "en": "COOLINKEY CLX — Smart chain lock",
+      "zh": "COOLINKEY CLX 智能指纹链条锁"
+    },
+    "subtitle": {
+      "en": "IP67 dust and water resistance · Bluetooth 5.0 · Up to 60 fingerprints · About 10 months of typical use per charge (400 mAh, USB-C). Zinc alloy body; stainless steel chain in a PET-wrapped textile sleeve (~100 cm). Works with the Tuya Smart app for access sharing and history.",
+      "zh": "IP67 防尘防水 · 蓝牙 5.0 · 最多 60 枚指纹 · 400 mAh 电池、Type-C 充电，典型使用约 10 个月续航。锌合金锁体；不锈钢链芯外包耐磨 PET 织物套管，链长约 100 cm。配合涂鸦智能 App 管理授权与记录。"
+    },
     "backgroundImageUrl": "",
     "overlayUsesProductImage": true
   },
   "midModules": {
     "a": {
       "enabled": true,
-      "title": { "en": "Use cases", "zh": "应用场景" },
+      "title": { "en": "Urban freedom, locked in seconds", "zh": "城市出行，秒级上锁" },
       "slides": [
         {
           "mediaUrl": "/images/defaults/mid-module-a-use-case.png",
           "mediaKind": "image",
           "text": {
-            "en": "Placeholder slide — edit Module A in Admin (export site.config.json) or replace this file under public/cms.",
-            "zh": "占位图与文案 — 可在后台编辑并导出 site.config.json，或直接修改 public/cms/site.config.json。"
+            "en": "Park at racks, poles, or communal stands without fumbling for keys. Matte black body, recessed fingerprint pad, and a sleeved chain read as premium gear—because your lock should look as intentional as your bike.",
+            "zh": "在停车架、立柱或小区车棚快速落锁，告别掏钥匙。哑光黑锁体、内凹式指纹区与织物包覆链条，与高端公路车气质一致——锁具本身也应是装备的一部分。"
+          }
+        },
+        {
+          "mediaUrl": "/images/defaults/mid-module-a-use-case.png",
+          "mediaKind": "image",
+          "text": {
+            "en": "Rain, splashes, and roadside grime are part of the ride. CLX1/CLX2 are built for outdoor duty so you can focus on the route—not the weather forecast.",
+            "zh": "雨水、溅水与路面泥尘都是骑行日常。CLX1/CLX2 面向户外使用设计，让你更关注路线，而不是反复查看天气预报。"
           }
         }
       ]
     },
     "b": {
       "enabled": true,
-      "title": { "en": "Test results", "zh": "测试结果" },
+      "title": { "en": "Engineered for reliability", "zh": "为可靠而生" },
       "slides": [
         {
           "mediaUrl": "/images/defaults/mid-module-b-test.png",
           "mediaKind": "image",
           "text": {
-            "en": "Placeholder for lab or field test content (Module B, text left / image right).",
-            "zh": "用于展示实验室或现场测试结论（模块 B：左文右图），请替换为你的图片与说明。"
+            "en": "IP67 sealing helps keep dust and water out of the electronics. Bluetooth 5.0 keeps pairing stable in busy signal environments. Use this module for lab sheets, drop-test photos, or short verification videos.",
+            "zh": "IP67 结构有助于阻隔粉尘与水汽侵入电子腔体；蓝牙 5.0 在复杂无线环境下保持连接稳定。本模块适合放实验室报告、跌落/防水示意照片或短视频。"
           }
         }
       ]
     },
     "d": {
       "enabled": true,
-      "title": { "en": "Production", "zh": "生产实拍" },
+      "title": { "en": "Materials you can trust", "zh": "材质与工艺" },
       "slides": [
         {
           "mediaUrl": "/images/defaults/mid-module-d-production.png",
           "mediaKind": "image",
           "text": {
-            "en": "Placeholder for factory or assembly footage (Module D). Use image or mp4 URL and set media type in Admin.",
-            "zh": "用于产线或组装实拍（模块 D）。可换为图片或 mp4 地址，并在后台设置媒体类型。"
+            "en": "Zinc alloy housing, stainless steel chain, nylon and PET in the sleeve—chosen for strength, wear resistance, and a clean silhouette. Replace this slide with factory line photos or macro shots of the lock body and chain.",
+            "zh": "锌合金外壳、不锈钢链条、尼龙与 PET 织物层——兼顾强度、耐磨与简洁外观。可将本图替换为产线实拍、锁体与链条的特写等。"
           }
         }
       ]
@@ -63,34 +77,49 @@
   "features": [
     {
       "icon": "water",
-      "title": { "en": "", "zh": "" },
-      "description": { "en": "", "zh": "" }
+      "title": { "en": "IP67 rated", "zh": "IP67 防护" },
+      "description": {
+        "en": "Sealed against dust and immersion-grade water ingress so outdoor parking stays practical year-round.",
+        "zh": "防尘防水设计，适应户外停车与多变天气，四季使用更安心。"
+      }
     },
     {
       "icon": "fingerprint",
-      "title": { "en": "", "zh": "" },
-      "description": { "en": "", "zh": "" }
+      "title": { "en": "Biometric unlock", "zh": "指纹一触即开" },
+      "description": {
+        "en": "Register up to 60 fingerprints; unlock on the pad without reaching for keys or your phone.",
+        "zh": "最多支持 60 枚指纹；在锁体面板上直接解锁，无需翻找钥匙或手机。"
+      }
     },
     {
       "icon": "chain",
-      "title": { "en": "", "zh": "" },
-      "description": { "en": "", "zh": "" }
+      "title": { "en": "Heavy-duty sleeved chain", "zh": "高强度包覆链条" },
+      "description": {
+        "en": "Stainless steel links inside a PET-wrapped textile sleeve—about 100 cm to wrap frame, wheel, and anchor point.",
+        "zh": "不锈钢链芯外包耐磨织物套管，链长约 100 cm，可环绕车架、轮组与固定物。"
+      }
     }
   ],
   "manualsSection": {
-    "heading": { "en": "", "zh": "" },
+    "heading": { "en": "Manuals & downloads", "zh": "说明书与下载" },
     "hiddenManualTypes": []
   },
   "productPage": {
-    "manualsHeading": { "en": "", "zh": "" }
+    "manualsHeading": { "en": "Manuals & downloads", "zh": "说明书与下载" }
   },
   "about": {
-    "title": { "en": "", "zh": "" },
-    "body": { "en": "", "zh": "" }
+    "title": { "en": "About COOLINKEY", "zh": "关于 COOLINKEY" },
+    "body": {
+      "en": "COOLINKEY builds smart security for bicycles and daily carry—combining fingerprint access, a tough sleeved chain, and app connectivity so you can lock up quickly and get back to riding.",
+      "zh": "COOLINKEY 专注自行车与随身场景的智能安防，将指纹解锁、高强度包覆链条与 App 互联结合，让你快速上锁、回到骑行与都市生活。"
+    }
   },
   "contact": {
-    "title": { "en": "", "zh": "" },
-    "body": { "en": "", "zh": "" }
+    "title": { "en": "Contact", "zh": "联系我们" },
+    "body": {
+      "en": "For support, distribution, or business inquiries: support@coolinkey.com",
+      "zh": "售后、渠道或商务合作：support@coolinkey.com"
+    }
   },
   "legal": {
     "privacyTitle": { "en": "", "zh": "" },

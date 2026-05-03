@@ -95,15 +95,15 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="flex max-h-[80vh] w-[80vw] max-w-6xl flex-col overflow-hidden rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] shadow-xl"
+        className="flex max-h-[80vh] w-[80vw] max-w-6xl flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl"
       >
-        <header className="flex items-center justify-between gap-4 border-b border-[rgba(255,255,255,0.1)] px-5 py-4">
-          <h2 id={titleId} className="text-lg font-semibold text-white">
+        <header className="flex items-center justify-between gap-4 border-b border-slate-200 px-5 py-4">
+          <h2 id={titleId} className="text-lg font-semibold text-slate-900">
             {title}
           </h2>
           <button
             type="button"
-            className="rounded-md px-3 py-1.5 text-sm font-semibold text-white hover:text-[#00e676]"
+            className="rounded-md px-3 py-1.5 text-sm font-semibold text-slate-600 hover:text-emerald-700"
             onClick={onClose}
           >
             {t("manualsSection.close")}
@@ -122,26 +122,26 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
                   allowFullScreen
                 />
               </div>
-              <p className="text-center text-sm text-[#cccccc]">{t("manualsSection.videoNote")}</p>
+              <p className="text-center text-sm text-slate-600">{t("manualsSection.videoNote")}</p>
             </div>
           ) : pdfUrl ? (
             <div>
-              {pdfError ? <p className="text-center text-[#cccccc]">{pdfError}</p> : null}
+              {pdfError ? <p className="text-center text-slate-600">{pdfError}</p> : null}
               <div ref={containerRef} className="flex flex-col items-stretch" />
             </div>
           ) : (
-            <p className="text-center text-[#cccccc]">No preview available.</p>
+            <p className="text-center text-slate-600">No preview available.</p>
           )}
         </div>
 
-        <footer className="flex flex-wrap items-center justify-end gap-3 border-t border-[rgba(255,255,255,0.1)] px-5 py-4">
+        <footer className="flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 px-5 py-4">
           {pdfUrl ? (
             <a
               href={pdfUrl}
               download
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-[8px] border-2 border-transparent bg-[#00e676] px-8 py-3 text-[16px] font-semibold text-white transition-colors hover:bg-[#00c853]"
+              className="inline-flex items-center justify-center rounded-[8px] border-2 border-transparent bg-emerald-600 px-8 py-3 text-[16px] font-semibold text-white transition-colors hover:bg-emerald-700"
             >
               {t("manualsSection.downloadPdf")}
             </a>

@@ -39,8 +39,8 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
     >
       {showHeading ? (
         <>
-          <h2 className="text-center text-[32px] font-bold text-white">{heading}</h2>
-          <div className="mx-auto mt-4 h-1 w-28 bg-[#00e676]" />
+          <h2 className="text-center text-[32px] font-bold text-slate-900">{heading}</h2>
+          <div className="mx-auto mt-4 h-1 w-28 bg-emerald-600" />
         </>
       ) : null}
 
