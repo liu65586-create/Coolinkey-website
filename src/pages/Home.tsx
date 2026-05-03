@@ -56,7 +56,7 @@ export function Home() {
           className="relative isolate flex min-h-[max(80vh,600px)] items-center"
           aria-label="Hero"
         >
-          <div className="absolute inset-0 -z-20 bg-gradient-to-b from-black to-[#111111]" />
+          <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#0a0a0b] to-[#141418]" />
           {heroBgUrl ? (
             <div
               className="absolute inset-0 -z-10 opacity-20"
@@ -92,7 +92,7 @@ export function Home() {
       ) : null}
 
       {modules?.homeFeatures !== false ? (
-        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-black py-20">
+        <section id="features" className="border-t border-[rgba(255,255,255,0.06)] bg-[#0a0a0b] py-20">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:px-6 md:grid-cols-3 md:gap-6">
             {featureDefaults.map((fd, i) => {
               const row = features[i];

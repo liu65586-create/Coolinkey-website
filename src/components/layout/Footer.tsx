@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useShoppingRegion, type ShoppingRegionMode } from "../../context/ShoppingRegionContext";
 
@@ -34,18 +34,18 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.1)] bg-black">
+    <footer className="border-t border-[rgba(255,255,255,0.1)] bg-[#0a0a0b]">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm text-white">© COOLINKEY</div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-            <Link className="text-[#00b51a] hover:underline" to="/privacy">
+            <Link className="text-[#00e676] hover:underline" to="/privacy">
               {t("footer.privacy")}
             </Link>
-            <Link className="text-[#00b51a] hover:underline" to="/cookie-policy">
+            <Link className="text-[#00e676] hover:underline" to="/cookie-policy">
               {t("footer.cookie")}
             </Link>
-            <a className="text-[#00b51a] hover:underline" href="mailto:support@coolinkey.com">
+            <a className="text-[#00e676] hover:underline" href="mailto:support@coolinkey.com">
               support@coolinkey.com
             </a>
           </div>
@@ -75,8 +75,8 @@ export function Footer() {
                   className={[
                     "rounded-[8px] border px-3 py-2 text-xs font-semibold transition-colors",
                     mode === key
-                      ? "border-[#00b51a] bg-[rgba(0,181,26,0.12)] text-white"
-                      : "border-[rgba(255,255,255,0.15)] text-white hover:border-[#00b51a] hover:text-[#00b51a]",
+                      ? "border-[#00e676] bg-[rgba(0,230,118,0.12)] text-white"
+                      : "border-[rgba(255,255,255,0.15)] text-white hover:border-[#00e676] hover:text-[#00e676]",
                   ].join(" ")}
                 >
                   {label}

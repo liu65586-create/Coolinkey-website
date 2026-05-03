@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { AdminMidModulesSection } from "../admin/AdminMidModulesSection";
 import { AdminProductsPanel } from "../admin/AdminProductsPanel";
@@ -88,13 +88,13 @@ export function Admin() {
 
   if (gate.blocked) {
     return (
-      <div className="min-h-dvh bg-black px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#0a0a0b] px-4 py-16 text-white">
         <h1 className="text-2xl font-bold">Admin disabled</h1>
         <p className="mt-4 max-w-2xl text-[#cccccc]">
-          Production deployments must set <code className="text-[#00b51a]">VITE_ADMIN_PIN</code> in Vercel
+          Production deployments must set <code className="text-[#00e676]">VITE_ADMIN_PIN</code> in Vercel
           environment variables, then redeploy. This prevents a public admin surface without a secret.
         </p>
-        <Link className="mt-8 inline-block text-[#00b51a] hover:underline" to="/">
+        <Link className="mt-8 inline-block text-[#00e676] hover:underline" to="/">
           Back to site
         </Link>
       </div>
@@ -103,7 +103,7 @@ export function Admin() {
 
   if (!canEdit) {
     return (
-      <div className="min-h-dvh bg-black px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#0a0a0b] px-4 py-16 text-white">
         <h1 className="text-2xl font-bold">COOLINKEY Admin</h1>
         {!import.meta.env.PROD && !import.meta.env.VITE_ADMIN_PIN ? (
           <p className="mt-3 max-w-2xl text-sm text-amber-200">
@@ -113,20 +113,20 @@ export function Admin() {
         <div className="mt-8 max-w-md space-y-3">
           <input
             type="password"
-            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-white outline-none focus:border-[#00b51a]"
+            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-white outline-none focus:border-[#00e676]"
             placeholder="PIN"
             value={pinInput}
             onChange={(e) => setPinInput(e.target.value)}
           />
           <button
             type="button"
-            className="rounded-lg bg-[#00b51a] px-4 py-2 font-semibold text-white hover:bg-[#00cc1a]"
+            className="rounded-lg bg-[#00e676] px-4 py-2 font-semibold text-white hover:bg-[#00c853]"
             onClick={() => gate.tryUnlock(pinInput)}
           >
             Unlock
           </button>
         </div>
-        <Link className="mt-10 inline-block text-[#00b51a] hover:underline" to="/">
+        <Link className="mt-10 inline-block text-[#00e676] hover:underline" to="/">
           Back to site
         </Link>
       </div>
@@ -135,29 +135,29 @@ export function Admin() {
 
   if (mainTab === "site" && (loading || !draft)) {
     return (
-      <div className="min-h-dvh bg-black px-4 py-16 text-white">
+      <div className="min-h-dvh bg-[#0a0a0b] px-4 py-16 text-white">
         <p className="text-[#cccccc]">{error ?? "Loading…"}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-dvh bg-black text-white">
+    <div className="min-h-dvh bg-[#0a0a0b] text-white">
       <header className="border-b border-[rgba(255,255,255,0.1)] px-4 py-4 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <div className="text-xs font-semibold text-[#00b51a]">COOLINKEY</div>
+            <div className="text-xs font-semibold text-[#00e676]">COOLINKEY</div>
             <div className="text-lg font-bold">
               {mainTab === "site" ? "Site configuration" : "Products & manuals"}
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Link className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00b51a]" to="/">
+            <Link className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00e676]" to="/">
               View site
             </Link>
             <button
               type="button"
-              className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00b51a]"
+              className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00e676]"
               onClick={() => gate.logout()}
             >
               Lock
@@ -170,14 +170,14 @@ export function Admin() {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "site" ? "bg-[#00b51a] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
+            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "site" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
             onClick={() => setMainTab("site")}
           >
             站点与文案
           </button>
           <button
             type="button"
-            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "products" ? "bg-[#00b51a] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
+            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "products" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
             onClick={() => setMainTab("products")}
           >
             产品与说明书
@@ -193,26 +193,27 @@ export function Admin() {
         <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-4 text-sm text-[#cccccc]">
           <p>
             <strong className="text-white">How publishing works:</strong> “Save in this browser” stores overrides in{" "}
-            <code className="text-[#00b51a]">localStorage</code> for preview. To update the public site for everyone,
+            <code className="text-[#00e676]">localStorage</code> for preview. To update the public site for everyone,
             click <strong className="text-white">Export JSON</strong>, replace{" "}
-            <code className="text-[#00b51a]">public/cms/site.config.json</code> in the repo, then push to GitHub (Vercel
+            <code className="text-[#00e676]">public/cms/site.config.json</code> in the repo, then push to GitHub (Vercel
             redeploys). Product catalog is edited in the <strong className="text-white">产品与说明书</strong> tab and
-            saved to <code className="text-[#00b51a]">public/cms/products.json</code>; PDF files live under{" "}
-            <code className="text-[#00b51a]">public/manuals/</code>.
+            saved to <code className="text-[#00e676]">public/cms/products.json</code>. Manual PDFs may be full{" "}
+            <code className="text-[#00e676]">https://…</code> links (e.g. OSS/CDN); or use paths under{" "}
+            <code className="text-[#00e676]">public/manuals/</code> if you host files in the repo.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            className={`rounded-lg px-3 py-2 text-sm font-semibold ${tab === "content" ? "bg-[#00b51a] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
+            className={`rounded-lg px-3 py-2 text-sm font-semibold ${tab === "content" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
             onClick={() => setTab("content")}
           >
             Forms
           </button>
           <button
             type="button"
-            className={`rounded-lg px-3 py-2 text-sm font-semibold ${tab === "json" ? "bg-[#00b51a] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
+            className={`rounded-lg px-3 py-2 text-sm font-semibold ${tab === "json" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
             onClick={() => setTab("json")}
           >
             Raw JSON
@@ -226,7 +227,7 @@ export function Admin() {
               <label className="block text-sm text-[#cccccc]">
                 <span className="mb-1 block text-xs font-semibold text-white/80">Logo URL (site root path recommended)</span>
                 <input
-                  className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                  className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                   value={draft.brand.logoSrc}
                   onChange={(e) => setDraft({ ...draft, brand: { ...draft.brand, logoSrc: e.target.value } })}
                 />
@@ -234,7 +235,7 @@ export function Admin() {
               <label className="block text-sm text-[#cccccc]">
                 <span className="mb-1 block text-xs font-semibold text-white/80">Logo alt text</span>
                 <input
-                  className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                  className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                   value={draft.brand.logoAlt}
                   onChange={(e) => setDraft({ ...draft, brand: { ...draft.brand, logoAlt: e.target.value } })}
                 />
@@ -243,7 +244,7 @@ export function Admin() {
                 <span className="mb-1 block text-xs font-semibold text-white/80">Logo max height (px)</span>
                 <input
                   type="number"
-                  className="w-full max-w-xs rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                  className="w-full max-w-xs rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                   value={draft.brand.logoMaxHeightPx}
                   onChange={(e) =>
                     setDraft({
@@ -286,7 +287,7 @@ export function Admin() {
               <label className="block text-sm text-[#cccccc]">
                 <span className="mb-1 block text-xs font-semibold text-white/80">Background image URL (optional)</span>
                 <input
-                  className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                  className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                   value={draft.hero.backgroundImageUrl}
                   onChange={(e) =>
                     setDraft({ ...draft, hero: { ...draft.hero, backgroundImageUrl: e.target.value } })
@@ -313,7 +314,7 @@ export function Admin() {
                   <label className="block text-sm text-[#cccccc]">
                     <span className="mb-1 block text-xs font-semibold text-white/80">Icon</span>
                     <select
-                      className="w-full max-w-xs rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                      className="w-full max-w-xs rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                       value={f.icon}
                       onChange={(e) => {
                         const next = [...draft.features];
@@ -426,13 +427,13 @@ export function Admin() {
         ) : (
           <div className="space-y-3">
             <textarea
-              className="min-h-[420px] w-full rounded-xl border border-[rgba(255,255,255,0.12)] bg-black p-4 font-mono text-xs text-white outline-none focus:border-[#00b51a]"
+              className="min-h-[420px] w-full rounded-xl border border-[rgba(255,255,255,0.12)] bg-black p-4 font-mono text-xs text-white outline-none focus:border-[#00e676]"
               value={rawJson}
               onChange={(e) => setRawJson(e.target.value)}
             />
             <button
               type="button"
-              className="rounded-lg border border-[#00b51a] px-4 py-2 text-sm font-semibold text-[#00b51a] hover:bg-[rgba(0,181,26,0.1)]"
+              className="rounded-lg border border-[#00e676] px-4 py-2 text-sm font-semibold text-[#00e676] hover:bg-[rgba(0,230,118,0.1)]"
               onClick={() => {
                 try {
                   const parsed = normalizeSiteConfig(JSON.parse(rawJson) as SiteConfig);
@@ -451,7 +452,7 @@ export function Admin() {
         <div className="flex flex-wrap gap-2 border-t border-[rgba(255,255,255,0.1)] pt-6">
           <button
             type="button"
-            className="rounded-lg bg-[#00b51a] px-4 py-2 font-semibold text-white hover:bg-[#00cc1a] disabled:opacity-50"
+            className="rounded-lg bg-[#00e676] px-4 py-2 font-semibold text-white hover:bg-[#00c853] disabled:opacity-50"
             disabled={!dirty}
             onClick={() => saveLocalOverride(normalizeSiteConfig(draft))}
           >
@@ -460,7 +461,7 @@ export function Admin() {
           <button type="button" className="rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm" onClick={onExport}>
             Export JSON
           </button>
-          <label className="cursor-pointer rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm hover:border-[#00b51a]">
+          <label className="cursor-pointer rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm hover:border-[#00e676]">
             Import JSON
             <input
               type="file"

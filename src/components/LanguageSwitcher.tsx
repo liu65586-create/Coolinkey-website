@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 
 export function LanguageSwitcher() {
   const { i18n, t } = useTranslation();
@@ -26,8 +26,8 @@ export function LanguageSwitcher() {
         type="button"
         className={`rounded-[6px] px-3 py-1.5 text-sm font-semibold transition-colors ${
           i18n.language.startsWith("zh")
-            ? "text-white/50 hover:text-[#00b51a]"
-            : "bg-[#111111] text-[#00b51a]"
+            ? "text-white/50 hover:text-[#00e676]"
+            : "bg-[#111111] text-[#00e676]"
         }`}
         onClick={() => setLang("en")}
       >
@@ -37,8 +37,8 @@ export function LanguageSwitcher() {
         type="button"
         className={`rounded-[6px] px-3 py-1.5 text-sm font-semibold transition-colors ${
           i18n.language.startsWith("zh")
-            ? "bg-[#111111] text-[#00b51a]"
-            : "text-white/50 hover:text-[#00b51a]"
+            ? "bg-[#111111] text-[#00e676]"
+            : "text-white/50 hover:text-[#00e676]"
         }`}
         onClick={() => setLang("zh")}
       >

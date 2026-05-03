@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import type { Bilingual, MidSlide, MidSlideMediaKind } from "../types/siteConfig";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
@@ -64,7 +64,7 @@ export function MidSplitCarousel({
       <div className="flex gap-2">
         <button
           type="button"
-          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00b51a] hover:text-[#00b51a] disabled:opacity-40"
+          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00e676] hover:text-[#00e676] disabled:opacity-40"
           disabled={i === 0}
           onClick={() => setI((x) => Math.max(0, x - 1))}
         >
@@ -72,7 +72,7 @@ export function MidSplitCarousel({
         </button>
         <button
           type="button"
-          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00b51a] hover:text-[#00b51a] disabled:opacity-40"
+          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00e676] hover:text-[#00e676] disabled:opacity-40"
           disabled={i >= safeSlides.length - 1}
           onClick={() => setI((x) => Math.min(safeSlides.length - 1, x + 1))}
         >
@@ -85,7 +85,7 @@ export function MidSplitCarousel({
             key={idx}
             type="button"
             aria-label={`Slide ${idx + 1}`}
-            className={`h-2 w-2 rounded-full ${idx === i ? "bg-[#00b51a]" : "bg-[rgba(255,255,255,0.25)]"}`}
+            className={`h-2 w-2 rounded-full ${idx === i ? "bg-[#00e676]" : "bg-[rgba(255,255,255,0.25)]"}`}
             onClick={() => setI(idx)}
           />
         ))}

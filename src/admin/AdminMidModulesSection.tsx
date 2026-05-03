@@ -1,4 +1,4 @@
-import { BiInput } from "../components/admin/BiInput";
+﻿import { BiInput } from "../components/admin/BiInput";
 import type { ManualType } from "../types/cms";
 import type { MidModuleBlock, MidSlide, MidSlideMediaKind, SiteConfig } from "../types/siteConfig";
 import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
@@ -58,7 +58,7 @@ export function AdminMidModulesSection({
           <div className="text-sm font-semibold text-white/80">幻灯片</div>
           <button
             type="button"
-            className="rounded-lg border border-[#00b51a] px-3 py-1.5 text-xs font-semibold text-[#00b51a]"
+            className="rounded-lg border border-[#00e676] px-3 py-1.5 text-xs font-semibold text-[#00e676]"
             onClick={() => patchMid(key, { ...m, slides: [...m.slides, emptySlide()] })}
           >
             添加幻灯片
@@ -79,10 +79,13 @@ export function AdminMidModulesSection({
               </button>
             </div>
             <label className="block text-sm text-[#cccccc]">
-              <span className="mb-1 block text-xs font-semibold text-white/80">媒体 URL（图片 / GIF / mp4）</span>
+              <span className="mb-1 block text-xs font-semibold text-white/80">
+                媒体 URL（图片 / GIF / mp4，支持完整 https 外链，无需进 GitHub）
+              </span>
               <input
-                className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                 value={s.mediaUrl}
+                placeholder="https://…"
                 onChange={(e) => {
                   const slides = [...m.slides];
                   slides[idx] = { ...s, mediaUrl: e.target.value };
@@ -93,7 +96,7 @@ export function AdminMidModulesSection({
             <label className="block text-sm text-[#cccccc]">
               <span className="mb-1 block text-xs font-semibold text-white/80">媒体类型</span>
               <select
-                className="w-full max-w-xs rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                className="w-full max-w-xs rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                 value={s.mediaKind}
                 onChange={(e) => {
                   const slides = [...m.slides];
@@ -126,7 +129,7 @@ export function AdminMidModulesSection({
         <h2 className="text-lg font-semibold text-white">Resources & Manuals · 隐藏类型</h2>
         <p className="text-sm text-[#cccccc]">
           勾选后，首页与产品页不显示对应说明书卡片（installation / user_manual / faq / video），其余卡片自动重排。若使用「仅本浏览器保存」，全站访客需将导出后的{" "}
-          <code className="text-[#00b51a]">public/cms/site.config.json</code> 提交并部署后才会生效。
+          <code className="text-[#00e676]">public/cms/site.config.json</code> 提交并部署后才会生效。
         </p>
         <div className="flex flex-wrap gap-4">
           {manualTypeOptions.map((t) => (

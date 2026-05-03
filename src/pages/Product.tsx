@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+﻿import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../components/Button";
@@ -103,7 +103,7 @@ export function Product() {
           {visibleManuals.length ? (
             <div className="mt-16 border-t border-[rgba(255,255,255,0.06)] pt-6">
               <h2 className="mb-2 text-center text-[32px] font-bold text-white">{manualsHeading}</h2>
-              <div className="mx-auto mb-8 h-1 w-28 bg-[#00b51a]" />
+              <div className="mx-auto mb-8 h-1 w-28 bg-[#00e676]" />
               <ManualsGrid manuals={visibleManuals} showHeading={false} />
             </div>
           ) : null}

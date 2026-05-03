@@ -1,4 +1,4 @@
-import * as pdfjsLib from "pdfjs-dist";
+﻿import * as pdfjsLib from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.mjs?url";
 import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -103,7 +103,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
           </h2>
           <button
             type="button"
-            className="rounded-md px-3 py-1.5 text-sm font-semibold text-white hover:text-[#00b51a]"
+            className="rounded-md px-3 py-1.5 text-sm font-semibold text-white hover:text-[#00e676]"
             onClick={onClose}
           >
             {t("manualsSection.close")}
@@ -141,7 +141,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
               download
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-[8px] border-2 border-transparent bg-[#00b51a] px-8 py-3 text-[16px] font-semibold text-white transition-colors hover:bg-[#00cc1a]"
+              className="inline-flex items-center justify-center rounded-[8px] border-2 border-transparent bg-[#00e676] px-8 py-3 text-[16px] font-semibold text-white transition-colors hover:bg-[#00c853]"
             >
               {t("manualsSection.downloadPdf")}
             </a>

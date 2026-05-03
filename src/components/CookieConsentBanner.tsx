@@ -1,4 +1,4 @@
-import CookieConsent from "react-cookie-consent";
+﻿import CookieConsent from "react-cookie-consent";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useGeoIpContext } from "../context/GeoIpContext";
@@ -31,7 +31,7 @@ export function CookieConsentBanner() {
         alignItems: "center",
       }}
       buttonStyle={{
-        background: "#00b51a",
+        background: "#00e676",
         color: "#ffffff",
         fontSize: "14px",
         fontWeight: 700,
@@ -42,7 +42,7 @@ export function CookieConsentBanner() {
     >
       <span>
         {message}{" "}
-        <Link className="text-[#00b51a] hover:underline" to="/cookie-policy">
+        <Link className="text-[#00e676] hover:underline" to="/cookie-policy">
           {learnMore}
         </Link>
       </span>

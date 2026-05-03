@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { BiInput } from "../components/admin/BiInput";
 import { useCms } from "../context/CmsContext";
 import type { CmsManual, CmsPayload, CmsProduct, ManualType } from "../types/cms";
@@ -124,7 +124,7 @@ export function AdminProductsPanel() {
         <p className="text-[#cccccc]">No products in catalog. Add one below.</p>
         <button
           type="button"
-          className="rounded-lg bg-[#00b51a] px-4 py-2 font-semibold text-white"
+          className="rounded-lg bg-[#00e676] px-4 py-2 font-semibold text-white"
           onClick={() => setDraft([emptyProduct()])}
         >
           Add first product
@@ -137,10 +137,9 @@ export function AdminProductsPanel() {
     <div className="space-y-8">
       <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-4 text-sm text-[#cccccc]">
         <p>
-          编辑 <code className="text-[#00b51a]">public/cms/products.json</code> 的等价数据：主图/轮播、多语言名称与描述、规格表、购买链接、说明书（PDF 路径与视频嵌入
-          URL）。保存到浏览器后仅本机预览；<strong className="text-white">Export</strong> 下载的文件请覆盖仓库中的{" "}
-          <code className="text-[#00b51a]">products.json</code> 并推送以更新线上。PDF 实体文件仍需放到{" "}
-          <code className="text-[#00b51a]">public/manuals/en|zh/</code>。
+          编辑 <code className="text-[#00e676]">public/cms/products.json</code> 的等价数据：主图/轮播、多语言名称与描述、规格表、购买链接、说明书（PDF 与视频均可填<strong className="text-white">完整 https 链接</strong>
+          ，无需上传到 GitHub；也可继续用 <code className="text-[#00e676]">/manuals/…</code> 相对路径指向仓库内文件）。保存到浏览器后仅本机预览；<strong className="text-white">Export</strong> 下载的文件请覆盖仓库中的{" "}
+          <code className="text-[#00e676]">products.json</code> 并推送以更新线上。
         </p>
       </div>
 
@@ -148,7 +147,7 @@ export function AdminProductsPanel() {
         <label className="block text-sm text-[#cccccc]">
           <span className="mb-1 block text-xs font-semibold text-white/80">选择产品</span>
           <select
-            className="min-w-[220px] rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+            className="min-w-[220px] rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
             value={idx}
             onChange={(e) => setIdx(Number(e.target.value))}
           >
@@ -161,7 +160,7 @@ export function AdminProductsPanel() {
         </label>
         <button
           type="button"
-          className="rounded-lg border border-[#00b51a] px-3 py-2 text-sm font-semibold text-[#00b51a] hover:bg-[rgba(0,181,26,0.1)]"
+          className="rounded-lg border border-[#00e676] px-3 py-2 text-sm font-semibold text-[#00e676] hover:bg-[rgba(0,230,118,0.1)]"
           onClick={() => {
             setDraft((list) => {
               const next = [...list, emptyProduct()];
@@ -194,7 +193,7 @@ export function AdminProductsPanel() {
         <label className="block text-sm text-[#cccccc]">
           <span className="mb-1 block text-xs font-semibold text-white/80">Slug（URL 段，唯一）</span>
           <input
-            className="w-full max-w-md rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+            className="w-full max-w-md rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
             value={p.slug}
             onChange={(e) => setProduct({ ...p, slug: e.target.value })}
           />
@@ -202,17 +201,18 @@ export function AdminProductsPanel() {
         <BiInput label="产品名称" value={p.name} onChange={(v) => setProduct({ ...p, name: v })} />
         <BiInput label="简短描述" value={p.shortDescription} onChange={(v) => setProduct({ ...p, shortDescription: v })} />
         <label className="block text-sm text-[#cccccc]">
-          <span className="mb-1 block text-xs font-semibold text-white/80">主图 URL</span>
+          <span className="mb-1 block text-xs font-semibold text-white/80">主图 URL（https 外链或 / 开头的站内路径）</span>
           <input
-            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
             value={p.mainImage}
+            placeholder="https://cdn.example.com/hero.jpg"
             onChange={(e) => setProduct({ ...p, mainImage: e.target.value })}
           />
         </label>
         <label className="block text-sm text-[#cccccc]">
           <span className="mb-1 block text-xs font-semibold text-white/80">购买链接 · 海外（Amazon 等）</span>
           <input
-            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
             value={p.purchaseLinkEn}
             onChange={(e) => setProduct({ ...p, purchaseLinkEn: e.target.value })}
           />
@@ -220,7 +220,7 @@ export function AdminProductsPanel() {
         <label className="block text-sm text-[#cccccc]">
           <span className="mb-1 block text-xs font-semibold text-white/80">购买链接 · 中国（京东/天猫等）</span>
           <input
-            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
             value={p.purchaseLinkZh}
             onChange={(e) => setProduct({ ...p, purchaseLinkZh: e.target.value })}
           />
@@ -232,7 +232,7 @@ export function AdminProductsPanel() {
           <h3 className="text-base font-semibold text-white">轮播图 URL 列表</h3>
           <button
             type="button"
-            className="rounded-lg border border-[#00b51a] px-3 py-1.5 text-xs font-semibold text-[#00b51a]"
+            className="rounded-lg border border-[#00e676] px-3 py-1.5 text-xs font-semibold text-[#00e676]"
             onClick={() => setProduct({ ...p, galleryImages: [...p.galleryImages, ""] })}
           >
             添加一张
@@ -245,7 +245,7 @@ export function AdminProductsPanel() {
             {p.galleryImages.map((url, gi) => (
               <div key={gi} className="flex gap-2">
                 <input
-                  className="flex-1 rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                  className="flex-1 rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                   value={url}
                   placeholder="https://... or /images/foo.jpg"
                   onChange={(e) => {
@@ -275,7 +275,7 @@ export function AdminProductsPanel() {
           <h3 className="text-base font-semibold text-white">技术规格</h3>
           <button
             type="button"
-            className="rounded-lg border border-[#00b51a] px-3 py-1.5 text-xs font-semibold text-[#00b51a]"
+            className="rounded-lg border border-[#00e676] px-3 py-1.5 text-xs font-semibold text-[#00e676]"
             onClick={() => setProduct({ ...p, specs: [...p.specs, emptySpec()] })}
           >
             添加一行
@@ -317,7 +317,7 @@ export function AdminProductsPanel() {
           <h3 className="text-base font-semibold text-white">说明书与视频</h3>
           <button
             type="button"
-            className="rounded-lg border border-[#00b51a] px-3 py-1.5 text-xs font-semibold text-[#00b51a]"
+            className="rounded-lg border border-[#00e676] px-3 py-1.5 text-xs font-semibold text-[#00e676]"
             onClick={() => setProduct({ ...p, manuals: [...p.manuals, emptyManual()] })}
           >
             添加一条手册/视频
@@ -329,7 +329,7 @@ export function AdminProductsPanel() {
           p.manuals.map((m, mi) => (
             <div key={mi} className="space-y-3 rounded-lg border border-[rgba(255,255,255,0.08)] p-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="text-xs font-semibold text-[#00b51a]">条目 {mi + 1}</span>
+                <span className="text-xs font-semibold text-[#00e676]">条目 {mi + 1}</span>
                 <button
                   type="button"
                   className="text-xs text-red-300 hover:underline"
@@ -341,7 +341,7 @@ export function AdminProductsPanel() {
               <label className="block text-sm text-[#cccccc]">
                 <span className="mb-1 block text-xs font-semibold text-white/80">内部 ID（唯一键）</span>
                 <input
-                  className="w-full max-w-md rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                  className="w-full max-w-md rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                   value={m.id}
                   onChange={(e) => {
                     const next = [...p.manuals];
@@ -353,7 +353,7 @@ export function AdminProductsPanel() {
               <label className="block text-sm text-[#cccccc]">
                 <span className="mb-1 block text-xs font-semibold text-white/80">类型</span>
                 <select
-                  className="w-full max-w-xs rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                  className="w-full max-w-xs rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                   value={m.type}
                   onChange={(e) => {
                     const next = [...p.manuals];
@@ -379,10 +379,11 @@ export function AdminProductsPanel() {
               />
               <div className="grid gap-3 sm:grid-cols-2">
                 <label className="block text-sm text-[#cccccc]">
-                  <span className="mb-1 block text-xs font-semibold text-white/80">PDF · EN 路径</span>
+                  <span className="mb-1 block text-xs font-semibold text-white/80">PDF · EN（https 外链或 /manuals/…）</span>
                   <input
-                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                     value={m.pdfFileEn ?? ""}
+                    placeholder="https://…/manual-en.pdf"
                     onChange={(e) => {
                       const next = [...p.manuals];
                       const v = e.target.value.trim();
@@ -392,10 +393,11 @@ export function AdminProductsPanel() {
                   />
                 </label>
                 <label className="block text-sm text-[#cccccc]">
-                  <span className="mb-1 block text-xs font-semibold text-white/80">PDF · 中文 路径</span>
+                  <span className="mb-1 block text-xs font-semibold text-white/80">PDF · 中文（https 外链或 /manuals/…）</span>
                   <input
-                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                     value={m.pdfFileZh ?? ""}
+                    placeholder="https://…/manual-zh.pdf"
                     onChange={(e) => {
                       const next = [...p.manuals];
                       const v = e.target.value.trim();
@@ -409,7 +411,7 @@ export function AdminProductsPanel() {
                 <label className="block text-sm text-[#cccccc]">
                   <span className="mb-1 block text-xs font-semibold text-white/80">视频嵌入 URL · EN（YouTube embed 等）</span>
                   <input
-                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                     value={m.videoUrlEn ?? ""}
                     onChange={(e) => {
                       const next = [...p.manuals];
@@ -421,7 +423,7 @@ export function AdminProductsPanel() {
                 <label className="block text-sm text-[#cccccc]">
                   <span className="mb-1 block text-xs font-semibold text-white/80">视频嵌入 URL · 中文（B站 embed 等）</span>
                   <input
-                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00b51a]"
+                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
                     value={m.videoUrlZh ?? ""}
                     onChange={(e) => {
                       const next = [...p.manuals];
@@ -439,13 +441,13 @@ export function AdminProductsPanel() {
       <section className="space-y-3 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#0a0a0a] p-5">
         <h3 className="text-base font-semibold text-white">Raw JSON（整块 products）</h3>
         <textarea
-          className="min-h-[280px] w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black p-3 font-mono text-xs text-white outline-none focus:border-[#00b51a]"
+          className="min-h-[280px] w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black p-3 font-mono text-xs text-white outline-none focus:border-[#00e676]"
           value={rawJson}
           onChange={(e) => setRawJson(e.target.value)}
         />
         <button
           type="button"
-          className="rounded-lg border border-[#00b51a] px-3 py-2 text-sm font-semibold text-[#00b51a] hover:bg-[rgba(0,181,26,0.1)]"
+          className="rounded-lg border border-[#00e676] px-3 py-2 text-sm font-semibold text-[#00e676] hover:bg-[rgba(0,230,118,0.1)]"
           onClick={applyRawJson}
         >
           应用 JSON 到表单
@@ -455,7 +457,7 @@ export function AdminProductsPanel() {
       <div className="flex flex-wrap gap-2 border-t border-[rgba(255,255,255,0.1)] pt-6">
         <button
           type="button"
-          className="rounded-lg bg-[#00b51a] px-4 py-2 font-semibold text-white hover:bg-[#00cc1a] disabled:opacity-50"
+          className="rounded-lg bg-[#00e676] px-4 py-2 font-semibold text-white hover:bg-[#00c853] disabled:opacity-50"
           disabled={!dirty}
           onClick={onSaveLocal}
         >
@@ -464,7 +466,7 @@ export function AdminProductsPanel() {
         <button type="button" className="rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm" onClick={onExport}>
           Export products.json
         </button>
-        <label className="cursor-pointer rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm hover:border-[#00b51a]">
+        <label className="cursor-pointer rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm hover:border-[#00e676]">
           Import JSON
           <input type="file" accept="application/json" className="hidden" onChange={(e) => void onImportFile(e.target.files?.[0] ?? null)} />
         </label>

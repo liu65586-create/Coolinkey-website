@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
@@ -30,7 +30,7 @@ export function ProductGallery({ images, productName }: Props) {
       <div className="flex items-center justify-between gap-3">
         <button
           type="button"
-          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00b51a] hover:text-[#00b51a] disabled:opacity-40"
+          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00e676] hover:text-[#00e676] disabled:opacity-40"
           disabled={idx === 0}
           onClick={() => setIdx((i) => Math.max(0, i - 1))}
         >
@@ -44,7 +44,7 @@ export function ProductGallery({ images, productName }: Props) {
               onClick={() => setIdx(i)}
               className={[
                 "h-14 w-20 shrink-0 overflow-hidden rounded-md border",
-                i === idx ? "border-[#00b51a]" : "border-[rgba(255,255,255,0.12)] hover:border-[#00b51a]",
+                i === idx ? "border-[#00e676]" : "border-[rgba(255,255,255,0.12)] hover:border-[#00e676]",
               ].join(" ")}
             >
               <img src={src} alt="" className="h-full w-full object-cover" />
@@ -53,7 +53,7 @@ export function ProductGallery({ images, productName }: Props) {
         </div>
         <button
           type="button"
-          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00b51a] hover:text-[#00b51a] disabled:opacity-40"
+          className="rounded-md border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm font-semibold text-white hover:border-[#00e676] hover:text-[#00e676] disabled:opacity-40"
           disabled={idx >= list.length - 1}
           onClick={() => setIdx((i) => Math.min(list.length - 1, i + 1))}
         >
