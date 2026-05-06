@@ -1,7 +1,7 @@
 {
   "version": 1,
   "brand": {
-    "logoSrc": "/brand/coolinkey-logo.png",
+    "logoSrc": "https://drive.google.com/file/d/1Y_v-dTZ33TRDYGKTq7bCYTWvtJZlzoAs/view?usp=drive_link",
     "logoAlt": "COOLINKEY",
     "logoMaxHeightPx": 30
   },
@@ -25,7 +25,10 @@
   "midModules": {
     "a": {
       "enabled": true,
-      "title": { "en": "Urban freedom, locked in seconds", "zh": "城市出行，秒级上锁" },
+      "title": {
+        "en": "Urban freedom, locked in seconds",
+        "zh": "城市出行，秒级上锁"
+      },
       "slides": [
         {
           "mediaUrl": "/images/defaults/mid-module-a-use-case.png",
@@ -47,7 +50,10 @@
     },
     "b": {
       "enabled": true,
-      "title": { "en": "Engineered for reliability", "zh": "为可靠而生" },
+      "title": {
+        "en": "Engineered for reliability",
+        "zh": "为可靠而生"
+      },
       "slides": [
         {
           "mediaUrl": "/images/defaults/mid-module-b-test.png",
@@ -61,7 +67,10 @@
     },
     "d": {
       "enabled": true,
-      "title": { "en": "Materials you can trust", "zh": "材质与工艺" },
+      "title": {
+        "en": "Materials you can trust",
+        "zh": "材质与工艺"
+      },
       "slides": [
         {
           "mediaUrl": "/images/defaults/mid-module-d-production.png",
@@ -77,7 +86,10 @@
   "features": [
     {
       "icon": "water",
-      "title": { "en": "IP67 rated", "zh": "IP67 防护" },
+      "title": {
+        "en": "IP67 rated",
+        "zh": "IP67 防护"
+      },
       "description": {
         "en": "Sealed against dust and immersion-grade water ingress so outdoor parking stays practical year-round.",
         "zh": "防尘防水设计，适应户外停车与多变天气，四季使用更安心。"
@@ -85,7 +97,10 @@
     },
     {
       "icon": "fingerprint",
-      "title": { "en": "Biometric unlock", "zh": "指纹一触即开" },
+      "title": {
+        "en": "Biometric unlock",
+        "zh": "指纹一触即开"
+      },
       "description": {
         "en": "Register up to 60 fingerprints; unlock on the pad without reaching for keys or your phone.",
         "zh": "最多支持 60 枚指纹；在锁体面板上直接解锁，无需翻找钥匙或手机。"
@@ -93,7 +108,10 @@
     },
     {
       "icon": "chain",
-      "title": { "en": "Heavy-duty sleeved chain", "zh": "高强度包覆链条" },
+      "title": {
+        "en": "Heavy-duty sleeved chain",
+        "zh": "高强度包覆链条"
+      },
       "description": {
         "en": "Stainless steel links inside a PET-wrapped textile sleeve—about 100 cm to wrap frame, wheel, and anchor point.",
         "zh": "不锈钢链芯外包耐磨织物套管，链长约 100 cm，可环绕车架、轮组与固定物。"
@@ -101,35 +119,68 @@
     }
   ],
   "manualsSection": {
-    "heading": { "en": "Manuals & downloads", "zh": "说明书与下载" },
+    "heading": {
+      "en": "Manuals & downloads",
+      "zh": "说明书与下载"
+    },
     "hiddenManualTypes": []
   },
   "productPage": {
-    "manualsHeading": { "en": "Manuals & downloads", "zh": "说明书与下载" }
+    "manualsHeading": {
+      "en": "Manuals & downloads",
+      "zh": "说明书与下载"
+    }
   },
   "about": {
-    "title": { "en": "About COOLINKEY", "zh": "关于 COOLINKEY" },
+    "title": {
+      "en": "About COOLINKEY",
+      "zh": "关于 COOLINKEY"
+    },
     "body": {
       "en": "COOLINKEY builds smart security for bicycles and daily carry—combining fingerprint access, a tough sleeved chain, and app connectivity so you can lock up quickly and get back to riding.",
       "zh": "COOLINKEY 专注自行车与随身场景的智能安防，将指纹解锁、高强度包覆链条与 App 互联结合，让你快速上锁、回到骑行与都市生活。"
     }
   },
   "contact": {
-    "title": { "en": "Contact", "zh": "联系我们" },
+    "title": {
+      "en": "Contact",
+      "zh": "联系我们"
+    },
     "body": {
       "en": "For support, distribution, or business inquiries: support@coolinkey.com",
       "zh": "售后、渠道或商务合作：support@coolinkey.com"
     }
   },
   "legal": {
-    "privacyTitle": { "en": "", "zh": "" },
-    "privacyBody": { "en": "", "zh": "" },
-    "cookieTitle": { "en": "", "zh": "" },
-    "cookieBody": { "en": "", "zh": "" }
+    "privacyTitle": {
+      "en": "",
+      "zh": ""
+    },
+    "privacyBody": {
+      "en": "",
+      "zh": ""
+    },
+    "cookieTitle": {
+      "en": "",
+      "zh": ""
+    },
+    "cookieBody": {
+      "en": "",
+      "zh": ""
+    }
   },
   "cookieBanner": {
-    "message": { "en": "", "zh": "" },
-    "accept": { "en": "", "zh": "" },
-    "learnMore": { "en": "", "zh": "" }
+    "message": {
+      "en": "",
+      "zh": ""
+    },
+    "accept": {
+      "en": "",
+      "zh": ""
+    },
+    "learnMore": {
+      "en": "",
+      "zh": ""
+    }
   }
 }
