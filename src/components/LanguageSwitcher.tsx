@@ -16,18 +16,18 @@ export function LanguageSwitcher() {
     window.dispatchEvent(new Event("coolinkey-lang-change"));
   };
 
+  const isZh = i18n.language.startsWith("zh");
+
   return (
     <div
-      className="flex items-center gap-1 rounded-[8px] border border-slate-300 bg-white/80 p-1"
+      className="flex items-center gap-0.5 rounded-lg border border-[var(--color-border)] bg-surface/80 p-0.5"
       role="group"
       aria-label="Language"
     >
       <button
         type="button"
-        className={`rounded-[6px] px-3 py-1.5 text-sm font-semibold transition-colors ${
-          i18n.language.startsWith("zh")
-            ? "text-slate-500 hover:text-emerald-700"
-            : "bg-emerald-600 text-white shadow-sm"
+        className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+          !isZh ? "bg-accent text-white" : "text-text-muted hover:text-accent"
         }`}
         onClick={() => setLang("en")}
       >
@@ -35,10 +35,8 @@ export function LanguageSwitcher() {
       </button>
       <button
         type="button"
-        className={`rounded-[6px] px-3 py-1.5 text-sm font-semibold transition-colors ${
-          i18n.language.startsWith("zh")
-            ? "bg-emerald-600 text-white shadow-sm"
-            : "text-slate-500 hover:text-emerald-700"
+        className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+          isZh ? "bg-accent text-white" : "text-text-muted hover:text-accent"
         }`}
         onClick={() => setLang("zh")}
       >

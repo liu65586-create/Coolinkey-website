@@ -7,6 +7,7 @@ import { MidSplitCarousel } from "../components/MidSplitCarousel";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import { useShoppingRegion } from "../context/ShoppingRegionContext";
+import { useResolvedMediaUrl } from "../hooks/useResolvedMediaUrl";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 import { getVisibleManuals } from "../utils/manualsVisibility";
@@ -24,6 +25,7 @@ export function Home() {
   const heroBgUrl =
     (config?.hero.backgroundImageUrl?.trim() ? config.hero.backgroundImageUrl.trim() : "") ||
     (config?.hero.overlayUsesProductImage !== false && heroImgFromProduct ? heroImgFromProduct : "");
+  const heroBgResolved = useResolvedMediaUrl(heroBgUrl);
 
   const heroTitle = pickBilingual(lang, config?.hero.title, t("hero.title"));
   const heroSubtitle = pickBilingual(lang, config?.hero.subtitle, t("hero.subtitle"));
@@ -39,7 +41,7 @@ export function Home() {
     { title: t("features.title_steel"), desc: t("features.desc_steel"), key: "chain" as const },
   ];
 
-  if (siteLoading || !config) return <div className="px-4 py-20 text-slate-500">…</div>;
+  if (siteLoading || !config) return <div className="px-4 py-20 text-text-muted">…</div>;
 
   const hiddenManualTypes = config.manualsSection.hiddenManualTypes;
   const visibleManuals = defaultProduct?.manuals?.length
@@ -56,23 +58,25 @@ export function Home() {
           className="relative isolate flex min-h-[max(80vh,600px)] items-center"
           aria-label="Hero"
         >
-          <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#f8fafc] via-[#eef2f7] to-[#e2e8f0]" />
-          {heroBgUrl ? (
+          <div className="absolute inset-0 -z-20 bg-page" />
+          {heroBgResolved ? (
             <div
-              className="absolute inset-0 -z-10 opacity-[0.18]"
+              className="absolute inset-0 -z-10 opacity-[0.14]"
               style={{
-                backgroundImage: `url(${heroBgUrl})`,
+                backgroundImage: `url(${heroBgResolved})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             />
           ) : null}
 
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-16 sm:px-6">
-            <h1 className="max-w-4xl text-[36px] font-bold leading-tight text-slate-900 sm:text-[64px]">{heroTitle}</h1>
-            <p className="max-w-3xl text-base text-slate-600 sm:text-lg">{heroSubtitle}</p>
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-20 sm:px-6">
+            <h1 className="max-w-3xl text-[36px] font-bold leading-[1.08] tracking-tight text-text sm:text-[56px]">
+              {heroTitle}
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg">{heroSubtitle}</p>
 
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-[20px]">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
               <Button
                 variant="primary"
                 disabled={loading || !defaultProduct}
@@ -92,8 +96,8 @@ export function Home() {
       ) : null}
 
       {modules?.homeFeatures !== false ? (
-        <section id="features" className="border-t border-slate-200/80 bg-[#f1f5f9] py-20">
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:px-6 md:grid-cols-3 md:gap-6">
+        <section id="features" className="section-pad border-t border-[var(--color-border)]">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-2 px-4 sm:px-6 md:grid-cols-3 md:gap-8">
             {featureDefaults.map((fd, i) => {
               const row = features[i];
               const iconKey = row?.icon ?? fd.key;
@@ -113,7 +117,7 @@ export function Home() {
       ) : null}
 
       {config.midModules.a.enabled && midSlides(config.midModules.a.slides).length ? (
-        <section className="border-t border-slate-200/80 bg-white py-16">
+        <section className="section-pad border-t border-[var(--color-border)] bg-surface">
           <MidSplitCarousel
             variant="imageLeft"
             title={config.midModules.a.title}
@@ -124,7 +128,7 @@ export function Home() {
       ) : null}
 
       {config.midModules.b.enabled && midSlides(config.midModules.b.slides).length ? (
-        <section className="border-t border-slate-200/80 bg-[#f8fafc] py-16">
+        <section className="section-pad border-t border-[var(--color-border)]">
           <MidSplitCarousel
             variant="textLeft"
             title={config.midModules.b.title}
@@ -135,7 +139,7 @@ export function Home() {
       ) : null}
 
       {config.midModules.d.enabled && midSlides(config.midModules.d.slides).length ? (
-        <section className="border-t border-slate-200/80 bg-white py-16">
+        <section className="section-pad border-t border-[var(--color-border)] bg-surface">
           <MidSplitCarousel
             variant="imageLeft"
             title={config.midModules.d.title}
@@ -146,7 +150,7 @@ export function Home() {
       ) : null}
 
       {modules?.homeManuals !== false && visibleManuals.length ? (
-        <section className="border-t border-slate-200/80 bg-[#f8fafc] py-4">
+        <section className="border-t border-[var(--color-border)] bg-surface-muted/50">
           <ManualsGrid manuals={visibleManuals} />
         </section>
       ) : null}

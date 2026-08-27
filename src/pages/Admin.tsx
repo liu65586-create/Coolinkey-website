@@ -1,8 +1,10 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { AdminMediaPanel } from "../admin/AdminMediaPanel";
 import { AdminMidModulesSection } from "../admin/AdminMidModulesSection";
 import { AdminProductsPanel } from "../admin/AdminProductsPanel";
 import { BiInput } from "../components/admin/BiInput";
+import { MediaUploadField } from "../components/admin/MediaUploadField";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import type { SiteConfig } from "../types/siteConfig";
 import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
@@ -47,7 +49,7 @@ export function Admin() {
   const { config, loading, error, saveLocalOverride, resetToRepoFile, reload } = useSiteConfig();
   const [draft, setDraft] = useState<SiteConfig | null>(null);
   const [pinInput, setPinInput] = useState("");
-  const [mainTab, setMainTab] = useState<"site" | "products">("site");
+  const [mainTab, setMainTab] = useState<"site" | "products" | "media">("site");
   const [tab, setTab] = useState<"content" | "json">("content");
   const [rawJson, setRawJson] = useState("");
   const gate = useAdminGate();
@@ -148,7 +150,7 @@ export function Admin() {
           <div>
             <div className="text-xs font-semibold text-[#00e676]">COOLINKEY</div>
             <div className="text-lg font-bold">
-              {mainTab === "site" ? "Site configuration" : "Products & manuals"}
+              {mainTab === "site" ? "Site configuration" : mainTab === "products" ? "Products & manuals" : "Media library"}
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -182,10 +184,21 @@ export function Admin() {
           >
             产品与说明书
           </button>
+          <button
+            type="button"
+            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "media" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
+            onClick={() => setMainTab("media")}
+          >
+            媒体管理
+          </button>
         </div>
 
         {mainTab === "products" ? (
           <AdminProductsPanel />
+        ) : null}
+
+        {mainTab === "media" ? (
+          <AdminMediaPanel />
         ) : null}
 
         {mainTab === "site" && draft ? (
@@ -224,14 +237,14 @@ export function Admin() {
           <div className="space-y-10">
             <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Branding</h2>
-              <label className="block text-sm text-[#cccccc]">
-                <span className="mb-1 block text-xs font-semibold text-white/80">Logo URL (site root path recommended)</span>
-                <input
-                  className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
-                  value={draft.brand.logoSrc}
-                  onChange={(e) => setDraft({ ...draft, brand: { ...draft.brand, logoSrc: e.target.value } })}
-                />
-              </label>
+              <MediaUploadField
+                slotId="brand-logo"
+                label="Logo"
+                spec="SVG 或 PNG 透明底"
+                kind="image"
+                value={draft.brand.logoSrc}
+                onChange={(url) => setDraft({ ...draft, brand: { ...draft.brand, logoSrc: url } })}
+              />
               <label className="block text-sm text-[#cccccc]">
                 <span className="mb-1 block text-xs font-semibold text-white/80">Logo alt text</span>
                 <input
@@ -284,17 +297,14 @@ export function Admin() {
               <h2 className="text-lg font-semibold">Hero</h2>
               <BiInput label="Title" value={draft.hero.title} onChange={(v) => setDraft({ ...draft, hero: { ...draft.hero, title: v } })} />
               <BiInput label="Subtitle" value={draft.hero.subtitle} onChange={(v) => setDraft({ ...draft, hero: { ...draft.hero, subtitle: v } })} />
-              <label className="block text-sm text-[#cccccc]">
-                <span className="mb-1 block text-xs font-semibold text-white/80">Background image URL (optional)</span>
-                <input
-                  className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
-                  value={draft.hero.backgroundImageUrl}
-                  onChange={(e) =>
-                    setDraft({ ...draft, hero: { ...draft.hero, backgroundImageUrl: e.target.value } })
-                  }
-                  placeholder="https://... or /images/hero.jpg"
-                />
-              </label>
+              <MediaUploadField
+                slotId="hero-background"
+                label="Hero 背景图 / 动图"
+                spec="2400×1350 或 1920×1080；GIF/WebP 动图可用"
+                kind="image"
+                value={draft.hero.backgroundImageUrl}
+                onChange={(url) => setDraft({ ...draft, hero: { ...draft.hero, backgroundImageUrl: url } })}
+              />
               <label className="flex items-center gap-3 text-sm text-[#cccccc]">
                 <input
                   type="checkbox"

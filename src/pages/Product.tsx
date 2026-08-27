@@ -38,15 +38,14 @@ export function Product() {
 
   const name = active ? (lang === "zh" ? active.name.zh : active.name.en) : "";
   const desc = active ? (lang === "zh" ? active.shortDescription.zh : active.shortDescription.en) : "";
-  const gallery = active ? [active.mainImage, ...active.galleryImages] : [];
+  const gallery = active ? [active.mainImage, ...active.galleryImages].filter(Boolean) : [];
   const visibleManuals = active
     ? getVisibleManuals(active.manuals, config?.manualsSection?.hiddenManualTypes)
     : [];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <div className="max-w-xl">
-        <div className="mb-2 text-sm font-semibold text-slate-600">{t("product.selectProduct")}</div>
+    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <div className="max-w-md">
         <ProductDropdown
           products={products}
           valueSlug={active?.slug ?? ""}
@@ -56,54 +55,44 @@ export function Product() {
       </div>
 
       {!active ? (
-        <p className="mt-10 text-slate-600">{loading ? "…" : "—"}</p>
+        <p className="mt-16 text-text-muted">{loading ? "…" : "—"}</p>
       ) : (
         <>
-          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
+          <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
             <ProductGallery images={gallery} productName={name} />
 
-            <div>
-              <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">{name}</h1>
-              <p className="mt-4 text-[15px] leading-relaxed text-slate-600">{desc}</p>
-
-              <div className="mt-8">
-                <Button
-                  variant="primary"
-                  onClick={() => openPurchase(active, { useChinaStores, i18nLang: i18n.language })}
-                >
-                  {t("hero.buy")}
-                </Button>
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h1 className="text-3xl font-bold tracking-tight text-text sm:text-[2rem]">{name}</h1>
+                <p className="text-[15px] leading-relaxed text-text-muted">{desc}</p>
               </div>
 
-              <div className="mt-10">
-                <h2 className="text-xl font-semibold text-slate-900">{t("product.specs")}</h2>
-                <div className="mt-4 overflow-hidden rounded-lg border border-slate-200">
-                  <table className="w-full border-collapse text-left text-sm text-slate-900">
-                    <tbody>
-                      {active.specs.map((row, i) => (
-                        <tr
-                          key={i}
-                          className={i % 2 === 1 ? "bg-slate-50" : "bg-white"}
-                        >
-                          <th className="border-b border-slate-200 px-4 py-3 font-semibold text-slate-800">
-                            {lang === "zh" ? row.key.zh : row.key.en}
-                          </th>
-                          <td className="border-b border-slate-200 px-4 py-3 text-slate-600">
-                            {lang === "zh" ? row.value.zh : row.value.en}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+              <Button
+                variant="primary"
+                onClick={() => openPurchase(active, { useChinaStores, i18nLang: i18n.language })}
+              >
+                {t("hero.buy")}
+              </Button>
+
+              <div>
+                <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">{t("product.specs")}</h2>
+                <dl className="divide-y divide-[var(--color-border)]">
+                  {active.specs.map((row, i) => (
+                    <div key={i} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 py-3.5 text-sm">
+                      <dt className="font-medium text-text">{lang === "zh" ? row.key.zh : row.key.en}</dt>
+                      <dd className="text-text-muted">{lang === "zh" ? row.value.zh : row.value.en}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             </div>
           </div>
 
           {visibleManuals.length ? (
-            <div className="mt-16 border-t border-slate-200 pt-6">
-              <h2 className="mb-2 text-center text-[32px] font-bold text-slate-900">{manualsHeading}</h2>
-              <div className="mx-auto mb-8 h-1 w-28 bg-emerald-600" />
+            <div className="mt-20 border-t border-[var(--color-border)] pt-16">
+              <h2 className="mb-10 text-center text-2xl font-semibold tracking-tight text-text sm:text-[28px]">
+                {manualsHeading}
+              </h2>
               <ManualsGrid manuals={visibleManuals} showHeading={false} />
             </div>
           ) : null}

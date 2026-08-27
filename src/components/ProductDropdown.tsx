@@ -13,10 +13,10 @@ export function ProductDropdown({ products, valueSlug, onChangeSlug, disabled }:
   const lang = i18n.language.startsWith("zh") ? "zh" : "en";
 
   return (
-    <label className="block max-w-xl">
-      <span className="sr-only">Product</span>
+    <label className="block max-w-md">
+      <span className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">Product</span>
       <select
-        className="w-full appearance-none rounded-[8px] border-2 border-emerald-600 bg-white px-4 py-3 pr-10 text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:opacity-50"
+        className="w-full appearance-none rounded-lg border border-[var(--color-border)] bg-surface px-4 py-2.5 text-sm text-text outline-none focus:border-accent focus:ring-1 focus:ring-accent disabled:opacity-50"
         value={valueSlug}
         disabled={disabled || products.length === 0}
         onChange={(e) => onChangeSlug(e.target.value)}

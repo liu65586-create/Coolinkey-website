@@ -9,7 +9,6 @@ import { ManualModal } from "./ManualModal";
 
 type Props = {
   manuals: CmsManual[];
-  /** When false, only renders cards (use when the page already provides a section title). */
   showHeading?: boolean;
 };
 
@@ -33,20 +32,12 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
   if (sorted.length === 0) return null;
 
   return (
-    <section
-      id="manuals"
-      className={`mx-auto max-w-6xl px-4 sm:px-6 ${showHeading ? "py-16" : "py-0"}`}
-    >
+    <section id="manuals" className={`mx-auto max-w-6xl px-4 sm:px-6 ${showHeading ? "section-pad" : "py-0"}`}>
       {showHeading ? (
-        <>
-          <h2 className="text-center text-[32px] font-bold text-slate-900">{heading}</h2>
-          <div className="mx-auto mt-4 h-1 w-28 bg-emerald-600" />
-        </>
+        <h2 className="mb-10 text-center text-2xl font-semibold tracking-tight text-text sm:text-[28px]">{heading}</h2>
       ) : null}
 
-      <div
-        className={`grid grid-cols-1 gap-6 sm:grid-cols-2 ${lgCols} ${showHeading ? "mt-10" : "mt-0"}`}
-      >
+      <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 ${lgCols} ${showHeading ? "" : "mt-0"}`}>
         {sorted.map((m) => (
           <ManualCard key={m.id} manual={m} onOpen={setActive} />
         ))}

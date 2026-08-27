@@ -1,23 +1,55 @@
-export function IconDoc() {
+import type { ReactNode } from "react";
+import { BookOpen, CircleHelp, CirclePlay, Wrench } from "lucide-react";
+import type { ManualType } from "../../types/cms";
+
+const stroke = {
+  size: 22,
+  strokeWidth: 1.5,
+  absoluteStrokeWidth: true,
+} as const;
+
+function ManualIconFrame({ children }: { children: ReactNode }) {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden>
-      <path
-        d="M10 8h12l8 8v16H10V8Z"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      <path d="M22 8v8h8" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-      <path d="M14 22h12M14 26h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
+    <div
+      className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/15 bg-gradient-to-b from-accent/[0.07] to-transparent text-accent transition-colors group-hover:border-accent/25"
+      aria-hidden
+    >
+      {children}
+    </div>
   );
 }
 
-export function IconVideo() {
-  return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden>
-      <rect x="6" y="10" width="28" height="20" rx="3" stroke="currentColor" strokeWidth="2" />
-      <path d="M17 16v8l7-4-7-4Z" fill="currentColor" />
-    </svg>
-  );
+export function renderManualIcon(type: ManualType) {
+  switch (type) {
+    case "installation":
+      return (
+        <ManualIconFrame>
+          <Wrench {...stroke} />
+        </ManualIconFrame>
+      );
+    case "user_manual":
+      return (
+        <ManualIconFrame>
+          <BookOpen {...stroke} />
+        </ManualIconFrame>
+      );
+    case "faq":
+      return (
+        <ManualIconFrame>
+          <CircleHelp {...stroke} />
+        </ManualIconFrame>
+      );
+    case "video":
+      return (
+        <ManualIconFrame>
+          <CirclePlay {...stroke} />
+        </ManualIconFrame>
+      );
+    default:
+      return (
+        <ManualIconFrame>
+          <BookOpen {...stroke} />
+        </ManualIconFrame>
+      );
+  }
 }

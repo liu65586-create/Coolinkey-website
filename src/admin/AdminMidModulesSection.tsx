@@ -1,4 +1,5 @@
 ﻿import { BiInput } from "../components/admin/BiInput";
+import { MediaUploadField } from "../components/admin/MediaUploadField";
 import type { ManualType } from "../types/cms";
 import type { MidModuleBlock, MidSlide, MidSlideMediaKind, SiteConfig } from "../types/siteConfig";
 import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
@@ -78,21 +79,18 @@ export function AdminMidModulesSection({
                 删除此幻灯片
               </button>
             </div>
-            <label className="block text-sm text-[#cccccc]">
-              <span className="mb-1 block text-xs font-semibold text-white/80">
-                媒体 URL（图片 / GIF / mp4，支持完整 https 外链，无需进 GitHub）
-              </span>
-              <input
-                className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
-                value={s.mediaUrl}
-                placeholder="https://…"
-                onChange={(e) => {
-                  const slides = [...m.slides];
-                  slides[idx] = { ...s, mediaUrl: e.target.value };
-                  patchMid(key, { ...m, slides });
-                }}
-              />
-            </label>
+            <MediaUploadField
+              slotId={`mid-${key}-${idx}`}
+              label={`幻灯片 ${idx + 1} · 媒体`}
+              spec="1600×1000；视频 mp4 1080p"
+              kind={s.mediaKind === "video" ? "video" : "image"}
+              value={s.mediaUrl}
+              onChange={(url) => {
+                const slides = [...m.slides];
+                slides[idx] = { ...s, mediaUrl: url };
+                patchMid(key, { ...m, slides });
+              }}
+            />
             <label className="block text-sm text-[#cccccc]">
               <span className="mb-1 block text-xs font-semibold text-white/80">媒体类型</span>
               <select

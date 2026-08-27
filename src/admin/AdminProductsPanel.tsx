@@ -1,5 +1,6 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { BiInput } from "../components/admin/BiInput";
+import { MediaUploadField } from "../components/admin/MediaUploadField";
 import { useCms } from "../context/CmsContext";
 import type { CmsManual, CmsPayload, CmsProduct, ManualType } from "../types/cms";
 
@@ -200,15 +201,14 @@ export function AdminProductsPanel() {
         </label>
         <BiInput label="产品名称" value={p.name} onChange={(v) => setProduct({ ...p, name: v })} />
         <BiInput label="简短描述" value={p.shortDescription} onChange={(v) => setProduct({ ...p, shortDescription: v })} />
-        <label className="block text-sm text-[#cccccc]">
-          <span className="mb-1 block text-xs font-semibold text-white/80">主图 URL（https 外链或 / 开头的站内路径）</span>
-          <input
-            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
-            value={p.mainImage}
-            placeholder="https://cdn.example.com/hero.jpg"
-            onChange={(e) => setProduct({ ...p, mainImage: e.target.value })}
-          />
-        </label>
+        <MediaUploadField
+          slotId={`product-${idx}-main`}
+          label="主图"
+          spec="1600×1000 或 1200×900"
+          kind="image"
+          value={p.mainImage}
+          onChange={(url) => setProduct({ ...p, mainImage: url })}
+        />
         <label className="block text-sm text-[#cccccc]">
           <span className="mb-1 block text-xs font-semibold text-white/80">购买链接 · 海外（Amazon 等）</span>
           <input
@@ -243,27 +243,32 @@ export function AdminProductsPanel() {
         ) : (
           <div className="space-y-2">
             {p.galleryImages.map((url, gi) => (
-              <div key={gi} className="flex gap-2">
-                <input
-                  className="flex-1 rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
+              <div key={gi} className="space-y-2">
+                <MediaUploadField
+                  slotId={`product-${idx}-gallery-${gi}`}
+                  label={`画廊 ${gi + 1}`}
+                  spec="与主图同比例"
+                  kind="image"
+                  compact
                   value={url}
-                  placeholder="https://... or /images/foo.jpg"
-                  onChange={(e) => {
+                  onChange={(v) => {
                     const next = [...p.galleryImages];
-                    next[gi] = e.target.value;
+                    next[gi] = v;
                     setProduct({ ...p, galleryImages: next });
                   }}
                 />
-                <button
-                  type="button"
-                  className="rounded-lg border border-[rgba(255,255,255,0.15)] px-2 text-sm hover:border-red-400"
-                  onClick={() => {
-                    const next = p.galleryImages.filter((_, i) => i !== gi);
-                    setProduct({ ...p, galleryImages: next });
-                  }}
-                >
-                  删
-                </button>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    className="text-xs text-red-300 hover:underline"
+                    onClick={() => {
+                      const next = p.galleryImages.filter((_, i) => i !== gi);
+                      setProduct({ ...p, galleryImages: next });
+                    }}
+                  >
+                    删除此图
+                  </button>
+                </div>
               </div>
             ))}
           </div>

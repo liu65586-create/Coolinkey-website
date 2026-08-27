@@ -11,13 +11,12 @@ type Props = {
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "children">;
 
 const base =
-  "inline-flex cursor-pointer items-center justify-center rounded-[8px] px-8 py-3 text-[16px] font-semibold leading-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex cursor-pointer items-center justify-center rounded-lg px-8 py-3 text-[15px] font-semibold leading-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "border-2 border-transparent bg-emerald-600 text-white hover:bg-emerald-700 active:bg-emerald-700",
+  primary: "border border-transparent bg-accent text-white hover:bg-accent-hover",
   secondary:
-    "border-2 border-emerald-600 bg-white text-emerald-800 hover:bg-emerald-50 active:bg-emerald-50",
+    "border border-accent bg-transparent text-text hover:bg-accent/[0.06]",
 };
 
 export function Button({ variant, children, onClick, href, className = "", ...rest }: Props) {
