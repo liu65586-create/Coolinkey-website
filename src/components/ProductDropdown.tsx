@@ -9,14 +9,14 @@ type Props = {
 };
 
 export function ProductDropdown({ products, valueSlug, onChangeSlug, disabled }: Props) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const lang = i18n.language.startsWith("zh") ? "zh" : "en";
 
   return (
     <label className="block max-w-md">
-      <span className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">Product</span>
+      <span className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">{t("product.selectProduct")}</span>
       <select
-        className="w-full appearance-none rounded-lg border border-[var(--color-border)] bg-surface px-4 py-2.5 text-sm text-text outline-none focus:border-accent focus:ring-1 focus:ring-accent disabled:opacity-50"
+        className="w-full appearance-none rounded-xl border border-[var(--color-border)] bg-white px-4 py-2.5 text-sm text-text outline-none focus:border-accent focus:ring-1 focus:ring-accent disabled:opacity-50"
         value={valueSlug}
         disabled={disabled || products.length === 0}
         onChange={(e) => onChangeSlug(e.target.value)}

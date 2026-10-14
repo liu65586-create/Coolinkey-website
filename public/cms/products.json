@@ -2,16 +2,15 @@
   "products": [
     {
       "slug": "smart-chain-lock",
-      "name": { "en": "Smart Chain Lock", "zh": "智能链条锁" },
+      "name": { "en": "CLX1 Heavy-Duty Smart Chain Lock", "zh": "CLX1 重型智能链条锁" },
       "shortDescription": {
-        "en": "Fingerprint-enabled smart chain lock with IP67 sealing and hardened stainless steel for daily security.",
-        "zh": "支持指纹识别的智能链条锁，IP67 防护与不锈钢加固结构，适合日常安防场景。"
+        "en": "A 6 mm hardened stainless steel chain and armored zinc-alloy body. Instant fingerprint unlock, IP67 protection, USB-C backup power, and a fail-safe mechanical key.",
+        "zh": "6 mm 硬化不锈钢链条与锌合金锁体。指纹即开、IP67 防护、USB-C 应急供电，并配备机械钥匙。"
       },
-      "mainImage": "https://picsum.photos/seed/coolinkeyp1/900/700",
+      "mainImage": "/images/defaults/mid-module-a-use-case.png",
       "galleryImages": [
-        "https://picsum.photos/seed/coolinkeyp2/900/700",
-        "https://picsum.photos/seed/coolinkeyp3/900/700",
-        "https://picsum.photos/seed/coolinkeyp4/900/700"
+        "/images/lifestyle/hero-cyclists.jpg",
+        "/images/lifestyle/scenario-bicycle.jpg"
       ],
       "specs": [
         {
@@ -20,15 +19,15 @@
         },
         {
           "key": { "en": "Unlock", "zh": "解锁方式" },
-          "value": { "en": "Fingerprint (<0.3s)", "zh": "指纹（<0.3 秒）" }
+          "value": { "en": "Fingerprint + app + mechanical key", "zh": "指纹 + App + 机械钥匙" }
         },
         {
-          "key": { "en": "Material", "zh": "材质" },
-          "value": { "en": "Stainless steel body & chain", "zh": "不锈钢锁体与链条" }
+          "key": { "en": "Chain", "zh": "链条" },
+          "value": { "en": "6 mm stainless steel · ~100 cm", "zh": "6 mm 不锈钢 · 约 100 cm" }
         },
         {
           "key": { "en": "Power", "zh": "供电" },
-          "value": { "en": "Rechargeable Li-ion (placeholder)", "zh": "可充电锂电池（示例）" }
+          "value": { "en": "400 mAh · USB-C · ~10 months typical use", "zh": "400 mAh · USB-C · 典型使用约 10 个月" }
         }
       ],
       "purchaseLinkEn": "https://www.amazon.com/",

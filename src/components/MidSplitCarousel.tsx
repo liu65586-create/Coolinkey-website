@@ -91,5 +91,5 @@ export function MidSplitCarousel({
       </div>
     );
 
-  return <div className="mx-auto max-w-6xl px-4 sm:px-6">{row}</div>;
+  return <div className="page-wrap">{row}</div>;
 }

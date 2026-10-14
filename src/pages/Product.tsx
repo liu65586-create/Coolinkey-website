@@ -44,7 +44,7 @@ export function Product() {
     : [];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+    <div className="page-wrap py-12 sm:py-16">
       <div className="max-w-md">
         <ProductDropdown
           products={products}
@@ -58,12 +58,15 @@ export function Product() {
         <p className="mt-16 text-text-muted">{loading ? "…" : "—"}</p>
       ) : (
         <>
-          <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
-            <ProductGallery images={gallery} productName={name} />
+          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
+            <div className="rounded-[28px] bg-surface-muted p-4 sm:p-6">
+              <ProductGallery images={gallery} productName={name} />
+            </div>
 
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-3xl font-bold tracking-tight text-text sm:text-[2rem]">{name}</h1>
+                <p className="text-sm font-semibold tracking-wide text-accent">CLX1</p>
+                <h1 className="font-display text-3xl font-bold tracking-tight text-text sm:text-[2.15rem]">{name}</h1>
                 <p className="text-[15px] leading-relaxed text-text-muted">{desc}</p>
               </div>
 
@@ -76,9 +79,15 @@ export function Product() {
 
               <div>
                 <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">{t("product.specs")}</h2>
-                <dl className="divide-y divide-[var(--color-border)]">
+                <dl className="overflow-hidden rounded-2xl border border-[var(--color-border)]">
                   {active.specs.map((row, i) => (
-                    <div key={i} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 py-3.5 text-sm">
+                    <div
+                      key={i}
+                      className={[
+                        "grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 px-4 py-3.5 text-sm",
+                        i % 2 === 0 ? "bg-white" : "bg-surface-muted",
+                      ].join(" ")}
+                    >
                       <dt className="font-medium text-text">{lang === "zh" ? row.key.zh : row.key.en}</dt>
                       <dd className="text-text-muted">{lang === "zh" ? row.value.zh : row.value.en}</dd>
                     </div>
@@ -90,7 +99,7 @@ export function Product() {
 
           {visibleManuals.length ? (
             <div className="mt-20 border-t border-[var(--color-border)] pt-16">
-              <h2 className="mb-10 text-center text-2xl font-semibold tracking-tight text-text sm:text-[28px]">
+              <h2 className="mb-10 text-center font-display text-2xl font-semibold tracking-tight text-text sm:text-[28px]">
                 {manualsHeading}
               </h2>
               <ManualsGrid manuals={visibleManuals} showHeading={false} />

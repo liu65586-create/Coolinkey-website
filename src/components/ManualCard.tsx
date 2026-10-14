@@ -16,7 +16,7 @@ export function ManualCard({ manual, onOpen }: Props) {
     <button
       type="button"
       onClick={() => onOpen(manual)}
-      className="group flex w-full flex-col items-center gap-4 rounded-xl bg-surface px-5 py-8 text-center transition-colors hover:bg-accent/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="group flex w-full flex-col items-center gap-4 rounded-2xl border border-[var(--color-border)] bg-white px-5 py-8 text-center shadow-[0_8px_24px_rgba(11,27,43,0.04)] transition-colors hover:bg-accent/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {renderManualIcon(manual.type)}
       <div className="space-y-1">

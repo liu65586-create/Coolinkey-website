@@ -3,15 +3,15 @@
 @theme {
   --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
   --font-display: Sora, Inter, ui-sans-serif, system-ui, sans-serif;
-  --color-page: #e8ecf1;
+  --color-page: #ffffff;
   --color-surface: #ffffff;
-  --color-surface-muted: #f1f5f9;
+  --color-surface-muted: #f4f6f8;
   --color-accent: #00b51a;
   --color-accent-hover: #00cc1a;
   --color-accent-bright: #00e676;
-  --color-text: #0f172a;
-  --color-text-muted: #64748b;
-  --color-border: rgba(15, 23, 42, 0.08);
+  --color-text: #0b1b2b;
+  --color-text-muted: #5b6775;
+  --color-border: rgba(11, 27, 43, 0.08);
 }
 
 html,
@@ -31,7 +31,19 @@ body {
   min-height: 100%;
 }
 
-/* Minimal section rhythm */
+.page-wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .page-wrap {
+    padding-inline: 1.75rem;
+  }
+}
+
 .section-pad {
   padding-top: 4.5rem;
   padding-bottom: 4.5rem;
@@ -39,7 +51,7 @@ body {
 
 @media (min-width: 640px) {
   .section-pad {
-    padding-top: 5.5rem;
-    padding-bottom: 5.5rem;
+    padding-top: 5.25rem;
+    padding-bottom: 5.25rem;
   }
 }

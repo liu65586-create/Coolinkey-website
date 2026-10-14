@@ -274,7 +274,7 @@ export function Admin() {
               {(
                 [
                   ["homeHero", "Hero"],
-                  ["homeFeatures", "Three features"],
+                  ["homeFeatures", "Feature strip"],
                   ["homeManuals", "Manual cards"],
                 ] as const
               ).map(([key, label]) => (
@@ -318,7 +318,7 @@ export function Admin() {
             </section>
 
             <section className="space-y-6 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
-              <h2 className="text-lg font-semibold">Three features</h2>
+              <h2 className="text-lg font-semibold">Feature strip</h2>
               {draft.features.map((f, idx) => (
                 <div key={idx} className="space-y-3 border-t border-[rgba(255,255,255,0.08)] pt-4 first:border-t-0 first:pt-0">
                   <label className="block text-sm text-[#cccccc]">
@@ -335,6 +335,10 @@ export function Admin() {
                       <option value="water">water</option>
                       <option value="fingerprint">fingerprint</option>
                       <option value="chain">chain</option>
+                      <option value="dual">dual</option>
+                      <option value="share">share</option>
+                      <option value="logs">logs</option>
+                      <option value="battery">battery</option>
                     </select>
                   </label>
                   <BiInput

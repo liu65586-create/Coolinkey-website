@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "首页",
-    "product": "产品",
+    "product": "CLX1",
+    "support": "支持",
     "about": "关于",
     "contact": "联系",
     "openMenu": "打开菜单",
@@ -12,18 +13,89 @@
     "zh": "中文"
   },
   "hero": {
-    "title": "COOLINKEY 智能链条锁",
-    "subtitle": "IP67 防水防尘 · 指纹一碰即开 · 不锈钢链条防护",
+    "title": "解锁自由。\n安心骑行。",
+    "subtitle": "每一次出行都有智能安防守护。无需钥匙、无需担心 — coolinkey 守护你在意的一切。",
     "buy": "立即购买",
-    "learnMore": "了解更多"
+    "discover": "了解 CLX1",
+    "learnMore": "了解更多",
+    "watch": "观看视频"
   },
   "features": {
-    "title_ip67": "IP67级防水防尘",
-    "desc_ip67": "无惧风雨，户外使用稳定可靠。",
-    "title_fp": "指纹快速解锁",
-    "desc_fp": "0.3秒瞬时识别，一触即开。",
-    "title_steel": "不锈钢锁体+链条超强防护",
-    "desc_steel": "高强度不锈钢材质，抗剪防锯，安全等级提升。"
+    "title_ip67": "IP67 防水防尘",
+    "desc_ip67": "为户外而生。",
+    "title_fp": "一触即开",
+    "desc_fp": "无需钥匙与密码。",
+    "title_steel": "高强度链条",
+    "desc_steel": "硬化不锈钢链芯。",
+    "title_dual": "双重解锁保障",
+    "desc_dual": "机械钥匙 + 应急供电。",
+    "title_share": "分享电子钥匙",
+    "desc_share": "App 秒级授权。",
+    "title_logs": "开锁记录",
+    "desc_logs": "知道是谁、何时。",
+    "title_battery": "没电也不怕",
+    "desc_battery": "Type-C 充电宝应急。"
+  },
+  "spotlight": {
+    "kicker": "CLX1",
+    "title": "重型智能链条锁",
+    "body": "6 mm 硬化不锈钢链条与锌合金锁体，专为日常安防设计。指纹即开、IP67 防护，并配备应急机械钥匙，守护你的出行世界。",
+    "specChain": "6mm",
+    "specChainLabel": "链条直径",
+    "specIp": "IP67",
+    "specIpLabel": "防水等级",
+    "specLen": "100cm",
+    "specLenLabel": "链条长度",
+    "learnMore": "了解更多"
+  },
+  "scenarios": {
+    "kicker": "广泛场景",
+    "title": "不止是自行车",
+    "body": "从公路车到电动车，从玻璃门到铁门 — 一把锁，多种可能。",
+    "viewAll": "查看全部场景",
+    "bicycle": "自行车",
+    "ebike": "电动车",
+    "glass": "玻璃门",
+    "gate": "铁门"
+  },
+  "appBanner": {
+    "kicker": "智能控制",
+    "title": "不止是自行车",
+    "body": "上锁、解锁、分享授权 — 都在手机里完成。",
+    "appStore": "App Store",
+    "googlePlay": "Google Play",
+    "locked": "CLX1 已锁定",
+    "unlock": "解锁"
+  },
+  "supportPage": {
+    "kicker": "支持",
+    "title": "轻松上手。始终安心。",
+    "subtitle": "设置、使用与排查 coolinkey 所需的一切都在这里。说明书、视频与分步指南，集中查阅。",
+    "quickStart": "快速开始",
+    "quickStartHint": "几分钟完成设置。",
+    "guides": "用户指南与下载",
+    "guidesHint": "CLX1 说明书与 PDF。",
+    "videos": "视频指南",
+    "videosHint": "跟着演示一步到位。",
+    "troubleshooting": "常见问题",
+    "troubleshootingHint": "快速解决常见状况。",
+    "helpTitle": "还需要帮助？",
+    "helpBody": "支持团队随时为你服务。",
+    "contactCta": "联系支持",
+    "step1": "先充电",
+    "step1Hint": "几分钟完成开机准备。",
+    "step2": "连接 App",
+    "step2Hint": "通过蓝牙 5.0 配对。",
+    "step3": "录入指纹",
+    "step3Hint": "最多支持 60 枚指纹。",
+    "step4": "触摸解锁",
+    "step4Hint": "一触即开，无需钥匙。",
+    "faq1q": "指纹识别失败",
+    "faq1a": "擦干并清洁传感器，再以均匀力度重新录入。设置时避免潮湿或厚手套。",
+    "faq2q": "充电 / 供电问题",
+    "faq2a": "请使用 USB-C 线。若电量耗尽，可用充电宝连接 Type-C 口应急开锁，再完整充电。",
+    "faq3q": "使用机械钥匙",
+    "faq3a": "备用钥匙仅用于应急。完全插入后用力转动，平时请与锁分开存放。"
   },
   "manualsSection": {
     "heading": "资料与说明书",
@@ -33,6 +105,7 @@
     "videoNote": "YouTube 演示 — 可在 CMS 中为中文用户配置 B站嵌入链接。"
   },
   "footer": {
+    "tagline": "让出行更自由的智能锁。",
     "privacy": "隐私政策",
     "cookie": "GDPR 与 Cookie 声明",
     "icp": "ICP备XXXX号",

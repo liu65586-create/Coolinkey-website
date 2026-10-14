@@ -3,7 +3,7 @@ import type { LocalizedString, ManualType } from "./cms";
 /** Same shape as CMS `LocalizedString`; alias avoids cross-file assignability issues under `tsc --strict`. */
 export type Bilingual = LocalizedString;
 
-export type FeatureIconKey = "water" | "fingerprint" | "chain";
+export type FeatureIconKey = "water" | "fingerprint" | "chain" | "dual" | "share" | "logs" | "battery";
 
 export type MidSlideMediaKind = "image" | "video";
 

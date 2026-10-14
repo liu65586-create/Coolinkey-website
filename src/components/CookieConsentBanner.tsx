@@ -32,18 +32,18 @@ export function CookieConsentBanner() {
         boxShadow: "0 -4px 24px rgba(15, 23, 42, 0.06)",
       }}
       buttonStyle={{
-        background: "#059669",
+        background: "#00b51a",
         color: "#ffffff",
         fontSize: "14px",
         fontWeight: 700,
         padding: "10px 16px",
-        borderRadius: "8px",
+        borderRadius: "999px",
       }}
       buttonWrapperClasses="!ml-4"
     >
       <span>
         {message}{" "}
-        <Link className="font-medium text-emerald-700 hover:underline" to="/cookie-policy">
+        <Link className="font-medium text-accent hover:underline" to="/cookie-policy">
           {learnMore}
         </Link>
       </span>

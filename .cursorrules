@@ -23,22 +23,25 @@ Follow the product spec in-repo and these references; **do not invent** colors, 
 - Markets: EU/US + China, **same template**, **EN / 中文** via i18n.  
 - Goals: brand + outbound purchase links + manuals preview/download (**no checkout**).
 
-## Visual tokens (strict)
+## Visual tokens (strict) — light lifestyle brand
 
 | Token | Hex |
 |-------|-----|
-| Background / footer / primary button border | `#000000` |
-| Text | `#ffffff` |
+| Background / footer | `#ffffff` |
+| Surface muted / cards | `#f4f6f8` |
+| Text | `#0b1b2b` |
 | Accent (buttons, links, hover, emphasis) | `#00b51a` |
-| Muted text | `#cccccc` |
-| Card dark | `#0a0a0a`, `#111111` |
-| Nav bottom border | `1px solid rgba(255,255,255,0.1)` |
+| Accent hover | `#00cc1a` |
+| Muted text | `#5b6775` |
+| Border | `rgba(11, 27, 43, 0.08)` |
 | Nav height | `80px` |
+| Primary CTA | pill (`rounded-full`), green fill, white text |
+| Secondary CTA | pill, white fill, light border |
 
 ## Navigation
 
-- Items: **HOME / PRODUCT / ABOUT / CONTACT**; language switcher rightmost; mobile hamburger.  
-- Nav links: white; **hover** text `#00b51a`.  
+- Items: **Home / CLX1 / Support / About**; language switcher rightmost; mobile hamburger.  
+- Nav links: muted navy; **active** dark text + green underline; **hover** text `#00b51a`.  
 - Language switch changes **all copy**, **manual paths**, and **purchase URL params** (`source=coolinkey_website`, `lang=`).
 
 ## Footer
@@ -49,19 +52,22 @@ Follow the product spec in-repo and these references; **do not invent** colors, 
 
 ## Home
 
-- Hero: `80vh`, `min-height: 600px`; gradient `#000000` → `#111111`; product image overlay **opacity 0.2**.  
-- H1: EN `COOLINKEY Smart Chain Lock` / ZH `COOLINKEY 智能链条锁`; desktop `64px`, mobile `36px`, weight `700`.  
-- Subtitle: IP67 · fingerprint · steel chain (both languages).  
-- CTAs: primary green `#00b51a`, hover `#00cc1a`; secondary black, `2px` green border, hover `rgba(0,181,26,0.1)`; gap `20px`, padding `12px 32px`, radius `8px`, font `16px` / `600`.  
-- Purchase: **region-aware** (CN vs global stores) + `?source=coolinkey_website`.  
-- Learn more: scroll to `#features` or `/product`.  
-- Three feature columns / one on mobile; spacing per spec; copy exactly as product brief.  
-- **Resources & Manuals**: four cards; modal `80vw`×`80vh`; PDF via **PDF.js**; download + close; no “coming soon” product section on home.  
-- Home manuals = **default product** (smart chain lock) only.
+- Split hero: copy left, rounded lifestyle photo right. H1 lifestyle line (EN `Unlock Freedom. Ride with Confidence.`).  
+- CTAs: Discover CLX1 (green pill) + Watch Video (outline pill).  
+- Six feature icons in a row (2/3/6 by breakpoint): One Touch, Dual Unlock, Share E-Keys, Activity Logs, Dead Battery, IP67.  
+- Product spotlight card (photo + 6mm / IP67 / 100cm).  
+- Scenarios: More Than Just Bikes (bicycles, e-bikes, glass doors, metal gates).  
+- App control banner with phone mock.  
+- Manuals live on **Support**, not Home (unless CMS `homeManuals` is enabled).  
+- Purchase remains **region-aware** (CN vs global stores) + `?source=coolinkey_website`.
+
+## Support page
+
+- Quick Start, User Guides & Downloads (PDF.js modal), Video Guides, Troubleshooting, Contact CTA.
 
 ## Product page
 
-- Dropdown (CMS-driven): black bg, white text, green border, `8px` radius.  
+- Dropdown (CMS-driven): white bg, dark text, green focus, rounded.  
 - Layout: carousel + lightbox; name, description, striped specs table, buy button, manuals block.
 
 ## Compliance

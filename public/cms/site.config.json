@@ -1,30 +1,30 @@
 {
   "version": 1,
   "brand": {
-    "logoSrc": "https://drive.google.com/file/d/1Y_v-dTZ33TRDYGKTq7bCYTWvtJZlzoAs/view?usp=drive_link",
-    "logoAlt": "COOLINKEY",
+    "logoSrc": "",
+    "logoAlt": "coolinkey",
     "logoMaxHeightPx": 30
   },
   "modules": {
     "homeHero": true,
     "homeFeatures": true,
-    "homeManuals": true
+    "homeManuals": false
   },
   "hero": {
     "title": {
-      "en": "COOLINKEY CLX — Smart chain lock",
-      "zh": "COOLINKEY CLX 智能指纹链条锁"
+      "en": "Unlock Freedom.\nRide with Confidence.",
+      "zh": "解锁自由。\n安心骑行。"
     },
     "subtitle": {
-      "en": "IP67 dust and water resistance · Bluetooth 5.0 · Up to 60 fingerprints · About 10 months of typical use per charge (400 mAh, USB-C). Zinc alloy body; stainless steel chain in a PET-wrapped textile sleeve (~100 cm). Works with the Tuya Smart app for access sharing and history.",
-      "zh": "IP67 防尘防水 · 蓝牙 5.0 · 最多 60 枚指纹 · 400 mAh 电池、Type-C 充电，典型使用约 10 个月续航。锌合金锁体；不锈钢链芯外包耐磨 PET 织物套管，链长约 100 cm。配合涂鸦智能 App 管理授权与记录。"
+      "en": "Smart security for every journey. No keys, no worries — coolinkey keeps what matters to you, safe.",
+      "zh": "每一次出行都有智能安防守护。无需钥匙、无需担心 — coolinkey 守护你在意的一切。"
     },
-    "backgroundImageUrl": "",
-    "overlayUsesProductImage": true
+    "backgroundImageUrl": "/images/lifestyle/hero-cyclists.jpg",
+    "overlayUsesProductImage": false
   },
   "midModules": {
     "a": {
-      "enabled": true,
+      "enabled": false,
       "title": {
         "en": "Urban freedom, locked in seconds",
         "zh": "城市出行，秒级上锁"
@@ -37,19 +37,11 @@
             "en": "Park at racks, poles, or communal stands without fumbling for keys. Matte black body, recessed fingerprint pad, and a sleeved chain read as premium gear—because your lock should look as intentional as your bike.",
             "zh": "在停车架、立柱或小区车棚快速落锁，告别掏钥匙。哑光黑锁体、内凹式指纹区与织物包覆链条，与高端公路车气质一致——锁具本身也应是装备的一部分。"
           }
-        },
-        {
-          "mediaUrl": "/images/defaults/mid-module-a-use-case.png",
-          "mediaKind": "image",
-          "text": {
-            "en": "Rain, splashes, and roadside grime are part of the ride. CLX1/CLX2 are built for outdoor duty so you can focus on the route—not the weather forecast.",
-            "zh": "雨水、溅水与路面泥尘都是骑行日常。CLX1/CLX2 面向户外使用设计，让你更关注路线，而不是反复查看天气预报。"
-          }
         }
       ]
     },
     "b": {
-      "enabled": true,
+      "enabled": false,
       "title": {
         "en": "Engineered for reliability",
         "zh": "为可靠而生"
@@ -59,14 +51,14 @@
           "mediaUrl": "/images/defaults/mid-module-b-test.png",
           "mediaKind": "image",
           "text": {
-            "en": "IP67 sealing helps keep dust and water out of the electronics. Bluetooth 5.0 keeps pairing stable in busy signal environments. Use this module for lab sheets, drop-test photos, or short verification videos.",
-            "zh": "IP67 结构有助于阻隔粉尘与水汽侵入电子腔体；蓝牙 5.0 在复杂无线环境下保持连接稳定。本模块适合放实验室报告、跌落/防水示意照片或短视频。"
+            "en": "IP67 sealing helps keep dust and water out of the electronics. Bluetooth 5.0 keeps pairing stable in busy signal environments.",
+            "zh": "IP67 结构有助于阻隔粉尘与水汽侵入电子腔体；蓝牙 5.0 在复杂无线环境下保持连接稳定。"
           }
         }
       ]
     },
     "d": {
-      "enabled": true,
+      "enabled": false,
       "title": {
         "en": "Materials you can trust",
         "zh": "材质与工艺"
@@ -76,8 +68,8 @@
           "mediaUrl": "/images/defaults/mid-module-d-production.png",
           "mediaKind": "image",
           "text": {
-            "en": "Zinc alloy housing, stainless steel chain, nylon and PET in the sleeve—chosen for strength, wear resistance, and a clean silhouette. Replace this slide with factory line photos or macro shots of the lock body and chain.",
-            "zh": "锌合金外壳、不锈钢链条、尼龙与 PET 织物层——兼顾强度、耐磨与简洁外观。可将本图替换为产线实拍、锁体与链条的特写等。"
+            "en": "Zinc alloy housing, stainless steel chain, nylon and PET in the sleeve—chosen for strength, wear resistance, and a clean silhouette.",
+            "zh": "锌合金外壳、不锈钢链条、尼龙与 PET 织物层——兼顾强度、耐磨与简洁外观。"
           }
         }
       ]
@@ -85,37 +77,34 @@
   },
   "features": [
     {
-      "icon": "water",
-      "title": {
-        "en": "IP67 rated",
-        "zh": "IP67 防护"
-      },
-      "description": {
-        "en": "Sealed against dust and immersion-grade water ingress so outdoor parking stays practical year-round.",
-        "zh": "防尘防水设计，适应户外停车与多变天气，四季使用更安心。"
-      }
-    },
-    {
       "icon": "fingerprint",
-      "title": {
-        "en": "Biometric unlock",
-        "zh": "指纹一触即开"
-      },
-      "description": {
-        "en": "Register up to 60 fingerprints; unlock on the pad without reaching for keys or your phone.",
-        "zh": "最多支持 60 枚指纹；在锁体面板上直接解锁，无需翻找钥匙或手机。"
-      }
+      "title": { "en": "One Touch Unlock", "zh": "一触即开" },
+      "description": { "en": "No keys, no codes.", "zh": "无需钥匙与密码。" }
     },
     {
-      "icon": "chain",
-      "title": {
-        "en": "Heavy-duty sleeved chain",
-        "zh": "高强度包覆链条"
-      },
-      "description": {
-        "en": "Stainless steel links inside a PET-wrapped textile sleeve—about 100 cm to wrap frame, wheel, and anchor point.",
-        "zh": "不锈钢链芯外包耐磨织物套管，链长约 100 cm，可环绕车架、轮组与固定物。"
-      }
+      "icon": "dual",
+      "title": { "en": "Dual Unlock Assurance", "zh": "双重解锁保障" },
+      "description": { "en": "Keys + power backup.", "zh": "机械钥匙 + 应急供电。" }
+    },
+    {
+      "icon": "share",
+      "title": { "en": "Share E-Keys", "zh": "分享电子钥匙" },
+      "description": { "en": "In seconds via app.", "zh": "App 秒级授权。" }
+    },
+    {
+      "icon": "logs",
+      "title": { "en": "Activity Logs", "zh": "开锁记录" },
+      "description": { "en": "Know who, when.", "zh": "知道是谁、何时。" }
+    },
+    {
+      "icon": "battery",
+      "title": { "en": "Dead Battery? No Problem", "zh": "没电也不怕" },
+      "description": { "en": "Type-C power bank.", "zh": "Type-C 充电宝应急。" }
+    },
+    {
+      "icon": "water",
+      "title": { "en": "IP67 Waterproof", "zh": "IP67 防水防尘" },
+      "description": { "en": "Built for the outdoors.", "zh": "为户外而生。" }
     }
   ],
   "manualsSection": {
@@ -152,35 +141,14 @@
     }
   },
   "legal": {
-    "privacyTitle": {
-      "en": "",
-      "zh": ""
-    },
-    "privacyBody": {
-      "en": "",
-      "zh": ""
-    },
-    "cookieTitle": {
-      "en": "",
-      "zh": ""
-    },
-    "cookieBody": {
-      "en": "",
-      "zh": ""
-    }
+    "privacyTitle": { "en": "", "zh": "" },
+    "privacyBody": { "en": "", "zh": "" },
+    "cookieTitle": { "en": "", "zh": "" },
+    "cookieBody": { "en": "", "zh": "" }
   },
   "cookieBanner": {
-    "message": {
-      "en": "",
-      "zh": ""
-    },
-    "accept": {
-      "en": "",
-      "zh": ""
-    },
-    "learnMore": {
-      "en": "",
-      "zh": ""
-    }
+    "message": { "en": "", "zh": "" },
+    "accept": { "en": "", "zh": "" },
+    "learnMore": { "en": "", "zh": "" }
   }
 }

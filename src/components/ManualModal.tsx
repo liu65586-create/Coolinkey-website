@@ -1,6 +1,7 @@
 ﻿import * as pdfjsLib from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.mjs?url";
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import type { CmsManual, ManualType } from "../types/cms";
 import { Button } from "./Button";
@@ -83,9 +84,9 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
 
   const title = lang === "zh" ? manual.title.zh : manual.title.en;
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 p-4"
+      className="fixed inset-0 z-[400] flex items-center justify-center bg-black/70 p-4"
       role="presentation"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
@@ -103,7 +104,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
           </h2>
           <button
             type="button"
-            className="rounded-md px-3 py-1.5 text-sm font-semibold text-slate-600 hover:text-emerald-700"
+            className="rounded-full px-3 py-1.5 text-sm font-semibold text-text-muted hover:text-accent"
             onClick={onClose}
           >
             {t("manualsSection.close")}
@@ -151,6 +152,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
           </Button>
         </footer>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

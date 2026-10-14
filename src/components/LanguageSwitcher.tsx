@@ -20,13 +20,13 @@ export function LanguageSwitcher() {
 
   return (
     <div
-      className="flex items-center gap-0.5 rounded-lg border border-[var(--color-border)] bg-surface/80 p-0.5"
+      className="flex items-center gap-0.5 rounded-full border border-[var(--color-border)] bg-white p-0.5"
       role="group"
       aria-label="Language"
     >
       <button
         type="button"
-        className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+        className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
           !isZh ? "bg-accent text-white" : "text-text-muted hover:text-accent"
         }`}
         onClick={() => setLang("en")}
@@ -35,7 +35,7 @@ export function LanguageSwitcher() {
       </button>
       <button
         type="button"
-        className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+        className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
           isZh ? "bg-accent text-white" : "text-text-muted hover:text-accent"
         }`}
         onClick={() => setLang("zh")}

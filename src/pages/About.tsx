@@ -10,9 +10,10 @@ export function About() {
   const title = pickBilingual(lang, config?.about?.title, t("about.title"));
   const body = pickBilingual(lang, config?.about?.body, t("about.body"));
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <h1 className="text-4xl font-bold text-slate-900">{title}</h1>
-      <p className="mt-6 text-[15px] leading-relaxed text-slate-600">{body}</p>
+    <div className="page-wrap max-w-3xl py-16 sm:py-20">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">coolinkey</p>
+      <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-text">{title}</h1>
+      <p className="mt-6 text-[16px] leading-relaxed text-text-muted">{body}</p>
     </div>
   );
 }
