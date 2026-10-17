@@ -90,15 +90,15 @@ export function Home() {
               )}
             </div>
           </div>
-          <div className="overflow-hidden rounded-[28px] bg-surface-muted shadow-[0_20px_50px_rgba(11,27,43,0.12)]">
+          <div className="overflow-hidden rounded-[28px] border border-white/70 bg-surface-muted p-2 shadow-[0_20px_50px_rgba(11,27,43,0.08)] sm:p-3">
             {heroBgResolved ? (
               <img
                 src={heroBgResolved}
                 alt=""
-                className="aspect-[5/4] w-full object-cover lg:aspect-[4/3] lg:min-h-[420px]"
+                className="aspect-[5/4] w-full rounded-[20px] object-contain lg:aspect-[4/3] lg:min-h-[420px]"
               />
             ) : heroImgFromProduct ? (
-              <img src={heroImgFromProduct} alt="" className="aspect-[5/4] w-full object-cover" />
+              <img src={heroImgFromProduct} alt="" className="aspect-[5/4] w-full object-contain" />
             ) : null}
           </div>
         </section>
@@ -173,7 +173,7 @@ export function Home() {
                 <img
                   src={item.img}
                   alt={t(item.labelKey)}
-                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  className="aspect-[4/3] w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                 />
               </div>
               <figcaption className="mt-3 text-sm font-medium text-text">{t(item.labelKey)}</figcaption>
