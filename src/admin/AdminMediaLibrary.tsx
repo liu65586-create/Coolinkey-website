@@ -32,7 +32,7 @@ export function AdminMediaLibrary({ site, products }: { site: SiteConfig | null;
     <section className="space-y-4 rounded-xl border border-white/12 bg-[#252a33] p-5">
       <div>
         <h2 className="text-lg font-semibold">本机媒体库</h2>
-        <p className="mt-1 text-sm text-[#cccccc]">这里的文件只在当前浏览器里。完整导出包会带上原始文件。仓库里原有的图片不会出现在这个列表，除非你重新导入。</p>
+        <p className="mt-1 text-sm text-[#cccccc]">这里的文件只在当前浏览器里。提交并发布时会把这些新文件写入仓库。仓库里原有的图片不会出现在这个列表，除非你重新上传。</p>
       </div>
       <input
         className="w-full rounded-lg border border-white/12 bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"

@@ -26,7 +26,7 @@ export function AdminMediaPanel({
     <div className="space-y-8">
       <div className="rounded-xl border border-white/12 bg-[#252a33] p-4 text-sm text-[#cccccc]">
         <p>
-          槽位和前台引用的是同一份草稿。选择文件只会放进本机媒体库，并写成仓库相对路径。线上更新要靠页面顶部的完整变更包。
+          槽位和前台引用的是同一份草稿。选择文件会放进本机媒体库，并写成仓库相对路径。线上更新请用「提交并发布」。
         </p>
       </div>
 

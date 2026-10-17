@@ -41,7 +41,7 @@ export function MediaUploadField({
       try {
         const result = await importMediaFile(file);
         onChange(result.path);
-        setStatus("已放入本机媒体库。导出完整变更包并提交仓库后，线上才会更新。");
+        setStatus("已放入本机媒体库。点「提交并发布」后，线上才会更新。");
         setFailed(false);
       } catch (error) {
         setFailed(true);

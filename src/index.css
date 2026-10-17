@@ -175,6 +175,7 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
 .admin-shell [class*="bg-[#252a33]"] { background:#ffffff !important; border-color:#dce2d9 !important; box-shadow:0 8px 26px rgba(32,39,32,.035); }
 .admin-shell [class*="bg-black"] { background:#f8faf6 !important; }
 .admin-shell [class*="text-white"] { color:#263027 !important; }
+.admin-shell [class*="bg-[#00b51a]"] { color:#ffffff !important; }
 .admin-shell [class*="text-[#cccccc]"], .admin-shell [class*="text-[#888]"] { color:#6a746b !important; }
 .admin-shell [class*="border-white"] { border-color:#dce2d9 !important; }
 .admin-shell input, .admin-shell textarea, .admin-shell select { border-color:#d4dcd1 !important; border-radius:10px; }

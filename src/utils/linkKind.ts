@@ -38,7 +38,7 @@ export function classifyLink(raw: string): LinkInfo {
   if (url.startsWith("blob:") || url.startsWith("data:")) {
     return { kind: "external", verified: false, note: "这是浏览器临时地址，不能写入导出包。" };
   }
-  if (url.startsWith("/")) return { kind: "repo", verified: false, note: "仓库内相对路径。新文件需包含在完整变更包里。" };
+  if (url.startsWith("/")) return { kind: "repo", verified: false, note: "仓库内相对路径。新上传的文件会在提交并发布时写入仓库。" };
 
   let host = "";
   try {

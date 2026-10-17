@@ -26,12 +26,15 @@ function move<T>(list: T[], index: number, dir: -1 | 1): T[] {
   return next;
 }
 
-export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }: { draft: SiteConfig; setDraft: (next: SiteConfig) => void; products?: CmsProduct[]; setProducts?: (next: CmsProduct[]) => void }) {
+export type ContentSection = "settings" | "home" | "support";
+
+export function AdminSiteExtras({ draft, setDraft, products = [], setProducts, section }: { draft: SiteConfig; setDraft: (next: SiteConfig) => void; products?: CmsProduct[]; setProducts?: (next: CmsProduct[]) => void; section: ContentSection }) {
   const sections = draft.homeSections ?? [];
+  const show = (name: ContentSection) => section === name;
   const support = draft.supportPage;
   return (
     <div className="space-y-10">
-      <section className="space-y-4 rounded-xl border border-white/12 bg-[#252a33] p-5">
+      {show("settings") ? <section className="space-y-4 rounded-xl border border-white/12 bg-[#252a33] p-5">
         <h2 className="text-lg font-semibold">导航</h2>
         <p className="text-sm text-[#cccccc]">可以改中英文名称。首页、CLX1、支持和关于停在同一页的对应位置，其余项仍是独立页面。</p>
         {(draft.nav?.links ?? []).map((link, index) => (
@@ -65,9 +68,9 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
             </label>
           </div>
         ))}
-      </section>
+      </section> : null}
 
-      <section className="space-y-3 rounded-xl border border-white/12 bg-[#252a33] p-5">
+      {show("home") ? <><section className="space-y-3 rounded-xl border border-white/12 bg-[#252a33] p-5">
         <h2 className="text-lg font-semibold">首页模块顺序</h2>
         {sections.map((section, index) => (
           <div key={section.id} className="flex flex-wrap items-center gap-3">
@@ -147,7 +150,7 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
         <section className="space-y-5 rounded-xl border border-white/12 bg-[#252a33] p-5">
           <div>
             <h2 className="text-lg font-semibold">首页视觉模块与全部文案</h2>
-            <p className="mt-1 text-sm text-[#cccccc]">这里控制新版首页的眉题、功能卡片、场景补充文字和底部 CTA；每个模块支持中英文。图片替换后会进入完整变更包。</p>
+            <p className="mt-1 text-sm text-[#cccccc]">这里控制新版首页的眉题、功能卡片、场景补充文字和底部 CTA；每个模块支持中英文。图片替换后，点「提交并发布」会一起提交。</p>
           </div>
           <BiInput label="首屏眉题" value={draft.homeDesign.heroEyebrow} onChange={(heroEyebrow) => setDraft({ ...draft, homeDesign: { ...draft.homeDesign!, heroEyebrow } })} />
           <BiInput label="首屏卖点：指纹" value={draft.homeDesign.heroProofFingerprint} onChange={(heroProofFingerprint) => setDraft({ ...draft, homeDesign: { ...draft.homeDesign!, heroProofFingerprint } })} />
@@ -195,11 +198,12 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
           <BiInput label="底部 CTA 标题" value={draft.homeDesign.closingTitle} onChange={(closingTitle) => setDraft({ ...draft, homeDesign: { ...draft.homeDesign!, closingTitle } })} />
         </section>
       ) : null}
+      </> : null}
 
-      {support ? (
+      {show("support") && support ? (
         <section className="space-y-4 rounded-xl border border-white/12 bg-[#252a33] p-5">
           <h2 className="text-lg font-semibold">Support 页面文案</h2>
-          <p className="text-sm text-[#cccccc]">这里是页面上的故障问答。PDF 形式的 FAQ 说明书在「产品与说明书」里按类型管理，两者不是同一份数据。</p>
+          <p className="text-sm text-[#cccccc]">这里是页面上的故障问答。PDF 和视频在下面的资料管理里按类型维护。</p>
           <BiInput label="标题" value={support.title} onChange={(title) => setDraft({ ...draft, supportPage: { ...support, title } })} />
           <BiInput label="副标题" value={support.subtitle} onChange={(subtitle) => setDraft({ ...draft, supportPage: { ...support, subtitle } })} />
           <BiInput label="Quick Start 标题" value={support.quickStart} onChange={(quickStart) => setDraft({ ...draft, supportPage: { ...support, quickStart } })} />
@@ -221,7 +225,7 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
           </div>
           <div className="space-y-3 rounded-lg border border-white/10 p-3">
             <h3 className="font-semibold">Support 资料管理 · 产品说明书与视频</h3>
-            <p className="text-xs text-white/60">在这里直接管理 Support 页面会读取的资料。文件会进入本地媒体库，并随完整变更包导出。</p>
+            <p className="text-xs text-white/60">在这里直接管理 Support 页面会读取的资料。文件先存在这台浏览器，提交并发布时会写入仓库。</p>
             {products.map((product, productIndex) => <div key={product.slug} className="space-y-3 border-t border-white/10 pt-3">
               <h4 className="text-sm font-semibold">{product.name.en || product.slug}</h4>
               {product.manuals.map((manual, manualIndex) => <div key={manual.id} className="space-y-2 rounded-lg bg-black/20 p-3">
@@ -232,11 +236,11 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
                   </select>
                 </label>
                 {manual.type === "video" ? <>
-                  <MediaUploadField slotId={`support-${product.slug}-${manual.id}-video-en`} label="English video (MP4/WebM or video URL)" spec="MP4/WebM；本地视频随完整变更包导出" kind="video" value={manual.videoUrlEn ?? ""} onChange={(url) => { if (!setProducts) return; const next = [...products]; const manuals = [...product.manuals]; manuals[manualIndex] = { ...manual, videoUrlEn: url || null }; next[productIndex] = { ...product, manuals }; setProducts(next); }} />
-                  <MediaUploadField slotId={`support-${product.slug}-${manual.id}-video-zh`} label="中文视频 (MP4/WebM 或视频链接)" spec="MP4/WebM；本地视频随完整变更包导出" kind="video" value={manual.videoUrlZh ?? ""} onChange={(url) => { if (!setProducts) return; const next = [...products]; const manuals = [...product.manuals]; manuals[manualIndex] = { ...manual, videoUrlZh: url || null }; next[productIndex] = { ...product, manuals }; setProducts(next); }} />
+                  <MediaUploadField slotId={`support-${product.slug}-${manual.id}-video-en`} label="English video (MP4/WebM or video URL)" spec="MP4/WebM，单个不超过 3.5MB；提交并发布时写入仓库" kind="video" value={manual.videoUrlEn ?? ""} onChange={(url) => { if (!setProducts) return; const next = [...products]; const manuals = [...product.manuals]; manuals[manualIndex] = { ...manual, videoUrlEn: url || null }; next[productIndex] = { ...product, manuals }; setProducts(next); }} />
+                  <MediaUploadField slotId={`support-${product.slug}-${manual.id}-video-zh`} label="中文视频 (MP4/WebM 或视频链接)" spec="MP4/WebM，单个不超过 3.5MB；提交并发布时写入仓库" kind="video" value={manual.videoUrlZh ?? ""} onChange={(url) => { if (!setProducts) return; const next = [...products]; const manuals = [...product.manuals]; manuals[manualIndex] = { ...manual, videoUrlZh: url || null }; next[productIndex] = { ...product, manuals }; setProducts(next); }} />
                 </> : <>
-                  <MediaUploadField slotId={`support-${product.slug}-${manual.id}-en`} label="English PDF" spec="PDF 文件；导出完整变更包后随仓库发布" kind="pdf" value={manual.pdfFileEn ?? ""} onChange={(url) => { if (!setProducts) return; const next = [...products]; const manuals = [...product.manuals]; manuals[manualIndex] = { ...manual, pdfFileEn: url || null }; next[productIndex] = { ...product, manuals }; setProducts(next); }} />
-                  <MediaUploadField slotId={`support-${product.slug}-${manual.id}-zh`} label="中文 PDF" spec="PDF 文件；导出完整变更包后随仓库发布" kind="pdf" value={manual.pdfFileZh ?? ""} onChange={(url) => { if (!setProducts) return; const next = [...products]; const manuals = [...product.manuals]; manuals[manualIndex] = { ...manual, pdfFileZh: url || null }; next[productIndex] = { ...product, manuals }; setProducts(next); }} />
+                  <MediaUploadField slotId={`support-${product.slug}-${manual.id}-en`} label="English PDF" spec="PDF 文件，单个不超过 3.5MB；提交并发布时写入仓库" kind="pdf" value={manual.pdfFileEn ?? ""} onChange={(url) => { if (!setProducts) return; const next = [...products]; const manuals = [...product.manuals]; manuals[manualIndex] = { ...manual, pdfFileEn: url || null }; next[productIndex] = { ...product, manuals }; setProducts(next); }} />
+                  <MediaUploadField slotId={`support-${product.slug}-${manual.id}-zh`} label="中文 PDF" spec="PDF 文件，单个不超过 3.5MB；提交并发布时写入仓库" kind="pdf" value={manual.pdfFileZh ?? ""} onChange={(url) => { if (!setProducts) return; const next = [...products]; const manuals = [...product.manuals]; manuals[manualIndex] = { ...manual, pdfFileZh: url || null }; next[productIndex] = { ...product, manuals }; setProducts(next); }} />
                 </>}
                 <button type="button" className="text-xs text-red-300" onClick={() => { if (!setProducts) return; const next = [...products]; next[productIndex] = { ...product, manuals: product.manuals.filter((item) => item.id !== manual.id) }; setProducts(next); }}>删除此资料</button>
               </div>)}
@@ -299,7 +303,7 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
         </section>
       ) : null}
 
-      <section className="space-y-4 rounded-xl border border-white/12 bg-[#252a33] p-5">
+      {show("settings") ? <><section className="space-y-4 rounded-xl border border-white/12 bg-[#252a33] p-5">
         <h2 className="text-lg font-semibold">页脚与联系邮箱</h2>
         <BiInput label="页脚标语" value={draft.footer?.tagline ?? { en: "", zh: "" }} onChange={(tagline) => setDraft({ ...draft, footer: { ...draft.footer!, tagline } })} />
         <BiInput label="隐私链接文字" value={draft.footer?.privacy ?? { en: "", zh: "" }} onChange={(privacy) => setDraft({ ...draft, footer: { ...draft.footer!, privacy } })} />
@@ -312,7 +316,6 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
             onChange={(e) => setDraft({ ...draft, contact: { ...draft.contact, email: e.target.value } })}
           />
         </label>
-        <p className="text-xs text-[#888]">微信图标保持占位，不能加链接。</p>
       </section>
 
       <section className="space-y-4 rounded-xl border border-white/12 bg-[#252a33] p-5">
@@ -332,7 +335,7 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
           value={draft.brand.faviconSrc ?? ""}
           onChange={(faviconSrc) => setDraft({ ...draft, brand: { ...draft.brand, faviconSrc } })}
         />
-      </section>
+      </section></> : null}
     </div>
   );
 }

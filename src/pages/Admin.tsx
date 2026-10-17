@@ -4,7 +4,6 @@ import { AdminMediaLibrary } from "../admin/AdminMediaLibrary";
 import { AdminMediaPanel } from "../admin/AdminMediaPanel";
 import { AdminMidModulesSection } from "../admin/AdminMidModulesSection";
 import { AdminProductsPanel } from "../admin/AdminProductsPanel";
-import { AdminPublishBar } from "../admin/AdminPublishBar";
 import { AdminSiteExtras } from "../admin/AdminSiteExtras";
 import { BiInput } from "../components/admin/BiInput";
 import { MediaUploadField } from "../components/admin/MediaUploadField";
@@ -15,6 +14,7 @@ import { buildContentZip, downloadBlob, restoreContentZip } from "../utils/expor
 import { normalizeProducts } from "../utils/normalizeProducts";
 import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
 import { fingerprintContent, readReleaseStatus, writeReleaseStatus } from "../utils/releaseStatus";
+import { fetchSession, loginAdmin, logoutAdmin, publishContent, type PublishSession } from "../utils/publishRelease";
 
 const SITE_KEY = "coolinkey_site_config_full";
 const PRODUCTS_KEY = "coolinkey_products_override";
@@ -27,8 +27,10 @@ export function Admin() {
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [mainTab, setMainTab] = useState<"site" | "products" | "media">("site");
+  const [page, setPage] = useState<"settings" | "home" | "clx1" | "support" | "about">("home");
   const [tab, setTab] = useState<"content" | "json">("content");
+  const [session, setSession] = useState<PublishSession | null>(null);
+  const [password, setPassword] = useState("");
   const [rawJson, setRawJson] = useState("");
   const [hash, setHash] = useState("");
   const [release, setRelease] = useState(readReleaseStatus);
@@ -79,6 +81,9 @@ export function Admin() {
 
   useEffect(() => {
     void load();
+    void fetchSession()
+      .then(setSession)
+      .catch(() => setSession({ ok: false, authenticated: false, publishReady: false, missing: ["ADMIN_PASSWORD", "GITHUB_TOKEN"] }));
   }, [load]);
 
   useEffect(() => {
@@ -110,34 +115,34 @@ export function Admin() {
   }, [draft, products]);
 
   const status = useMemo(() => {
-    if (!hash) return { label: "正在计算", detail: "正在比较草稿和上次导出。", canCommit: false, canDeploy: false };
+    if (!hash) return { label: "正在计算", detail: "正在读取当前内容。", canCommit: false, canDeploy: false };
     if (release.exportHash !== hash) {
       return {
-        label: hasLocalDraft ? "有未导出修改" : "与仓库文件一致，尚未导出",
-        detail: "本地草稿不会出现在普通访问里。要给访客看，请导出完整变更包，放回仓库并重新部署。",
+        label: hasLocalDraft ? "有未发布修改" : "内容尚未发布",
+        detail: "保存草稿只留在这台浏览器。点「提交并发布」后，内容会提交到 GitHub，并由 Vercel 自动部署。",
         canCommit: false,
         canDeploy: false,
       };
     }
     if (release.deployedAt) {
       return {
-        label: "已手动确认部署",
-        detail: `你在 ${release.deployedAt} 确认线上已更新。如果之后又改了内容，这个状态会取消。`,
+        label: "已发布",
+        detail: `已于 ${release.deployedAt} 确认线上更新。如果之后又改了内容，这个状态会取消。`,
         canCommit: true,
         canDeploy: true,
       };
     }
     if (release.committedAt) {
       return {
-        label: "已手动确认提交",
-        detail: `你在 ${release.committedAt} 确认已经提交 Git。后台没有检查 GitHub。`,
+        label: "已提交",
+        detail: `已于 ${release.committedAt} 提交到 GitHub。Vercel 会按这次提交部署。`,
         canCommit: true,
         canDeploy: true,
       };
     }
     return {
-      label: "已导出，待提交",
-      detail: release.exportedAt ? `完整变更包导出于 ${release.exportedAt}。请按包内说明提交并部署。` : "已导出。",
+      label: "已导出，待发布",
+      detail: "当前内容和上次导出一致。要更新官网，请点「提交并发布」。",
       canCommit: true,
       canDeploy: false,
     };
@@ -215,107 +220,175 @@ export function Admin() {
     }
   };
 
-  const mark = (kind: "committed" | "deployed") => {
-    if (release.exportHash !== hash) return;
-    const next = {
-      ...release,
-      committedAt: kind === "committed" || kind === "deployed" ? new Date().toISOString() : release.committedAt,
-      deployedAt: kind === "deployed" ? new Date().toISOString() : release.deployedAt,
-    };
-    if (kind === "committed") next.deployedAt = null;
-    writeReleaseStatus(next);
-    setRelease(next);
-    setNotice(kind === "committed" ? "已记下：你确认提交过 Git。后台没有核对远程仓库。" : "已记下：你确认线上已经更新。后台没有核对 Vercel。");
+  const onPublish = async () => {
+    setBusy(true);
+    setError(null);
+    try {
+      const { site, nextProducts } = requireDraft();
+      persistDraft(site, nextProducts);
+      setDraft(site);
+      setProducts(nextProducts);
+      const result = await publishContent(site, nextProducts);
+      const exportHash = await fingerprintContent(site, nextProducts);
+      const next = { exportHash, exportedAt: new Date().toISOString(), committedAt: new Date().toISOString(), deployedAt: null };
+      writeReleaseStatus(next);
+      setRelease(next);
+      setHash(exportHash);
+      setNotice(`已提交到 GitHub（${result.sha.slice(0, 7)}）。Vercel 正在按这次提交部署，完成后刷新官网即可看到。`);
+    } catch (publishError) {
+      setError(publishError instanceof Error ? publishError.message : "发布失败");
+    } finally {
+      setBusy(false);
+    }
   };
 
-  if (loading || !draft) {
+  if (!session) {
     return (
-      <div className="admin-shell px-4 py-16">
-        <p className="text-[#cccccc]">{error ?? "Loading…"}</p>
+      <div className="admin-shell grid min-h-screen place-items-center px-4">
+        <p className="text-sm text-[#5b6775]">{error ?? "正在检查登录状态…"}</p>
       </div>
     );
   }
 
+  if (!session.authenticated) {
+    return (
+      <div className="admin-shell grid min-h-screen place-items-center bg-[#f4f6f8] px-4">
+        <form
+          className="w-full max-w-sm rounded-2xl border border-[rgba(11,27,43,0.08)] bg-white p-8"
+          onSubmit={(event) => {
+            event.preventDefault();
+            setBusy(true);
+            setError(null);
+            void loginAdmin(password)
+              .then((next) => {
+                setSession({ ...next, authenticated: true });
+                setPassword("");
+              })
+              .catch((loginError) => setError(loginError instanceof Error ? loginError.message : "登录失败"))
+              .finally(() => setBusy(false));
+          }}
+        >
+          <p className="text-sm font-semibold text-[#00b51a]">coolinkey</p>
+          <h1 className="mt-2 text-2xl font-bold text-[#0b1b2b]">登录管理系统</h1>
+          <p className="mt-2 text-sm leading-relaxed text-[#5b6775]">登录后可以编辑官网内容，并提交到 GitHub 自动部署。</p>
+          <label className="mt-6 block text-sm font-medium text-[#0b1b2b]">
+            管理密码
+            <input
+              type="password"
+              className="mt-2 w-full rounded-xl border border-[rgba(11,27,43,0.12)] px-3 py-2 outline-none focus:border-[#00b51a]"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoComplete="current-password"
+            />
+          </label>
+          {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
+          {session.missing.length ? (
+            <p className="mt-3 text-xs leading-relaxed text-[#5b6775]">
+              服务器还需配置：{session.missing.join("、")}。把它们加到 Vercel 环境变量，或本地 `.env` 后重启。
+            </p>
+          ) : null}
+          <button type="submit" className="mt-6 w-full rounded-full bg-[#00b51a] px-4 py-2.5 text-sm font-semibold text-white disabled:opacity-50" disabled={busy}>
+            登录
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  if (loading || !draft) {
+    return (
+      <div className="admin-shell grid min-h-screen place-items-center bg-[#f4f6f8] px-4">
+        <p className="text-sm text-[#5b6775]">{error ?? "正在加载内容…"}</p>
+      </div>
+    );
+  }
+
+  const navItem = (id: typeof page, label: string) => (
+    <button
+      type="button"
+      className={`w-full rounded-lg px-3 py-2 text-left text-sm ${page === id ? "bg-[#e7f8ea] font-semibold text-[#00b51a]" : "text-[#5b6775] hover:bg-black/[0.03] hover:text-[#0b1b2b]"}`}
+      onClick={() => setPage(id)}
+    >
+      {label}
+    </button>
+  );
+
   return (
-    <div className="admin-shell">
-      <header className="border-b border-[rgba(255,255,255,0.1)] px-4 py-4 sm:px-6">
-        <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="text-xs font-semibold text-[#00b51a]">COOLINKEY</div>
-            <div className="text-lg font-bold">静态内容编辑</div>
+    <div className="admin-shell min-h-screen bg-[#f4f6f8] text-[#0b1b2b]">
+      <div className="flex min-h-screen">
+        <aside className="sticky top-0 flex h-screen w-60 shrink-0 flex-col border-r border-[rgba(11,27,43,0.08)] bg-white px-4 py-6">
+          <div className="px-2">
+            <div className="text-sm font-semibold text-[#00b51a]">coolinkey</div>
+            <div className="mt-1 text-base font-bold">管理系统</div>
           </div>
-          <Link className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00b51a]" to="/">
-            查看线上内容
-          </Link>
-        </div>
-      </header>
+          <nav className="mt-8 space-y-6">
+            <div>
+              {navItem("settings", "系统设置")}
+            </div>
+            <div>
+              <div className="px-3 text-xs font-semibold tracking-wide text-[#0b1b2b]">官网管理</div>
+              <div className="mt-2 space-y-1">
+                {navItem("home", "首页管理")}
+                {navItem("clx1", "CLX1管理")}
+                {navItem("support", "Support管理")}
+                {navItem("about", "About管理")}
+              </div>
+            </div>
+          </nav>
+        </aside>
+        <div className="min-w-0 flex-1">
+          <header className="flex items-center justify-between border-b border-[rgba(11,27,43,0.08)] bg-white px-6 py-4">
+            <div>
+              <div className="text-lg font-bold">
+                {page === "settings" ? "系统设置" : page === "home" ? "首页管理" : page === "clx1" ? "CLX1管理" : page === "support" ? "Support管理" : "About管理"}
+              </div>
+              <p className="text-sm text-[#5b6775]">{notice || status.detail}</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Link className="rounded-full border border-[rgba(11,27,43,0.12)] px-3 py-2 text-sm" to="/">查看官网</Link>
+              <button type="button" className="rounded-full border border-[rgba(11,27,43,0.12)] px-3 py-2 text-sm" disabled={busy} onClick={onSaveDraft}>保存草稿</button>
+              <button type="button" className="rounded-full bg-[#00b51a] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50" disabled={busy || !session.publishReady} onClick={() => void onPublish()}>
+                提交并发布
+              </button>
+              <button
+                type="button"
+                className="rounded-full px-3 py-2 text-sm text-[#5b6775]"
+                onClick={() => {
+                  void logoutAdmin().finally(() => setSession({ ...session, authenticated: false }));
+                }}
+              >
+                退出
+              </button>
+            </div>
+          </header>
+          <div className="space-y-6 px-6 py-6">
+            {error ? <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p> : null}
+            {!session.publishReady ? (
+              <p className="rounded-xl border border-[rgba(11,27,43,0.08)] bg-white px-4 py-3 text-sm text-[#5b6775]">
+                提交并发布还不能用。请在 Vercel 项目环境变量中设置 {session.missing.join("、")}。令牌需要有这个仓库的写入权限，推送到 main 后 Vercel 会自动部署。
+              </p>
+            ) : null}
 
-      <div className="mx-auto max-w-5xl space-y-6 px-4 py-6 sm:px-6">
-        <AdminPublishBar
-          statusLabel={status.label}
-          detail={notice ? `${status.detail} ${notice}` : status.detail}
-          error={error}
-          busy={busy}
-          canCommit={status.canCommit}
-          canDeploy={status.canDeploy}
-          onSaveDraft={onSaveDraft}
-          onPreview={() => {
-            onSaveDraft();
-            window.open("/?draft=1", "_blank", "noopener");
-          }}
-          onExportJson={() => void onExport("json")}
-          onExportFull={() => void onExport("full")}
-          onImportZip={(file) => void onImportZip(file)}
-          onMarkCommitted={() => mark("committed")}
-          onMarkDeployed={() => mark("deployed")}
-          onClearDraft={() => {
-            if (!confirm("清除本机草稿？未导出的修改会丢失。")) return;
-            localStorage.removeItem(SITE_KEY);
-            localStorage.removeItem(PRODUCTS_KEY);
-            writeReleaseStatus({ exportHash: null, exportedAt: null, committedAt: null, deployedAt: null });
-            void load();
-          }}
-        />
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "site" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
-            onClick={() => setMainTab("site")}
-          >
-            站点与文案
-          </button>
-          <button
-            type="button"
-            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "products" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
-            onClick={() => setMainTab("products")}
-          >
-            产品与说明书
-          </button>
-          <button
-            type="button"
-            className={`rounded-lg px-3 py-2 text-sm font-semibold ${mainTab === "media" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
-            onClick={() => setMainTab("media")}
-          >
-            媒体管理
-          </button>
-        </div>
-
-        {mainTab === "products" ? (
+        {page === "clx1" ? (
           <AdminProductsPanel key={productsEpoch} products={products} onChange={setProducts} />
         ) : null}
 
-        {mainTab === "media" ? (
-          <div className="space-y-8">
-            <AdminMediaLibrary site={draft} products={products} />
-            <AdminMediaPanel site={draft} products={products} onSite={setDraft} onProducts={setProducts} />
-          </div>
+        {page === "settings" ? (
+          <AdminSiteExtras section="settings" draft={draft} setDraft={setDraft} products={products} setProducts={setProducts} />
         ) : null}
 
-        {mainTab === "site" && draft ? (
-          <>
-        <AdminSiteExtras draft={draft} setDraft={setDraft} products={products} setProducts={setProducts} />
+        {page === "support" ? (
+          <AdminSiteExtras section="support" draft={draft} setDraft={setDraft} products={products} setProducts={setProducts} />
+        ) : null}
 
-        <div className="flex flex-wrap gap-2">
+        {page === "home" ? (
+          <AdminSiteExtras section="home" draft={draft} setDraft={setDraft} products={products} setProducts={setProducts} />
+        ) : null}
+
+        {draft ? (
+          <>
+
+        {page === "settings" ? <div className="flex flex-wrap gap-2">
           <button
             type="button"
             className={`rounded-lg px-3 py-2 text-sm font-semibold ${tab === "content" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
@@ -328,13 +401,13 @@ export function Admin() {
             className={`rounded-lg px-3 py-2 text-sm font-semibold ${tab === "json" ? "bg-[#00e676] text-white" : "border border-[rgba(255,255,255,0.15)]"}`}
             onClick={() => setTab("json")}
           >
-            Raw JSON
+            JSON
           </button>
-        </div>
+        </div> : null}
 
-        {tab === "content" ? (
+        {tab === "content" || page !== "settings" ? (
           <div className="space-y-10">
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
+            {page === "settings" ? <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Branding</h2>
               <MediaUploadField
                 slotId="brand-logo"
@@ -366,9 +439,9 @@ export function Admin() {
                   }
                 />
               </label>
-            </section>
+            </section> : null}
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
+            {page === "home" ? <><section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Home modules</h2>
               {(
                 [
@@ -460,9 +533,9 @@ export function Admin() {
                   />
                 </div>
               ))}
-            </section>
+            </section></> : null}
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
+            {page === "home" || page === "clx1" || page === "support" ? <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Manuals section heading</h2>
               <BiInput
                 label="Home manuals heading"
@@ -476,9 +549,9 @@ export function Admin() {
                 value={draft.productPage.manualsHeading}
                 onChange={(v) => setDraft({ ...draft, productPage: { manualsHeading: v } })}
               />
-            </section>
+            </section> : null}
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
+            {page === "about" ? <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">About / Contact</h2>
               <BiInput label="About title" value={draft.about.title} onChange={(v) => setDraft({ ...draft, about: { ...draft.about, title: v } })} />
               <BiInput label="About body" value={draft.about.body} onChange={(v) => setDraft({ ...draft, about: { ...draft.about, body: v } })} />
@@ -492,9 +565,9 @@ export function Admin() {
                 value={draft.contact.body}
                 onChange={(v) => setDraft({ ...draft, contact: { ...draft.contact, body: v } })}
               />
-            </section>
+            </section> : null}
 
-            <section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
+            {page === "settings" ? <><section className="space-y-4 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-5">
               <h2 className="text-lg font-semibold">Legal pages</h2>
               <BiInput
                 label="Privacy title"
@@ -535,7 +608,7 @@ export function Admin() {
                 value={draft.cookieBanner.learnMore}
                 onChange={(v) => setDraft({ ...draft, cookieBanner: { ...draft.cookieBanner, learnMore: v } })}
               />
-            </section>
+            </section></> : null}
           </div>
         ) : (
           <div className="space-y-3">
@@ -564,6 +637,24 @@ export function Admin() {
 
           </>
         ) : null}
+        {page === "settings" ? (
+          <section className="space-y-4 rounded-xl border border-[rgba(11,27,43,0.08)] bg-white p-5">
+            <h2 className="text-lg font-semibold">媒体与备份</h2>
+            <p className="text-sm text-[#5b6775]">图片和文件在各页面里直接替换。这里可以查看已上传的媒体，或下载一份备份。发布请用右上角的「提交并发布」，不需要再手动上传变更包。</p>
+            <AdminMediaLibrary site={draft} products={products} />
+            <AdminMediaPanel site={draft} products={products} onSite={setDraft} onProducts={setProducts} />
+            <div className="flex flex-wrap gap-2">
+              <button type="button" className="rounded-full border border-[rgba(11,27,43,0.12)] px-4 py-2 text-sm" disabled={busy} onClick={() => void onExport("full")}>下载完整备份</button>
+              <button type="button" className="rounded-full border border-[rgba(11,27,43,0.12)] px-4 py-2 text-sm" disabled={busy} onClick={() => void onExport("json")}>下载配置 JSON</button>
+              <label className="rounded-full border border-[rgba(11,27,43,0.12)] px-4 py-2 text-sm">
+                从备份恢复
+                <input type="file" accept=".zip" className="sr-only" onChange={(event) => void onImportZip(event.target.files?.[0] ?? null)} />
+              </label>
+            </div>
+          </section>
+        ) : null}
+          </div>
+        </div>
       </div>
     </div>
   );
