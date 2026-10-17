@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { AdminMediaLibrary } from "../admin/AdminMediaLibrary";
 import { AdminMediaPanel } from "../admin/AdminMediaPanel";
@@ -230,14 +230,14 @@ export function Admin() {
 
   if (loading || !draft) {
     return (
-      <div className="min-h-dvh bg-[#1e2028] px-4 py-16 text-white">
+      <div className="admin-shell px-4 py-16">
         <p className="text-[#cccccc]">{error ?? "Loading…"}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-dvh bg-[#1e2028] text-white">
+    <div className="admin-shell">
       <header className="border-b border-[rgba(255,255,255,0.1)] px-4 py-4 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -313,7 +313,7 @@ export function Admin() {
 
         {mainTab === "site" && draft ? (
           <>
-        <AdminSiteExtras draft={draft} setDraft={setDraft} />
+        <AdminSiteExtras draft={draft} setDraft={setDraft} products={products} setProducts={setProducts} />
 
         <div className="flex flex-wrap gap-2">
           <button

@@ -107,21 +107,36 @@ export async function restoreContentZip(file: File): Promise<{ site: SiteConfig;
   if (!Array.isArray(parsed.products)) throw new Error("products.json 格式不对");
   const products = normalizeProducts(parsed.products);
   const { saveMediaBlob, saveMediaMeta } = await import("./mediaStore");
+  const mediaEntry = entries.find((entry) => entry.name.endsWith("public/cms/media.json"));
+  const mediaPayload = mediaEntry ? JSON.parse(decoder.decode(mediaEntry.data)) as { media?: MediaMeta[] } : {};
+  const metadataByPath = new Map((mediaPayload.media ?? []).map((meta) => [meta.path, meta]));
+  const mimeForPath = (path: string) => {
+    const ext = path.split(".").pop()?.toLowerCase();
+    const types: Record<string, string> = {
+      png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", svg: "image/svg+xml",
+      mp4: "video/mp4", webm: "video/webm", pdf: "application/pdf", gif: "image/gif",
+    };
+    return types[ext ?? ""] ?? "application/octet-stream";
+  };
   for (const entry of entries) {
     if (!entry.name.startsWith("public/uploads/") && !entry.name.startsWith("public/manuals/") && !entry.name.startsWith("public/brand/") && !entry.name.startsWith("public/images/")) {
       continue;
     }
     const sitePath = `/${entry.name.replace(/^public\//, "")}`;
-    const blob = new Blob([entry.data]);
+    const priorMeta = metadataByPath.get(sitePath);
+    const blob = new Blob([entry.data], { type: priorMeta?.mime || mimeForPath(sitePath) });
     await saveMediaBlob(sitePath, blob);
     await saveMediaMeta({
       path: sitePath,
-      name: sitePath.split("/").pop() ?? sitePath,
-      altEn: "",
-      altZh: "",
+      name: priorMeta?.name || sitePath.split("/").pop() || sitePath,
+      altEn: priorMeta?.altEn || "",
+      altZh: priorMeta?.altZh || "",
       mime: blob.type,
       size: blob.size,
-      addedAt: new Date().toISOString(),
+      width: priorMeta?.width,
+      height: priorMeta?.height,
+      duration: priorMeta?.duration,
+      addedAt: priorMeta?.addedAt || new Date().toISOString(),
     });
   }
   window.dispatchEvent(new Event("coolinkey-media"));

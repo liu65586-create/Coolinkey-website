@@ -53,7 +53,8 @@ export function MediaUploadField({
     [onChange]
   );
 
-  const isVideo = kind === "video" || /\.(mp4|webm|ogg)(\?|$)/i.test(value);
+  const isVideo = kind === "video";
+  const isDirectVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(value);
   const isPdf = kind === "pdf" || /\.pdf(\?|$)/i.test(value);
 
   return (
@@ -84,8 +85,13 @@ export function MediaUploadField({
         }}
       >
         {preview && !isPdf ? (
-          isVideo ? (
+          isVideo && isDirectVideo ? (
             <video src={preview} className="mx-auto max-h-[160px] w-full object-contain" muted playsInline controls />
+          ) : isVideo ? (
+            <div className="flex min-h-[100px] flex-col items-center justify-center gap-2 px-4 py-6 text-center text-xs text-[#888]">
+              <span>已设置外部视频链接</span>
+              <span className="break-all text-[10px]">{value}</span>
+            </div>
           ) : (
             <img src={preview} alt="" className="mx-auto max-h-[160px] w-full object-contain" />
           )

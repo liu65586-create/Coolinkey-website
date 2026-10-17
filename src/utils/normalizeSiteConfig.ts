@@ -1,4 +1,5 @@
 import { copyDefaults } from "../cms/copyDefaults";
+import { homeDesignDefaults } from "../cms/homeDesignDefaults";
 import type { Bilingual, HomeSectionId, ImageFit, MidModuleBlock, MidSlide, SiteConfig } from "../types/siteConfig";
 
 function emptyMid(): MidModuleBlock {
@@ -62,6 +63,7 @@ export function normalizeSiteConfig(cfg: SiteConfig): SiteConfig {
   const enabled = (id: HomeSectionId) => sections.find((item) => item.id === id)?.enabled === true;
   const emptySeo = { title: { en: "", zh: "" }, description: { en: "", zh: "" } };
 
+  const homeDesign = { ...homeDesignDefaults, ...(cfg.homeDesign ?? {}) };
   return {
     ...cfg,
     version: cfg.version || 1,
@@ -84,6 +86,14 @@ export function normalizeSiteConfig(cfg: SiteConfig): SiteConfig {
       privacy: keepBi(cfg.footer?.privacy, copyDefaults.footer.privacy),
       cookie: keepBi(cfg.footer?.cookie, copyDefaults.footer.cookie),
       icp: keepBi(cfg.footer?.icp, copyDefaults.footer.icp),
+    },
+    homeDesign: {
+      ...homeDesignDefaults,
+      ...homeDesign,
+      details: (homeDesign.details?.length ? homeDesign.details : homeDesignDefaults.details).map((item, index) => ({
+        ...homeDesignDefaults.details[index % homeDesignDefaults.details.length],
+        ...item,
+      })),
     },
     modules: {
       homeHero: enabled("hero"),

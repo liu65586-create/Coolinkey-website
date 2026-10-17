@@ -34,7 +34,7 @@ export async function fingerprintContent(site: unknown, products: unknown): Prom
     site,
     products,
     media: media
-      .map((item) => ({ path: item.path, size: item.size, addedAt: item.addedAt }))
+      .map((item) => ({ path: item.path, name: item.name, mime: item.mime, size: item.size, width: item.width, height: item.height, duration: item.duration, altEn: item.altEn, altZh: item.altZh, addedAt: item.addedAt }))
       .sort((a, b) => a.path.localeCompare(b.path)),
   });
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(body));

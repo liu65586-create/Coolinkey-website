@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { BiInput } from "../components/admin/BiInput";
 import { FitFocusFields } from "../components/admin/FitFocusFields";
 import { LinkKindNote } from "../components/admin/LinkKindNote";
@@ -354,34 +354,56 @@ export function AdminProductsPanel({
                 }}
               />
               <div className="grid gap-3 sm:grid-cols-2">
-                <label className="block text-sm text-[#cccccc]">
-                  <span className="mb-1 block text-xs font-semibold text-white/80">PDF · EN（https 外链或 /manuals/…）</span>
-                  <input
-                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
-                    value={m.pdfFileEn ?? ""}
-                    placeholder="https://…/manual-en.pdf"
-                    onChange={(e) => {
-                      const next = [...p.manuals];
-                      const v = e.target.value.trim();
-                      next[mi] = { ...m, pdfFileEn: v ? v : null };
-                      setProduct({ ...p, manuals: next });
-                    }}
-                  />
-                </label>
-                <label className="block text-sm text-[#cccccc]">
-                  <span className="mb-1 block text-xs font-semibold text-white/80">PDF · 中文（https 外链或 /manuals/…）</span>
-                  <input
-                    className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-sm text-white outline-none focus:border-[#00e676]"
-                    value={m.pdfFileZh ?? ""}
-                    placeholder="https://…/manual-zh.pdf"
-                    onChange={(e) => {
-                      const next = [...p.manuals];
-                      const v = e.target.value.trim();
-                      next[mi] = { ...m, pdfFileZh: v ? v : null };
-                      setProduct({ ...p, manuals: next });
-                    }}
-                  />
-                </label>
+                <MediaUploadField
+                  slotId={`product-${idx}-manual-${mi}-pdf-en`}
+                  label="PDF · EN"
+                  spec="上传 PDF 文件；也可使用现有 /manuals/ 路径或外部 URL。"
+                  kind="pdf"
+                  value={m.pdfFileEn ?? ""}
+                  onChange={(url) => {
+                    const next = [...p.manuals];
+                    next[mi] = { ...m, pdfFileEn: url || null };
+                    setProduct({ ...p, manuals: next });
+                  }}
+                />
+                <MediaUploadField
+                  slotId={`product-${idx}-manual-${mi}-pdf-zh`}
+                  label="PDF · 中文"
+                  spec="上传 PDF 文件；也可在下方填写已有文件路径。"
+                  kind="pdf"
+                  value={m.pdfFileZh ?? ""}
+                  onChange={(url) => {
+                    const next = [...p.manuals];
+                    next[mi] = { ...m, pdfFileZh: url || null };
+                    setProduct({ ...p, manuals: next });
+                  }}
+                />
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <MediaUploadField
+                  slotId={`product-${idx}-manual-${mi}-video-en`}
+                  label="视频文件 · EN"
+                  spec="可上传 MP4 / WebM；也可继续使用下方外部视频 URL。"
+                  kind="video"
+                  value={m.videoUrlEn ?? ""}
+                  onChange={(url) => {
+                    const next = [...p.manuals];
+                    next[mi] = { ...m, videoUrlEn: url };
+                    setProduct({ ...p, manuals: next });
+                  }}
+                />
+                <MediaUploadField
+                  slotId={`product-${idx}-manual-${mi}-video-zh`}
+                  label="视频文件 · 中文"
+                  spec="可上传 MP4 / WebM；也可继续使用下方外部视频 URL。"
+                  kind="video"
+                  value={m.videoUrlZh ?? ""}
+                  onChange={(url) => {
+                    const next = [...p.manuals];
+                    next[mi] = { ...m, videoUrlZh: url };
+                    setProduct({ ...p, manuals: next });
+                  }}
+                />
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 <label className="block text-sm text-[#cccccc]">

@@ -1,9 +1,10 @@
 {
   "version": 1,
   "brand": {
-    "logoSrc": "",
-    "logoAlt": "coolinkey",
-    "logoMaxHeightPx": 30
+    "logoSrc": "/brand/coolinkey-logo-dark.png",
+    "logoAlt": "COOLINKEY",
+    "logoMaxHeightPx": 32,
+    "displayName": "COOLINKEY"
   },
   "modules": {
     "homeHero": true,
@@ -16,11 +17,21 @@
       "zh": "解锁自由。\n安心骑行。"
     },
     "subtitle": {
-      "en": "Smart security for every journey. No keys, no worries — coolinkey keeps what matters to you, safe.",
-      "zh": "每一次出行都有智能安防守护。无需钥匙、无需担心 — coolinkey 守护你在意的一切。"
+      "en": "Smart security for every journey. No keys to carry. More freedom to ride.",
+      "zh": "为每一次出行提供智能守护。少一点钥匙负担，多一点自由骑行。"
     },
-    "backgroundImageUrl": "/images/lifestyle/hero-cyclists.jpg",
-    "overlayUsesProductImage": false
+    "backgroundImageUrl": "/images/listing/product-clx1-isolated.jpg",
+    "overlayUsesProductImage": false,
+    "imageFit": "contain",
+    "focus": "50% 50%",
+    "discoverLabel": {
+      "en": "Discover CLX1",
+      "zh": "了解 CLX1"
+    },
+    "watchLabel": {
+      "en": "See how it works",
+      "zh": "观看产品演示"
+    }
   },
   "midModules": {
     "a": {
@@ -78,33 +89,69 @@
   "features": [
     {
       "icon": "fingerprint",
-      "title": { "en": "One Touch Unlock", "zh": "一触即开" },
-      "description": { "en": "No keys, no codes.", "zh": "无需钥匙与密码。" }
+      "title": {
+        "en": "One-touch access",
+        "zh": "一触解锁"
+      },
+      "description": {
+        "en": "Unlock with your fingerprint.",
+        "zh": "通过指纹快速解锁。"
+      }
     },
     {
       "icon": "dual",
-      "title": { "en": "Dual Unlock Assurance", "zh": "双重解锁保障" },
-      "description": { "en": "Keys + power backup.", "zh": "机械钥匙 + 应急供电。" }
+      "title": {
+        "en": "Backup key",
+        "zh": "机械钥匙备份"
+      },
+      "description": {
+        "en": "A physical key for emergencies.",
+        "zh": "紧急情况下可使用机械钥匙。"
+      }
     },
     {
       "icon": "share",
-      "title": { "en": "Share E-Keys", "zh": "分享电子钥匙" },
-      "description": { "en": "In seconds via app.", "zh": "App 秒级授权。" }
+      "title": {
+        "en": "App control",
+        "zh": "App 管理"
+      },
+      "description": {
+        "en": "Manage access from your phone.",
+        "zh": "通过手机管理访问权限。"
+      }
     },
     {
       "icon": "logs",
-      "title": { "en": "Activity Logs", "zh": "开锁记录" },
-      "description": { "en": "Know who, when.", "zh": "知道是谁、何时。" }
+      "title": {
+        "en": "Activity history",
+        "zh": "活动记录"
+      },
+      "description": {
+        "en": "Review lock activity in the app.",
+        "zh": "在 App 中查看锁具活动记录。"
+      }
     },
     {
       "icon": "battery",
-      "title": { "en": "Dead Battery? No Problem", "zh": "没电也不怕" },
-      "description": { "en": "Type-C power bank.", "zh": "Type-C 充电宝应急。" }
+      "title": {
+        "en": "USB-C power",
+        "zh": "USB-C 供电"
+      },
+      "description": {
+        "en": "A backup power option when needed.",
+        "zh": "需要时可通过 USB-C 应急供电。"
+      }
     },
     {
       "icon": "water",
-      "title": { "en": "IP67 Waterproof", "zh": "IP67 防水防尘" },
-      "description": { "en": "Built for the outdoors.", "zh": "为户外而生。" }
+      "title": {
+        "en": "IP67 rated",
+        "zh": "IP67 防护"
+      },
+      "description": {
+        "en": "Built for outdoor conditions.",
+        "zh": "适用于户外使用环境。"
+      }
     }
   ],
   "manualsSection": {
@@ -141,14 +188,304 @@
     }
   },
   "legal": {
-    "privacyTitle": { "en": "", "zh": "" },
-    "privacyBody": { "en": "", "zh": "" },
-    "cookieTitle": { "en": "", "zh": "" },
-    "cookieBody": { "en": "", "zh": "" }
+    "privacyTitle": {
+      "en": "",
+      "zh": ""
+    },
+    "privacyBody": {
+      "en": "",
+      "zh": ""
+    },
+    "cookieTitle": {
+      "en": "",
+      "zh": ""
+    },
+    "cookieBody": {
+      "en": "",
+      "zh": ""
+    }
   },
   "cookieBanner": {
-    "message": { "en": "", "zh": "" },
-    "accept": { "en": "", "zh": "" },
-    "learnMore": { "en": "", "zh": "" }
+    "message": {
+      "en": "",
+      "zh": ""
+    },
+    "accept": {
+      "en": "",
+      "zh": ""
+    },
+    "learnMore": {
+      "en": "",
+      "zh": ""
+    }
+  },
+  "spotlight": {
+    "kicker": {
+      "en": "MEET CLX1",
+      "zh": "认识 CLX1"
+    },
+    "title": {
+      "en": "Security that fits your everyday.",
+      "zh": "融入日常的安心守护。"
+    },
+    "body": {
+      "en": "A smart chain lock that combines fingerprint access, app management and a physical backup key in a clean, portable design.",
+      "zh": "将指纹解锁、App 管理与机械钥匙备份融入简洁便携的链条锁设计，让日常上锁更轻松。"
+    },
+    "specChain": {
+      "en": "6 mm",
+      "zh": "6 mm"
+    },
+    "specChainLabel": {
+      "en": "Steel wire diameter",
+      "zh": "钢丝直径"
+    },
+    "specIp": {
+      "en": "IP67",
+      "zh": "IP67"
+    },
+    "specIpLabel": {
+      "en": "Dust & water protection",
+      "zh": "防尘防水等级"
+    },
+    "specLen": {
+      "en": "100 cm",
+      "zh": "100 cm"
+    },
+    "specLenLabel": {
+      "en": "Chain perimeter",
+      "zh": "链条周长"
+    },
+    "learnMore": {
+      "en": "Explore the lock",
+      "zh": "探索产品详情"
+    },
+    "imageFit": "contain",
+    "focus": "50% 50%"
+  },
+  "scenarios": {
+    "kicker": {
+      "en": "ONE LOCK, MANY ROUTINES",
+      "zh": "多种日常场景"
+    },
+    "title": {
+      "en": "Made for more than one kind of ride.",
+      "zh": "不止适用于一种出行场景。"
+    },
+    "body": {
+      "en": "At the bike rack, outside a café, or securing a gate at home—bring smart access into your routine.",
+      "zh": "无论停靠在自行车架旁、咖啡店外，还是在家中锁住围栏，都能融入你的日常。"
+    },
+    "viewAll": {
+      "en": "View product details",
+      "zh": "查看产品详情"
+    },
+    "imageFit": "contain",
+    "focus": "50% 50%",
+    "items": [
+      {
+        "id": "scenario-bicycle",
+        "image": "/images/listing/bike-locking-closeup.jpg",
+        "label": {
+          "en": "Everyday cycling",
+          "zh": "日常骑行"
+        }
+      },
+      {
+        "id": "scenario-ebike",
+        "image": "/images/listing/ebike-locking.jpg",
+        "label": {
+          "en": "E-bikes",
+          "zh": "电助力自行车"
+        }
+      },
+      {
+        "id": "scenario-glass",
+        "image": "/images/listing/glass-door-locking.jpg",
+        "label": {
+          "en": "Glass doors",
+          "zh": "玻璃门"
+        }
+      },
+      {
+        "id": "scenario-gate",
+        "image": "/images/listing/metal-gate-locking.jpg",
+        "label": {
+          "en": "Metal gates",
+          "zh": "金属围栏"
+        }
+      }
+    ]
+  },
+  "appBanner": {
+    "kicker": {
+      "en": "CONNECTED CONTROL",
+      "zh": "智能互联"
+    },
+    "title": {
+      "en": "Your lock. Your access.",
+      "zh": "你的锁，由你掌控。"
+    },
+    "body": {
+      "en": "Pair with the app to manage access and make everyday locking feel simpler.",
+      "zh": "连接 App 管理访问权限，让日常上锁与解锁更简单。"
+    },
+    "appStore": {
+      "en": "App Store",
+      "zh": "App Store"
+    },
+    "googlePlay": {
+      "en": "Google Play",
+      "zh": "Google Play"
+    },
+    "image": "/images/listing/app-key-sharing-wide.jpg",
+    "imageFit": "contain",
+    "focus": "50% 50%"
+  },
+  "homeSections": [
+    {
+      "id": "hero",
+      "enabled": true
+    },
+    {
+      "id": "features",
+      "enabled": true
+    },
+    {
+      "id": "spotlight",
+      "enabled": true
+    },
+    {
+      "id": "scenarios",
+      "enabled": true
+    },
+    {
+      "id": "app",
+      "enabled": true
+    },
+    {
+      "id": "midA",
+      "enabled": false
+    },
+    {
+      "id": "midB",
+      "enabled": false
+    },
+    {
+      "id": "midD",
+      "enabled": false
+    },
+    {
+      "id": "manuals",
+      "enabled": false
+    }
+  ],
+  "homeDesign": {
+    "heroEyebrow": {
+      "en": "SMART SECURITY, SIMPLIFIED",
+      "zh": "智能安防，简单自在"
+    },
+    "heroProofFingerprint": {
+      "en": "Fingerprint access",
+      "zh": "指纹解锁"
+    },
+    "heroProofBackup": {
+      "en": "Mechanical backup key",
+      "zh": "机械钥匙备份"
+    },
+    "heroImageCaption": {
+      "en": "Made for everyday rides",
+      "zh": "为日常骑行设计"
+    },
+    "detailEyebrow": {
+      "en": "DETAILS THAT MATTER",
+      "zh": "每个细节，都为安心而设计"
+    },
+    "detailTitle": {
+      "en": "Thoughtful details. Everyday confidence.",
+      "zh": "每个细节，都为安心而设计"
+    },
+    "detailIntro": {
+      "en": "From easy access to emergency backup, the essentials are designed to feel intuitive in everyday use.",
+      "zh": "从便捷解锁到应急备份，重要功能清晰、直观，也更容易融入日常。"
+    },
+    "details": [
+      {
+        "id": "access",
+        "image": "/images/listing/product-clx1-isolated.jpg",
+        "eyebrow": {
+          "en": "01 / ACCESS",
+          "zh": "01 / 解锁"
+        },
+        "title": {
+          "en": "One touch. You're in.",
+          "zh": "一触即开"
+        },
+        "body": {
+          "en": "Fingerprint access, without reaching for a key.",
+          "zh": "指纹识别，让解锁更简单。"
+        }
+      },
+      {
+        "id": "backup",
+        "image": "/images/listing/bike-locking-closeup.jpg",
+        "eyebrow": {
+          "en": "02 / BACKUP",
+          "zh": "02 / 备份"
+        },
+        "title": {
+          "en": "A backup when it matters",
+          "zh": "关键时刻，有备份"
+        },
+        "body": {
+          "en": "A mechanical key is there for emergencies.",
+          "zh": "紧急情况下可使用机械钥匙解锁。"
+        }
+      },
+      {
+        "id": "connect",
+        "image": "/images/listing/glass-door-locking.jpg",
+        "eyebrow": {
+          "en": "03 / CONNECT",
+          "zh": "03 / 互联"
+        },
+        "title": {
+          "en": "Control from your phone",
+          "zh": "掌控在你手中"
+        },
+        "body": {
+          "en": "Manage access with the companion app.",
+          "zh": "通过 App 管理访问权限。"
+        }
+      }
+    ],
+    "scenarioEyebrow": {
+      "en": "ONE LOCK, MANY ROUTINES",
+      "zh": "多种日常场景"
+    },
+    "scenarioFooter": {
+      "en": "Designed for bicycles, e-bikes and everyday securing needs",
+      "zh": "为自行车、电助力自行车及日常固定物品设计"
+    },
+    "appEyebrow": {
+      "en": "CONNECTED CONTROL",
+      "zh": "智能互联"
+    },
+    "appPointOne": {
+      "en": "App management",
+      "zh": "手机管理"
+    },
+    "appPointTwo": {
+      "en": "Convenient access sharing",
+      "zh": "便捷授权"
+    },
+    "closingEyebrow": {
+      "en": "READY FOR YOUR NEXT RIDE",
+      "zh": "准备好开启下一段旅程"
+    },
+    "closingTitle": {
+      "en": "You focus on freedom.\nWe focus on security.",
+      "zh": "你专注自由。\n我们专注守护。"
+    }
   }
 }

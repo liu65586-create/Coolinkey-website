@@ -46,3 +46,18 @@ Image fit and focus change CSS `object-fit` and `object-position`. They do not c
 Google Drive folder links are rejected as file URLs. Drive, YouTube, and Vimeo links are shape-checked only; the admin cannot verify share permissions.
 
 Browser title and description fields update the tab after JavaScript runs. This site does not prerender per-route Open Graph tags.
+
+
+## COOLINKEY visual rebuild (static CMS)
+
+This revision refreshes the homepage with a light smoky-grey visual system, restrained lime accents, product-first hero, editable feature/story/scenario sections, and the supplied listing imagery under `public/images/listing/`.
+
+### Editing and publishing
+
+- Open `/admin` to edit the bilingual site copy, brand logo, product content, page images, manuals/PDFs, video links, navigation, support content, and homepage detail cards.
+- Uploaded media remains a local browser draft until you export the complete content bundle.
+- Use **Export complete bundle** and follow `MANIFEST.md` to place JSON and media files into the repository before committing and redeploying.
+- The site remains static. The admin does not write to GitHub or deploy automatically.
+- The logo is controlled by `brand.logoSrc`; upload/replacement should be previewed in the draft and included in the export bundle.
+
+The build could not be independently run in the editing environment because dependency installation timed out. TypeScript/TSX syntax transpilation was checked separately; run `npm ci` and `npm run build` in a normal development environment before publishing.

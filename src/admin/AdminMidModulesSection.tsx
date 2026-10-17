@@ -25,6 +25,7 @@ export function AdminMidModulesSection({
       normalizeSiteConfig({
         ...d,
         midModules: { ...d.midModules, [key]: next },
+        homeSections: (d.homeSections ?? []).map((section) => section.id === (key === "a" ? "midA" : key === "b" ? "midB" : "midD") ? { ...section, enabled: next.enabled } : section),
       })
     );
   };

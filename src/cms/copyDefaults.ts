@@ -25,11 +25,11 @@ export const copyDefaults = {
     kicker: bi("CLX1", "CLX1"),
     title: bi("Heavy-Duty Smart Chain Lock", "重型智能链条锁"),
     body: bi(
-      "A 6 mm hardened stainless steel chain and armored zinc-alloy body designed for everyday security. Instant fingerprint unlock, IP67 protection, and a fail-safe mechanical key keep your world secure.",
-      "6 mm 硬化不锈钢链条与锌合金锁体，专为日常安防设计。指纹即开、IP67 防护，并配备应急机械钥匙，守护你的出行世界。"
+      "A A smart chain lock with fingerprint access, app management, IP67 protection, and a mechanical backup key. Steel wire diameter: 6 mm.",
+      "集指纹解锁、App 管理、IP67 防护与机械钥匙备份于一体的智能链条锁。钢丝直径：6 mm。"
     ),
     specChain: bi("6mm", "6mm"),
-    specChainLabel: bi("Chain Thickness", "链条直径"),
+    specChainLabel: bi("Steel Wire Diameter", "钢丝直径"),
     specIp: bi("IP67", "IP67"),
     specIpLabel: bi("Waterproof", "防水等级"),
     specLen: bi("100cm", "100cm"),

@@ -2,32 +2,75 @@
   "products": [
     {
       "slug": "smart-chain-lock",
-      "name": { "en": "CLX1 Heavy-Duty Smart Chain Lock", "zh": "CLX1 重型智能链条锁" },
-      "shortDescription": {
-        "en": "A 6 mm hardened stainless steel chain and armored zinc-alloy body. Instant fingerprint unlock, IP67 protection, USB-C backup power, and a fail-safe mechanical key.",
-        "zh": "6 mm 硬化不锈钢链条与锌合金锁体。指纹即开、IP67 防护、USB-C 应急供电，并配备机械钥匙。"
+      "name": {
+        "en": "CLX1 Smart Chain Lock",
+        "zh": "CLX1 智能链条锁"
       },
-      "mainImage": "/images/defaults/mid-module-a-use-case.png",
+      "shortDescription": {
+        "en": "A smart chain lock with fingerprint access, app management, IP67 protection and a mechanical backup key. Steel wire diameter: 6 mm.",
+        "zh": "集指纹解锁、App 管理、IP67 防护与机械钥匙备份于一体的智能链条锁。钢丝直径：6 mm。"
+      },
+      "mainImage": "/images/listing/product-clx1-isolated.jpg",
       "galleryImages": [
-        "/images/lifestyle/hero-cyclists.jpg",
-        "/images/lifestyle/scenario-bicycle.jpg"
+        "/images/listing/product-clx1-isolated.jpg",
+        "/images/listing/product-keyless-everyday.jpg",
+        "/images/listing/product-folds-bottle-size.jpg",
+        "/images/listing/product-box-contents.jpg",
+        "/images/listing/bike-locking-closeup.jpg",
+        "/images/listing/ebike-locking.jpg",
+        "/images/listing/metal-gate-locking.jpg",
+        "/images/listing/glass-door-locking.jpg"
       ],
       "specs": [
         {
-          "key": { "en": "Protection rating", "zh": "防护等级" },
-          "value": { "en": "IP67", "zh": "IP67" }
+          "key": {
+            "en": "Protection rating",
+            "zh": "防护等级"
+          },
+          "value": {
+            "en": "IP67",
+            "zh": "IP67"
+          }
         },
         {
-          "key": { "en": "Unlock", "zh": "解锁方式" },
-          "value": { "en": "Fingerprint + app + mechanical key", "zh": "指纹 + App + 机械钥匙" }
+          "key": {
+            "en": "Unlocking",
+            "zh": "解锁方式"
+          },
+          "value": {
+            "en": "Fingerprint + app + mechanical key",
+            "zh": "指纹 + App + 机械钥匙"
+          }
         },
         {
-          "key": { "en": "Chain", "zh": "链条" },
-          "value": { "en": "6 mm stainless steel · ~100 cm", "zh": "6 mm 不锈钢 · 约 100 cm" }
+          "key": {
+            "en": "Steel wire diameter",
+            "zh": "钢丝直径"
+          },
+          "value": {
+            "en": "6 mm (0.24 in)",
+            "zh": "6 mm（0.24 英寸）"
+          }
         },
         {
-          "key": { "en": "Power", "zh": "供电" },
-          "value": { "en": "400 mAh · USB-C · ~10 months typical use", "zh": "400 mAh · USB-C · 典型使用约 10 个月" }
+          "key": {
+            "en": "Chain perimeter",
+            "zh": "链条周长"
+          },
+          "value": {
+            "en": "100 cm (39.4 in)",
+            "zh": "100 cm（39.4 英寸）"
+          }
+        },
+        {
+          "key": {
+            "en": "Charging",
+            "zh": "充电接口"
+          },
+          "value": {
+            "en": "USB-C",
+            "zh": "USB-C"
+          }
         }
       ],
       "purchaseLinkEn": "https://www.amazon.com/",
@@ -35,79 +78,43 @@
       "manuals": [
         {
           "id": "installation",
-          "title": { "en": "Installation Guide", "zh": "安装指南" },
+          "title": {
+            "en": "Installation Guide",
+            "zh": "安装指南"
+          },
           "type": "installation",
           "pdfFileEn": "/manuals/en/chainlock_install.pdf",
           "pdfFileZh": "/manuals/zh/chainlock_install.pdf"
         },
         {
           "id": "user_manual",
-          "title": { "en": "User Manual", "zh": "用户手册" },
+          "title": {
+            "en": "User Manual",
+            "zh": "用户手册"
+          },
           "type": "user_manual",
           "pdfFileEn": "/manuals/en/chainlock_manual.pdf",
           "pdfFileZh": "/manuals/zh/chainlock_manual.pdf"
         },
         {
           "id": "faq",
-          "title": { "en": "FAQs", "zh": "常见问题" },
+          "title": {
+            "en": "FAQs",
+            "zh": "常见问题"
+          },
           "type": "faq",
           "pdfFileEn": "/manuals/en/chainlock_faq.pdf",
           "pdfFileZh": "/manuals/zh/chainlock_faq.pdf"
         },
         {
           "id": "video",
-          "title": { "en": "Video Tutorials", "zh": "视频教程" },
+          "title": {
+            "en": "Video Tutorials",
+            "zh": "视频教程"
+          },
           "type": "video",
           "pdfFileEn": null,
           "pdfFileZh": null,
-          "videoUrlEn": "https://www.youtube.com/embed/lYfkl-ZXSuw",
-          "videoUrlZh": "https://www.youtube.com/embed/lYfkl-ZXSuw"
-        }
-      ]
-    },
-    {
-      "slug": "padlock",
-      "name": { "en": "Padlock", "zh": "挂锁" },
-      "shortDescription": {
-        "en": "Example entry for future CMS-managed products.",
-        "zh": "示例：未来由 CMS 上架的挂锁产品占位数据。"
-      },
-      "mainImage": "https://picsum.photos/seed/coolinkeypad1/900/700",
-      "galleryImages": ["https://picsum.photos/seed/coolinkeypad2/900/700"],
-      "specs": [
-        {
-          "key": { "en": "Status", "zh": "状态" },
-          "value": { "en": "Sample listing", "zh": "示例列表" }
-        }
-      ],
-      "purchaseLinkEn": "https://www.amazon.com/",
-      "purchaseLinkZh": "https://www.jd.com/",
-      "manuals": [
-        {
-          "id": "installation",
-          "title": { "en": "Installation Guide", "zh": "安装指南" },
-          "type": "installation",
-          "pdfFileEn": "/manuals/en/chainlock_install.pdf",
-          "pdfFileZh": "/manuals/zh/chainlock_install.pdf"
-        },
-        {
-          "id": "user_manual",
-          "title": { "en": "User Manual", "zh": "用户手册" },
-          "type": "user_manual",
-          "pdfFileEn": "/manuals/en/chainlock_manual.pdf",
-          "pdfFileZh": "/manuals/zh/chainlock_manual.pdf"
-        },
-        {
-          "id": "faq",
-          "title": { "en": "FAQs", "zh": "常见问题" },
-          "type": "faq",
-          "pdfFileEn": "/manuals/en/chainlock_faq.pdf",
-          "pdfFileZh": "/manuals/zh/chainlock_faq.pdf"
-        },
-        {
-          "id": "video",
-          "title": { "en": "Video Tutorials", "zh": "视频教程" },
-          "type": "video",
           "videoUrlEn": "https://www.youtube.com/embed/lYfkl-ZXSuw",
           "videoUrlZh": "https://www.youtube.com/embed/lYfkl-ZXSuw"
         }

@@ -65,6 +65,25 @@ export type MidModuleBlock = {
   slides: MidSlide[];
 };
 
+
+export type HomeDesignCopy = {
+  heroEyebrow: Bilingual;
+  heroProofFingerprint: Bilingual;
+  heroProofBackup: Bilingual;
+  heroImageCaption: Bilingual;
+  detailEyebrow: Bilingual;
+  detailTitle: Bilingual;
+  detailIntro: Bilingual;
+  details: Array<{ id: string; image: string; eyebrow: Bilingual; title: Bilingual; body: Bilingual }>;
+  scenarioEyebrow: Bilingual;
+  scenarioFooter: Bilingual;
+  appEyebrow: Bilingual;
+  appPointOne: Bilingual;
+  appPointTwo: Bilingual;
+  closingEyebrow: Bilingual;
+  closingTitle: Bilingual;
+};
+
 export type SiteConfig = {
   version: number;
   brand: {
@@ -83,6 +102,7 @@ export type SiteConfig = {
     cookie: Bilingual;
     icp: Bilingual;
   };
+  homeDesign?: HomeDesignCopy;
   modules: {
     homeHero: boolean;
     homeFeatures: boolean;
