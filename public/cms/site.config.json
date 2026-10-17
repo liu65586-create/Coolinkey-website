@@ -16,8 +16,8 @@
       "zh": "解锁自由。\n安心骑行。"
     },
     "subtitle": {
-      "en": "Smart security for every journey. No keys, no worries — coolinkey keeps what matters to you, safe.",
-      "zh": "每一次出行都有智能安防守护。无需钥匙、无需担心 — coolinkey 守护你在意的一切。"
+      "en": "Smart security for every journey. Unlock with a touch, and keep a mechanical key as a backup when you need it.",
+      "zh": "为每一次出行提供智能守护。日常轻触指纹即可解锁，并配备机械钥匙作为备用方案。"
     },
     "backgroundImageUrl": "/images/lifestyle/hero-cyclists.jpg",
     "overlayUsesProductImage": false
@@ -78,33 +78,69 @@
   "features": [
     {
       "icon": "fingerprint",
-      "title": { "en": "One Touch Unlock", "zh": "一触即开" },
-      "description": { "en": "No keys, no codes.", "zh": "无需钥匙与密码。" }
+      "title": {
+        "en": "Fingerprint Unlock",
+        "zh": "指纹解锁"
+      },
+      "description": {
+        "en": "Store up to 60 fingerprints.",
+        "zh": "最多可录入 60 枚指纹。"
+      }
     },
     {
       "icon": "dual",
-      "title": { "en": "Dual Unlock Assurance", "zh": "双重解锁保障" },
-      "description": { "en": "Keys + power backup.", "zh": "机械钥匙 + 应急供电。" }
-    },
-    {
-      "icon": "share",
-      "title": { "en": "Share E-Keys", "zh": "分享电子钥匙" },
-      "description": { "en": "In seconds via app.", "zh": "App 秒级授权。" }
-    },
-    {
-      "icon": "logs",
-      "title": { "en": "Activity Logs", "zh": "开锁记录" },
-      "description": { "en": "Know who, when.", "zh": "知道是谁、何时。" }
-    },
-    {
-      "icon": "battery",
-      "title": { "en": "Dead Battery? No Problem", "zh": "没电也不怕" },
-      "description": { "en": "Type-C power bank.", "zh": "Type-C 充电宝应急。" }
+      "title": {
+        "en": "Mechanical Key Backup",
+        "zh": "机械钥匙备用"
+      },
+      "description": {
+        "en": "Two physical keys included.",
+        "zh": "附带两把机械钥匙。"
+      }
     },
     {
       "icon": "water",
-      "title": { "en": "IP67 Waterproof", "zh": "IP67 防水防尘" },
-      "description": { "en": "Built for the outdoors.", "zh": "为户外而生。" }
+      "title": {
+        "en": "IP67 Protection",
+        "zh": "IP67 防护"
+      },
+      "description": {
+        "en": "Protection against dust and water.",
+        "zh": "防尘防水设计。"
+      }
+    },
+    {
+      "icon": "share",
+      "title": {
+        "en": "Bluetooth App Access",
+        "zh": "蓝牙 App 管理"
+      },
+      "description": {
+        "en": "Connect and manage access in the app.",
+        "zh": "通过 App 连接并管理使用。"
+      }
+    },
+    {
+      "icon": "logs",
+      "title": {
+        "en": "100 cm Sleeved Chain",
+        "zh": "100 厘米包覆链条"
+      },
+      "description": {
+        "en": "Flexible reach for everyday locking.",
+        "zh": "灵活适配日常上锁场景。"
+      }
+    },
+    {
+      "icon": "battery",
+      "title": {
+        "en": "USB-C Rechargeable",
+        "zh": "USB-C 充电"
+      },
+      "description": {
+        "en": "Recharge the built-in battery.",
+        "zh": "为内置电池充电。"
+      }
     }
   ],
   "manualsSection": {
@@ -126,8 +162,8 @@
       "zh": "关于 COOLINKEY"
     },
     "body": {
-      "en": "COOLINKEY builds smart security for bicycles and daily carry—combining fingerprint access, a tough sleeved chain, and app connectivity so you can lock up quickly and get back to riding.",
-      "zh": "COOLINKEY 专注自行车与随身场景的智能安防，将指纹解锁、高强度包覆链条与 App 互联结合，让你快速上锁、回到骑行与都市生活。"
+      "en": "COOLINKEY creates smart security for bicycles and everyday mobility, combining fingerprint access, a sleeved chain, Bluetooth app connectivity, and a mechanical key backup.",
+      "zh": "COOLINKEY 专注于自行车及日常出行智能安防，将指纹解锁、包覆链条、蓝牙 App 连接与机械钥匙备用方案结合。"
     }
   },
   "contact": {
@@ -141,14 +177,35 @@
     }
   },
   "legal": {
-    "privacyTitle": { "en": "", "zh": "" },
-    "privacyBody": { "en": "", "zh": "" },
-    "cookieTitle": { "en": "", "zh": "" },
-    "cookieBody": { "en": "", "zh": "" }
+    "privacyTitle": {
+      "en": "",
+      "zh": ""
+    },
+    "privacyBody": {
+      "en": "",
+      "zh": ""
+    },
+    "cookieTitle": {
+      "en": "",
+      "zh": ""
+    },
+    "cookieBody": {
+      "en": "",
+      "zh": ""
+    }
   },
   "cookieBanner": {
-    "message": { "en": "", "zh": "" },
-    "accept": { "en": "", "zh": "" },
-    "learnMore": { "en": "", "zh": "" }
+    "message": {
+      "en": "",
+      "zh": ""
+    },
+    "accept": {
+      "en": "",
+      "zh": ""
+    },
+    "learnMore": {
+      "en": "",
+      "zh": ""
+    }
   }
 }
