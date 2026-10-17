@@ -1,6 +1,7 @@
 import {
   checkPassword,
   clearCookie,
+  assembleBlobs,
   commitBlobs,
   createBlob,
   createSessionValue,
@@ -65,6 +66,13 @@ export async function handleAdminApi(req, res, pathname) {
       if (!requireSession(req, res)) return;
       const body = await readJson(req);
       const sha = await createBlob(body.contentBase64);
+      return send(res, 200, { ok: true, sha, path: body.path });
+    }
+
+    if (pathname === "/api/assemble" && req.method === "POST") {
+      if (!requireSession(req, res)) return;
+      const body = await readJson(req);
+      const sha = await assembleBlobs(body.shas);
       return send(res, 200, { ok: true, sha, path: body.path });
     }
 

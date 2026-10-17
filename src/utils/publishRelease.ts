@@ -42,6 +42,31 @@ export function logoutAdmin() {
   return api<{ ok: boolean }>("/api/logout", { method: "POST" });
 }
 
+const CHUNK_BYTES = 2_400_000;
+const FILE_BYTES_MAX = 48 * 1024 * 1024;
+
+async function uploadFile(path: string, bytes: Uint8Array) {
+  if (bytes.byteLength <= CHUNK_BYTES) {
+    return api<{ sha: string; path: string }>("/api/blob", {
+      method: "POST",
+      body: JSON.stringify({ path, contentBase64: bytesToBase64(bytes) }),
+    });
+  }
+  const shas: string[] = [];
+  for (let offset = 0; offset < bytes.byteLength; offset += CHUNK_BYTES) {
+    const slice = bytes.subarray(offset, Math.min(offset + CHUNK_BYTES, bytes.byteLength));
+    const part = await api<{ sha: string }>("/api/blob", {
+      method: "POST",
+      body: JSON.stringify({ path, contentBase64: bytesToBase64(slice) }),
+    });
+    shas.push(part.sha);
+  }
+  return api<{ sha: string; path: string }>("/api/assemble", {
+    method: "POST",
+    body: JSON.stringify({ path, shas }),
+  });
+}
+
 async function collectFiles(site: SiteConfig, products: CmsProduct[]) {
   const encoder = new TextEncoder();
   const media = await listMediaMeta();
@@ -54,7 +79,7 @@ async function collectFiles(site: SiteConfig, products: CmsProduct[]) {
     const blob = await getMediaBlob(meta.path);
     if (!blob) continue;
     const bytes = new Uint8Array(await blob.arrayBuffer());
-    if (bytes.byteLength > 3_500_000) throw new Error(`${meta.name} 超过 3.5MB，请压缩后再发布`);
+    if (bytes.byteLength > FILE_BYTES_MAX) throw new Error(`${meta.name} 超过 48MB，请压缩后再发布`);
     const sitePath = meta.path.startsWith("/") ? meta.path : `/${meta.path}`;
     files.push({ path: `public${sitePath}`, bytes });
     kept.push(meta);
@@ -67,10 +92,7 @@ export async function publishContent(site: SiteConfig, products: CmsProduct[]) {
   const files = await collectFiles(site, products);
   const uploaded: { path: string; sha: string }[] = [];
   for (const file of files) {
-    const result = await api<{ sha: string; path: string }>("/api/blob", {
-      method: "POST",
-      body: JSON.stringify({ path: file.path, contentBase64: bytesToBase64(file.bytes) }),
-    });
+    const result = await uploadFile(file.path, file.bytes);
     uploaded.push({ path: file.path, sha: result.sha });
   }
   return api<{ sha: string; url: string; branch: string }>("/api/commit", {

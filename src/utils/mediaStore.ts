@@ -154,7 +154,7 @@ export function suggestUploadPath(file: File): string {
   return `/uploads/${stamp}-${base}.${ext}`;
 }
 
-export const MEDIA_MAX_BYTES = 32 * 1024 * 1024;
+export const MEDIA_MAX_BYTES = 48 * 1024 * 1024;
 
 const ALLOWED = new Set(["png", "jpg", "jpeg", "webp", "gif", "svg", "mp4", "webm", "pdf"]);
 
