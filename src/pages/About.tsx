@@ -12,7 +12,7 @@ export function About() {
   return (
     <div className="page-wrap max-w-3xl py-16 sm:py-20">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">coolinkey</p>
-      <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-text">{title}</h1>
+      <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-text">{title}</h2>
       <p className="mt-6 text-[16px] leading-relaxed text-text-muted">{body}</p>
     </div>
   );

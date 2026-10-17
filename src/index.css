@@ -28,7 +28,7 @@
   --radius-xl: 28px;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 html, body { min-height: 100%; }
 body {
   margin: 0;
@@ -55,6 +55,9 @@ header:has(nav) { z-index: 50; }
 
 /* Home page — quiet, editorial, product-first */
 .home-page { overflow: hidden; background: var(--paper); }
+.site-anchor { border-top: 1px solid var(--line, rgba(11, 27, 43, 0.08)); }
+.site-anchor:focus { outline: none; }
+#about { min-height: calc(100svh - 80px); }
 .hero-section { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(118deg,#f4f5f1 0%,#e9ece6 100%); }
 .hero-grid { position:relative; min-height: min(720px, calc(100svh - 78px)); display:grid; grid-template-columns: 1fr 1.02fr; align-items:center; gap:clamp(30px,5vw,76px); padding-block:72px 82px; }
 .hero-orb { position:absolute; z-index:-1; border-radius:50%; pointer-events:none; }

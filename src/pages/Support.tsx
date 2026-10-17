@@ -49,9 +49,9 @@ export function Support() {
       <section className="page-wrap grid items-center gap-10 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">{text(page?.kicker, "supportPage.kicker")}</p>
-          <h1 className="mt-3 font-display text-[36px] font-bold leading-tight tracking-tight text-text sm:text-[48px]">
+          <h2 className="mt-3 font-display text-[36px] font-bold leading-tight tracking-tight text-text sm:text-[48px]">
             {text(page?.title, "supportPage.title")}
-          </h1>
+          </h2>
           <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-text-muted">{text(page?.subtitle, "supportPage.subtitle")}</p>
         </div>
         <div className="overflow-hidden rounded-[28px] bg-surface-muted p-6">

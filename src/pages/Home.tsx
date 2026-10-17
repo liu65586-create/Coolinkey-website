@@ -49,7 +49,7 @@ export function Home() {
   if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
 
   return (
-    <main className="home-page">
+    <>
       <section className="hero-section">
         <div className="hero-orb hero-orb-one" />
         <div className="hero-orb hero-orb-two" />
@@ -198,6 +198,6 @@ export function Home() {
       </section>
 
       <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src={videoSrc} />
-    </main>
+    </>
   );
 }

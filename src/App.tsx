@@ -9,14 +9,11 @@ import { GeoIpProvider } from "./context/GeoIpContext";
 import { PreviewDraftProvider } from "./context/PreviewDraftContext";
 import { ShoppingRegionProvider } from "./context/ShoppingRegionContext";
 import { SiteConfigProvider } from "./context/SiteConfigContext";
-import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { CookiePolicy } from "./pages/CookiePolicy";
-import { Home } from "./pages/Home";
 import { Privacy } from "./pages/Privacy";
 import { Admin } from "./pages/Admin";
-import { Product } from "./pages/Product";
-import { Support } from "./pages/Support";
+import { SitePage } from "./pages/SitePage";
 
 export default function App() {
   return (
@@ -33,10 +30,12 @@ export default function App() {
                 <Routes>
                   <Route path="/admin" element={<Admin />} />
                   <Route element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="product/:slug?" element={<Product />} />
-                    <Route path="support" element={<Support />} />
-                    <Route path="about" element={<About />} />
+                    <Route element={<SitePage />}>
+                      <Route index element={null} />
+                      <Route path="product/:slug?" element={null} />
+                      <Route path="support" element={null} />
+                      <Route path="about" element={null} />
+                    </Route>
                     <Route path="contact" element={<Contact />} />
                     <Route path="privacy" element={<Privacy />} />
                     <Route path="cookie-policy" element={<CookiePolicy />} />
