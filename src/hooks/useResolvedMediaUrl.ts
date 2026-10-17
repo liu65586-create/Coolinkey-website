@@ -7,16 +7,22 @@ export function useResolvedMediaUrl(url: string | undefined | null): string {
 
   useEffect(() => {
     const raw = url?.trim() ?? "";
-    if (!raw) {
-      setResolved("");
-      return;
-    }
     let cancelled = false;
-    void resolveMediaUrl(raw).then((next) => {
-      if (!cancelled) setResolved(next);
-    });
+    const run = () => {
+      if (!raw) {
+        setResolved("");
+        return;
+      }
+      void resolveMediaUrl(raw).then((next) => {
+        if (!cancelled) setResolved(next);
+      });
+    };
+    run();
+    const onMedia = () => run();
+    window.addEventListener("coolinkey-media", onMedia);
     return () => {
       cancelled = true;
+      window.removeEventListener("coolinkey-media", onMedia);
     };
   }, [url]);
 

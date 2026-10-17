@@ -1,14 +1,19 @@
-﻿import { useEffect, useMemo, useState } from "react";
+﻿import { useState } from "react";
 import { BiInput } from "../components/admin/BiInput";
+import { FitFocusFields } from "../components/admin/FitFocusFields";
+import { LinkKindNote } from "../components/admin/LinkKindNote";
 import { MediaUploadField } from "../components/admin/MediaUploadField";
-import { useCms } from "../context/CmsContext";
 import type { CmsManual, CmsPayload, CmsProduct, ManualType } from "../types/cms";
 
 const manualTypes: ManualType[] = ["installation", "user_manual", "faq", "video"];
 
 function emptyProduct(): CmsProduct {
   return {
+    id: `product-${Date.now()}`,
     slug: "new-product",
+    enabled: true,
+    imageFit: "contain",
+    focus: "50% 50%",
     name: { en: "", zh: "" },
     shortDescription: { en: "", zh: "" },
     mainImage: "",
@@ -22,7 +27,7 @@ function emptyProduct(): CmsProduct {
 
 function emptyManual(): CmsManual {
   return {
-    id: "manual",
+    id: `manual-${Date.now()}`,
     title: { en: "", zh: "" },
     type: "user_manual",
     pdfFileEn: null,
@@ -39,69 +44,29 @@ function emptySpec() {
   };
 }
 
-export function AdminProductsPanel() {
-  const { products, loading, error, saveLocalProducts, resetProductsToRepoFile } = useCms();
-  const [draft, setDraft] = useState<CmsProduct[]>([]);
+export function AdminProductsPanel({
+  products,
+  onChange,
+}: {
+  products: CmsProduct[];
+  onChange: (next: CmsProduct[]) => void;
+}) {
+  const [draft, setDraftState] = useState<CmsProduct[]>(products);
   const [idx, setIdx] = useState(0);
-  const [rawJson, setRawJson] = useState("");
+  const [rawJson, setRawJson] = useState(() => JSON.stringify({ products }, null, 2));
 
-  useEffect(() => {
-    setDraft(structuredClone(products));
-    setRawJson(JSON.stringify({ products }, null, 2));
-  }, [products]);
-
-  const dirty = useMemo(
-    () => JSON.stringify({ products: draft }) !== JSON.stringify({ products }),
-    [draft, products]
-  );
+  const setDraft = (action: CmsProduct[] | ((prev: CmsProduct[]) => CmsProduct[])) => {
+    setDraftState((prev) => {
+      const next = typeof action === "function" ? action(prev) : action;
+      onChange(next);
+      return next;
+    });
+  };
 
   const p = draft[idx];
 
   const setProduct = (next: CmsProduct) => {
     setDraft((list) => list.map((x, i) => (i === idx ? next : x)));
-  };
-
-  const validate = (): string | null => {
-    const slugs = new Set<string>();
-    for (const pr of draft) {
-      const s = pr.slug.trim();
-      if (!s) return "Each product needs a non-empty slug.";
-      if (slugs.has(s)) return `Duplicate slug: ${s}`;
-      slugs.add(s);
-    }
-    return null;
-  };
-
-  const onSaveLocal = () => {
-    const msg = validate();
-    if (msg) {
-      alert(msg);
-      return;
-    }
-    saveLocalProducts({ products: draft });
-  };
-
-  const onExport = () => {
-    const blob = new Blob([JSON.stringify({ products: draft }, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "products.json";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const onImportFile = async (file: File | null) => {
-    if (!file) return;
-    const text = await file.text();
-    const parsed = JSON.parse(text) as CmsPayload;
-    if (!parsed.products || !Array.isArray(parsed.products)) {
-      alert("Invalid products.json: missing products array");
-      return;
-    }
-    setDraft(structuredClone(parsed.products));
-    setIdx(0);
-    setRawJson(JSON.stringify(parsed, null, 2));
   };
 
   const applyRawJson = () => {
@@ -114,10 +79,6 @@ export function AdminProductsPanel() {
       alert("Invalid JSON");
     }
   };
-
-  if (loading && draft.length === 0) {
-    return <p className="text-[#cccccc]">{error ?? "Loading products…"}</p>;
-  }
 
   if (!p) {
     return (
@@ -138,9 +99,8 @@ export function AdminProductsPanel() {
     <div className="space-y-8">
       <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-4 text-sm text-[#cccccc]">
         <p>
-          编辑 <code className="text-[#00e676]">public/cms/products.json</code> 的等价数据：主图/轮播、多语言名称与描述、规格表、购买链接、说明书（PDF 与视频均可填<strong className="text-white">完整 https 链接</strong>
-          ，无需上传到 GitHub；也可继续用 <code className="text-[#00e676]">/manuals/…</code> 相对路径指向仓库内文件）。保存到浏览器后仅本机预览；<strong className="text-white">Export</strong> 下载的文件请覆盖仓库中的{" "}
-          <code className="text-[#00e676]">products.json</code> 并推送以更新线上。
+          产品修改会进入页面顶部的本地草稿。购买链接仍分中国店铺和海外店铺两条；打开时网站会自动加上
+          source=coolinkey_website 和 lang，这两项不能在这里删掉。PDF FAQ 和页面上的故障问答不是同一份内容。
         </p>
       </div>
 
@@ -199,6 +159,16 @@ export function AdminProductsPanel() {
             onChange={(e) => setProduct({ ...p, slug: e.target.value })}
           />
         </label>
+        <label className="flex items-center gap-2 text-sm text-[#cccccc]">
+          <input type="checkbox" checked={p.enabled !== false} onChange={(e) => setProduct({ ...p, enabled: e.target.checked })} />
+          在前台启用
+        </label>
+        <FitFocusFields
+          fit={p.imageFit === "cover" ? "cover" : "contain"}
+          focus={p.focus || "50% 50%"}
+          onChange={(next) => setProduct({ ...p, imageFit: next.fit, focus: next.focus })}
+        />
+        <p className="text-xs text-[#888]">6 mm 表示钢丝直径，不要改成整条链条外径。不要新增未经证实的性能承诺。</p>
         <BiInput label="产品名称" value={p.name} onChange={(v) => setProduct({ ...p, name: v })} />
         <BiInput label="简短描述" value={p.shortDescription} onChange={(v) => setProduct({ ...p, shortDescription: v })} />
         <MediaUploadField
@@ -224,6 +194,7 @@ export function AdminProductsPanel() {
             value={p.purchaseLinkZh}
             onChange={(e) => setProduct({ ...p, purchaseLinkZh: e.target.value })}
           />
+          <p className="mt-1 text-xs text-[#888]">打开时会自动加上 source=coolinkey_website 和 lang，不要从地址里删这两项。</p>
         </label>
       </section>
 
@@ -424,6 +395,7 @@ export function AdminProductsPanel() {
                       setProduct({ ...p, manuals: next });
                     }}
                   />
+                  <LinkKindNote value={m.videoUrlEn ?? ""} />
                 </label>
                 <label className="block text-sm text-[#cccccc]">
                   <span className="mb-1 block text-xs font-semibold text-white/80">视频嵌入 URL · 中文（B站 embed 等）</span>
@@ -436,6 +408,7 @@ export function AdminProductsPanel() {
                       setProduct({ ...p, manuals: next });
                     }}
                   />
+                  <LinkKindNote value={m.videoUrlZh ?? ""} />
                 </label>
               </div>
             </div>
@@ -458,31 +431,6 @@ export function AdminProductsPanel() {
           应用 JSON 到表单
         </button>
       </section>
-
-      <div className="flex flex-wrap gap-2 border-t border-[rgba(255,255,255,0.1)] pt-6">
-        <button
-          type="button"
-          className="rounded-lg bg-[#00e676] px-4 py-2 font-semibold text-white hover:bg-[#00c853] disabled:opacity-50"
-          disabled={!dirty}
-          onClick={onSaveLocal}
-        >
-          保存到本浏览器
-        </button>
-        <button type="button" className="rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm" onClick={onExport}>
-          Export products.json
-        </button>
-        <label className="cursor-pointer rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm hover:border-[#00e676]">
-          Import JSON
-          <input type="file" accept="application/json" className="hidden" onChange={(e) => void onImportFile(e.target.files?.[0] ?? null)} />
-        </label>
-        <button
-          type="button"
-          className="rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm"
-          onClick={() => void resetProductsToRepoFile()}
-        >
-          重置为仓库文件（清除浏览器覆盖）
-        </button>
-      </div>
     </div>
   );
 }

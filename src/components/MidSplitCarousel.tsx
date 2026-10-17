@@ -4,32 +4,25 @@ import type { Bilingual, MidSlide, MidSlideMediaKind } from "../types/siteConfig
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 import { CarouselControls } from "./CarouselControls";
+import { MediaPlayer } from "./MediaPlayer";
 import { ResolvedImage } from "./ResolvedImage";
 
 type Variant = "imageLeft" | "textLeft";
 
-function MediaView({ url, kind }: { url: string; kind: MidSlideMediaKind }) {
+function MediaView({ url, kind, fit, focus }: { url: string; kind: MidSlideMediaKind; fit?: MidSlide["imageFit"]; focus?: string }) {
   const resolved = useResolvedMediaUrl(url);
-  const k = kind === "video" || /\.(mp4|webm|ogg)(\?|$)/i.test(url) ? "video" : "image";
-  if (!resolved) return null;
+  const k = kind === "video" || /\.(mp4|webm)(\?|$)/i.test(url) ? "video" : "image";
+  if (!resolved && k !== "video") return null;
   if (k === "video") {
-    return (
-      <video
-        className="aspect-[16/10] w-full max-h-[400px] rounded-lg object-cover"
-        src={resolved}
-        controls
-        playsInline
-        muted
-        loop
-        preload="metadata"
-      />
-    );
+    return <MediaPlayer url={url} className="aspect-[16/10] w-full max-h-[400px] rounded-lg bg-black object-contain" />;
   }
   return (
     <ResolvedImage
       src={url}
       alt=""
-      className="aspect-[16/10] w-full max-h-[400px] rounded-lg object-cover"
+      fit={fit === "contain" ? "contain" : "cover"}
+      focus={focus || "50% 50%"}
+      className="aspect-[16/10] w-full max-h-[400px] rounded-lg"
     />
   );
 }
@@ -54,7 +47,7 @@ export function MidSplitCarousel({
   const heading = pickBilingual(lang, title, "").trim();
   const body = pickBilingual(lang, slide.text, "");
 
-  const media = <MediaView url={slide.mediaUrl} kind={slide.mediaKind} />;
+  const media = <MediaView url={slide.mediaUrl} kind={slide.mediaKind} fit={slide.imageFit} focus={slide.focus} />;
   const textBlock = (
     <div className="flex flex-col justify-center space-y-4 lg:py-4">
       {heading ? <h3 className="text-xl font-semibold tracking-tight text-text sm:text-2xl">{heading}</h3> : null}

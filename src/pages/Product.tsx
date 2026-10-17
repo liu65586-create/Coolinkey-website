@@ -24,14 +24,18 @@ export function Product() {
 
   const manualsHeading = pickBilingual(lang, config?.productPage?.manualsHeading, t("product.manuals"));
 
+  const visibleProducts = useMemo(() => products.filter((product) => product.enabled !== false), [products]);
+
   const active = useMemo(() => {
-    if (slug) return getBySlug(slug) ?? defaultProduct;
-    return defaultProduct;
+    const found = slug ? getBySlug(slug) : defaultProduct;
+    if (found && found.enabled === false) return defaultProduct;
+    return found ?? defaultProduct;
   }, [slug, getBySlug, defaultProduct]);
 
   useEffect(() => {
-    if (loading) return;
-    if (slug && !getBySlug(slug) && defaultProduct) {
+    if (loading || !defaultProduct) return;
+    const found = slug ? getBySlug(slug) : undefined;
+    if (slug && (!found || found.enabled === false) && slug !== defaultProduct.slug) {
       navigate(`/product/${defaultProduct.slug}`, { replace: true });
     }
   }, [loading, slug, getBySlug, defaultProduct, navigate]);
@@ -47,7 +51,7 @@ export function Product() {
     <div className="page-wrap py-12 sm:py-16">
       <div className="max-w-md">
         <ProductDropdown
-          products={products}
+          products={visibleProducts}
           valueSlug={active?.slug ?? ""}
           disabled={loading}
           onChangeSlug={(next) => navigate(`/product/${next}`)}
@@ -60,7 +64,7 @@ export function Product() {
         <>
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
             <div className="rounded-[28px] bg-surface-muted p-4 sm:p-6">
-              <ProductGallery images={gallery} productName={name} />
+              <ProductGallery images={gallery} productName={name} fit={active.imageFit} focus={active.focus} />
             </div>
 
             <div className="space-y-8">

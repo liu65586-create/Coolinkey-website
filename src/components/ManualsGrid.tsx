@@ -20,10 +20,7 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
 
   const heading = pickBilingual(lang, config?.manualsSection?.heading, t("manualsSection.heading"));
 
-  const sorted = useMemo(() => {
-    const order = ["installation", "user_manual", "faq", "video"] as const;
-    return [...manuals].sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
-  }, [manuals]);
+  const sorted = useMemo(() => manuals, [manuals]);
 
   const n = sorted.length;
   const lgCols =

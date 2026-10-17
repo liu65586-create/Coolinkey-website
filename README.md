@@ -27,13 +27,22 @@ Sample PDFs live under `public/manuals/{en,zh}/`. Replace with real assets while
 
 ## Site content & admin
 
-- **Global copy / modules / logo path**: `public/cms/site.config.json` (bilingual fields; empty strings fall back to `src/i18n/locales/*.json`).
-- **Logo image file**: place assets under `public/brand/` (default: `/brand/coolinkey-logo.png`).
-- **Admin UI**: open `/admin` locally or on your deployed domain.
-  - **Production**: set `VITE_ADMIN_PIN` in Vercel env vars, redeploy, then unlock with the PIN.
-  - **Site tab → publish**: **Export JSON** → replace `public/cms/site.config.json` → push.
-  - **Products tab → publish**: **Export products.json** → replace `public/cms/products.json` → push.
-  - **Browser-only preview**: each tab has “Save in this browser” (`localStorage` keys `coolinkey_site_config_full` and `coolinkey_products_override`).
-- **Products, galleries, specs, purchase links, manual PDF paths**: edited in admin **产品与说明书** tab or directly in `public/cms/products.json` (until a headless CMS API is wired).
+The public site is static. Visitors only see files in the repo (`public/cms/site.config.json`, `public/cms/products.json`, and files under `public/`).
 
-`public/robots.txt` discourages indexing `/admin`.
+`/admin` edits a **local draft** in this browser. It does not publish the live site and it does not call an upload API.
+
+1. Edit copy, products, and media.
+2. Use **保存并预览草稿** to open `/?draft=1`. That preview is only in your browser.
+3. Use **导出完整变更包**. The zip contains `MANIFEST.md`, the JSON files, and any media you imported.
+4. Copy those files onto the paths listed in the manifest, commit, and push.
+5. After Vercel finishes building, check the live site, then use the manual confirmation buttons. Those buttons do not talk to GitHub or Vercel.
+
+**下载配置 JSON** omits new media files. A local draft is not a backup until you export the full package. Import that zip later with **从变更包恢复**.
+
+There is no admin password in this static build. Do not put secrets in `VITE_*` variables. `/admin` can change only the current browser until someone commits the export.
+
+Image fit and focus change CSS `object-fit` and `object-position`. They do not crop the original file.
+
+Google Drive folder links are rejected as file URLs. Drive, YouTube, and Vimeo links are shape-checked only; the admin cannot verify share permissions.
+
+Browser title and description fields update the tab after JavaScript runs. This site does not prerender per-route Open Graph tags.

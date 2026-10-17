@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { usePreviewDraft } from "./PreviewDraftContext";
 import type { SiteConfig } from "../types/siteConfig";
 import { deepMerge } from "../utils/deepMerge";
 import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
@@ -17,11 +18,11 @@ type SiteConfigContextValue = {
   config: SiteConfig | null;
   loading: boolean;
   error: string | null;
-  /** Reload from localStorage override or repo JSON */
+  /** Reload repo JSON. Local draft is applied only while `?draft=1` preview is on. */
   reload: () => Promise<void>;
-  /** Remove browser override and reload from `/cms/site.config.json` */
+  /** Remove browser draft and reload the repo JSON */
   resetToRepoFile: () => Promise<void>;
-  /** Persist full config to localStorage (this browser only) */
+  /** Persist a local draft. This does not publish the public site. */
   saveLocalOverride: (next: SiteConfig) => void;
 };
 
@@ -44,6 +45,7 @@ function readLocalOverride(): SiteConfig | null {
 }
 
 export function SiteConfigProvider({ children }: { children: ReactNode }) {
+  const { previewDraft } = usePreviewDraft();
   const [config, setConfig] = useState<SiteConfig | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -53,7 +55,7 @@ export function SiteConfigProvider({ children }: { children: ReactNode }) {
     setError(null);
     try {
       const repo = await fetchRepoConfig();
-      const local = readLocalOverride();
+      const local = previewDraft ? readLocalOverride() : null;
       setConfig(normalizeSiteConfig(local ? deepMerge(repo, local) : repo));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unknown error");
@@ -61,7 +63,7 @@ export function SiteConfigProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [previewDraft]);
 
   useEffect(() => {
     void reload();

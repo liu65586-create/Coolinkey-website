@@ -7,8 +7,10 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { usePreviewDraft } from "./PreviewDraftContext";
 import type { CmsPayload, CmsProduct } from "../types/cms";
 import { deepMerge } from "../utils/deepMerge";
+import { normalizeProducts } from "../utils/normalizeProducts";
 
 const PRODUCTS_STORAGE_KEY = "coolinkey_products_override";
 
@@ -42,6 +44,7 @@ function readLocalPayload(): CmsPayload | null {
 }
 
 export function CmsProvider({ children }: { children: ReactNode }) {
+  const { previewDraft } = usePreviewDraft();
   const [products, setProducts] = useState<CmsProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -51,16 +54,16 @@ export function CmsProvider({ children }: { children: ReactNode }) {
     setError(null);
     try {
       const repo = await fetchRepoPayload();
-      const local = readLocalPayload();
+      const local = previewDraft ? readLocalPayload() : null;
       const merged = local ? deepMerge(repo, local) : repo;
-      setProducts(merged.products ?? []);
+      setProducts(normalizeProducts(merged.products ?? []));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unknown error");
       setProducts([]);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [previewDraft]);
 
   useEffect(() => {
     void refetch();
@@ -99,10 +102,10 @@ export function CmsProvider({ children }: { children: ReactNode }) {
     [products]
   );
 
-  const defaultProduct = useMemo(
-    () => products.find((p) => p.slug === "smart-chain-lock") ?? products[0],
-    [products]
-  );
+  const defaultProduct = useMemo(() => {
+    const visible = products.filter((product) => product.enabled !== false);
+    return visible.find((product) => product.slug === "smart-chain-lock") ?? visible[0];
+  }, [products]);
 
   const value = useMemo(
     () => ({

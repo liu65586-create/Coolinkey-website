@@ -1,4 +1,5 @@
 ﻿import { BiInput } from "../components/admin/BiInput";
+import { FitFocusFields } from "../components/admin/FitFocusFields";
 import { MediaUploadField } from "../components/admin/MediaUploadField";
 import type { ManualType } from "../types/cms";
 import type { MidModuleBlock, MidSlide, MidSlideMediaKind, SiteConfig } from "../types/siteConfig";
@@ -106,6 +107,15 @@ export function AdminMidModulesSection({
                 <option value="video">video（mp4/webm）</option>
               </select>
             </label>
+            <FitFocusFields
+              fit={s.imageFit === "contain" ? "contain" : "cover"}
+              focus={s.focus || "50% 50%"}
+              onChange={(next) => {
+                const slides = [...m.slides];
+                slides[idx] = { ...s, imageFit: next.fit, focus: next.focus };
+                patchMid(key, { ...m, slides });
+              }}
+            />
             <BiInput
               label="文案（当前幻灯片）"
               value={s.text}

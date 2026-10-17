@@ -7,10 +7,55 @@ export type FeatureIconKey = "water" | "fingerprint" | "chain" | "dual" | "share
 
 export type MidSlideMediaKind = "image" | "video";
 
+export type ImageFit = "contain" | "cover";
+
 export type MidSlide = {
+  id?: string;
   mediaUrl: string;
   mediaKind: MidSlideMediaKind;
   text: Bilingual;
+  imageFit?: ImageFit;
+  focus?: string;
+};
+
+export type HomeSectionId =
+  | "hero"
+  | "features"
+  | "spotlight"
+  | "scenarios"
+  | "app"
+  | "midA"
+  | "midB"
+  | "midD"
+  | "manuals";
+
+export type NavLinkItem = {
+  id: string;
+  label: Bilingual;
+  to: string;
+};
+
+export type ScenarioItem = {
+  id: string;
+  image: string;
+  label: Bilingual;
+};
+
+export type SupportStep = {
+  id: string;
+  title: Bilingual;
+  hint: Bilingual;
+};
+
+export type SupportFaqItem = {
+  id: string;
+  question: Bilingual;
+  answer: Bilingual;
+};
+
+export type SeoFields = {
+  title: Bilingual;
+  description: Bilingual;
 };
 
 export type MidModuleBlock = {
@@ -26,6 +71,17 @@ export type SiteConfig = {
     logoSrc: string;
     logoAlt: string;
     logoMaxHeightPx: number;
+    displayName?: string;
+    faviconSrc?: string;
+  };
+  nav?: {
+    links: NavLinkItem[];
+  };
+  footer?: {
+    tagline: Bilingual;
+    privacy: Bilingual;
+    cookie: Bilingual;
+    icp: Bilingual;
   };
   modules: {
     homeHero: boolean;
@@ -38,12 +94,78 @@ export type SiteConfig = {
     /** Absolute path or full URL; empty = none unless overlayUsesProductImage */
     backgroundImageUrl: string;
     overlayUsesProductImage: boolean;
+    imageFit?: ImageFit;
+    focus?: string;
+    discoverLabel?: Bilingual;
+    watchLabel?: Bilingual;
   };
   features: Array<{
+    id?: string;
     icon: FeatureIconKey;
     title: Bilingual;
     description: Bilingual;
   }>;
+  homeSections?: Array<{ id: HomeSectionId; enabled: boolean }>;
+  spotlight?: {
+    kicker: Bilingual;
+    title: Bilingual;
+    body: Bilingual;
+    specChain: Bilingual;
+    specChainLabel: Bilingual;
+    specIp: Bilingual;
+    specIpLabel: Bilingual;
+    specLen: Bilingual;
+    specLenLabel: Bilingual;
+    learnMore: Bilingual;
+    imageFit?: ImageFit;
+    focus?: string;
+  };
+  scenarios?: {
+    kicker: Bilingual;
+    title: Bilingual;
+    body: Bilingual;
+    viewAll: Bilingual;
+    imageFit?: ImageFit;
+    focus?: string;
+    items: ScenarioItem[];
+  };
+  appBanner?: {
+    kicker: Bilingual;
+    title: Bilingual;
+    body: Bilingual;
+    appStore: Bilingual;
+    googlePlay: Bilingual;
+    image: string;
+    imageFit?: ImageFit;
+    focus?: string;
+  };
+  supportPage?: {
+    kicker: Bilingual;
+    title: Bilingual;
+    subtitle: Bilingual;
+    quickStart: Bilingual;
+    quickStartHint: Bilingual;
+    guides: Bilingual;
+    guidesHint: Bilingual;
+    videos: Bilingual;
+    videosHint: Bilingual;
+    troubleshooting: Bilingual;
+    troubleshootingHint: Bilingual;
+    helpTitle: Bilingual;
+    helpBody: Bilingual;
+    contactCta: Bilingual;
+    steps: SupportStep[];
+    faqs: SupportFaqItem[];
+  };
+  seo?: {
+    home: SeoFields;
+    product: SeoFields;
+    support: SeoFields;
+    about: SeoFields;
+    contact: SeoFields;
+    privacy: SeoFields;
+    cookie: SeoFields;
+  };
   midModules: {
     a: MidModuleBlock;
     b: MidModuleBlock;
@@ -64,6 +186,7 @@ export type SiteConfig = {
   contact: {
     title: Bilingual;
     body: Bilingual;
+    email?: string;
   };
   legal: {
     privacyTitle: Bilingual;

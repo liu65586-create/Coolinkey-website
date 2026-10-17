@@ -1,6 +1,10 @@
 ﻿import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useShoppingRegion, type ShoppingRegionMode } from "../../context/ShoppingRegionContext";
+import { useSiteConfig } from "../../context/SiteConfigContext";
+import { useResolvedMediaUrl } from "../../hooks/useResolvedMediaUrl";
+import type { Lang } from "../../utils/siteCopy";
+import { pickBilingual } from "../../utils/siteCopy";
 
 function WeChatIcon({ label }: { label: string }) {
   return (
@@ -26,31 +30,38 @@ function WeChatIcon({ label }: { label: string }) {
 }
 
 export function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { mode, setMode } = useShoppingRegion();
+  const { config } = useSiteConfig();
+  const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
+  const logoSrc = useResolvedMediaUrl(config?.brand.logoSrc?.trim() || "");
+  const email = config?.contact?.email?.trim() || "support@coolinkey.com";
 
   const onRegionChange = (next: ShoppingRegionMode) => {
     setMode(next);
   };
 
-  const links = [
-    { to: "/", label: t("nav.home") },
-    { to: "/product", label: t("nav.product") },
-    { to: "/support", label: t("nav.support") },
-    { to: "/about", label: t("nav.about") },
-  ];
+  const links = (config?.nav?.links ?? []).map((item) => ({
+    id: item.id,
+    to: item.to,
+    label: pickBilingual(lang, item.label, item.to),
+  }));
 
   return (
     <footer className="border-t border-[var(--color-border)] bg-white">
       <div className="page-wrap flex flex-col gap-8 py-12">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <div className="font-display text-xl font-semibold tracking-tight text-text">coolinkey</div>
-            <p className="mt-1 text-sm text-text-muted">{t("footer.tagline")}</p>
+            {logoSrc ? (
+              <img src={logoSrc} alt={config?.brand.logoAlt || "coolinkey"} style={{ maxHeight: config?.brand.logoMaxHeightPx ?? 30 }} className="w-auto" />
+            ) : (
+              <div className="font-display text-xl font-semibold tracking-tight text-text">{config?.brand.displayName || "coolinkey"}</div>
+            )}
+            <p className="mt-1 text-sm text-text-muted">{pickBilingual(lang, config?.footer?.tagline, t("footer.tagline"))}</p>
           </div>
           <nav className="flex flex-wrap items-center gap-x-7 gap-y-2 text-sm font-medium text-text-muted">
             {links.map((item) => (
-              <Link key={item.to} to={item.to} className="hover:text-accent">
+              <Link key={item.id} to={item.to} className="hover:text-accent">
                 {item.label}
               </Link>
             ))}
@@ -66,19 +77,19 @@ export function Footer() {
           <div className="text-sm text-text-muted">© COOLINKEY</div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
             <Link className="font-medium text-text-muted hover:text-accent" to="/privacy">
-              {t("footer.privacy")}
+              {pickBilingual(lang, config?.footer?.privacy, t("footer.privacy"))}
             </Link>
             <Link className="font-medium text-text-muted hover:text-accent" to="/cookie-policy">
-              {t("footer.cookie")}
+              {pickBilingual(lang, config?.footer?.cookie, t("footer.cookie"))}
             </Link>
-            <a className="font-medium text-text-muted hover:text-accent" href="mailto:support@coolinkey.com">
-              support@coolinkey.com
+            <a className="font-medium text-text-muted hover:text-accent" href={`mailto:${email}`}>
+              {email}
             </a>
           </div>
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-center text-xs text-text-muted sm:text-left">{t("footer.icp")}</div>
+          <div className="text-center text-xs text-text-muted sm:text-left">{pickBilingual(lang, config?.footer?.icp, t("footer.icp"))}</div>
           <div className="flex flex-col gap-2 sm:items-end">
             <div className="text-xs text-text-muted">{t("footer.shoppingRegion")}</div>
             <div className="flex flex-wrap gap-2">

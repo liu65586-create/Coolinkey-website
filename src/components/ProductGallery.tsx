@@ -6,9 +6,11 @@ import { ResolvedImage } from "./ResolvedImage";
 type Props = {
   images: string[];
   productName: string;
+  fit?: "contain" | "cover";
+  focus?: string;
 };
 
-export function ProductGallery({ images, productName }: Props) {
+export function ProductGallery({ images, productName, fit = "contain", focus = "50% 50%" }: Props) {
   const { t } = useTranslation();
   const list = useMemo(() => images.filter(Boolean), [images]);
   const [idx, setIdx] = useState(0);
@@ -29,7 +31,9 @@ export function ProductGallery({ images, productName }: Props) {
         <ResolvedImage
           src={current}
           alt={productName}
-          className="mx-auto max-h-[420px] w-full object-contain p-4"
+          fit={fit}
+          focus={focus}
+          className="mx-auto max-h-[420px] w-full p-4"
         />
       </button>
 

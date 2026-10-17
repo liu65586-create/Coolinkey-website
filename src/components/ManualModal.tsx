@@ -5,6 +5,8 @@ import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import type { CmsManual, ManualType } from "../types/cms";
 import { Button } from "./Button";
+import { MediaPlayer } from "./MediaPlayer";
+import { useResolvedMediaUrl } from "../hooks/useResolvedMediaUrl";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
@@ -28,6 +30,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
         ? (manual.pdfFileZh as string)
         : (manual.pdfFileEn as string)
       : null;
+  const resolvedPdf = useResolvedMediaUrl(pdfUrl);
   const videoUrl =
     manual && manual.type === "video"
       ? lang === "zh"
@@ -49,11 +52,11 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
     const el = containerRef.current;
     el.innerHTML = "";
     setPdfError(null);
-    if (type !== "video" && pdfUrl) {
+    if (type !== "video" && resolvedPdf) {
       let cancelled = false;
       (async () => {
         try {
-          const task = pdfjsLib.getDocument({ url: pdfUrl });
+          const task = pdfjsLib.getDocument({ url: resolvedPdf });
           const pdf = await task.promise;
           for (let i = 1; i <= pdf.numPages; i++) {
             if (cancelled) return;
@@ -78,7 +81,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
       };
     }
     return undefined;
-  }, [open, type, pdfUrl]);
+  }, [open, type, resolvedPdf]);
 
   if (!open || !manual) return null;
 
@@ -115,17 +118,10 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
           {type === "video" && videoUrl ? (
             <div className="space-y-3">
               <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black">
-                <iframe
-                  title={title}
-                  src={videoUrl}
-                  className="absolute inset-0 h-full w-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+                <MediaPlayer url={videoUrl} title={title} className="absolute inset-0 h-full w-full" />
               </div>
-              <p className="text-center text-sm text-slate-600">{t("manualsSection.videoNote")}</p>
             </div>
-          ) : pdfUrl ? (
+          ) : resolvedPdf ? (
             <div>
               {pdfError ? <p className="text-center text-slate-600">{pdfError}</p> : null}
               <div ref={containerRef} className="flex flex-col items-stretch" />
@@ -136,9 +132,9 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
         </div>
 
         <footer className="flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 px-5 py-4">
-          {pdfUrl ? (
+          {resolvedPdf ? (
             <a
-              href={pdfUrl}
+              href={resolvedPdf}
               download
               target="_blank"
               rel="noreferrer"

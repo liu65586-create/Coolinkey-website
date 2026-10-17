@@ -1,59 +1,49 @@
-import { getMediaBlob, saveMediaBlob, suggestUploadPath } from "./mediaStore";
+import {
+  assertSafeMediaFile,
+  invalidateMediaUrl,
+  readImageSize,
+  saveMediaBlob,
+  saveMediaMeta,
+  suggestUploadPath,
+  type MediaMeta,
+} from "./mediaStore";
 
 export type UploadResult = {
   path: string;
-  previewUrl: string;
-  savedToDisk: boolean;
+  savedToDisk: false;
 };
 
-export async function uploadMediaFile(
-  slotId: string,
-  file: File,
-  suggestedPath?: string
-): Promise<UploadResult> {
-  const path = suggestedPath ?? suggestUploadPath(slotId, file);
-
-  let savedToDisk = false;
-  try {
-    const res = await fetch(`/api/upload?path=${encodeURIComponent(path.replace(/^\//, ""))}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/octet-stream" },
-      body: file,
-    });
-    if (res.ok) savedToDisk = true;
-  } catch {
-    /* dev API unavailable */
-  }
-
+export async function importMediaFile(file: File, path = suggestUploadPath(file)): Promise<UploadResult> {
+  await assertSafeMediaFile(file);
+  const measured = await readImageSize(file).catch(() => ({}) as Awaited<ReturnType<typeof readImageSize>>);
   await saveMediaBlob(path, file);
-
-  const previewUrl = savedToDisk ? path : URL.createObjectURL(file);
-  return { path, previewUrl, savedToDisk };
-}
-
-export async function downloadStoredMedia(path: string, filename?: string): Promise<void> {
-  const blob = await getMediaBlob(path);
-  if (!blob) {
-    alert("本地未找到该文件，请重新上传。");
-    return;
-  }
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename ?? path.split("/").pop() ?? "file";
-  a.click();
-  URL.revokeObjectURL(url);
+  const meta: MediaMeta = {
+    path,
+    name: file.name,
+    altEn: "",
+    altZh: "",
+    mime: file.type || "application/octet-stream",
+    size: file.size,
+    width: measured.width,
+    height: measured.height,
+    duration: measured.duration,
+    addedAt: new Date().toISOString(),
+  };
+  await saveMediaMeta(meta);
+  invalidateMediaUrl(path);
+  window.dispatchEvent(new Event("coolinkey-media"));
+  return { path, savedToDisk: false };
 }
 
 export function mediaAccept(kind: "image" | "video" | "pdf" | "any"): string {
   switch (kind) {
     case "image":
-      return "image/*,.gif,.webp";
+      return "image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.png,.jpg,.jpeg,.webp,.gif,.svg";
     case "video":
-      return "video/mp4,video/webm,video/ogg,.mp4,.webm";
+      return "video/mp4,video/webm,.mp4,.webm";
     case "pdf":
       return "application/pdf,.pdf";
     default:
-      return "image/*,video/*,application/pdf,.gif,.webp,.mp4,.pdf";
+      return "image/png,image/jpeg,image/webp,image/gif,image/svg+xml,video/mp4,video/webm,application/pdf,.png,.jpg,.jpeg,.webp,.gif,.svg,.mp4,.webm,.pdf";
   }
 }

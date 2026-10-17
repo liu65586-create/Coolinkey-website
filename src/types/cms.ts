@@ -13,7 +13,14 @@ export type CmsManual = {
 };
 
 export type CmsProduct = {
+  /** Stable identity. Slug can change without breaking this id. */
+  id?: string;
   slug: string;
+  enabled?: boolean;
+  /** CSS object-fit. Does not crop the file. */
+  imageFit?: "contain" | "cover";
+  /** CSS object-position, for example `50% 50%`. */
+  focus?: string;
   name: LocalizedString;
   shortDescription: LocalizedString;
   mainImage: string;

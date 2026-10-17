@@ -1,141 +1,234 @@
-﻿import { useEffect, useMemo, useState } from "react";
+﻿import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { AdminMediaLibrary } from "../admin/AdminMediaLibrary";
 import { AdminMediaPanel } from "../admin/AdminMediaPanel";
 import { AdminMidModulesSection } from "../admin/AdminMidModulesSection";
 import { AdminProductsPanel } from "../admin/AdminProductsPanel";
+import { AdminPublishBar } from "../admin/AdminPublishBar";
+import { AdminSiteExtras } from "../admin/AdminSiteExtras";
 import { BiInput } from "../components/admin/BiInput";
 import { MediaUploadField } from "../components/admin/MediaUploadField";
-import { useSiteConfig } from "../context/SiteConfigContext";
+import type { CmsProduct } from "../types/cms";
 import type { SiteConfig } from "../types/siteConfig";
+import { validateContent } from "../utils/contentRefs";
+import { buildContentZip, downloadBlob, restoreContentZip } from "../utils/exportBundle";
+import { normalizeProducts } from "../utils/normalizeProducts";
 import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
+import { fingerprintContent, readReleaseStatus, writeReleaseStatus } from "../utils/releaseStatus";
 
-const SESSION_KEY = "coolinkey_admin";
-
-function useAdminGate() {
-  const isProd = import.meta.env.PROD;
-  const pin = (import.meta.env.VITE_ADMIN_PIN as string | undefined)?.trim();
-
-  const [unlocked, setUnlocked] = useState(() => {
-    if (isProd && !pin) return false;
-    if (!isProd && !pin) return true;
-    return sessionStorage.getItem(SESSION_KEY) === "1";
-  });
-
-  const blocked = isProd && !pin;
-
-  const tryUnlock = (input: string) => {
-    if (blocked) return;
-    if (!pin) {
-      setUnlocked(true);
-      sessionStorage.setItem(SESSION_KEY, "1");
-      return;
-    }
-    if (input.trim() === pin) {
-      sessionStorage.setItem(SESSION_KEY, "1");
-      setUnlocked(true);
-    }
-  };
-
-  const logout = () => {
-    sessionStorage.removeItem(SESSION_KEY);
-    if (!isProd && !pin) setUnlocked(true);
-    else setUnlocked(false);
-  };
-
-  return { unlocked, blocked, tryUnlock, logout };
-}
+const SITE_KEY = "coolinkey_site_config_full";
+const PRODUCTS_KEY = "coolinkey_products_override";
 
 export function Admin() {
-  const { config, loading, error, saveLocalOverride, resetToRepoFile, reload } = useSiteConfig();
   const [draft, setDraft] = useState<SiteConfig | null>(null);
-  const [pinInput, setPinInput] = useState("");
+  const [products, setProducts] = useState<CmsProduct[]>([]);
+  const [productsEpoch, setProductsEpoch] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
   const [mainTab, setMainTab] = useState<"site" | "products" | "media">("site");
   const [tab, setTab] = useState<"content" | "json">("content");
   const [rawJson, setRawJson] = useState("");
-  const gate = useAdminGate();
+  const [hash, setHash] = useState("");
+  const [release, setRelease] = useState(readReleaseStatus);
+  const [hasLocalDraft, setHasLocalDraft] = useState(false);
+
+  const persistDraft = useCallback((site: SiteConfig, nextProducts: CmsProduct[]) => {
+    const normalizedSite = normalizeSiteConfig(site);
+    const normalizedProducts = normalizeProducts(nextProducts);
+    localStorage.setItem(SITE_KEY, JSON.stringify(normalizedSite));
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify({ products: normalizedProducts }));
+    window.dispatchEvent(new Event("coolinkey-site-config"));
+    window.dispatchEvent(new Event("coolinkey-products-config"));
+    setHasLocalDraft(true);
+    return { normalizedSite, normalizedProducts };
+  }, []);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const [siteRes, productRes] = await Promise.all([
+        fetch("/cms/site.config.json", { cache: "no-store" }),
+        fetch("/cms/products.json", { cache: "no-store" }),
+      ]);
+      if (!siteRes.ok || !productRes.ok) throw new Error("无法读取仓库里的配置文件");
+      const repoSite = (await siteRes.json()) as SiteConfig;
+      const repoProducts = (await productRes.json()) as { products: CmsProduct[] };
+      const localSiteRaw = localStorage.getItem(SITE_KEY);
+      const localProductsRaw = localStorage.getItem(PRODUCTS_KEY);
+      const site = normalizeSiteConfig(localSiteRaw ? (JSON.parse(localSiteRaw) as SiteConfig) : repoSite);
+      const productPayload = localProductsRaw
+        ? (JSON.parse(localProductsRaw) as { products: CmsProduct[] })
+        : repoProducts;
+      const nextProducts = normalizeProducts(productPayload.products ?? []);
+      setDraft(site);
+      setRawJson(JSON.stringify(site, null, 2));
+      setProducts(nextProducts);
+      setProductsEpoch((value) => value + 1);
+      setHasLocalDraft(Boolean(localSiteRaw || localProductsRaw));
+      setHash(await fingerprintContent(site, nextProducts));
+      setRelease(readReleaseStatus());
+    } catch (loadError) {
+      setError(loadError instanceof Error ? loadError.message : "加载失败");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    if (config) {
-      const c = normalizeSiteConfig(structuredClone(config));
-      setDraft(c);
-      setRawJson(JSON.stringify(c, null, 2));
-    }
-  }, [config]);
+    void load();
+  }, [load]);
 
-  const canEdit = gate.unlocked && !gate.blocked;
+  useEffect(() => {
+    const onLeave = (event: BeforeUnloadEvent) => {
+      if (!draft) return;
+      const saved = localStorage.getItem(SITE_KEY);
+      const current = JSON.stringify(normalizeSiteConfig(draft));
+      if (saved !== current) {
+        event.preventDefault();
+      }
+    };
+    window.addEventListener("beforeunload", onLeave);
+    return () => window.removeEventListener("beforeunload", onLeave);
+  }, [draft]);
 
-  const onExport = () => {
+  useEffect(() => {
     if (!draft) return;
-    const blob = new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "site.config.json";
-    a.click();
-    URL.revokeObjectURL(url);
+    const timer = window.setTimeout(() => {
+      void fingerprintContent(draft, products).then(setHash);
+    }, 250);
+    const onMedia = () => {
+      void fingerprintContent(draft, products).then(setHash);
+    };
+    window.addEventListener("coolinkey-media", onMedia);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("coolinkey-media", onMedia);
+    };
+  }, [draft, products]);
+
+  const status = useMemo(() => {
+    if (!hash) return { label: "正在计算", detail: "正在比较草稿和上次导出。", canCommit: false, canDeploy: false };
+    if (release.exportHash !== hash) {
+      return {
+        label: hasLocalDraft ? "有未导出修改" : "与仓库文件一致，尚未导出",
+        detail: "本地草稿不会出现在普通访问里。要给访客看，请导出完整变更包，放回仓库并重新部署。",
+        canCommit: false,
+        canDeploy: false,
+      };
+    }
+    if (release.deployedAt) {
+      return {
+        label: "已手动确认部署",
+        detail: `你在 ${release.deployedAt} 确认线上已更新。如果之后又改了内容，这个状态会取消。`,
+        canCommit: true,
+        canDeploy: true,
+      };
+    }
+    if (release.committedAt) {
+      return {
+        label: "已手动确认提交",
+        detail: `你在 ${release.committedAt} 确认已经提交 Git。后台没有检查 GitHub。`,
+        canCommit: true,
+        canDeploy: true,
+      };
+    }
+    return {
+      label: "已导出，待提交",
+      detail: release.exportedAt ? `完整变更包导出于 ${release.exportedAt}。请按包内说明提交并部署。` : "已导出。",
+      canCommit: true,
+      canDeploy: false,
+    };
+  }, [hash, hasLocalDraft, release]);
+
+  const requireDraft = () => {
+    if (!draft) throw new Error("配置还没加载完");
+    const site = normalizeSiteConfig(draft);
+    const nextProducts = normalizeProducts(products);
+    const problems = validateContent(site, nextProducts);
+    if (problems.length) throw new Error(problems.join("\n"));
+    return { site, nextProducts };
   };
 
-  const onImportFile = async (file: File | null) => {
+  const onSaveDraft = () => {
+    if (!draft) return;
+    try {
+      const { site, nextProducts } = requireDraft();
+      persistDraft(site, nextProducts);
+      setDraft(site);
+      setProducts(nextProducts);
+      setNotice("已保存到本机草稿。线上官网没有变化。");
+      setError(null);
+    } catch (saveError) {
+      setError(saveError instanceof Error ? saveError.message : "保存失败");
+    }
+  };
+
+  const onExport = async (mode: "json" | "full") => {
+    setBusy(true);
+    setError(null);
+    try {
+      const { site, nextProducts } = requireDraft();
+      persistDraft(site, nextProducts);
+      setDraft(site);
+      setProducts(nextProducts);
+      const blob = await buildContentZip({ site, products: nextProducts, mode });
+      downloadBlob(blob, mode === "full" ? "coolinkey-content-bundle.zip" : "coolinkey-config-json.zip");
+      if (mode === "full") {
+        const exportHash = await fingerprintContent(site, nextProducts);
+        const next = { exportHash, exportedAt: new Date().toISOString(), committedAt: null, deployedAt: null };
+        writeReleaseStatus(next);
+        setRelease(next);
+        setHash(exportHash);
+        setNotice("已下载完整变更包。这还不是已发布。");
+      } else {
+        setNotice("已下载配置 JSON。这个包不含新媒体文件。");
+      }
+    } catch (exportError) {
+      setError(exportError instanceof Error ? exportError.message : "导出失败");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const onImportZip = async (file: File | null) => {
     if (!file) return;
-    const text = await file.text();
-    const parsed = normalizeSiteConfig(JSON.parse(text) as SiteConfig);
-    setDraft(parsed);
-    setRawJson(JSON.stringify(parsed, null, 2));
+    setBusy(true);
+    setError(null);
+    try {
+      const restored = await restoreContentZip(file);
+      persistDraft(restored.site, restored.products);
+      setDraft(restored.site);
+      setProducts(restored.products);
+      setProductsEpoch((value) => value + 1);
+      setRawJson(JSON.stringify(restored.site, null, 2));
+      const next = { exportHash: null, exportedAt: null, committedAt: null, deployedAt: null };
+      writeReleaseStatus(next);
+      setRelease(next);
+      setNotice("已从变更包恢复到本机草稿。请再导出一次，确认包和当前内容一致。");
+    } catch (importError) {
+      setError(importError instanceof Error ? importError.message : "恢复失败");
+    } finally {
+      setBusy(false);
+    }
   };
 
-  const dirty = useMemo(() => {
-    if (!draft || !config) return false;
-    return JSON.stringify(draft) !== JSON.stringify(config);
-  }, [draft, config]);
+  const mark = (kind: "committed" | "deployed") => {
+    if (release.exportHash !== hash) return;
+    const next = {
+      ...release,
+      committedAt: kind === "committed" || kind === "deployed" ? new Date().toISOString() : release.committedAt,
+      deployedAt: kind === "deployed" ? new Date().toISOString() : release.deployedAt,
+    };
+    if (kind === "committed") next.deployedAt = null;
+    writeReleaseStatus(next);
+    setRelease(next);
+    setNotice(kind === "committed" ? "已记下：你确认提交过 Git。后台没有核对远程仓库。" : "已记下：你确认线上已经更新。后台没有核对 Vercel。");
+  };
 
-  if (gate.blocked) {
-    return (
-      <div className="min-h-dvh bg-[#1e2028] px-4 py-16 text-white">
-        <h1 className="text-2xl font-bold">Admin disabled</h1>
-        <p className="mt-4 max-w-2xl text-[#cccccc]">
-          Production deployments must set <code className="text-[#00e676]">VITE_ADMIN_PIN</code> in Vercel
-          environment variables, then redeploy. This prevents a public admin surface without a secret.
-        </p>
-        <Link className="mt-8 inline-block text-[#00e676] hover:underline" to="/">
-          Back to site
-        </Link>
-      </div>
-    );
-  }
-
-  if (!canEdit) {
-    return (
-      <div className="min-h-dvh bg-[#1e2028] px-4 py-16 text-white">
-        <h1 className="text-2xl font-bold">COOLINKEY Admin</h1>
-        {!import.meta.env.PROD && !import.meta.env.VITE_ADMIN_PIN ? (
-          <p className="mt-3 max-w-2xl text-sm text-amber-200">
-            Dev mode: no <code>VITE_ADMIN_PIN</code> set — admin is open. Add a PIN before production.
-          </p>
-        ) : null}
-        <div className="mt-8 max-w-md space-y-3">
-          <input
-            type="password"
-            className="w-full rounded-lg border border-[rgba(255,255,255,0.12)] bg-black px-3 py-2 text-white outline-none focus:border-[#00e676]"
-            placeholder="PIN"
-            value={pinInput}
-            onChange={(e) => setPinInput(e.target.value)}
-          />
-          <button
-            type="button"
-            className="rounded-lg bg-[#00e676] px-4 py-2 font-semibold text-white hover:bg-[#00c853]"
-            onClick={() => gate.tryUnlock(pinInput)}
-          >
-            Unlock
-          </button>
-        </div>
-        <Link className="mt-10 inline-block text-[#00e676] hover:underline" to="/">
-          Back to site
-        </Link>
-      </div>
-    );
-  }
-
-  if (mainTab === "site" && (loading || !draft)) {
+  if (loading || !draft) {
     return (
       <div className="min-h-dvh bg-[#1e2028] px-4 py-16 text-white">
         <p className="text-[#cccccc]">{error ?? "Loading…"}</p>
@@ -148,27 +241,41 @@ export function Admin() {
       <header className="border-b border-[rgba(255,255,255,0.1)] px-4 py-4 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <div className="text-xs font-semibold text-[#00e676]">COOLINKEY</div>
-            <div className="text-lg font-bold">
-              {mainTab === "site" ? "Site configuration" : mainTab === "products" ? "Products & manuals" : "Media library"}
-            </div>
+            <div className="text-xs font-semibold text-[#00b51a]">COOLINKEY</div>
+            <div className="text-lg font-bold">静态内容编辑</div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <Link className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00e676]" to="/">
-              View site
-            </Link>
-            <button
-              type="button"
-              className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00e676]"
-              onClick={() => gate.logout()}
-            >
-              Lock
-            </button>
-          </div>
+          <Link className="rounded-lg border border-[rgba(255,255,255,0.15)] px-3 py-2 text-sm hover:border-[#00b51a]" to="/">
+            查看线上内容
+          </Link>
         </div>
       </header>
 
       <div className="mx-auto max-w-5xl space-y-6 px-4 py-6 sm:px-6">
+        <AdminPublishBar
+          statusLabel={status.label}
+          detail={notice ? `${status.detail} ${notice}` : status.detail}
+          error={error}
+          busy={busy}
+          canCommit={status.canCommit}
+          canDeploy={status.canDeploy}
+          onSaveDraft={onSaveDraft}
+          onPreview={() => {
+            onSaveDraft();
+            window.open("/?draft=1", "_blank", "noopener");
+          }}
+          onExportJson={() => void onExport("json")}
+          onExportFull={() => void onExport("full")}
+          onImportZip={(file) => void onImportZip(file)}
+          onMarkCommitted={() => mark("committed")}
+          onMarkDeployed={() => mark("deployed")}
+          onClearDraft={() => {
+            if (!confirm("清除本机草稿？未导出的修改会丢失。")) return;
+            localStorage.removeItem(SITE_KEY);
+            localStorage.removeItem(PRODUCTS_KEY);
+            writeReleaseStatus({ exportHash: null, exportedAt: null, committedAt: null, deployedAt: null });
+            void load();
+          }}
+        />
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
@@ -194,27 +301,19 @@ export function Admin() {
         </div>
 
         {mainTab === "products" ? (
-          <AdminProductsPanel />
+          <AdminProductsPanel key={productsEpoch} products={products} onChange={setProducts} />
         ) : null}
 
         {mainTab === "media" ? (
-          <AdminMediaPanel />
+          <div className="space-y-8">
+            <AdminMediaLibrary site={draft} products={products} />
+            <AdminMediaPanel site={draft} products={products} onSite={setDraft} onProducts={setProducts} />
+          </div>
         ) : null}
 
         {mainTab === "site" && draft ? (
           <>
-        <div className="rounded-xl border border-[rgba(255,255,255,0.12)] bg-[#252a33] p-4 text-sm text-[#cccccc]">
-          <p>
-            <strong className="text-white">How publishing works:</strong> “Save in this browser” stores overrides in{" "}
-            <code className="text-[#00e676]">localStorage</code> for preview. To update the public site for everyone,
-            click <strong className="text-white">Export JSON</strong>, replace{" "}
-            <code className="text-[#00e676]">public/cms/site.config.json</code> in the repo, then push to GitHub (Vercel
-            redeploys). Product catalog is edited in the <strong className="text-white">产品与说明书</strong> tab and
-            saved to <code className="text-[#00e676]">public/cms/products.json</code>. Manual PDFs may be full{" "}
-            <code className="text-[#00e676]">https://…</code> links (e.g. OSS/CDN); or use paths under{" "}
-            <code className="text-[#00e676]">public/manuals/</code> if you host files in the repo.
-          </p>
-        </div>
+        <AdminSiteExtras draft={draft} setDraft={setDraft} />
 
         <div className="flex flex-wrap gap-2">
           <button
@@ -463,35 +562,6 @@ export function Admin() {
           </div>
         )}
 
-        <div className="flex flex-wrap gap-2 border-t border-[rgba(255,255,255,0.1)] pt-6">
-          <button
-            type="button"
-            className="rounded-lg bg-[#00e676] px-4 py-2 font-semibold text-white hover:bg-[#00c853] disabled:opacity-50"
-            disabled={!dirty}
-            onClick={() => saveLocalOverride(normalizeSiteConfig(draft))}
-          >
-            Save in this browser
-          </button>
-          <button type="button" className="rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm" onClick={onExport}>
-            Export JSON
-          </button>
-          <label className="cursor-pointer rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm hover:border-[#00e676]">
-            Import JSON
-            <input
-              type="file"
-              accept="application/json"
-              className="hidden"
-              onChange={(e) => void onImportFile(e.target.files?.[0] ?? null)}
-            />
-          </label>
-          <button
-            type="button"
-            className="rounded-lg border border-[rgba(255,255,255,0.15)] px-4 py-2 text-sm"
-            onClick={() => void resetToRepoFile().then(() => void reload())}
-          >
-            Reset to repo file (clear browser override)
-          </button>
-        </div>
           </>
         ) : null}
       </div>

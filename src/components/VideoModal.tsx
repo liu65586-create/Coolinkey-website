@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
+import { MediaPlayer } from "./MediaPlayer";
 
 type Props = {
   open: boolean;
@@ -36,13 +37,7 @@ export function VideoModal({ open, onClose, src }: Props) {
           {t("manualsSection.close")}
         </button>
         <div className="aspect-video w-full">
-          <iframe
-            title="coolinkey video"
-            src={src}
-            className="h-full w-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <MediaPlayer url={src} title="coolinkey video" className="h-full w-full" />
         </div>
       </div>
     </div>,

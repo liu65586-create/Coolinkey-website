@@ -4,6 +4,9 @@ import { NavLink } from "react-router-dom";
 import { useSiteConfig } from "../../context/SiteConfigContext";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { IconClose, IconMenu } from "../icons/Icon";
+import type { Lang } from "../../utils/siteCopy";
+import { pickBilingual } from "../../utils/siteCopy";
+import { useResolvedMediaUrl } from "../../hooks/useResolvedMediaUrl";
 
 const navCls = ({ isActive }: { isActive: boolean }) =>
   [
@@ -15,20 +18,30 @@ const navCls = ({ isActive }: { isActive: boolean }) =>
   ].join(" ");
 
 export function Navbar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { config } = useSiteConfig();
   const [open, setOpen] = useState(false);
+  const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
 
-  const logoSrc = config?.brand.logoSrc?.trim();
+  const logoSrc = useResolvedMediaUrl(config?.brand.logoSrc?.trim() || "");
   const logoAlt = config?.brand.logoAlt ?? "COOLINKEY";
   const logoH = config?.brand.logoMaxHeightPx ?? 30;
+  const brandName = config?.brand.displayName?.trim() || "coolinkey";
 
-  const links = [
-    { to: "/", label: t("nav.home"), end: true },
-    { to: "/product", label: t("nav.product"), end: false },
-    { to: "/support", label: t("nav.support"), end: false },
-    { to: "/about", label: t("nav.about"), end: false },
-  ];
+  const links = (config?.nav?.links?.length
+    ? config.nav.links
+    : [
+        { id: "home", to: "/", label: { en: t("nav.home"), zh: t("nav.home") } },
+        { id: "product", to: "/product", label: { en: t("nav.product"), zh: t("nav.product") } },
+        { id: "support", to: "/support", label: { en: t("nav.support"), zh: t("nav.support") } },
+        { id: "about", to: "/about", label: { en: t("nav.about"), zh: t("nav.about") } },
+      ]
+  ).map((item) => ({
+    id: item.id,
+    to: item.to,
+    label: pickBilingual(lang, item.label, t("nav.home")),
+    end: item.to === "/",
+  }));
 
   return (
     <header className="sticky top-0 z-[100] h-[80px] border-b border-[var(--color-border)] bg-white">
@@ -48,14 +61,14 @@ export function Navbar() {
             />
           ) : (
             <span className="font-display text-[22px] font-semibold tracking-tight sm:text-[24px]">
-              coolinkey
+              {brandName}
             </span>
           )}
         </NavLink>
 
         <nav className="hidden items-center gap-9 md:flex">
           {links.map((item) => (
-            <NavLink key={item.to} to={item.to} className={navCls} end={item.end}>
+            <NavLink key={item.id} to={item.to} className={navCls} end={item.end}>
               {item.label}
             </NavLink>
           ))}
@@ -82,7 +95,7 @@ export function Navbar() {
           <div className="page-wrap flex flex-col gap-1 py-4">
             {links.map((item) => (
               <NavLink
-                key={item.to}
+                key={item.id}
                 to={item.to}
                 end={item.end}
                 className="rounded-lg px-2 py-2 text-[15px] font-medium text-text-muted hover:bg-black/[0.03] hover:text-accent"

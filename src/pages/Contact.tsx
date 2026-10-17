@@ -16,8 +16,8 @@ export function Contact() {
       <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-text">{title}</h1>
       <p className="mt-6 text-[16px] leading-relaxed text-text-muted">{body}</p>
       <div className="mt-8">
-        <Button variant="primary" href="mailto:support@coolinkey.com">
-          {t("supportPage.contactCta")}
+        <Button variant="primary" href={`mailto:${config?.contact?.email?.trim() || "support@coolinkey.com"}`}>
+          {pickBilingual(lang, config?.supportPage?.contactCta, t("supportPage.contactCta"))}
         </Button>
       </div>
     </div>
