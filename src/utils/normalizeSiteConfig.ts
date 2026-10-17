@@ -14,6 +14,15 @@ function fit(value: string | undefined, fallback: ImageFit): ImageFit {
   return value === "cover" || value === "contain" ? value : fallback;
 }
 
+function navTarget(to: string | undefined, fallback: string): string {
+  const value = (to || fallback).trim();
+  if (value === "/product" || value.startsWith("/product/") || value === "#clx1") return "/#clx1";
+  if (value === "/support" || value === "#support") return "/#support";
+  if (value === "/about" || value === "#about") return "/#about";
+  if (value === "#home") return "/";
+  return value || "/";
+}
+
 function focus(value: string | undefined): string {
   const allowed = new Set(["50% 50%", "50% 0%", "50% 100%", "0% 50%", "100% 50%"]);
   return value && allowed.has(value) ? value : "50% 50%";
@@ -78,7 +87,7 @@ export function normalizeSiteConfig(cfg: SiteConfig): SiteConfig {
       links: (cfg.nav?.links?.length ? cfg.nav.links : copyDefaults.nav).map((link, index) => ({
         id: link.id?.trim() || `nav-${index + 1}`,
         label: keepBi(link.label, copyDefaults.nav[index]?.label ?? { en: "", zh: "" }),
-        to: link.to || copyDefaults.nav[index]?.to || "/",
+        to: navTarget(link.to, copyDefaults.nav[index]?.to || "/"),
       })),
     },
     footer: {

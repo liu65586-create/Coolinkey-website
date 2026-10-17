@@ -1,13 +1,13 @@
 ﻿import { useEffect, useState, type MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSiteConfig } from "../../context/SiteConfigContext";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { IconClose, IconMenu } from "../icons/Icon";
 import type { Lang } from "../../utils/siteCopy";
 import { pickBilingual } from "../../utils/siteCopy";
 import { useResolvedMediaUrl } from "../../hooks/useResolvedMediaUrl";
-import { scrollToSection, sectionIdFromPath, SITE_SECTION_IDS, type SiteSectionId } from "../../utils/siteSections";
+import { scrollToSection, sectionHash, sectionIdFromPath, SITE_SECTION_IDS, type SiteSectionId } from "../../utils/siteSections";
 
 const navCls = (isActive: boolean) =>
   [
@@ -20,7 +20,8 @@ const navCls = (isActive: boolean) =>
 
 export function Navbar() {
   const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+  const navigate = useNavigate();
   const { config } = useSiteConfig();
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<SiteSectionId | "">("home");
@@ -35,9 +36,9 @@ export function Navbar() {
     ? config.nav.links
     : [
         { id: "home", to: "/", label: { en: t("nav.home"), zh: t("nav.home") } },
-        { id: "product", to: "/product", label: { en: t("nav.product"), zh: t("nav.product") } },
-        { id: "support", to: "/support", label: { en: t("nav.support"), zh: t("nav.support") } },
-        { id: "about", to: "/about", label: { en: t("nav.about"), zh: t("nav.about") } },
+        { id: "product", to: "/#clx1", label: { en: t("nav.product"), zh: t("nav.product") } },
+        { id: "support", to: "/#support", label: { en: t("nav.support"), zh: t("nav.support") } },
+        { id: "about", to: "/#about", label: { en: t("nav.about"), zh: t("nav.about") } },
       ]
   ).map((item) => ({
     id: item.id,
@@ -46,7 +47,7 @@ export function Navbar() {
   }));
 
   useEffect(() => {
-    const onSite = sectionIdFromPath(pathname) !== null;
+    const onSite = pathname === "/";
     if (!onSite) {
       setActiveSection("");
       return;
@@ -95,9 +96,14 @@ export function Navbar() {
   const onNavigate = (event: MouseEvent<HTMLAnchorElement>, to: string) => {
     setOpen(false);
     const id = sectionIdFromPath(to);
-    if (!id || sectionIdFromPath(pathname) !== id) return;
+    if (!id) return;
     event.preventDefault();
-    scrollToSection(id);
+    const nextHash = sectionHash(id);
+    if (pathname === "/" && hash === nextHash) {
+      scrollToSection(id);
+      return;
+    }
+    navigate({ pathname: "/", hash: nextHash }, { replace: pathname === "/" });
   };
 
   return (

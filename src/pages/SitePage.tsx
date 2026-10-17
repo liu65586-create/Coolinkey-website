@@ -7,12 +7,11 @@ import { Support } from "./Support";
 import { scrollToSection, sectionIdFromPath } from "../utils/siteSections";
 
 export function SitePage() {
-  const { pathname } = useLocation();
+  const { hash } = useLocation();
   const instant = useRef(true);
 
   useEffect(() => {
-    const id = sectionIdFromPath(pathname);
-    if (!id) return;
+    const id = sectionIdFromPath(hash || "/") ?? "home";
     const behavior: ScrollBehavior = instant.current ? "auto" : "smooth";
     instant.current = false;
     scrollToSection(id, behavior);
@@ -33,7 +32,7 @@ export function SitePage() {
       observer.disconnect();
       window.clearTimeout(timer);
     };
-  }, [pathname]);
+  }, [hash]);
 
   return (
     <main className="home-page">

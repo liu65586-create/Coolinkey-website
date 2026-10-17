@@ -30,12 +30,7 @@ export default function App() {
                 <Routes>
                   <Route path="/admin" element={<Admin />} />
                   <Route element={<Layout />}>
-                    <Route element={<SitePage />}>
-                      <Route index element={null} />
-                      <Route path="product/:slug?" element={null} />
-                      <Route path="support" element={null} />
-                      <Route path="about" element={null} />
-                    </Route>
+                    <Route index element={<SitePage />} />
                     <Route path="contact" element={<Contact />} />
                     <Route path="privacy" element={<Privacy />} />
                     <Route path="cookie-policy" element={<CookiePolicy />} />

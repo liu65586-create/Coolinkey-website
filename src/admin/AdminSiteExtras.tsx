@@ -33,7 +33,7 @@ export function AdminSiteExtras({ draft, setDraft, products = [], setProducts }:
     <div className="space-y-10">
       <section className="space-y-4 rounded-xl border border-white/12 bg-[#252a33] p-5">
         <h2 className="text-lg font-semibold">导航</h2>
-        <p className="text-sm text-[#cccccc]">可以改中英文名称。路径只能选现有页面，避免把导航指到不存在的地址。</p>
+        <p className="text-sm text-[#cccccc]">可以改中英文名称。首页、CLX1、支持和关于停在同一页的对应位置，其余项仍是独立页面。</p>
         {(draft.nav?.links ?? []).map((link, index) => (
           <div key={link.id} className="space-y-3 border-t border-white/10 pt-4">
             <BiInput

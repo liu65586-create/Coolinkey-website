@@ -1,6 +1,5 @@
-﻿import { useEffect, useMemo } from "react";
+﻿import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../components/Button";
 import { ManualsGrid } from "../components/ManualsGrid";
 import { ProductDropdown } from "../components/ProductDropdown";
@@ -15,8 +14,7 @@ import { openPurchase } from "../utils/purchaseLinks";
 
 export function Product() {
   const { i18n, t } = useTranslation();
-  const { slug } = useParams();
-  const navigate = useNavigate();
+  const [slug, setSlug] = useState<string | undefined>();
   const { products, loading, getBySlug, defaultProduct } = useCms();
   const { config } = useSiteConfig();
   const { useChinaStores } = useShoppingRegion();
@@ -32,14 +30,6 @@ export function Product() {
     return found ?? defaultProduct;
   }, [slug, getBySlug, defaultProduct]);
 
-  useEffect(() => {
-    if (loading || !defaultProduct) return;
-    const found = slug ? getBySlug(slug) : undefined;
-    if (slug && (!found || found.enabled === false) && slug !== defaultProduct.slug) {
-      navigate(`/product/${defaultProduct.slug}`, { replace: true });
-    }
-  }, [loading, slug, getBySlug, defaultProduct, navigate]);
-
   const name = active ? (lang === "zh" ? active.name.zh : active.name.en) : "";
   const desc = active ? (lang === "zh" ? active.shortDescription.zh : active.shortDescription.en) : "";
   const gallery = active ? [active.mainImage, ...active.galleryImages].filter(Boolean) : [];
@@ -54,7 +44,7 @@ export function Product() {
           products={visibleProducts}
           valueSlug={active?.slug ?? ""}
           disabled={loading}
-          onChangeSlug={(next) => navigate(`/product/${next}`)}
+          onChangeSlug={setSlug}
         />
       </div>
 

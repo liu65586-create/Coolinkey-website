@@ -9,9 +9,6 @@ type SeoKey = "home" | "product" | "support" | "about" | "contact" | "privacy" |
 
 function pageKey(pathname: string): SeoKey | null {
   if (pathname === "/") return "home";
-  if (pathname.startsWith("/product")) return "product";
-  if (pathname.startsWith("/support")) return "support";
-  if (pathname.startsWith("/about")) return "about";
   if (pathname.startsWith("/contact")) return "contact";
   if (pathname.startsWith("/privacy")) return "privacy";
   if (pathname.startsWith("/cookie-policy")) return "cookie";

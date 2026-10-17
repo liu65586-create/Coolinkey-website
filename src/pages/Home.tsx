@@ -9,6 +9,7 @@ import { useSiteConfig } from "../context/SiteConfigContext";
 import { useResolvedMediaUrl } from "../hooks/useResolvedMediaUrl";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
+import { scrollToSection, sectionIdFromPath } from "../utils/siteSections";
 
 const defaultScenarios = [
   { id: "everyday", image: "/images/listing/bike-locking-closeup.jpg", label: { en: "Everyday cycling", zh: "日常骑行" } },
@@ -59,11 +60,11 @@ export function Home() {
             <h1>{heroTitle}</h1>
             <p className="hero-subtitle">{heroSubtitle}</p>
             <div className="hero-actions">
-              <Link className="button button-primary" to="/product">
+              <Link className="button button-primary" to="/#clx1">
                 {pickBilingual(lang, config.hero.discoverLabel, { en: "Discover CLX1", zh: "了解 CLX1" })}
                 <ArrowRight size={17} />
               </Link>
-              <button className="button button-quiet" type="button" onClick={() => videoSrc ? setVideoOpen(true) : window.location.assign("/support")}>
+              <button className="button button-quiet" type="button" onClick={() => videoSrc ? setVideoOpen(true) : scrollToSection("support")}>
                 <span className="play-ring"><CirclePlay size={17} /></span>
                 {pickBilingual(lang, config.hero.watchLabel, { en: "See how it works", zh: "观看产品演示" })}
               </button>
@@ -121,7 +122,7 @@ export function Home() {
               <div><strong>{pickBilingual(lang, spotlight?.specIp, { en: "IP67", zh: "IP67" })}</strong><span>{pickBilingual(lang, spotlight?.specIpLabel, { en: "Dust & water protection", zh: "防尘防水等级" })}</span></div>
               <div><strong>{pickBilingual(lang, spotlight?.specLen, { en: "100 cm", zh: "100 cm" })}</strong><span>{pickBilingual(lang, spotlight?.specLenLabel, { en: "Chain perimeter", zh: "链条周长" })}</span></div>
             </div>
-            <Link className="text-link" to="/product">{pickBilingual(lang, spotlight?.learnMore, { en: "Explore the lock", zh: "探索产品详情" })}<ArrowRight size={17} /></Link>
+            <Link className="text-link" to="/#clx1">{pickBilingual(lang, spotlight?.learnMore, { en: "Explore the lock", zh: "探索产品详情" })}<ArrowRight size={17} /></Link>
           </div>
         </div>
       </section>
@@ -180,7 +181,7 @@ export function Home() {
               </article>
             ))}
           </div>
-          <div className="scenario-bottom"><span>{pickBilingual(lang, design?.scenarioFooter, { en: "Designed for bicycles, e-bikes and everyday securing needs", zh: "为自行车、电助力自行车及日常固定物品设计" })}</span><Link to="/product">{pickBilingual(lang, config.scenarios?.viewAll, { en: "View product details", zh: "查看产品详情" })} <ArrowRight size={15} /></Link></div>
+          <div className="scenario-bottom"><span>{pickBilingual(lang, design?.scenarioFooter, { en: "Designed for bicycles, e-bikes and everyday securing needs", zh: "为自行车、电助力自行车及日常固定物品设计" })}</span><Link to="/#clx1">{pickBilingual(lang, config.scenarios?.viewAll, { en: "View product details", zh: "查看产品详情" })} <ArrowRight size={15} /></Link></div>
         </div>
       </section>
 
@@ -192,7 +193,7 @@ export function Home() {
             <h2>{pickBilingual(lang, appBanner?.title, { en: "Your lock. Your access.", zh: "你的锁，由你掌控。" })}</h2>
             <p>{pickBilingual(lang, appBanner?.body, { en: "Pair with the app to manage access and make everyday locking feel simpler.", zh: "连接 App 管理访问权限，让日常上锁与解锁更简单。" })}</p>
             <div className="app-points"><div><Smartphone size={18} /><span>{pickBilingual(lang, design?.appPointOne, { en: "App management", zh: "手机管理" })}</span></div><div><KeyRound size={18} /><span>{pickBilingual(lang, design?.appPointTwo, { en: "Convenient access sharing", zh: "便捷授权" })}</span></div></div>
-            <Link className="button button-dark" to="/support">{pickBilingual(lang, config.nav?.links?.find((link) => link.to === "/support")?.label, { en: "Explore support", zh: "查看支持与指南" })}<ArrowRight size={16} /></Link>
+            <Link className="button button-dark" to="/#support">{pickBilingual(lang, config.nav?.links?.find((link) => sectionIdFromPath(link.to) === "support")?.label, { en: "Explore support", zh: "查看支持与指南" })}<ArrowRight size={16} /></Link>
           </div>
         </div>
       </section>
