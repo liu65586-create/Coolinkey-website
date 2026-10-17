@@ -95,12 +95,11 @@ export function buildMediaSlots(
     });
 
     p.manuals.forEach((m, mi) => {
-      if (m.type === "video") return;
       slots.push({
         id: `product-${pi}-manual-${mi}-en`,
-        group: `产品 · ${p.slug} · 说明书`,
+        group: `产品 · ${p.slug} · 文档与视频`,
         label: `${m.id} · PDF · EN`,
-        spec: "PDF；可外链 https 或 /manuals/en/…",
+        spec: "PDF；可上传文件或粘贴可公开访问的 Google Drive / HTTPS 链接",
         kind: "pdf",
         getValue: () => m.pdfFileEn ?? "",
         setValue: (v) => {
@@ -113,15 +112,45 @@ export function buildMediaSlots(
       });
       slots.push({
         id: `product-${pi}-manual-${mi}-zh`,
-        group: `产品 · ${p.slug} · 说明书`,
+        group: `产品 · ${p.slug} · 文档与视频`,
         label: `${m.id} · PDF · 中文`,
-        spec: "PDF；可外链 https 或 /manuals/zh/…",
+        spec: "PDF；可上传文件或粘贴可公开访问的 Google Drive / HTTPS 链接",
         kind: "pdf",
         getValue: () => m.pdfFileZh ?? "",
         setValue: (v) => {
           const next = [...products];
           const manuals = [...p.manuals];
           manuals[mi] = { ...m, pdfFileZh: v || null };
+          next[pi] = { ...p, manuals };
+          patchProducts(next);
+        },
+      });
+      slots.push({
+        id: `product-${pi}-manual-${mi}-video-en`,
+        group: `产品 · ${p.slug} · 文档与视频`,
+        label: `${m.id} · 视频 · EN`,
+        spec: "优先使用 YouTube/Vimeo 嵌入链接；Google Drive 视频预览链接需确认前台嵌入方式兼容",
+        kind: "video",
+        getValue: () => m.videoUrlEn ?? "",
+        setValue: (v) => {
+          const next = [...products];
+          const manuals = [...p.manuals];
+          manuals[mi] = { ...m, videoUrlEn: v };
+          next[pi] = { ...p, manuals };
+          patchProducts(next);
+        },
+      });
+      slots.push({
+        id: `product-${pi}-manual-${mi}-video-zh`,
+        group: `产品 · ${p.slug} · 文档与视频`,
+        label: `${m.id} · 视频 · 中文`,
+        spec: "优先使用 Bilibili/YouTube 嵌入链接；请确认分享权限",
+        kind: "video",
+        getValue: () => m.videoUrlZh ?? "",
+        setValue: (v) => {
+          const next = [...products];
+          const manuals = [...p.manuals];
+          manuals[mi] = { ...m, videoUrlZh: v };
           next[pi] = { ...p, manuals };
           patchProducts(next);
         },
