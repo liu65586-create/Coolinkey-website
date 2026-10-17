@@ -4,8 +4,8 @@
       "slug": "smart-chain-lock",
       "name": { "en": "CLX1 Heavy-Duty Smart Chain Lock", "zh": "CLX1 重型智能链条锁" },
       "shortDescription": {
-        "en": "A 6 mm hardened stainless steel chain and armored zinc-alloy body. Instant fingerprint unlock, IP67 protection, USB-C backup power, and a fail-safe mechanical key.",
-        "zh": "6 mm 硬化不锈钢链条与锌合金锁体。指纹即开、IP67 防护、USB-C 应急供电，并配备机械钥匙。"
+        "en": "A heavy-duty stainless steel chain with 6 mm steel wire diameter and a zinc-alloy lock body. Instant fingerprint unlock, IP67 protection, USB-C backup power, and a fail-safe mechanical key.",
+        "zh": "重型不锈钢链条（钢丝直径 6 mm）与锌合金锁体。指纹即开、IP67 防护、USB-C 应急供电，并配备机械钥匙。"
       },
       "mainImage": "/images/defaults/mid-module-a-use-case.png",
       "galleryImages": [
@@ -23,7 +23,7 @@
         },
         {
           "key": { "en": "Chain", "zh": "链条" },
-          "value": { "en": "6 mm stainless steel · ~100 cm", "zh": "6 mm 不锈钢 · 约 100 cm" }
+          "value": { "en": "6 mm steel wire diameter · ~100 cm", "zh": "钢丝直径 6 mm · 约 100 cm" }
         },
         {
           "key": { "en": "Power", "zh": "供电" },
