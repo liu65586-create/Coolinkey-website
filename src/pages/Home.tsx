@@ -11,19 +11,19 @@ import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 
 const defaultScenarios = [
-  { image: "/images/listing/bike-locking-closeup.jpg", label: { en: "Everyday cycling", zh: "日常骑行" } },
-  { image: "/images/listing/ebike-locking.jpg", label: { en: "E-bikes", zh: "电助力自行车" } },
-  { image: "/images/listing/glass-door-locking.jpg", label: { en: "Glass doors", zh: "玻璃门" } },
-  { image: "/images/listing/metal-gate-locking.jpg", label: { en: "Metal gates", zh: "金属围栏" } },
+  { id: "everyday", image: "/images/listing/bike-locking-closeup.jpg", label: { en: "Everyday cycling", zh: "日常骑行" } },
+  { id: "ebike", image: "/images/listing/ebike-locking.jpg", label: { en: "E-bikes", zh: "电助力自行车" } },
+  { id: "glass", image: "/images/listing/glass-door-locking.jpg", label: { en: "Glass doors", zh: "玻璃门" } },
+  { id: "gate", image: "/images/listing/metal-gate-locking.jpg", label: { en: "Metal gates", zh: "金属围栏" } },
 ];
 
 const fallbackFeatures = [
-  { icon: "fingerprint", title: { en: "One-touch access", zh: "一触解锁" }, description: { en: "Unlock with your fingerprint.", zh: "通过指纹快速解锁。" } },
-  { icon: "dual", title: { en: "Backup key", zh: "机械钥匙备份" }, description: { en: "A physical key for emergencies.", zh: "紧急情况下可使用机械钥匙。" } },
-  { icon: "share", title: { en: "App control", zh: "App 管理" }, description: { en: "Manage access from your phone.", zh: "通过手机管理访问权限。" } },
-  { icon: "logs", title: { en: "Activity history", zh: "活动记录" }, description: { en: "Review lock activity in the app.", zh: "在 App 中查看锁具活动记录。" } },
-  { icon: "battery", title: { en: "USB-C power", zh: "USB-C 供电" }, description: { en: "A backup power option when needed.", zh: "需要时可通过 USB-C 应急供电。" } },
-  { icon: "water", title: { en: "IP67 rated", zh: "IP67 防护" }, description: { en: "Built for outdoor conditions.", zh: "适用于户外使用环境。" } },
+  { id: "fingerprint", icon: "fingerprint" as const, title: { en: "One-touch access", zh: "一触解锁" }, description: { en: "Unlock with your fingerprint.", zh: "通过指纹快速解锁。" } },
+  { id: "dual", icon: "dual" as const, title: { en: "Backup key", zh: "机械钥匙备份" }, description: { en: "A physical key for emergencies.", zh: "紧急情况下可使用机械钥匙。" } },
+  { id: "share", icon: "share" as const, title: { en: "App control", zh: "App 管理" }, description: { en: "Manage access from your phone.", zh: "通过手机管理访问权限。" } },
+  { id: "logs", icon: "logs" as const, title: { en: "Activity history", zh: "活动记录" }, description: { en: "Review lock activity in the app.", zh: "在 App 中查看锁具活动记录。" } },
+  { id: "battery", icon: "battery" as const, title: { en: "USB-C power", zh: "USB-C 供电" }, description: { en: "A backup power option when needed.", zh: "需要时可通过 USB-C 应急供电。" } },
+  { id: "water", icon: "water" as const, title: { en: "IP67 rated", zh: "IP67 防护" }, description: { en: "Built for outdoor conditions.", zh: "适用于户外使用环境。" } },
 ];
 
 export function Home() {
