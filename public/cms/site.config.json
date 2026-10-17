@@ -4,7 +4,8 @@
     "logoSrc": "/brand/coolinkey-logo-dark.png",
     "logoAlt": "COOLINKEY",
     "logoMaxHeightPx": 32,
-    "displayName": "COOLINKEY"
+    "displayName": "COOLINKEY",
+    "faviconSrc": ""
   },
   "modules": {
     "homeHero": true,
@@ -47,7 +48,10 @@
           "text": {
             "en": "Park at racks, poles, or communal stands without fumbling for keys. Matte black body, recessed fingerprint pad, and a sleeved chain read as premium gear—because your lock should look as intentional as your bike.",
             "zh": "在停车架、立柱或小区车棚快速落锁，告别掏钥匙。哑光黑锁体、内凹式指纹区与织物包覆链条，与高端公路车气质一致——锁具本身也应是装备的一部分。"
-          }
+          },
+          "id": "mid-a-1",
+          "imageFit": "cover",
+          "focus": "50% 50%"
         }
       ]
     },
@@ -64,7 +68,10 @@
           "text": {
             "en": "IP67 sealing helps keep dust and water out of the electronics. Bluetooth 5.0 keeps pairing stable in busy signal environments.",
             "zh": "IP67 结构有助于阻隔粉尘与水汽侵入电子腔体；蓝牙 5.0 在复杂无线环境下保持连接稳定。"
-          }
+          },
+          "id": "mid-b-1",
+          "imageFit": "cover",
+          "focus": "50% 50%"
         }
       ]
     },
@@ -81,7 +88,10 @@
           "text": {
             "en": "Zinc alloy housing, stainless steel chain, nylon and PET in the sleeve—chosen for strength, wear resistance, and a clean silhouette.",
             "zh": "锌合金外壳、不锈钢链条、尼龙与 PET 织物层——兼顾强度、耐磨与简洁外观。"
-          }
+          },
+          "id": "mid-d-1",
+          "imageFit": "cover",
+          "focus": "50% 50%"
         }
       ]
     }
@@ -96,7 +106,8 @@
       "description": {
         "en": "Unlock with your fingerprint.",
         "zh": "通过指纹快速解锁。"
-      }
+      },
+      "id": "feature-fingerprint-1"
     },
     {
       "icon": "dual",
@@ -107,7 +118,8 @@
       "description": {
         "en": "A physical key for emergencies.",
         "zh": "紧急情况下可使用机械钥匙。"
-      }
+      },
+      "id": "feature-dual-2"
     },
     {
       "icon": "share",
@@ -118,7 +130,8 @@
       "description": {
         "en": "Manage access from your phone.",
         "zh": "通过手机管理访问权限。"
-      }
+      },
+      "id": "feature-share-3"
     },
     {
       "icon": "logs",
@@ -129,7 +142,8 @@
       "description": {
         "en": "Review lock activity in the app.",
         "zh": "在 App 中查看锁具活动记录。"
-      }
+      },
+      "id": "feature-logs-4"
     },
     {
       "icon": "battery",
@@ -140,7 +154,8 @@
       "description": {
         "en": "A backup power option when needed.",
         "zh": "需要时可通过 USB-C 应急供电。"
-      }
+      },
+      "id": "feature-battery-5"
     },
     {
       "icon": "water",
@@ -151,7 +166,8 @@
       "description": {
         "en": "Built for outdoor conditions.",
         "zh": "适用于户外使用环境。"
-      }
+      },
+      "id": "feature-water-6"
     }
   ],
   "manualsSection": {
@@ -185,7 +201,8 @@
     "body": {
       "en": "For support, distribution, or business inquiries: support@coolinkey.com",
       "zh": "售后、渠道或商务合作：support@coolinkey.com"
-    }
+    },
+    "email": "support@coolinkey.com"
   },
   "legal": {
     "privacyTitle": {
@@ -486,6 +503,271 @@
     "closingTitle": {
       "en": "You focus on freedom.\nWe focus on security.",
       "zh": "你专注自由。\n我们专注守护。"
+    }
+  },
+  "nav": {
+    "links": [
+      {
+        "id": "nav-home",
+        "label": {
+          "en": "Home",
+          "zh": "首页"
+        },
+        "to": "/"
+      },
+      {
+        "id": "nav-product",
+        "label": {
+          "en": "CLX1",
+          "zh": "CLX1"
+        },
+        "to": "/#clx1"
+      },
+      {
+        "id": "nav-support",
+        "label": {
+          "en": "Support",
+          "zh": "支持"
+        },
+        "to": "/#support"
+      },
+      {
+        "id": "nav-about",
+        "label": {
+          "en": "About",
+          "zh": "关于"
+        },
+        "to": "/#about"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": {
+      "en": "Smart Lock for a Freer You.",
+      "zh": "让出行更自由的智能锁。"
+    },
+    "privacy": {
+      "en": "Privacy Policy",
+      "zh": "隐私政策"
+    },
+    "cookie": {
+      "en": "GDPR & Cookie Statement",
+      "zh": "GDPR 与 Cookie 声明"
+    },
+    "icp": {
+      "en": "ICP备XXXX号",
+      "zh": "ICP备XXXX号"
+    }
+  },
+  "supportPage": {
+    "kicker": {
+      "en": "Support",
+      "zh": "支持"
+    },
+    "title": {
+      "en": "Get started. Stay confident.",
+      "zh": "轻松上手。始终安心。"
+    },
+    "subtitle": {
+      "en": "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place.",
+      "zh": "设置、使用与排查 coolinkey 所需的一切都在这里。说明书、视频与分步指南，集中查阅。"
+    },
+    "quickStart": {
+      "en": "Quick Start",
+      "zh": "快速开始"
+    },
+    "quickStartHint": {
+      "en": "Get up and running in minutes.",
+      "zh": "几分钟完成设置。"
+    },
+    "guides": {
+      "en": "User Guides & Downloads",
+      "zh": "用户指南与下载"
+    },
+    "guidesHint": {
+      "en": "Manuals and PDFs for your CLX1.",
+      "zh": "CLX1 说明书与 PDF。"
+    },
+    "videos": {
+      "en": "Video Guides",
+      "zh": "视频指南"
+    },
+    "videosHint": {
+      "en": "Watch and learn, in real time.",
+      "zh": "跟着演示一步到位。"
+    },
+    "troubleshooting": {
+      "en": "Troubleshooting",
+      "zh": "常见问题"
+    },
+    "troubleshootingHint": {
+      "en": "Solve common issues quickly.",
+      "zh": "快速解决常见状况。"
+    },
+    "helpTitle": {
+      "en": "Still need help?",
+      "zh": "还需要帮助？"
+    },
+    "helpBody": {
+      "en": "Our support team is here for you.",
+      "zh": "支持团队随时为你服务。"
+    },
+    "contactCta": {
+      "en": "Contact Support",
+      "zh": "联系支持"
+    },
+    "steps": [
+      {
+        "id": "support-step-1",
+        "title": {
+          "en": "Charge first",
+          "zh": "先充电"
+        },
+        "hint": {
+          "en": "Set up and learning in minutes.",
+          "zh": "几分钟完成开机准备。"
+        }
+      },
+      {
+        "id": "support-step-2",
+        "title": {
+          "en": "Connect the app",
+          "zh": "连接 App"
+        },
+        "hint": {
+          "en": "Pair over Bluetooth 5.0.",
+          "zh": "通过蓝牙 5.0 配对。"
+        }
+      },
+      {
+        "id": "support-step-3",
+        "title": {
+          "en": "Add a fingerprint",
+          "zh": "录入指纹"
+        },
+        "hint": {
+          "en": "Register up to 60 prints.",
+          "zh": "最多支持 60 枚指纹。"
+        }
+      },
+      {
+        "id": "support-step-4",
+        "title": {
+          "en": "Touch to unlock",
+          "zh": "触摸解锁"
+        },
+        "hint": {
+          "en": "One-touch access, no keys.",
+          "zh": "一触即开，无需钥匙。"
+        }
+      }
+    ],
+    "faqs": [
+      {
+        "id": "support-faq-1",
+        "question": {
+          "en": "Fingerprint recognition fails",
+          "zh": "指纹识别失败"
+        },
+        "answer": {
+          "en": "Dry or clean the sensor, then re-enrol the print with even pressure. Avoid moisture and heavy gloves during setup.",
+          "zh": "擦干并清洁传感器，再以均匀力度重新录入。设置时避免潮湿或厚手套。"
+        }
+      },
+      {
+        "id": "support-faq-2",
+        "question": {
+          "en": "Charging / power issues",
+          "zh": "充电 / 供电问题"
+        },
+        "answer": {
+          "en": "Use a USB-C cable. If the lock is fully drained, connect a power bank to the Type-C port to unlock, then charge fully.",
+          "zh": "请使用 USB-C 线。若电量耗尽，可用充电宝连接 Type-C 口应急开锁，再完整充电。"
+        }
+      },
+      {
+        "id": "support-faq-3",
+        "question": {
+          "en": "Using the mechanical key",
+          "zh": "使用机械钥匙"
+        },
+        "answer": {
+          "en": "The backup key is for emergencies. Insert fully, turn firmly, then store the key separately from the lock.",
+          "zh": "备用钥匙仅用于应急。完全插入后用力转动，平时请与锁分开存放。"
+        }
+      }
+    ]
+  },
+  "seo": {
+    "home": {
+      "title": {
+        "en": "",
+        "zh": ""
+      },
+      "description": {
+        "en": "",
+        "zh": ""
+      }
+    },
+    "product": {
+      "title": {
+        "en": "",
+        "zh": ""
+      },
+      "description": {
+        "en": "",
+        "zh": ""
+      }
+    },
+    "support": {
+      "title": {
+        "en": "",
+        "zh": ""
+      },
+      "description": {
+        "en": "",
+        "zh": ""
+      }
+    },
+    "about": {
+      "title": {
+        "en": "",
+        "zh": ""
+      },
+      "description": {
+        "en": "",
+        "zh": ""
+      }
+    },
+    "contact": {
+      "title": {
+        "en": "",
+        "zh": ""
+      },
+      "description": {
+        "en": "",
+        "zh": ""
+      }
+    },
+    "privacy": {
+      "title": {
+        "en": "",
+        "zh": ""
+      },
+      "description": {
+        "en": "",
+        "zh": ""
+      }
+    },
+    "cookie": {
+      "title": {
+        "en": "",
+        "zh": ""
+      },
+      "description": {
+        "en": "",
+        "zh": ""
+      }
     }
   }
 }

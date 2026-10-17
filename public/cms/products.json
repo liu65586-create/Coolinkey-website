@@ -77,34 +77,16 @@
       "purchaseLinkZh": "https://www.jd.com/",
       "manuals": [
         {
-          "id": "installation",
-          "title": {
-            "en": "Installation Guide",
-            "zh": "安装指南"
-          },
-          "type": "installation",
-          "pdfFileEn": "/manuals/en/chainlock_install.pdf",
-          "pdfFileZh": "/manuals/zh/chainlock_install.pdf"
-        },
-        {
           "id": "user_manual",
           "title": {
             "en": "User Manual",
             "zh": "用户手册"
           },
           "type": "user_manual",
-          "pdfFileEn": "/manuals/en/chainlock_manual.pdf",
-          "pdfFileZh": "/manuals/zh/chainlock_manual.pdf"
-        },
-        {
-          "id": "faq",
-          "title": {
-            "en": "FAQs",
-            "zh": "常见问题"
-          },
-          "type": "faq",
-          "pdfFileEn": "/manuals/en/chainlock_faq.pdf",
-          "pdfFileZh": "/manuals/zh/chainlock_faq.pdf"
+          "pdfFileEn": "https://drive.google.com/file/d/1Y95KLF9v6KL3K1_JRk2wPDkj28wbsYsd/view?usp=drive_link",
+          "pdfFileZh": "https://drive.google.com/file/d/1YhBCstJZmijUePyjucinWRdQsRrtTb3Q/view?usp=drive_link",
+          "videoUrlEn": "",
+          "videoUrlZh": ""
         },
         {
           "id": "video",
@@ -115,10 +97,14 @@
           "type": "video",
           "pdfFileEn": null,
           "pdfFileZh": null,
-          "videoUrlEn": "https://www.youtube.com/embed/lYfkl-ZXSuw",
-          "videoUrlZh": "https://www.youtube.com/embed/lYfkl-ZXSuw"
+          "videoUrlEn": "https://drive.google.com/file/d/1S_8bRCT7XfXmoGyYLMI3AltPJvHQC789/view?usp=drive_link",
+          "videoUrlZh": "https://drive.google.com/file/d/1S_8bRCT7XfXmoGyYLMI3AltPJvHQC789/view?usp=drive_link"
         }
-      ]
+      ],
+      "id": "smart-chain-lock",
+      "enabled": true,
+      "imageFit": "contain",
+      "focus": "50% 50%"
     }
   ]
 }
