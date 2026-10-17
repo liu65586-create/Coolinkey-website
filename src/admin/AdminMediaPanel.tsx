@@ -50,11 +50,12 @@ export function AdminMediaPanel() {
     <div className="space-y-8">
       <div className="rounded-xl border border-white/12 bg-[#252a33] p-4 text-sm text-[#cccccc]">
         <p>
-          每个槽位与前台页面<strong className="text-white">一一对应</strong>。拖拽或选择文件上传后，路径会自动写入配置。
-          本地开发（<code className="text-[#00e676]">npm run dev</code>）会同时写入{" "}
-          <code className="text-[#00e676]">public/uploads/</code>；线上 Admin 需将文件放入{" "}
-          <code className="text-[#00e676]">public/</code> 并推送，或使用 https 外链。
-          保存到浏览器后可立即预览。
+          每个槽位与前台页面<strong className="text-white">一一对应</strong>。可直接选择/拖拽上传，也可粘贴 Google Drive 分享链接或其他 HTTPS 外链。
+          图片槽位提供尺寸比例预设；预设仅用于展示比例参考，不会压缩或重采样原始文件。默认应优先完整显示图片，避免裁掉产品细节。
+        </p>
+        <p className="mt-2 text-amber-200/90">
+          发布说明：当前“保存到本浏览器”仅供本机预览，不会自动更新所有访客看到的网站。Google Drive 文件需允许访客访问；视频嵌入链接需符合对应播放器格式。
+          线上直接上传还需要配置持久化媒体存储（例如对象存储/CDN）及服务端上传接口，不能依赖 Vercel 临时文件系统。
         </p>
       </div>
 
