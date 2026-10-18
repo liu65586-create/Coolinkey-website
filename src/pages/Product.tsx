@@ -72,13 +72,13 @@ export function Product() {
               </Button>
 
               <div>
-                <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">{t("product.specs")}</h2>
+                <h2 className="mb-4 text-[15px] font-semibold uppercase tracking-wider text-text-muted">{t("product.specs")}</h2>
                 <dl className="overflow-hidden rounded-2xl border border-[var(--color-border)]">
                   {active.specs.map((row, i) => (
                     <div
                       key={i}
                       className={[
-                        "grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 px-4 py-3.5 text-sm",
+                        "grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 px-4 py-3.5 text-[15px]",
                         i % 2 === 0 ? "bg-white" : "bg-surface-muted",
                       ].join(" ")}
                     >

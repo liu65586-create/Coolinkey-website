@@ -102,6 +102,9 @@
     "preview": "预览",
     "downloadPdf": "下载 PDF",
     "close": "关闭",
+    "previewLoading": "正在加载预览…",
+    "previewFailed": "这份文件不是有效的 PDF，暂时无法预览。",
+    "noPreview": "暂无可预览内容。",
     "videoNote": "YouTube 演示 — 可在 CMS 中为中文用户配置 B站嵌入链接。"
   },
   "footer": {

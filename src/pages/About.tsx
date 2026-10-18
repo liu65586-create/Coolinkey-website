@@ -11,7 +11,7 @@ export function About() {
   const body = pickBilingual(lang, config?.about?.body, t("about.body"));
   return (
     <div className="page-wrap max-w-3xl py-16 sm:py-20">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">coolinkey</p>
+      <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-text-muted">coolinkey</p>
       <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-text">{title}</h2>
       <p className="mt-6 text-[16px] leading-relaxed text-text-muted">{body}</p>
     </div>

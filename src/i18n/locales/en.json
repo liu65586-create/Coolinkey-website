@@ -102,6 +102,9 @@
     "preview": "Preview",
     "downloadPdf": "Download PDF",
     "close": "Close",
+    "previewLoading": "Loading preview…",
+    "previewFailed": "This file is not a valid PDF, so it cannot be previewed.",
+    "noPreview": "No preview available.",
     "videoNote": "YouTube (EN) — add Bilibili embed URL in CMS for ZH when available."
   },
   "footer": {
