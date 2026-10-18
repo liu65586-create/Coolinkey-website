@@ -83,8 +83,8 @@
             "zh": "用户手册"
           },
           "type": "user_manual",
-          "pdfFileEn": "https://drive.google.com/file/d/1Y95KLF9v6KL3K1_JRk2wPDkj28wbsYsd/view?usp=drive_link",
-          "pdfFileZh": "https://drive.google.com/file/d/1YhBCstJZmijUePyjucinWRdQsRrtTb3Q/view?usp=drive_link",
+          "pdfFileEn": "/manuals/en/chainlock_manual.pdf",
+          "pdfFileZh": "/manuals/zh/chainlock_manual.pdf",
           "videoUrlEn": "",
           "videoUrlZh": ""
         },
