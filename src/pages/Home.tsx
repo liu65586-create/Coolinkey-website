@@ -37,7 +37,7 @@ export function Home() {
   const heroTitle = pickBilingual(lang, config?.hero.title, { en: "Unlock Freedom.\nRide with Confidence.", zh: "解锁自由。\n安心骑行。" });
   const heroSubtitle = pickBilingual(lang, config?.hero.subtitle, { en: "Smart security for every journey. No keys to carry. More freedom to ride.", zh: "为每一次出行提供智能守护。少一点钥匙负担，多一点自由骑行。" });
   const productImage = useResolvedMediaUrl(defaultProduct?.mainImage || "/images/listing/product-clx1-isolated.jpg");
-  const heroImage = useResolvedMediaUrl(config?.hero.backgroundImageUrl || "/images/listing/product-clx1-isolated.jpg");
+  const heroImage = useResolvedMediaUrl(config?.hero.backgroundImageUrl || "/images/listing/clx1-render.gif");
   const videoManual = defaultProduct?.manuals?.find((manual) => manual.type === "video");
   const videoSrc = lang === "zh" ? (videoManual?.videoUrlZh ?? videoManual?.videoUrlEn ?? null) : (videoManual?.videoUrlEn ?? videoManual?.videoUrlZh ?? null);
   const features = config?.features?.length ? config.features : fallbackFeatures;
@@ -76,18 +76,9 @@ export function Home() {
             </div>
           </div>
           <div className="hero-product-wrap">
-            <div className="hero-product-glow" />
-            <div className="hero-product-card">
-              <img src={heroImage || productImage} alt={config.brand.logoAlt || "COOLINKEY CLX1 smart chain lock"} />
-              <div className="hero-product-caption">
-                <span className="caption-dot" />
-                <span>{pickBilingual(lang, defaultProduct?.name, { en: "CLX1 SMART CHAIN LOCK", zh: "CLX1 智能链条锁" })}</span>
-                <span className="caption-separator" />
-                <span>{pickBilingual(lang, design?.heroImageCaption, { en: "Made for everyday rides", zh: "为日常骑行设计" })}</span>
-              </div>
+            <div className="hero-product-card hero-product-render">
+              <img src={heroImage || "/images/listing/clx1-render.gif"} alt={config.brand.logoAlt || "COOLINKEY CLX1 smart chain lock"} />
             </div>
-            <div className="floating-spec floating-spec-top"><ShieldCheck size={17} /><span>{pickBilingual(lang, spotlight?.specIp, { en: "IP67", zh: "IP67" })}</span><small>{pickBilingual(lang, spotlight?.specIpLabel, { en: "Protection", zh: "防护等级" })}</small></div>
-            <div className="floating-spec floating-spec-bottom"><Ruler size={17} /><span>{pickBilingual(lang, spotlight?.specLen, { en: "100 cm", zh: "100 cm" })}</span><small>{pickBilingual(lang, spotlight?.specLenLabel, { en: "Chain perimeter", zh: "链条周长" })}</small></div>
           </div>
           <a className="hero-scroll" href="#features"><span>{pickBilingual(lang, spotlight?.learnMore, { en: "Explore CLX1", zh: "探索 CLX1" })}</span><ArrowDownRight size={16} /></a>
         </div>
