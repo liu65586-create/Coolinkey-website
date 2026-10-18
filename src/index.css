@@ -39,7 +39,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 #root { min-height: 100%; }
-a { color: inherit; text-decoration: none; }
+/* Keep in the base layer so utility colors (text-white, text-accent) still win on links. */
+@layer base {
+  a { color: inherit; text-decoration: none; }
+}
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 img { max-width: 100%; }

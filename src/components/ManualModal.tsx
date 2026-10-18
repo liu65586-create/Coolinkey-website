@@ -173,7 +173,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
               download
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-full border-2 border-transparent bg-black px-8 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-[#222]"
+              className="inline-flex items-center justify-center rounded-full border-2 border-transparent bg-black px-8 py-3 text-[15px] font-semibold !text-white transition-colors hover:bg-[#222]"
             >
               {t("manualsSection.downloadPdf")}
             </a>
