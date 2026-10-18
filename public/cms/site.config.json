@@ -21,7 +21,7 @@
       "en": "Smart security for every journey. No keys to carry. More freedom to ride.",
       "zh": "为每一次出行提供智能守护。少一点钥匙负担，多一点自由骑行。"
     },
-    "backgroundImageUrl": "/images/listing/product-clx1-isolated.jpg",
+    "backgroundImageUrl": "/uploads/20261018T162218-10-18-_export.gif",
     "overlayUsesProductImage": false,
     "imageFit": "contain",
     "focus": "50% 50%",
@@ -38,16 +38,16 @@
     "a": {
       "enabled": true,
       "title": {
-        "en": "Precision in Every Detail",
-        "zh": "匠心于细节，品质见真章"
+        "en": "Designed for bikes, e-bikes, gates, doors and more",
+        "zh": "为自行车、电助力自行车、门和大门等多种场景而设计"
       },
       "slides": [
         {
-          "mediaUrl": "/uploads/20261018T154222-production_process_showcase_640.gif",
+          "mediaUrl": "/uploads/20261018T162036-1600X1600-6.jpg",
           "mediaKind": "image",
           "text": {
-            "en": "Designed with Purpose. Crafted with Care.\nAt Coolinkey, we believe that a better locking experience begins with thoughtful design and attention to every detail. From the structure of each component to the finish of the final product, we focus on creating smart locking solutions that bring together functionality, refined design, and everyday convenience.",
-            "zh": "以设计为本，以匠心打磨每一处细节\n在 Coolinkey，我们相信，更好的锁具体验始于用心的设计与对细节的专注。从每一个零部件的结构，到最终产品的外观与质感，我们始终致力于打造兼顾实用功能、精致设计与日常便捷体验的智能锁具产品。"
+            "en": "More than a bike lock, Coolinkey is designed to adapt to the way you secure your everyday essentials. From bicycles and e-bikes to gates and doors, its versatile chain design offers a flexible locking solution for a variety of everyday situations",
+            "zh": "Coolinkey 采用灵活的链条式设计，让锁具的使用不再局限于自行车。从自行车、电助力自行车到门和大门，为不同场景提供更灵活的锁定选择，让日常防护更加便捷。"
           },
           "id": "mid-a-1",
           "imageFit": "cover",
@@ -76,18 +76,18 @@
       ]
     },
     "d": {
-      "enabled": false,
+      "enabled": true,
       "title": {
-        "en": "Materials you can trust",
-        "zh": "材质与工艺"
+        "en": "Designed with Purpose. Crafted with Car",
+        "zh": "以设计为本，以匠心打磨每一处细节"
       },
       "slides": [
         {
-          "mediaUrl": "/images/defaults/mid-module-d-production.png",
+          "mediaUrl": "/uploads/20261018T161813-production_process_showcase_640.gif",
           "mediaKind": "image",
           "text": {
-            "en": "Zinc alloy housing, stainless steel chain, nylon and PET in the sleeve—chosen for strength, wear resistance, and a clean silhouette.",
-            "zh": "锌合金外壳、不锈钢链条、尼龙与 PET 织物层——兼顾强度、耐磨与简洁外观。"
+            "en": "At Coolinkey, we believe that a better locking experience begins with thoughtful design and attention to every detail. From the structure of each component to the finish of the final product, we focus on creating smart locking solutions that bring together functionality, refined design, and everyday convenience.",
+            "zh": "在 Coolinkey，我们相信，更好的锁具体验始于用心的设计与对细节的专注。从每一个零部件的结构，到最终产品的外观与质感，我们始终致力于打造兼顾实用功能、精致设计与日常便捷体验的智能锁具产品。"
           },
           "id": "mid-d-1",
           "imageFit": "cover",
@@ -390,7 +390,7 @@
     },
     {
       "id": "midD",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "manuals",
@@ -429,7 +429,7 @@
     "details": [
       {
         "id": "access",
-        "image": "/uploads/20261018T160226-10-18-_export.gif",
+        "image": "/uploads/20261018T161453-2.png",
         "eyebrow": {
           "en": "01 / ACCESS",
           "zh": "01 / 解锁"
@@ -445,7 +445,7 @@
       },
       {
         "id": "backup",
-        "image": "/images/listing/bike-locking-closeup.jpg",
+        "image": "/uploads/20261018T161519-3.png",
         "eyebrow": {
           "en": "02 / BACKUP",
           "zh": "02 / 备份"
@@ -461,7 +461,7 @@
       },
       {
         "id": "connect",
-        "image": "/images/listing/glass-door-locking.jpg",
+        "image": "/uploads/20261018T161536-5-1.png",
         "eyebrow": {
           "en": "03 / CONNECT",
           "zh": "03 / 互联"
