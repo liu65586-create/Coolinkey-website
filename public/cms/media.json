@@ -17,6 +17,17 @@
       "mime": "application/pdf",
       "size": 5199505,
       "addedAt": "2026-10-17T17:33:34.780Z"
+    },
+    {
+      "path": "/uploads/20261018T154222-production_process_showcase_640.gif",
+      "name": "production_process_showcase_640.gif",
+      "altEn": "",
+      "altZh": "",
+      "mime": "image/gif",
+      "size": 9468881,
+      "width": 640,
+      "height": 360,
+      "addedAt": "2026-10-18T15:42:22.885Z"
     }
   ]
 }

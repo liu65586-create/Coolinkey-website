@@ -21,7 +21,7 @@
       "en": "Smart security for every journey. No keys to carry. More freedom to ride.",
       "zh": "为每一次出行提供智能守护。少一点钥匙负担，多一点自由骑行。"
     },
-    "backgroundImageUrl": "/images/listing/clx1-render.gif",
+    "backgroundImageUrl": "/images/listing/product-clx1-isolated.jpg",
     "overlayUsesProductImage": false,
     "imageFit": "contain",
     "focus": "50% 50%",
@@ -36,18 +36,18 @@
   },
   "midModules": {
     "a": {
-      "enabled": false,
+      "enabled": true,
       "title": {
-        "en": "Urban freedom, locked in seconds",
-        "zh": "城市出行，秒级上锁"
+        "en": "Precision in Every Detail",
+        "zh": "匠心于细节，品质见真章"
       },
       "slides": [
         {
-          "mediaUrl": "/images/defaults/mid-module-a-use-case.png",
+          "mediaUrl": "/uploads/20261018T154222-production_process_showcase_640.gif",
           "mediaKind": "image",
           "text": {
-            "en": "Park at racks, poles, or communal stands without fumbling for keys. Matte black body, recessed fingerprint pad, and a sleeved chain read as premium gear—because your lock should look as intentional as your bike.",
-            "zh": "在停车架、立柱或小区车棚快速落锁，告别掏钥匙。哑光黑锁体、内凹式指纹区与织物包覆链条，与高端公路车气质一致——锁具本身也应是装备的一部分。"
+            "en": "Designed with Purpose. Crafted with Care.\nAt Coolinkey, we believe that a better locking experience begins with thoughtful design and attention to every detail. From the structure of each component to the finish of the final product, we focus on creating smart locking solutions that bring together functionality, refined design, and everyday convenience.",
+            "zh": "以设计为本，以匠心打磨每一处细节\n在 Coolinkey，我们相信，更好的锁具体验始于用心的设计与对细节的专注。从每一个零部件的结构，到最终产品的外观与质感，我们始终致力于打造兼顾实用功能、精致设计与日常便捷体验的智能锁具产品。"
           },
           "id": "mid-a-1",
           "imageFit": "cover",
@@ -382,7 +382,7 @@
     },
     {
       "id": "midA",
-      "enabled": false
+      "enabled": true
     },
     {
       "id": "midB",
