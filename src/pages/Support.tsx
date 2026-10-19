@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronRight, CirclePlay, FileText } from "lucide-react";
+import { ArrowRight, ChevronRight, FileText } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../components/Button";
@@ -8,6 +8,7 @@ import { useSiteConfig } from "../context/SiteConfigContext";
 import type { CmsManual } from "../types/cms";
 import { getVisibleManuals } from "../utils/manualsVisibility";
 import { pickBilingual, type Lang } from "../utils/siteCopy";
+import { VideoFrame, manualVideoUrl } from "../components/VideoFrame";
 
 export function Support() {
   const { t, i18n } = useTranslation();
@@ -90,22 +91,15 @@ export function Support() {
         <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
           <h2 className="text-[17px] font-semibold text-text">{text(page?.videos, "supportPage.videos")}</h2>
           <p className="mt-1 text-[15px] text-text-muted">{text(page?.videosHint, "supportPage.videosHint")}</p>
-          <ul className="mt-4 space-y-2">
-            {(videos.length ? videos : docs.slice(0, 3)).map((m) => (
-              <li key={m.id}>
-                <button
-                  type="button"
-                  onClick={() => setActive(m)}
-                  className="flex w-full items-center gap-3 rounded-xl bg-surface-muted p-2 text-left hover:bg-[#e7f8ea]"
-                >
-                  <span className="flex h-11 w-16 items-center justify-center rounded-lg bg-[#dce8e1] text-accent">
-                    <CirclePlay size={22} />
-                  </span>
-                  <span className="text-[15px] font-medium text-text">{lang === "zh" ? m.title.zh : m.title.en}</span>
-                </button>
-              </li>
+          <div className="mt-4 grid gap-3">
+            {videos.map((m) => (
+              <VideoFrame
+                key={m.id}
+                src={manualVideoUrl(m, lang)}
+                label={lang === "zh" ? m.title.zh : m.title.en}
+              />
             ))}
-          </ul>
+          </div>
         </article>
       </section>
 

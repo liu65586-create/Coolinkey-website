@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { VideoModal } from "../components/VideoModal";
+import { VideoFrame } from "../components/VideoFrame";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import type { Lang } from "../utils/siteCopy";
@@ -272,7 +272,6 @@ export function LifeAndSpecs() {
 
 export function HowItWorks() {
   const { loading, config, defaultProduct, lang, copy } = useHomeCopy();
-  const [videoOpen, setVideoOpen] = useState(false);
   if (loading || !config) return null;
 
   const videoManual = defaultProduct?.manuals?.find((manual) => manual.type === "video");
@@ -285,16 +284,7 @@ export function HowItWorks() {
     <div className="v2-home">
       <section className="v2-section v2-section-muted" id="how-it-works" aria-labelledby="access-title">
         <div className="v2-wrap v2-split">
-          <button
-            type="button"
-            className="v2-video"
-            onClick={() => videoSrc && setVideoOpen(true)}
-            disabled={!videoSrc}
-            aria-label={copy("Play CLX1 demonstration", "播放 CLX1 演示")}
-          >
-            <img src="/images/listing/one-touch-unlock.jpg" alt="" />
-            {videoSrc ? <span className="v2-play" aria-hidden="true" /> : null}
-          </button>
+          <VideoFrame src={videoSrc} label={copy("Play CLX1 demonstration", "播放 CLX1 演示")} />
           <div>
             <h2 id="access-title">{copy("Access, Made Personal.", "开锁，按你的方式。")}</h2>
             <p className="v2-lead">
@@ -319,7 +309,6 @@ export function HowItWorks() {
           </div>
         </div>
       </section>
-      <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src={videoSrc} />
     </div>
   );
 }

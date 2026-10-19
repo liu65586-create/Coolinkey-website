@@ -6,6 +6,7 @@ import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 import { ManualCard } from "./ManualCard";
 import { ManualModal } from "./ManualModal";
+import { VideoFrame, manualVideoUrl } from "./VideoFrame";
 
 type Props = {
   manuals: CmsManual[];
@@ -35,9 +36,13 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
       ) : null}
 
       <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 ${lgCols} ${showHeading ? "" : "mt-0"}`}>
-        {sorted.map((m) => (
-          <ManualCard key={m.id} manual={m} onOpen={setActive} />
-        ))}
+        {sorted.map((m) =>
+          m.type === "video" ? (
+            <VideoFrame key={m.id} src={manualVideoUrl(m, lang)} label={lang === "zh" ? m.title.zh : m.title.en} />
+          ) : (
+            <ManualCard key={m.id} manual={m} onOpen={setActive} />
+          ),
+        )}
       </div>
 
       <ManualModal open={Boolean(active)} onClose={() => setActive(null)} manual={active} lang={lang} />
