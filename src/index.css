@@ -397,10 +397,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-design-main, .v2-design-grid figure, .v2-cards figure, .v2-video, .v2-specs > img { overflow: hidden; border-radius: 12px; background: #fff; border: 1px solid #e5e6e1; }
 .v2-design-main img, .v2-design-grid img, .v2-cards img, .v2-video img, .v2-specs > img { display: block; width: 100%; object-fit: contain; background: #f4f4f1; }
 .v2-design-main { display: flex; flex-direction: column; min-height: 0; margin: 0; }
-.v2-design-main img { flex: 1; width: 100%; height: 100%; min-height: 0; object-fit: contain; background: transparent; }
+.v2-design-main img { flex: 0 0 auto; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; object-position: center; background: transparent; }
 .v2-design-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; min-height: 100%; }
 .v2-design-grid figure { display: flex; flex-direction: column; min-height: 0; margin: 0; overflow: visible; border: 0; border-radius: 0; background: transparent; }
-.v2-design-grid img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; border: 1px solid #e5e6e1; border-radius: 12px; }
+.v2-design-grid img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; object-position: center; border: 1px solid #e5e6e1; border-radius: 12px; }
 .v2-cards img, .v2-video img { aspect-ratio: 4 / 3; height: auto; }
 .v2-design-grid figcaption, .v2-cards figcaption { padding: 12px 4px 0; color: #202120; font-size: 0.95rem; font-weight: 600; }
 .v2-split { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 4vw, 64px); align-items: center; }
@@ -448,7 +448,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 @media (max-width: 1000px) {
   .v2-hero-grid, .v2-hero-brand .v2-hero-grid, .v2-design, .v2-split, .v2-approach, .v2-paths, .v2-footer-grid { grid-template-columns: 1fr; }
   .v2-cards { grid-template-columns: 1fr; }
-  .v2-design-main, .v2-design-main img { min-height: 320px; }
+  .v2-design-main, .v2-design-main img { min-height: 240px; }
   .v2-design-copy { padding: 20px 20px 0; }
   .v2-hero-brand .v2-hero-media img { aspect-ratio: 16 / 10; max-height: 280px; }
   .v2-principles li { grid-template-columns: 1fr; gap: 8px; }
