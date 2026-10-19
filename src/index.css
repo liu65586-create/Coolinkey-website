@@ -478,7 +478,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 }
 
 /* One gap between the bottom of a block and the top of the next. */
-:root { --block-gap: 80px; }
+:root { --block-gap: 80px; --block-end: 16px; }
 @media (max-width: 700px) { :root { --block-gap: 48px; } }
 .home-page .v2-section,
 #how-it-works,
@@ -489,9 +489,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 #clx1 .page-wrap,
 .about-panel {
   padding-top: var(--block-gap);
-  padding-bottom: 0;
+  padding-bottom: var(--block-end);
 }
 #how-it-works { min-height: 0; justify-content: flex-start; }
 #support .support-hero { padding-top: 0; padding-bottom: 32px; }
-#support .support-cta { padding-bottom: 0; }
+#support .support-cta { padding-bottom: var(--block-end); }
 .v2-footer-grid { padding-top: var(--block-gap); }
