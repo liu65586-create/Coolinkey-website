@@ -43,8 +43,8 @@ export function SitePage() {
       </div>
       <section id="clx1" className="site-anchor" tabIndex={-1}>
         <MeetClx1 />
-        <Product />
         <ProductStory />
+        <Product />
       </section>
       <HowItWorks />
       <LifeAndSpecs />
