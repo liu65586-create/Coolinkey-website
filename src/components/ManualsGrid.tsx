@@ -29,7 +29,7 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
   if (sorted.length === 0) return null;
 
   return (
-    <section id="manuals" className={`page-wrap ${showHeading ? "section-pad" : "py-0"}`}>
+    <section id="manuals" className={showHeading ? "page-wrap section-pad" : ""}>
       {showHeading ? (
         <h2 className="mb-10 text-center text-2xl font-semibold tracking-tight text-text sm:text-[28px]">{heading}</h2>
       ) : null}

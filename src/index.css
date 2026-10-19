@@ -60,8 +60,7 @@ header:has(nav) { z-index: 50; }
 .home-page { overflow: hidden; background: var(--paper); }
 .site-anchor { border-top: 1px solid var(--line, rgba(11, 27, 43, 0.08)); scroll-margin-top: 80px; }
 .site-anchor:focus { outline: none; }
-#about { min-height: calc(100svh - 80px); display:flex; align-items:center; }
-#about .page-wrap { padding-block: 48px; }
+#about { min-height: 0; scroll-margin-top: 80px; }
 .hero-section { position: relative; isolation: isolate; overflow: hidden; display:flex; align-items:center; min-height: calc(100svh - 80px); background: linear-gradient(118deg,#f4f5f1 0%,#e9ece6 100%); }
 .hero-grid { position:static; min-height:0; display:grid; grid-template-columns: 1fr 1.02fr; align-items:center; gap:clamp(30px,5vw,76px); padding-block:clamp(24px, 4vh, 48px); }
 .hero-orb { position:absolute; z-index:-1; border-radius:50%; pointer-events:none; }
@@ -170,6 +169,7 @@ header:has(nav) { z-index: 50; }
 main:not(.home-page) { min-height:55vh; }
 main:not(.home-page) h1, main:not(.home-page) h2 { letter-spacing:-.04em; }
 main:not(.home-page) .page-wrap { max-width:1180px; }
+main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96px)); }
 
 /* Admin: convert the legacy dark editor into a clean light workspace without removing functionality. */
 .admin-shell { min-height:100vh; background:#f1f3ef; color:#202720; }
@@ -328,13 +328,14 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
   #support .support-faq .mt-2 { margin-top: 0.35rem; }
 }
 .home-page { background: #f8f8f6; overflow: visible; }
-#about { min-height: 0; display: block; }
-
 .v2-home { background: #f8f8f6; color: #202120; }
 .v2-wrap { width: min(1440px, calc(100% - 96px)); margin-inline: auto; }
 .v2-section { padding-block: clamp(56px, 8vw, 112px); }
-#business.v2-section, #contact > .v2-section { min-height: 0; padding-block: 40px; }
-#contact .v2-section-head { max-width: none; margin-bottom: 0; text-align: left; }
+#business.v2-section { min-height: 0; padding-block: 40px; }
+.about-panel { display: grid; justify-items: start; gap: 16px; padding-block: 64px 72px; }
+.about-panel h2 { margin: 0; font-size: clamp(2rem, 3vw, 2.75rem); font-weight: 650; letter-spacing: -0.045em; line-height: 1.08; }
+.about-panel .about-body { margin: 0; max-width: 40rem; color: #686b66; font-size: 1.0625rem; line-height: 1.7; }
+.about-panel > a { margin-top: 8px; }
 .v2-section-muted { background: #ecede9; }
 .v2-eyebrow { margin: 0; color: #686b66; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; }
 .v2-section-head .v2-eyebrow { margin: 0; color: #686b66; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; }
@@ -347,7 +348,7 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
 .brand-slide[aria-hidden="true"] { visibility: hidden; }
 .brand-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .brand-slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16, 24, 18, 0.78) 0%, rgba(16, 24, 18, 0.42) 42%, rgba(16, 24, 18, 0.08) 72%); }
-.brand-copy { position: absolute; z-index: 1; left: max(32px, calc((100% - 1440px) / 2 + 48px)); bottom: 88px; width: min(640px, calc(100% - 64px)); }
+.brand-copy { position: absolute; z-index: 1; left: max(48px, calc((100% - 1440px) / 2)); bottom: 88px; width: min(640px, calc(100% - 96px)); }
 .brand-copy .v2-eyebrow, .brand-copy h1, .brand-copy h2 { color: #fff; }
 .brand-copy h1, .brand-copy h2 { margin: 12px 0 0; max-width: 14ch; font-size: clamp(2.6rem, 4.6vw, 5rem); font-weight: 650; letter-spacing: -0.05em; line-height: 0.98; }
 .brand-copy .v2-lead { color: rgba(255, 255, 255, 0.86); }
@@ -356,7 +357,7 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
 .brand-principles { display: grid; gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }
 .brand-principles strong { display: block; font-size: 1.15rem; font-weight: 650; }
 .brand-principles p { margin: 2px 0 0; color: rgba(255, 255, 255, 0.82); font-size: 0.98rem; line-height: 1.45; }
-.brand-controls { position: absolute; z-index: 2; right: max(32px, calc((100% - 1440px) / 2 + 48px)); bottom: 36px; display: flex; align-items: center; gap: 14px; }
+.brand-controls { position: absolute; z-index: 2; right: max(48px, calc((100% - 1440px) / 2)); bottom: 36px; display: flex; align-items: center; gap: 14px; }
 .brand-nav, .brand-dots button { border: 0; background: transparent; color: #fff; }
 .brand-nav { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 999px; background: rgba(16, 24, 18, 0.28); }
 .brand-nav:hover { background: rgba(255, 255, 255, 0.16); }
@@ -453,7 +454,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .v2-principles li { grid-template-columns: 1fr; gap: 8px; }
 }
 @media (max-width: 700px) {
-  .v2-wrap, .page-wrap, .site-container { width: min(100% - 40px, 1440px); }
+  .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 40px, 1440px); }
   .v2-section, .v2-hero-brand { padding-block: 56px; }
   .v2-hero-copy h1, .v2-hero-brand h1 { font-size: clamp(2.4rem, 12vw, 3.4rem); max-width: none; }
 }
