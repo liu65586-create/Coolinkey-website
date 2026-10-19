@@ -344,12 +344,16 @@ export function BusinessPaths() {
             </article>
             <article>
               <p className="v2-eyebrow">{copy("For Business", "面向商务")}</p>
-              <ul>
-                <li><Link to="/#contact">{copy("Business Inquiries", "商务咨询")}</Link></li>
-                <li><Link to="/#clx1">{copy("Product Information", "产品信息")}</Link></li>
-                <li><Link to="/#contact">{copy("Contact Our Team", "联系团队")}</Link></li>
-              </ul>
-              <Link className="v2-btn v2-btn-primary" to="/#contact">{copy("Get in Touch", "取得联系")}</Link>
+              <h3>{copy("Let's Explore What's Possible.", "一起看看能合作什么。")}</h3>
+              <p>
+                {copy(
+                  "We welcome inquiries from distributors, retailers and businesses interested in working with COOLINKEY.",
+                  "欢迎分销商、零售商以及其他有意与 COOLINKEY 合作的企业来信咨询。",
+                )}
+              </p>
+              <Link className="v2-btn v2-btn-primary" to="/business">
+                {copy("Discuss Business Opportunities", "洽谈合作机会")} →
+              </Link>
             </article>
           </div>
         </div>

@@ -442,6 +442,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-philosophy p { margin: 12px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
 .v2-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .v2-paths article { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding: 0 8px 0 0; border: 0; border-radius: 0; background: transparent; }
+.v2-paths article h3 { margin: 0; color: #202120; font-size: clamp(1.75rem, 2.4vw, 2.25rem); font-weight: 620; letter-spacing: -0.03em; line-height: 1.15; }
+.v2-paths article p:not(.v2-eyebrow) { margin: 0; max-width: 36rem; color: #686b66; font-size: 1.0625rem; line-height: 1.6; }
 .v2-paths ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .v2-paths a:not(.v2-btn) { color: #202120; font-weight: 600; }
 .v2-paths a:not(.v2-btn):hover { color: #146c43; }
@@ -496,3 +498,37 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 #support .support-hero { padding-top: 0; padding-bottom: 32px; }
 #support .support-cta { padding-bottom: var(--block-end); }
 .v2-footer-grid { padding-top: var(--block-gap); }
+
+.business-inquiry { padding-block: 72px 80px; }
+.business-inquiry .v2-split { align-items: start; }
+.business-inquiry h1 { margin: 12px 0 0; color: #202120; font-size: clamp(2rem, 3.4vw, 3.25rem); font-weight: 620; letter-spacing: -0.04em; line-height: 1.08; }
+.business-inquiry form { display: grid; gap: 16px; }
+.business-inquiry label { display: grid; gap: 6px; color: #202120; font-size: 0.95rem; font-weight: 650; }
+.business-inquiry input,
+.business-inquiry select,
+.business-inquiry textarea {
+  width: 100%;
+  border: 1px solid rgba(11, 27, 43, 0.14);
+  border-radius: 8px;
+  background: #fff;
+  color: #202120;
+  font: inherit;
+  font-weight: 450;
+  padding: 12px 14px;
+}
+.business-inquiry textarea { min-height: 140px; resize: vertical; }
+.business-inquiry input:focus-visible,
+.business-inquiry select:focus-visible,
+.business-inquiry textarea:focus-visible { outline: 2px solid #36b66a; outline-offset: 2px; }
+.business-inquiry [aria-invalid="true"] { border-color: #9b2c2c; }
+.business-inquiry .field-error,
+.business-inquiry .form-error { margin: 0; color: #9b2c2c; font-size: 0.85rem; font-weight: 650; }
+.business-inquiry .form-note,
+.business-inquiry .privacy-note { margin: 0; color: #686b66; font-size: 0.9rem; line-height: 1.5; }
+.business-inquiry .privacy-note a { color: #146c43; font-weight: 650; }
+.business-inquiry .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.business-inquiry .v2-btn { justify-self: start; }
+@media (max-width: 700px) {
+  .business-inquiry { padding-block: 48px; }
+  .business-inquiry .v2-btn { justify-self: stretch; width: 100%; }
+}

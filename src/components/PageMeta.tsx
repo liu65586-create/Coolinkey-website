@@ -24,7 +24,13 @@ export function PageMeta() {
   useEffect(() => {
     const key = pageKey(pathname);
     const fields: SeoFields | undefined = key ? config?.seo?.[key] : undefined;
-    const title = pickBilingual(lang, fields?.title, "");
+    const title = fields
+      ? pickBilingual(lang, fields.title, "")
+      : pathname.startsWith("/business")
+        ? lang === "zh"
+          ? "商务合作与咨询"
+          : "Business Partnerships & Inquiries"
+        : "";
     const description = pickBilingual(lang, fields?.description, "");
     const meta = document.querySelector('meta[name="description"]');
     const previousTitle = document.title;

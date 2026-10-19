@@ -9,6 +9,7 @@ import { GeoIpProvider } from "./context/GeoIpContext";
 import { PreviewDraftProvider } from "./context/PreviewDraftContext";
 import { ShoppingRegionProvider } from "./context/ShoppingRegionContext";
 import { SiteConfigProvider } from "./context/SiteConfigContext";
+import { BusinessInquiry } from "./pages/BusinessInquiry";
 import { CookiePolicy } from "./pages/CookiePolicy";
 import { Privacy } from "./pages/Privacy";
 import { Admin } from "./pages/Admin";
@@ -31,6 +32,7 @@ export default function App() {
                   <Route element={<Layout />}>
                     <Route index element={<SitePage />} />
                     <Route path="contact" element={<Navigate to="/#contact" replace />} />
+                    <Route path="business" element={<BusinessInquiry />} />
                     <Route path="privacy" element={<Privacy />} />
                     <Route path="cookie-policy" element={<CookiePolicy />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
