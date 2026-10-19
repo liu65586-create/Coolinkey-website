@@ -275,7 +275,6 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
    with the same inset above the content and above the next module. */
 :root { --nav-h: 80px; --frame-gap: clamp(28px, 4vh, 56px); }
 #how-it-works,
-#business,
 #contact > .v2-section,
 #clx1 > .v2-home:first-child > .v2-section,
 #support > .support-stack {
@@ -284,7 +283,6 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
 }
 @media (min-width: 1000px) {
   #how-it-works,
-  #business,
   #contact > .v2-section,
   #clx1 > .v2-home:first-child > .v2-section,
   #support > .support-stack {
@@ -294,7 +292,6 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
     min-height: calc(100svh - var(--nav-h));
   }
   #how-it-works > .v2-wrap,
-  #business > .v2-wrap,
   #contact > .v2-section > .v2-wrap,
   #clx1 .v2-meet { width: min(1440px, calc(100% - 96px)); }
   #how-it-works .v2-video,
@@ -312,6 +309,8 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
   #support > .support-stack {
     --frame-gap: clamp(20px, 2.6vh, 36px);
     gap: clamp(8px, 1.1vh, 14px);
+    min-height: 0;
+    justify-content: flex-start;
     padding-block: var(--frame-gap);
   }
   #support .support-hero { gap: clamp(10px, 1.6vh, 20px); }
@@ -337,6 +336,7 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
 .v2-home { background: #f8f8f6; color: #202120; }
 .v2-wrap { width: min(1440px, calc(100% - 96px)); margin-inline: auto; }
 .v2-section { padding-block: clamp(56px, 8vw, 112px); }
+#business.v2-section { min-height: 0; padding-block: 40px; }
 .v2-section-muted { background: #ecede9; }
 .v2-eyebrow { margin: 0; color: #686b66; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; }
 .v2-section-head .v2-eyebrow { margin: 0; color: #686b66; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; }
