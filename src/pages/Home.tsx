@@ -196,7 +196,7 @@ export function ProductStory() {
     <div className="v2-home">
       <section className="v2-section" aria-labelledby="design-title">
         <div className="v2-wrap">
-          <header className="v2-section-head">
+          <header className="v2-section-head v2-design-head">
             <h2 id="design-title">{copy("More Than a Lock.", "不只是一把锁。")}</h2>
             <p>{copy("A thoughtful combination of form, function and everyday practicality.", "形态、功能与日常实用的结合。")}</p>
           </header>
