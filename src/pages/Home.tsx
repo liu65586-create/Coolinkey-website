@@ -293,11 +293,11 @@ export function BusinessPaths() {
             <article>
               <p className="v2-eyebrow">{copy("For Business", "面向商务")}</p>
               <ul>
-                <li><Link to="/contact">{copy("Business Inquiries", "商务咨询")}</Link></li>
+                <li><Link to="/#contact">{copy("Business Inquiries", "商务咨询")}</Link></li>
                 <li><Link to="/#clx1">{copy("Product Information", "产品信息")}</Link></li>
-                <li><Link to="/contact">{copy("Contact Our Team", "联系团队")}</Link></li>
+                <li><Link to="/#contact">{copy("Contact Our Team", "联系团队")}</Link></li>
               </ul>
-              <Link className="v2-btn v2-btn-primary" to="/contact">{copy("Get in Touch", "取得联系")}</Link>
+              <Link className="v2-btn v2-btn-primary" to="/#contact">{copy("Get in Touch", "取得联系")}</Link>
             </article>
           </div>
         </div>

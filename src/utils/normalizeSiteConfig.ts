@@ -19,6 +19,7 @@ function navTarget(to: string | undefined, fallback: string): string {
   if (value === "/product" || value.startsWith("/product/") || value === "#clx1") return "/#clx1";
   if (value === "/support" || value === "#support") return "/#support";
   if (value === "/about" || value === "#about") return "/#about";
+  if (value === "/contact" || value === "#contact") return "/#contact";
   if (value === "#home") return "/";
   return value || "/";
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { About } from "./About";
+import { Contact } from "./Contact";
 import { BrandPhilosophy, BusinessPaths, DesignPrinciples, HomeHero, HowItWorks, LifeAndSpecs, MeetClx1, ProductStory } from "./Home";
 import { Product } from "./Product";
 import { Support } from "./Support";
@@ -53,6 +54,9 @@ export function SitePage() {
         <Support />
       </section>
       <BusinessPaths />
+      <section id="contact" className="site-anchor" tabIndex={-1} aria-labelledby="contact-title">
+        <Contact />
+      </section>
       <section id="about" className="site-anchor" tabIndex={-1}>
         <About />
       </section>

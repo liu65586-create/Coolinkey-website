@@ -41,13 +41,13 @@ export function Footer() {
           <ul>
             <li><Link to="/#support">{copy("FAQ", "常见问题")}</Link></li>
             <li><Link to="/#support">{copy("User Manual", "用户手册")}</Link></li>
-            <li><Link to="/contact">{copy("Contact", "联系")}</Link></li>
+            <li><Link to="/#contact">{copy("Contact", "联系")}</Link></li>
           </ul>
         </div>
         <div>
           <h2>{copy("Business", "商务")}</h2>
           <ul>
-            <li><Link to="/contact">{copy("Business Inquiries", "商务咨询")}</Link></li>
+            <li><Link to="/#contact">{copy("Business Inquiries", "商务咨询")}</Link></li>
             <li><Link to="/#clx1">{copy("Product Information", "产品信息")}</Link></li>
           </ul>
         </div>

@@ -1,4 +1,4 @@
-export const SITE_SECTION_IDS = ["home", "approach", "clx1", "how-it-works", "support", "business", "about"] as const;
+export const SITE_SECTION_IDS = ["home", "approach", "clx1", "how-it-works", "support", "business", "contact", "about"] as const;
 
 export type SiteSectionId = (typeof SITE_SECTION_IDS)[number];
 
@@ -13,7 +13,7 @@ export function sectionIdFromPath(target: string): SiteSectionId | null {
   if (path === "/product" || path.startsWith("/product/")) return "clx1";
   if (path === "/support") return "support";
   if (path === "/about") return "about";
-  if (path === "/contact") return null;
+  if (path === "/contact") return "contact";
   return null;
 }
 
