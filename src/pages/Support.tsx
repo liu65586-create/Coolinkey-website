@@ -49,7 +49,7 @@ export function Support() {
       <section className="support-hero page-wrap grid items-center gap-6 py-8 lg:grid-cols-[1.15fr_0.85fr] lg:py-8">
         <div>
           <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-text-muted">{text(page?.kicker, "supportPage.kicker")}</p>
-          <h2 className="mt-2 font-display text-[30px] font-semibold leading-tight tracking-tight text-text sm:text-[36px]">
+          <h2 className="mt-2 font-display text-[clamp(2rem,3.5vw,3.5rem)] font-semibold leading-tight tracking-tight text-text">
             {text(page?.title, "supportPage.title")}
           </h2>
           <p className="mt-3 max-w-xl text-[16px] leading-relaxed text-text-muted">{text(page?.subtitle, "supportPage.subtitle")}</p>

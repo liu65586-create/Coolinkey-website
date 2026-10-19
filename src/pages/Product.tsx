@@ -60,7 +60,7 @@ export function Product() {
             <div className="space-y-6">
               <div className="space-y-3">
                 <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-text-muted">CLX1</p>
-                <h2 className="font-display text-[28px] font-semibold tracking-tight text-text sm:text-[32px]">{name}</h2>
+                <h2 className="font-display text-[clamp(2.2rem,4vw,4rem)] font-semibold leading-none tracking-tight text-text">{name}</h2>
                 <p className="text-[16px] leading-relaxed text-text-muted">{desc}</p>
               </div>
 

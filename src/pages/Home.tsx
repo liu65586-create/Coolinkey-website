@@ -1,30 +1,24 @@
-import { ArrowDownRight, ArrowRight, CirclePlay, Fingerprint, KeyRound, ShieldCheck, Droplets, Smartphone, Ruler } from "lucide-react";
+import { Bluetooth, Fingerprint, KeyRound, Smartphone } from "lucide-react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { VideoModal } from "../components/VideoModal";
-import { ResolvedImage } from "../components/ResolvedImage";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
-import { useResolvedMediaUrl } from "../hooks/useResolvedMediaUrl";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
-import { scrollToSection, sectionIdFromPath } from "../utils/siteSections";
+import { useTranslation } from "react-i18next";
 
-const defaultScenarios = [
-  { id: "everyday", image: "/images/listing/bike-locking-closeup.jpg", label: { en: "Everyday cycling", zh: "日常骑行" } },
-  { id: "ebike", image: "/images/listing/ebike-locking.jpg", label: { en: "E-bikes", zh: "电助力自行车" } },
-  { id: "glass", image: "/images/listing/glass-door-locking.jpg", label: { en: "Glass doors", zh: "玻璃门" } },
-  { id: "gate", image: "/images/listing/metal-gate-locking.jpg", label: { en: "Metal gates", zh: "金属围栏" } },
+const designShots = [
+  { src: "/images/listing/one-touch-unlock.jpg", en: "Fingerprint Unlock", zh: "指纹解锁" },
+  { src: "/images/listing/mechanical-key-backup.jpg", en: "Mechanical Key", zh: "机械钥匙" },
+  { src: "/images/listing/heavy-duty-chain.jpg", en: "6 mm Steel Wire", zh: "6 mm 钢丝" },
+  { src: "/images/listing/product-folds-bottle-size.jpg", en: "Compact Form", zh: "便携形态" },
 ];
 
-const fallbackFeatures = [
-  { id: "fingerprint", icon: "fingerprint" as const, title: { en: "One-touch access", zh: "一触解锁" }, description: { en: "Unlock with your fingerprint.", zh: "通过指纹快速解锁。" } },
-  { id: "dual", icon: "dual" as const, title: { en: "Backup key", zh: "机械钥匙备份" }, description: { en: "A physical key for emergencies.", zh: "紧急情况下可使用机械钥匙。" } },
-  { id: "share", icon: "share" as const, title: { en: "App control", zh: "App 管理" }, description: { en: "Manage access from your phone.", zh: "通过手机管理访问权限。" } },
-  { id: "logs", icon: "logs" as const, title: { en: "Activity history", zh: "活动记录" }, description: { en: "Review lock activity in the app.", zh: "在 App 中查看锁具活动记录。" } },
-  { id: "battery", icon: "battery" as const, title: { en: "USB-C power", zh: "USB-C 供电" }, description: { en: "A backup power option when needed.", zh: "需要时可通过 USB-C 应急供电。" } },
-  { id: "water", icon: "water" as const, title: { en: "IP67 rated", zh: "IP67 防护" }, description: { en: "Built for outdoor conditions.", zh: "适用于户外使用环境。" } },
+const carryShots = [
+  { src: "/images/listing/product-folds-bottle-size.jpg", en: "Easy to Carry", zh: "便于携带", bodyEn: "Folds down for everyday carrying.", bodyZh: "可折叠收纳，方便日常携带。" },
+  { src: "/images/listing/bike-locking-closeup.jpg", en: "On Your Bike", zh: "骑行使用", bodyEn: "A chain lock for securing a bicycle.", bodyZh: "链条锁，可用于固定自行车。" },
+  { src: "/images/listing/product-clx1-isolated.jpg", en: "Ready When You Are", zh: "随时可用", bodyEn: "Fingerprint, app, or mechanical key.", bodyZh: "指纹、App 或机械钥匙。" },
 ];
 
 export function Home() {
@@ -34,162 +28,181 @@ export function Home() {
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const [videoOpen, setVideoOpen] = useState(false);
 
-  const heroTitle = pickBilingual(lang, config?.hero.title, { en: "Unlock Freedom.\nRide with Confidence.", zh: "解锁自由。\n安心骑行。" });
-  const heroSubtitle = pickBilingual(lang, config?.hero.subtitle, { en: "Smart security for every journey. No keys to carry. More freedom to ride.", zh: "为每一次出行提供智能守护。少一点钥匙负担，多一点自由骑行。" });
-  const productImage = useResolvedMediaUrl(defaultProduct?.mainImage || "/images/listing/product-clx1-isolated.jpg");
-  const heroImage = useResolvedMediaUrl(config?.hero.backgroundImageUrl || "/images/listing/clx1-render.gif");
   const videoManual = defaultProduct?.manuals?.find((manual) => manual.type === "video");
-  const videoSrc = lang === "zh" ? (videoManual?.videoUrlZh ?? videoManual?.videoUrlEn ?? null) : (videoManual?.videoUrlEn ?? videoManual?.videoUrlZh ?? null);
-  const features = config?.features?.length ? config.features : fallbackFeatures;
-  const scenarios = config?.scenarios?.items?.length ? config.scenarios.items : defaultScenarios;
-  const spotlight = config?.spotlight;
-  const appBanner = config?.appBanner;
-  const design = config?.homeDesign;
-  const appImage = useResolvedMediaUrl(appBanner?.image?.trim() || "/images/listing/app-key-sharing-wide.jpg");
+  const videoSrc = lang === "zh"
+    ? (videoManual?.videoUrlZh || videoManual?.videoUrlEn || null)
+    : (videoManual?.videoUrlEn || videoManual?.videoUrlZh || null);
+  const heroImage = defaultProduct?.mainImage || "/images/listing/product-clx1-isolated.jpg";
+  const specs = defaultProduct?.specs ?? [];
+  const steps = config?.supportPage?.steps ?? [];
 
   if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
 
+  const copy = (en: string, zh: string) => (lang === "zh" ? zh : en);
+
   return (
-    <>
-      <section className="hero-section">
-        <div className="hero-orb hero-orb-one" />
-        <div className="hero-orb hero-orb-two" />
-        <div className="site-container hero-grid">
-          <div className="hero-copy">
-            <div className="eyebrow"><span className="eyebrow-line" /> {pickBilingual(lang, design?.heroEyebrow, { en: "SMART SECURITY, SIMPLIFIED", zh: "智能安防，简单自在" })}</div>
-            <h1>{heroTitle}</h1>
-            <p className="hero-subtitle">{heroSubtitle}</p>
-            <div className="hero-actions">
-              <Link className="button button-primary" to="/#clx1">
-                {pickBilingual(lang, config.hero.discoverLabel, { en: "Discover CLX1", zh: "了解 CLX1" })}
-                <ArrowRight size={17} />
-              </Link>
-              <button className="button button-quiet" type="button" onClick={() => videoSrc ? setVideoOpen(true) : scrollToSection("support")}>
-                <span className="play-ring"><CirclePlay size={17} /></span>
-                {pickBilingual(lang, config.hero.watchLabel, { en: "See how it works", zh: "观看产品演示" })}
-              </button>
-            </div>
-            <div className="hero-proof">
-              <div><Fingerprint size={18} /><span>{pickBilingual(lang, design?.heroProofFingerprint, { en: "Fingerprint access", zh: "指纹解锁" })}</span></div>
-              <div><KeyRound size={18} /><span>{pickBilingual(lang, design?.heroProofBackup, { en: "Mechanical backup key", zh: "机械钥匙备份" })}</span></div>
-              <div><Droplets size={18} /><span>{pickBilingual(lang, spotlight?.specIp, { en: "IP67", zh: "IP67" })}</span></div>
+    <div className="v2-home">
+      <section className="v2-hero">
+        <div className="v2-wrap v2-hero-grid">
+          <div className="v2-hero-copy">
+            <p className="v2-eyebrow">COOLINKEY CLX1</p>
+            <h1>{copy("Your Finger.\nYour Key.", "你的指纹。\n你的钥匙。")}</h1>
+            <p className="v2-lead">
+              {copy(
+                "Meet CLX1 — a fingerprint smart chain lock designed to make everyday access simpler.",
+                "认识 CLX1 —— 一款指纹智能链条锁，让日常开锁更简单。",
+              )}
+            </p>
+            <div className="v2-actions">
+              <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore CLX1", "了解 CLX1")}</Link>
+              <Link className="v2-btn v2-btn-secondary" to="/#how-it-works">{copy("See How It Works", "查看如何使用")}</Link>
             </div>
           </div>
-          <div className="hero-product-wrap">
-            <div className="hero-product-card hero-product-render">
-              <img src={heroImage || "/images/listing/clx1-render.gif"} alt={config.brand.logoAlt || "COOLINKEY CLX1 smart chain lock"} />
-            </div>
-          </div>
-          <a className="hero-scroll" href="#features"><span>{pickBilingual(lang, spotlight?.learnMore, { en: "Explore CLX1", zh: "探索 CLX1" })}</span><ArrowDownRight size={16} /></a>
-        </div>
-      </section>
-
-      <section className="feature-strip" id="features">
-        <div className="site-container feature-grid">
-          {features.slice(0, 6).map((feature, index) => {
-            const Icon = [Fingerprint, KeyRound, Smartphone, ShieldCheck, Droplets, Ruler][index % 6];
-            return <article className="feature-tile" key={feature.id || `${feature.icon}-${index}`}>
-              <div className="feature-icon"><Icon size={20} strokeWidth={1.7} /></div>
-              <h3>{pickBilingual(lang, feature.title, feature.title.en)}</h3>
-              <p>{pickBilingual(lang, feature.description, feature.description.en)}</p>
-            </article>;
-          })}
-        </div>
-      </section>
-
-      <section className="product-story section-space" id="product">
-        <div className="site-container story-grid">
-          <div className="story-image-panel">
-            <div className="story-image-backdrop" />
-            <img src={productImage || "/images/listing/product-clx1-isolated.jpg"} alt={pickBilingual(lang, spotlight?.title, { en: "CLX1 smart chain lock", zh: "CLX1 智能链条锁" })} />
-            <div className="story-image-label"><span>01</span><span>{lang === "zh" ? "产品设计" : "DESIGNED FOR EVERYDAY"}</span></div>
-          </div>
-          <div className="story-copy">
-            <div className="eyebrow"><span className="eyebrow-line" /> {pickBilingual(lang, spotlight?.kicker, { en: "MEET CLX1", zh: "认识 CLX1" })}</div>
-            <h2>{pickBilingual(lang, spotlight?.title, { en: "Security that fits your everyday.", zh: "融入日常的安心守护。" })}</h2>
-            <p>{pickBilingual(lang, spotlight?.body, { en: "A smart chain lock that combines fingerprint access, app management and a physical backup key in a clean, portable design.", zh: "将指纹解锁、App 管理与机械钥匙备份融入简洁便携的链条锁设计，让日常上锁更轻松。" })}</p>
-            <div className="spec-row">
-              <div><strong>{pickBilingual(lang, spotlight?.specChain, { en: "6 mm", zh: "6 mm" })}</strong><span>{pickBilingual(lang, spotlight?.specChainLabel, { en: "Steel wire diameter", zh: "钢丝直径" })}</span></div>
-              <div><strong>{pickBilingual(lang, spotlight?.specIp, { en: "IP67", zh: "IP67" })}</strong><span>{pickBilingual(lang, spotlight?.specIpLabel, { en: "Dust & water protection", zh: "防尘防水等级" })}</span></div>
-              <div><strong>{pickBilingual(lang, spotlight?.specLen, { en: "100 cm", zh: "100 cm" })}</strong><span>{pickBilingual(lang, spotlight?.specLenLabel, { en: "Chain perimeter", zh: "链条周长" })}</span></div>
-            </div>
-            <Link className="text-link" to="/#clx1">{pickBilingual(lang, spotlight?.learnMore, { en: "Explore the lock", zh: "探索产品详情" })}<ArrowRight size={17} /></Link>
+          <div className="v2-hero-media">
+            <img src={heroImage} alt={copy("CLX1 fingerprint smart chain lock", "CLX1 指纹智能链条锁")} />
           </div>
         </div>
       </section>
 
-      {(["a", "b", "d"] as const).map((key) => {
-        const module = config.midModules?.[key];
-        const sectionId = key === "a" ? "midA" : key === "b" ? "midB" : "midD";
-        const sectionSetting = config.homeSections?.find((item) => item.id === sectionId);
-        const slides = (module?.slides ?? []).filter((slide) => slide.mediaUrl?.trim());
-        if (!module?.enabled || sectionSetting?.enabled === false || slides.length === 0) return null;
-        return <section className="mid-module-section section-space" key={key}>
-          <div className="site-container">
-            {module.title?.en || module.title?.zh ? <h2 className="mid-module-title">{pickBilingual(lang, module.title, "")}</h2> : null}
-            <div className="mid-module-grid">
-              {slides.map((slide, index) => <article className="mid-module-card" key={slide.id || `${key}-${index}`}>
-                {slide.mediaKind === "video" ? <video src={slide.mediaUrl} controls playsInline preload="metadata" /> : <ResolvedImage src={slide.mediaUrl} alt={pickBilingual(lang, slide.text, "COOLINKEY product feature")} className="mid-module-image" fit={slide.imageFit || "contain"} />}
-                {slide.text?.en || slide.text?.zh ? <p>{pickBilingual(lang, slide.text, "")}</p> : null}
-              </article>)}
+      <section className="v2-section" aria-labelledby="design-title">
+        <div className="v2-wrap">
+          <header className="v2-section-head">
+            <h2 id="design-title">{copy("More Than a Lock.", "不只是一把锁。")}</h2>
+            <p>{copy("A thoughtful combination of form, function and everyday practicality.", "形态、功能与日常实用的结合。")}</p>
+          </header>
+          <div className="v2-design">
+            <figure className="v2-design-main">
+              <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 product, full view", "CLX1 产品全貌")} />
+            </figure>
+            <div className="v2-design-grid">
+              {designShots.map((shot) => (
+                <figure key={shot.src}>
+                  <img src={shot.src} alt={copy(shot.en, shot.zh)} />
+                  <figcaption>{copy(shot.en, shot.zh)}</figcaption>
+                </figure>
+              ))}
             </div>
           </div>
-        </section>;
-      })}
+        </div>
+      </section>
 
-      <section className="design-section">
-        <div className="site-container">
-          <div className="section-heading">
-            <div><div className="eyebrow"><span className="eyebrow-line" /> {pickBilingual(lang, design?.detailEyebrow, { en: "DETAILS THAT MATTER", zh: "每个细节，都为安心而设计" })}</div><h2>{pickBilingual(lang, design?.detailTitle, { en: "Thoughtful details. Everyday confidence.", zh: "每个细节，都为安心而设计" })}</h2></div>
-            <p>{pickBilingual(lang, design?.detailIntro, { en: "From easy access to emergency backup, the essentials are designed to feel intuitive in everyday use.", zh: "从便捷解锁到应急备份，重要功能清晰、直观，也更容易融入日常。" })}</p>
+      <section className="v2-section v2-section-muted" id="how-it-works" aria-labelledby="access-title">
+        <div className="v2-wrap v2-split">
+          <button
+            type="button"
+            className="v2-video"
+            onClick={() => videoSrc && setVideoOpen(true)}
+            disabled={!videoSrc}
+            aria-label={copy("Play CLX1 demonstration", "播放 CLX1 演示")}
+          >
+            <img src="/images/listing/one-touch-unlock.jpg" alt="" />
+            {videoSrc ? <span className="v2-play" aria-hidden="true" /> : null}
+          </button>
+          <div>
+            <h2 id="access-title">{copy("Access, Made Personal.", "开锁，按你的方式。")}</h2>
+            <p className="v2-lead">
+              {copy(
+                "Unlock with your fingerprint, the app, or a mechanical key.",
+                "可用指纹、App 或机械钥匙开锁。",
+              )}
+            </p>
+            <ul className="v2-features">
+              <li><Fingerprint size={18} aria-hidden="true" /><span>{copy("Fingerprint Unlock", "指纹解锁")}</span></li>
+              <li><Smartphone size={18} aria-hidden="true" /><span>{copy("App Control", "App 管理")}</span></li>
+              <li><Bluetooth size={18} aria-hidden="true" /><span>{copy("Bluetooth Pairing", "蓝牙配对")}</span></li>
+              <li><KeyRound size={18} aria-hidden="true" /><span>{copy("Mechanical Key", "机械钥匙")}</span></li>
+            </ul>
+            {steps.length ? (
+              <ol className="v2-steps">
+                {steps.map((step, index) => (
+                  <li key={step.id}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <strong>{pickBilingual(lang, step.title, "")}</strong>
+                      {step.hint?.en || step.hint?.zh ? <p>{pickBilingual(lang, step.hint, "")}</p> : null}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            ) : null}
           </div>
-          <div className="detail-grid">
-            {(design?.details?.length ? design.details : [
-              { id: "access", image: "/images/listing/one-touch-unlock.jpg", eyebrow: { en: "01 / ACCESS", zh: "01 / 解锁" }, title: { en: "One touch. You're in.", zh: "一触即开" }, body: { en: "Fingerprint access, without reaching for a key.", zh: "指纹识别，让解锁更简单。" } },
-              { id: "backup", image: "/images/listing/mechanical-key-backup.jpg", eyebrow: { en: "02 / BACKUP", zh: "02 / 备份" }, title: { en: "A backup when it matters", zh: "关键时刻，有备份" }, body: { en: "A mechanical key is there for emergencies.", zh: "紧急情况下可使用机械钥匙解锁。" } },
-              { id: "connect", image: "/images/listing/app-key-sharing.jpg", eyebrow: { en: "03 / CONNECT", zh: "03 / 互联" }, title: { en: "Control from your phone", zh: "掌控在你手中" }, body: { en: "Manage access with the companion app.", zh: "通过 App 管理访问权限。" } }
-            ]).slice(0, 3).map((item, index) => (
-              <article className={`detail-card ${index === 0 ? "detail-card-large" : ""}`} key={item.id}>
-                <ResolvedImage src={item.image} alt={pickBilingual(lang, item.title, "")} loading="lazy" className={`detail-card-image ${index === 0 ? "detail-product-image" : "detail-scene-image"}`} fit={index === 0 ? "contain" : "cover"} />
-                <div className="detail-overlay"><span>{pickBilingual(lang, item.eyebrow, "")}</span><h3>{pickBilingual(lang, item.title, "")}</h3><p>{pickBilingual(lang, item.body, "")}</p></div>
-              </article>
+        </div>
+      </section>
+
+      <section className="v2-section" aria-labelledby="carry-title">
+        <div className="v2-wrap">
+          <header className="v2-section-head">
+            <h2 id="carry-title">{copy("Designed for Everyday Life.", "为日常生活而设计。")}</h2>
+            <p>{copy("Lightweight, portable and easy to carry wherever your day takes you.", "轻便、可携带，陪你度过一天。")}</p>
+          </header>
+          <div className="v2-cards">
+            {carryShots.map((shot) => (
+              <figure key={shot.en}>
+                <img src={shot.src} alt={copy(shot.en, shot.zh)} />
+                <figcaption>
+                  <strong>{copy(shot.en, shot.zh)}</strong>
+                  <span>{copy(shot.bodyEn, shot.bodyZh)}</span>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="scenarios-section section-space">
-        <div className="site-container">
-          <div className="section-heading">
-            <div><div className="eyebrow"><span className="eyebrow-line" /> {pickBilingual(lang, design?.scenarioEyebrow, { en: "ONE LOCK, MANY ROUTINES", zh: "多种日常场景" })}</div><h2>{pickBilingual(lang, config.scenarios?.title, { en: "Made for more than one kind of ride.", zh: "不止适用于一种出行场景。" })}</h2></div>
-            <p>{pickBilingual(lang, config.scenarios?.body, { en: "At the bike rack, outside a café, or securing a gate at home—bring smart access into your routine.", zh: "无论停靠在自行车架旁、咖啡店外，还是在家中锁住围栏，都能融入你的日常。" })}</p>
+      <section className="v2-section v2-section-muted" aria-labelledby="spec-title">
+        <div className="v2-wrap v2-split v2-specs">
+          <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 chain and lock body", "CLX1 链条与锁体")} />
+          <div>
+            <h2 id="spec-title">{copy("Details That Matter.", "关键细节。")}</h2>
+            <p className="v2-lead">{copy("Confirmed CLX1 specifications.", "已确认的 CLX1 规格。")}</p>
+            <dl>
+              <div><dt>{copy("Product Model", "产品型号")}</dt><dd>CLX1</dd></div>
+              {specs.map((row, index) => (
+                <div key={index}>
+                  <dt>{lang === "zh" ? row.key.zh : row.key.en}</dt>
+                  <dd>{lang === "zh" ? row.value.zh : row.value.en}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <div className="scenario-grid">
-            {scenarios.slice(0, 4).map((item, index) => (
-              <article className="scenario-card" key={item.id || index}>
-                <div className="scenario-image"><ResolvedImage src={item.image || defaultScenarios[index % defaultScenarios.length].image} alt={pickBilingual(lang, item.label, "")} className="scenario-actual-image" loading="lazy" fit="contain" /></div>
-                <div className="scenario-meta"><span>0{index + 1}</span><h3>{pickBilingual(lang, item.label, "")}</h3><ArrowRight size={16} /></div>
-              </article>
-            ))}
-          </div>
-          <div className="scenario-bottom"><span>{pickBilingual(lang, design?.scenarioFooter, { en: "Designed for bicycles, e-bikes and everyday securing needs", zh: "为自行车、电助力自行车及日常固定物品设计" })}</span><Link to="/#clx1">{pickBilingual(lang, config.scenarios?.viewAll, { en: "View product details", zh: "查看产品详情" })} <ArrowRight size={15} /></Link></div>
         </div>
       </section>
 
-      <section className="app-section">
-        <div className="site-container app-panel">
-          <div className="app-image">{appImage ? <img src={appImage} alt={lang === "zh" ? "COOLINKEY App 管理功能" : "COOLINKEY app management"} loading="lazy" /> : null}</div>
-          <div className="app-copy">
-            <div className="eyebrow"><span className="eyebrow-line" /> {pickBilingual(lang, design?.appEyebrow, { en: "CONNECTED CONTROL", zh: "智能互联" })}</div>
-            <h2>{pickBilingual(lang, appBanner?.title, { en: "Your lock. Your access.", zh: "你的锁，由你掌控。" })}</h2>
-            <p>{pickBilingual(lang, appBanner?.body, { en: "Pair with the app to manage access and make everyday locking feel simpler.", zh: "连接 App 管理访问权限，让日常上锁与解锁更简单。" })}</p>
-            <div className="app-points"><div><Smartphone size={18} /><span>{pickBilingual(lang, design?.appPointOne, { en: "App management", zh: "手机管理" })}</span></div><div><KeyRound size={18} /><span>{pickBilingual(lang, design?.appPointTwo, { en: "Convenient access sharing", zh: "便捷授权" })}</span></div></div>
-            <Link className="button button-dark" to="/#support">{pickBilingual(lang, config.nav?.links?.find((link) => sectionIdFromPath(link.to) === "support")?.label, { en: "Explore support", zh: "查看支持与指南" })}<ArrowRight size={16} /></Link>
+      <section className="v2-philosophy" aria-labelledby="philosophy-title">
+        <img src="/images/listing/brand-lifestyle-story.jpg" alt="" />
+        <div className="v2-wrap">
+          <h2 id="philosophy-title">{copy("Rethinking Everyday Security.", "重新思考日常安防。")}</h2>
+          <p>{copy("We believe everyday security should feel intuitive, thoughtful and easy to use.", "我们希望日常安防直观、细致，并且容易使用。")}</p>
+        </div>
+      </section>
+
+      <section className="v2-section" id="business" aria-labelledby="paths-title">
+        <div className="v2-wrap">
+          <h2 id="paths-title" className="sr-only">{copy("For consumers and business", "面向个人与商务")}</h2>
+          <div className="v2-paths">
+            <article>
+              <p className="v2-eyebrow">{copy("For Consumers", "面向个人")}</p>
+              <ul>
+                <li><Link to="/#clx1">{copy("Explore CLX1", "了解 CLX1")}</Link></li>
+                <li><Link to="/#how-it-works">{copy("How It Works", "如何使用")}</Link></li>
+                <li><Link to="/#support">{copy("Support & FAQ", "支持与常见问题")}</Link></li>
+              </ul>
+              <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore Now", "立即了解")}</Link>
+            </article>
+            <article>
+              <p className="v2-eyebrow">{copy("For Business", "面向商务")}</p>
+              <ul>
+                <li><Link to="/contact">{copy("Business Inquiries", "商务咨询")}</Link></li>
+                <li><Link to="/#clx1">{copy("Product Information", "产品信息")}</Link></li>
+                <li><Link to="/contact">{copy("Contact Our Team", "联系团队")}</Link></li>
+              </ul>
+              <Link className="v2-btn v2-btn-primary" to="/contact">{copy("Get in Touch", "取得联系")}</Link>
+            </article>
           </div>
         </div>
       </section>
 
       <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src={videoSrc} />
-    </>
+    </div>
   );
 }

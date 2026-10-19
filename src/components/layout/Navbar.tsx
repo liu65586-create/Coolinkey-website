@@ -11,7 +11,7 @@ import { scrollToSection, sectionHash, sectionIdFromPath, SITE_SECTION_IDS, type
 
 const navCls = (isActive: boolean) =>
   [
-    "relative text-[15px] font-medium tracking-wide transition-colors",
+    "relative text-[14px] font-medium tracking-wide transition-colors",
     isActive ? "text-text" : "text-text-muted hover:text-accent",
     isActive
       ? "after:absolute after:inset-x-0 after:-bottom-1 after:h-[2px] after:rounded-full after:bg-accent"
@@ -107,7 +107,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-[100] h-[80px] border-b border-[var(--color-border)] bg-white">
+    <header className="sticky top-0 z-[100] h-[80px] border-b border-[var(--color-border)] bg-[#f8f8f6]/92 backdrop-blur-md">
       <div className="page-wrap flex h-full items-center justify-between">
         <Link
           to="/"
@@ -133,7 +133,7 @@ export function Navbar() {
         <nav className="hidden items-center gap-9 md:flex">
           {links.map((item) => {
             const section = sectionIdFromPath(item.to);
-            const isActive = section !== null && activeSection === section;
+            const isActive = item.to === "/contact" ? pathname === "/contact" : section !== null && activeSection === section;
             return (
               <Link
                 key={item.id}
@@ -165,11 +165,11 @@ export function Navbar() {
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="border-b border-[var(--color-border)] bg-white md:hidden">
+        <div id="mobile-nav" className="border-b border-[var(--color-border)] bg-[#f8f8f6] md:hidden">
           <div className="page-wrap flex flex-col gap-1 py-4">
             {links.map((item) => {
               const section = sectionIdFromPath(item.to);
-              const isActive = section !== null && activeSection === section;
+              const isActive = item.to === "/contact" ? pathname === "/contact" : section !== null && activeSection === section;
               return (
                 <Link
                   key={item.id}

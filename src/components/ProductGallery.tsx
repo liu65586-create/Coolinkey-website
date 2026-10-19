@@ -51,6 +51,7 @@ export function ProductGallery({ images, productName, fit = "contain", focus = "
             <button
               key={src + i}
               type="button"
+              aria-label={`${t("product.zoomHint")} ${i + 1}`}
               onClick={() => setIdx(i)}
               className={[
                 "h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-md bg-surface-muted transition-opacity",

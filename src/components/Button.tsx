@@ -14,7 +14,7 @@ const base =
   "inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-7 py-3 text-[15px] font-semibold leading-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  primary: "border border-transparent bg-accent !text-white hover:bg-accent-hover",
+  primary: "border border-transparent bg-accent !text-[#142018] hover:bg-accent-hover",
   secondary:
     "border border-[rgba(11,27,43,0.14)] bg-white text-text hover:border-accent hover:text-accent",
   ghost: "border border-white/70 bg-white/10 !text-white hover:bg-white/20",

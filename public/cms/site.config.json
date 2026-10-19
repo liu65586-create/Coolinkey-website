@@ -510,18 +510,18 @@
       {
         "id": "nav-home",
         "label": {
-          "en": "Home",
-          "zh": "首页"
-        },
-        "to": "/"
-      },
-      {
-        "id": "nav-product",
-        "label": {
-          "en": "CLX1",
-          "zh": "CLX1"
+          "en": "Product",
+          "zh": "产品"
         },
         "to": "/#clx1"
+      },
+      {
+        "id": "nav-how",
+        "label": {
+          "en": "How It Works",
+          "zh": "如何使用"
+        },
+        "to": "/#how-it-works"
       },
       {
         "id": "nav-support",
@@ -532,12 +532,20 @@
         "to": "/#support"
       },
       {
-        "id": "nav-about",
+        "id": "nav-business",
         "label": {
-          "en": "About",
-          "zh": "关于"
+          "en": "Business",
+          "zh": "商务"
         },
-        "to": "/#about"
+        "to": "/#business"
+      },
+      {
+        "id": "nav-contact",
+        "label": {
+          "en": "Contact",
+          "zh": "联系"
+        },
+        "to": "/contact"
       }
     ]
   },
