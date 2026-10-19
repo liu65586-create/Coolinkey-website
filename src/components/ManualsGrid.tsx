@@ -6,7 +6,7 @@ import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 import { ManualCard } from "./ManualCard";
 import { ManualModal } from "./ManualModal";
-import { VideoFrame, manualVideoUrl } from "./VideoFrame";
+import { VideoModal, manualVideoUrl } from "./VideoModal";
 
 type Props = {
   manuals: CmsManual[];
@@ -18,6 +18,7 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
   const { config } = useSiteConfig();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const [active, setActive] = useState<CmsManual | null>(null);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
 
   const heading = pickBilingual(lang, config?.manualsSection?.heading, t("manualsSection.heading"));
 
@@ -36,15 +37,19 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
       ) : null}
 
       <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 ${lgCols} ${showHeading ? "" : "mt-0"}`}>
-        {sorted.map((m) =>
-          m.type === "video" ? (
-            <VideoFrame key={m.id} src={manualVideoUrl(m, lang)} label={lang === "zh" ? m.title.zh : m.title.en} />
-          ) : (
-            <ManualCard key={m.id} manual={m} onOpen={setActive} />
-          ),
-        )}
+        {sorted.map((m) => (
+          <ManualCard
+            key={m.id}
+            manual={m}
+            onOpen={(manual) => {
+              if (manual.type === "video") setVideoSrc(manualVideoUrl(manual, lang));
+              else setActive(manual);
+            }}
+          />
+        ))}
       </div>
 
+      <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />
       <ManualModal open={Boolean(active)} onClose={() => setActive(null)} manual={active} lang={lang} />
     </section>
   );
