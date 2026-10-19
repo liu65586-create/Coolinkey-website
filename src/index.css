@@ -58,7 +58,7 @@ header:has(nav) { z-index: 50; }
 
 /* Home page — quiet, editorial, product-first */
 .home-page { overflow: hidden; background: var(--paper); }
-.site-anchor { border-top: 1px solid var(--line, rgba(11, 27, 43, 0.08)); scroll-margin-top: 80px; }
+.site-anchor { scroll-margin-top: 80px; }
 .site-anchor:focus { outline: none; }
 #about { min-height: 0; scroll-margin-top: 80px; }
 .hero-section { position: relative; isolation: isolate; overflow: hidden; display:flex; align-items:center; min-height: calc(100svh - 80px); background: linear-gradient(118deg,#f4f5f1 0%,#e9ece6 100%); }
@@ -440,11 +440,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-philosophy .v2-wrap { position: relative; z-index: 1; margin-block: 48px; max-width: 640px; padding: 32px; border-radius: 16px; background: rgba(248,248,246,.92); }
 .v2-philosophy p { margin: 12px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
 .v2-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.v2-paths article { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding: 0 8px 0 0; border: 0; border-top: 1px solid #e5e6e1; border-radius: 0; background: transparent; }
+.v2-paths article { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding: 0 8px 0 0; border: 0; border-radius: 0; background: transparent; }
 .v2-paths ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .v2-paths a:not(.v2-btn) { color: #202120; font-weight: 600; }
 .v2-paths a:not(.v2-btn):hover { color: #146c43; }
-.v2-footer { border-top: 1px solid #e5e6e1; background: #fff; }
+.v2-footer { background: #fff; }
 .v2-footer-grid { display: grid; grid-template-columns: 1.3fr repeat(4, 1fr); gap: 28px; padding-block: 48px 28px; }
 .v2-footer h2 { margin: 0 0 12px; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; color: #686b66; }
 .v2-footer ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }

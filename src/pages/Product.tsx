@@ -92,7 +92,7 @@ export function Product() {
           </div>
 
           {visibleManuals.length ? (
-            <div className="product-manuals mt-8 border-t border-[var(--color-border)] pt-6">
+            <div className="product-manuals mt-8">
               <h2 className="mb-5 text-center font-display text-[22px] font-semibold tracking-tight text-text sm:text-[24px]">
                 {manualsHeading}
               </h2>
