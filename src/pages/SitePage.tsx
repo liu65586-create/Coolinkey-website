@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { About } from "./About";
-import { BrandPhilosophy, BusinessPaths, HomeHero, HowItWorks, ProductStory } from "./Home";
+import { BrandPhilosophy, BusinessPaths, DesignPrinciples, HomeHero, HowItWorks, LifeAndSpecs, MeetClx1, ProductStory } from "./Home";
 import { Product } from "./Product";
 import { Support } from "./Support";
 import { scrollToSection, sectionIdFromPath } from "../utils/siteSections";
@@ -11,7 +11,8 @@ export function SitePage() {
   const instant = useRef(true);
 
   useEffect(() => {
-    const id = sectionIdFromPath(hash || "/") ?? "home";
+    const id = sectionIdFromPath(hash || "/");
+    if (!id) return;
     const behavior: ScrollBehavior = instant.current ? "auto" : "smooth";
     instant.current = false;
     scrollToSection(id, behavior);
@@ -39,16 +40,19 @@ export function SitePage() {
       <div id="home">
         <HomeHero />
       </div>
+      <BrandPhilosophy />
+      <DesignPrinciples />
       <section id="clx1" className="site-anchor" tabIndex={-1}>
+        <MeetClx1 />
         <Product />
         <ProductStory />
       </section>
       <HowItWorks />
+      <LifeAndSpecs />
       <section id="support" className="site-anchor" tabIndex={-1}>
         <Support />
       </section>
       <BusinessPaths />
-      <BrandPhilosophy />
       <section id="about" className="site-anchor" tabIndex={-1}>
         <About />
       </section>

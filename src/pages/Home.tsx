@@ -1,4 +1,3 @@
-import { Bluetooth, Fingerprint, KeyRound, Smartphone } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { VideoModal } from "../components/VideoModal";
@@ -31,30 +30,29 @@ function useHomeCopy() {
 }
 
 export function HomeHero() {
-  const { loading, config, defaultProduct, copy } = useHomeCopy();
+  const { loading, config, copy } = useHomeCopy();
   if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
-  const heroImage = defaultProduct?.mainImage || "/images/listing/product-clx1-isolated.jpg";
 
   return (
     <div className="v2-home">
-      <section className="v2-hero">
+      <section className="v2-hero v2-hero-brand">
         <div className="v2-wrap v2-hero-grid">
           <div className="v2-hero-copy">
-            <p className="v2-eyebrow">COOLINKEY CLX1</p>
-            <h1>{copy("Your Finger.\nYour Key.", "你的指纹。\n你的钥匙。")}</h1>
+            <p className="v2-eyebrow">COOLINKEY</p>
+            <h1>{copy("Designed for a More Effortless Life.", "为更从容的生活而设计。")}</h1>
             <p className="v2-lead">
               {copy(
-                "Meet CLX1 — a fingerprint smart chain lock designed to make everyday access simpler.",
-                "认识 CLX1 —— 一款指纹智能链条锁，让日常开锁更简单。",
+                "We believe the best technology feels natural — simplifying everyday moments through thoughtful design.",
+                "我们相信，最好的科技是自然的——用细致的设计，让日常时刻更简单。",
               )}
             </p>
             <div className="v2-actions">
-              <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore CLX1", "了解 CLX1")}</Link>
-              <Link className="v2-btn v2-btn-secondary" to="/#how-it-works">{copy("See How It Works", "查看如何使用")}</Link>
+              <Link className="v2-btn v2-btn-primary" to="/#approach">{copy("Discover Our Approach", "了解我们的方式")}</Link>
+              <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Meet CLX1", "认识 CLX1")}</Link>
             </div>
           </div>
           <div className="v2-hero-media">
-            <img src={heroImage} alt={copy("CLX1 fingerprint smart chain lock", "CLX1 指纹智能链条锁")} />
+            <img src="/images/listing/bike-locking-closeup.jpg" alt={copy("CLX1 locked to a bicycle outside a home", "CLX1 将自行车锁在住宅外")} />
           </div>
         </div>
       </section>
@@ -62,10 +60,64 @@ export function HomeHero() {
   );
 }
 
-export function ProductStory() {
-  const { loading, config, defaultProduct, lang, copy } = useHomeCopy();
+export function DesignPrinciples() {
+  const { loading, config, copy } = useHomeCopy();
   if (loading || !config) return null;
-  const specs = defaultProduct?.specs ?? [];
+  const principles = [
+    { en: "Simplicity", zh: "简洁", bodyEn: "Clear design. Intuitive experiences. Only what matters.", bodyZh: "清晰的设计，直觉的体验，只留下真正重要的部分。" },
+    { en: "Freedom", zh: "自由", bodyEn: "Designed to fit naturally into the rhythms of everyday life.", bodyZh: "顺应日常生活的节奏。" },
+    { en: "Thoughtful Design", zh: "细致设计", bodyEn: "Every detail should serve a purpose.", bodyZh: "每一处细节都有其用意。" },
+  ];
+
+  return (
+    <div className="v2-home">
+      <section className="v2-section" aria-labelledby="principles-title">
+        <div className="v2-wrap">
+          <h2 id="principles-title">{copy("Less Complexity. More Possibility.", "更少复杂。更多可能。")}</h2>
+          <ol className="v2-principles">
+            {principles.map((item) => (
+              <li key={item.en}>
+                <strong>{copy(item.en, item.zh)}</strong>
+                <p>{copy(item.bodyEn, item.bodyZh)}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export function MeetClx1() {
+  const { loading, config, copy } = useHomeCopy();
+  if (loading || !config) return null;
+
+  return (
+    <div className="v2-home">
+      <section className="v2-section" aria-labelledby="meet-title">
+        <div className="v2-wrap v2-split v2-meet">
+          <div>
+            <h2 id="meet-title">{copy("Meet CLX1.", "认识 CLX1。")}</h2>
+            <p className="v2-lead">
+              {copy(
+                "A fingerprint smart chain lock designed to bring a more intuitive access experience to everyday life.",
+                "一款指纹智能链条锁，让日常开锁更直觉。",
+              )}
+            </p>
+            <div className="v2-actions">
+              <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
+            </div>
+          </div>
+          <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 fingerprint smart chain lock", "CLX1 指纹智能链条锁")} />
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export function ProductStory() {
+  const { loading, config, copy } = useHomeCopy();
+  if (loading || !config) return null;
 
   return (
     <div className="v2-home">
@@ -90,7 +142,17 @@ export function ProductStory() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
 
+export function LifeAndSpecs() {
+  const { loading, config, defaultProduct, lang, copy } = useHomeCopy();
+  if (loading || !config) return null;
+  const specs = defaultProduct?.specs ?? [];
+
+  return (
+    <div className="v2-home">
       <section className="v2-section" aria-labelledby="carry-title">
         <div className="v2-wrap">
           <header className="v2-section-head">
@@ -166,12 +228,6 @@ export function HowItWorks() {
                 "可用指纹、App 或机械钥匙开锁。",
               )}
             </p>
-            <ul className="v2-features">
-              <li><Fingerprint size={18} aria-hidden="true" /><span>{copy("Fingerprint Unlock", "指纹解锁")}</span></li>
-              <li><Smartphone size={18} aria-hidden="true" /><span>{copy("App Control", "App 管理")}</span></li>
-              <li><Bluetooth size={18} aria-hidden="true" /><span>{copy("Bluetooth Pairing", "蓝牙配对")}</span></li>
-              <li><KeyRound size={18} aria-hidden="true" /><span>{copy("Mechanical Key", "机械钥匙")}</span></li>
-            </ul>
             {steps.length ? (
               <ol className="v2-steps">
                 {steps.map((step, index) => (
@@ -198,11 +254,18 @@ export function BrandPhilosophy() {
   if (loading || !config) return null;
   return (
     <div className="v2-home">
-      <section className="v2-philosophy" aria-labelledby="philosophy-title">
-        <img src="/images/listing/brand-lifestyle-story.jpg" alt="" />
-        <div className="v2-wrap">
-          <h2 id="philosophy-title">{copy("Rethinking Everyday Security.", "重新思考日常安防。")}</h2>
-          <p>{copy("We believe everyday security should feel intuitive, thoughtful and easy to use.", "我们希望日常安防直观、细致，并且容易使用。")}</p>
+      <section className="v2-section" id="approach" aria-labelledby="philosophy-title">
+        <div className="v2-wrap v2-approach">
+          <div>
+            <h2 id="philosophy-title">{copy("Technology Should Feel Natural.", "科技应当自然而然。")}</h2>
+            <p>
+              {copy(
+                "Good design should not make everyday life more complicated. It should remove friction, feel intuitive, and allow people to focus on what matters.",
+                "好的设计不该让日常生活更复杂。它应当减少阻力、直觉易用，让人把注意力留给真正重要的事。",
+              )}
+            </p>
+          </div>
+          <img src="/images/listing/bike-locking-wide.jpg" alt={copy("CLX1 on a bicycle in daylight outside a house", "日光下，CLX1 锁在住宅外的自行车上")} />
         </div>
       </section>
     </div>

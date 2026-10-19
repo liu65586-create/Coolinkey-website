@@ -1,4 +1,4 @@
-export const SITE_SECTION_IDS = ["home", "clx1", "how-it-works", "support", "business", "about"] as const;
+export const SITE_SECTION_IDS = ["home", "approach", "clx1", "how-it-works", "support", "business", "about"] as const;
 
 export type SiteSectionId = (typeof SITE_SECTION_IDS)[number];
 
@@ -6,7 +6,8 @@ const HASH_IDS = new Set<string>(SITE_SECTION_IDS);
 
 export function sectionIdFromPath(target: string): SiteSectionId | null {
   const hash = target.includes("#") ? target.slice(target.indexOf("#") + 1).split("?")[0] : "";
-  if (HASH_IDS.has(hash)) return hash as SiteSectionId;
+  if (hash && HASH_IDS.has(hash)) return hash as SiteSectionId;
+  if (hash) return null;
   const path = target.split("?")[0].split("#")[0].replace(/\/+$/, "") || "/";
   if (path === "/") return "home";
   if (path === "/product" || path.startsWith("/product/")) return "clx1";
