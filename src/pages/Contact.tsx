@@ -12,14 +12,16 @@ export function Contact() {
   const body = pickBilingual(lang, config?.contact?.body, t("contact.body"));
   return (
     <div className="v2-home v2-section">
-      <div className="v2-wrap v2-section-head">
-        <p className="v2-eyebrow">{lang === "zh" ? "联系" : "Contact"}</p>
-        <h2 id="contact-title">{title}</h2>
-        <p>{body}</p>
-        <div className="v2-actions">
-          <Button variant="primary" href={`mailto:${config?.contact?.email?.trim() || "support@coolinkey.com"}`}>
-            {pickBilingual(lang, config?.supportPage?.contactCta, t("supportPage.contactCta"))}
-          </Button>
+      <div className="v2-wrap">
+        <div className="v2-section-head">
+          <p className="v2-eyebrow">{lang === "zh" ? "联系" : "Contact"}</p>
+          <h2 id="contact-title">{title}</h2>
+          <p>{body}</p>
+          <div className="v2-actions">
+            <Button variant="primary" href={`mailto:${config?.contact?.email?.trim() || "support@coolinkey.com"}`}>
+              {pickBilingual(lang, config?.supportPage?.contactCta, t("supportPage.contactCta"))}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
