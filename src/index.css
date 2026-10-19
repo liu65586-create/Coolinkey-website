@@ -326,11 +326,18 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
   #support .support-panels .mt-1,
   #support .support-faq .mt-1,
   #support .support-faq .mt-2 { margin-top: 0.35rem; }
+  #clx1 > .v2-home:first-child > .v2-section {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-block: 32px 16px;
+  }
 }
 .home-page { background: #f8f8f6; overflow: visible; }
 .v2-home { background: #f8f8f6; color: #202120; }
 .v2-wrap { width: min(1440px, calc(100% - 96px)); margin-inline: auto; }
 .v2-section { padding-block: clamp(56px, 8vw, 112px); }
+#clx1 .v2-section:has(.v2-design) { padding-block: 24px 0; }
+#clx1 .page-wrap { padding-top: 28px; }
 #business.v2-section { min-height: 0; padding-block: 40px; }
 .about-panel { display: grid; justify-items: start; gap: 16px; padding-block: 64px 72px; }
 .about-panel h2 { margin: 0; font-size: clamp(2rem, 3vw, 2.75rem); font-weight: 650; letter-spacing: -0.045em; line-height: 1.08; }
