@@ -439,7 +439,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-philosophy .v2-wrap { position: relative; z-index: 1; margin-block: 48px; max-width: 640px; padding: 32px; border-radius: 16px; background: rgba(248,248,246,.92); }
 .v2-philosophy p { margin: 12px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
 .v2-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.v2-paths article { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding: 8px 8px 8px 0; border: 0; border-top: 1px solid #e5e6e1; border-radius: 0; background: transparent; }
+.v2-paths article { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding: 0 8px 0 0; border: 0; border-top: 1px solid #e5e6e1; border-radius: 0; background: transparent; }
 .v2-paths ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .v2-paths a:not(.v2-btn) { color: #202120; font-weight: 600; }
 .v2-paths a:not(.v2-btn):hover { color: #146c43; }
@@ -475,3 +475,22 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   html { scroll-behavior: auto; }
   .button:hover, .v2-btn, .brand-track { transition: none; }
 }
+
+/* One gap between the bottom of a block and the top of the next. */
+:root { --block-gap: 80px; }
+@media (max-width: 700px) { :root { --block-gap: 48px; } }
+.home-page .v2-section,
+#how-it-works,
+#clx1 > .v2-home:first-child > .v2-section,
+#clx1 .v2-section:has(.v2-design),
+#business.v2-section,
+#support > .support-stack,
+#clx1 .page-wrap,
+.about-panel {
+  padding-top: var(--block-gap);
+  padding-bottom: 0;
+}
+#how-it-works { min-height: 0; justify-content: flex-start; }
+#support .support-hero { padding-top: 0; padding-bottom: 32px; }
+#support .support-cta { padding-bottom: 0; }
+.v2-footer-grid { padding-top: var(--block-gap); }
