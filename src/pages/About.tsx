@@ -14,7 +14,6 @@ export function About() {
   return (
     <section id="contact" className="site-anchor" tabIndex={-1}>
       <div id="about" className="v2-wrap about-panel">
-        <p className="v2-eyebrow">coolinkey</p>
         <h2>{title}</h2>
         <p className="about-body">{body}</p>
         <Button variant="primary" href={`mailto:${email}`}>
