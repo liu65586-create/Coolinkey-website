@@ -21,24 +21,19 @@ const carryShots = [
   { src: "/images/listing/product-clx1-isolated.jpg", en: "Ready When You Are", zh: "随时可用", bodyEn: "Fingerprint, app, or mechanical key.", bodyZh: "指纹、App 或机械钥匙。" },
 ];
 
-export function Home() {
+function useHomeCopy() {
   const { i18n } = useTranslation();
   const { config, loading } = useSiteConfig();
   const { defaultProduct } = useCms();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
-  const [videoOpen, setVideoOpen] = useState(false);
-
-  const videoManual = defaultProduct?.manuals?.find((manual) => manual.type === "video");
-  const videoSrc = lang === "zh"
-    ? (videoManual?.videoUrlZh || videoManual?.videoUrlEn || null)
-    : (videoManual?.videoUrlEn || videoManual?.videoUrlZh || null);
-  const heroImage = defaultProduct?.mainImage || "/images/listing/product-clx1-isolated.jpg";
-  const specs = defaultProduct?.specs ?? [];
-  const steps = config?.supportPage?.steps ?? [];
-
-  if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
-
   const copy = (en: string, zh: string) => (lang === "zh" ? zh : en);
+  return { config, loading, defaultProduct, lang, copy };
+}
+
+export function HomeHero() {
+  const { loading, config, defaultProduct, copy } = useHomeCopy();
+  if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
+  const heroImage = defaultProduct?.mainImage || "/images/listing/product-clx1-isolated.jpg";
 
   return (
     <div className="v2-home">
@@ -63,7 +58,17 @@ export function Home() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
 
+export function ProductStory() {
+  const { loading, config, defaultProduct, lang, copy } = useHomeCopy();
+  if (loading || !config) return null;
+  const specs = defaultProduct?.specs ?? [];
+
+  return (
+    <div className="v2-home">
       <section className="v2-section" aria-labelledby="design-title">
         <div className="v2-wrap">
           <header className="v2-section-head">
@@ -82,49 +87,6 @@ export function Home() {
                 </figure>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="v2-section v2-section-muted" id="how-it-works" aria-labelledby="access-title">
-        <div className="v2-wrap v2-split">
-          <button
-            type="button"
-            className="v2-video"
-            onClick={() => videoSrc && setVideoOpen(true)}
-            disabled={!videoSrc}
-            aria-label={copy("Play CLX1 demonstration", "播放 CLX1 演示")}
-          >
-            <img src="/images/listing/one-touch-unlock.jpg" alt="" />
-            {videoSrc ? <span className="v2-play" aria-hidden="true" /> : null}
-          </button>
-          <div>
-            <h2 id="access-title">{copy("Access, Made Personal.", "开锁，按你的方式。")}</h2>
-            <p className="v2-lead">
-              {copy(
-                "Unlock with your fingerprint, the app, or a mechanical key.",
-                "可用指纹、App 或机械钥匙开锁。",
-              )}
-            </p>
-            <ul className="v2-features">
-              <li><Fingerprint size={18} aria-hidden="true" /><span>{copy("Fingerprint Unlock", "指纹解锁")}</span></li>
-              <li><Smartphone size={18} aria-hidden="true" /><span>{copy("App Control", "App 管理")}</span></li>
-              <li><Bluetooth size={18} aria-hidden="true" /><span>{copy("Bluetooth Pairing", "蓝牙配对")}</span></li>
-              <li><KeyRound size={18} aria-hidden="true" /><span>{copy("Mechanical Key", "机械钥匙")}</span></li>
-            </ul>
-            {steps.length ? (
-              <ol className="v2-steps">
-                {steps.map((step, index) => (
-                  <li key={step.id}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <div>
-                      <strong>{pickBilingual(lang, step.title, "")}</strong>
-                      {step.hint?.en || step.hint?.zh ? <p>{pickBilingual(lang, step.hint, "")}</p> : null}
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            ) : null}
           </div>
         </div>
       </section>
@@ -167,7 +129,75 @@ export function Home() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
 
+export function HowItWorks() {
+  const { loading, config, defaultProduct, lang, copy } = useHomeCopy();
+  const [videoOpen, setVideoOpen] = useState(false);
+  if (loading || !config) return null;
+
+  const videoManual = defaultProduct?.manuals?.find((manual) => manual.type === "video");
+  const videoSrc = lang === "zh"
+    ? (videoManual?.videoUrlZh || videoManual?.videoUrlEn || null)
+    : (videoManual?.videoUrlEn || videoManual?.videoUrlZh || null);
+  const steps = config.supportPage?.steps ?? [];
+
+  return (
+    <div className="v2-home">
+      <section className="v2-section v2-section-muted" id="how-it-works" aria-labelledby="access-title">
+        <div className="v2-wrap v2-split">
+          <button
+            type="button"
+            className="v2-video"
+            onClick={() => videoSrc && setVideoOpen(true)}
+            disabled={!videoSrc}
+            aria-label={copy("Play CLX1 demonstration", "播放 CLX1 演示")}
+          >
+            <img src="/images/listing/one-touch-unlock.jpg" alt="" />
+            {videoSrc ? <span className="v2-play" aria-hidden="true" /> : null}
+          </button>
+          <div>
+            <h2 id="access-title">{copy("Access, Made Personal.", "开锁，按你的方式。")}</h2>
+            <p className="v2-lead">
+              {copy(
+                "Unlock with your fingerprint, the app, or a mechanical key.",
+                "可用指纹、App 或机械钥匙开锁。",
+              )}
+            </p>
+            <ul className="v2-features">
+              <li><Fingerprint size={18} aria-hidden="true" /><span>{copy("Fingerprint Unlock", "指纹解锁")}</span></li>
+              <li><Smartphone size={18} aria-hidden="true" /><span>{copy("App Control", "App 管理")}</span></li>
+              <li><Bluetooth size={18} aria-hidden="true" /><span>{copy("Bluetooth Pairing", "蓝牙配对")}</span></li>
+              <li><KeyRound size={18} aria-hidden="true" /><span>{copy("Mechanical Key", "机械钥匙")}</span></li>
+            </ul>
+            {steps.length ? (
+              <ol className="v2-steps">
+                {steps.map((step, index) => (
+                  <li key={step.id}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <strong>{pickBilingual(lang, step.title, "")}</strong>
+                      {step.hint?.en || step.hint?.zh ? <p>{pickBilingual(lang, step.hint, "")}</p> : null}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            ) : null}
+          </div>
+        </div>
+      </section>
+      <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src={videoSrc} />
+    </div>
+  );
+}
+
+export function BrandPhilosophy() {
+  const { loading, config, copy } = useHomeCopy();
+  if (loading || !config) return null;
+  return (
+    <div className="v2-home">
       <section className="v2-philosophy" aria-labelledby="philosophy-title">
         <img src="/images/listing/brand-lifestyle-story.jpg" alt="" />
         <div className="v2-wrap">
@@ -175,7 +205,15 @@ export function Home() {
           <p>{copy("We believe everyday security should feel intuitive, thoughtful and easy to use.", "我们希望日常安防直观、细致，并且容易使用。")}</p>
         </div>
       </section>
+    </div>
+  );
+}
 
+export function BusinessPaths() {
+  const { loading, config, copy } = useHomeCopy();
+  if (loading || !config) return null;
+  return (
+    <div className="v2-home">
       <section className="v2-section" id="business" aria-labelledby="paths-title">
         <div className="v2-wrap">
           <h2 id="paths-title" className="sr-only">{copy("For consumers and business", "面向个人与商务")}</h2>
@@ -201,8 +239,6 @@ export function Home() {
           </div>
         </div>
       </section>
-
-      <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src={videoSrc} />
     </div>
   );
 }
