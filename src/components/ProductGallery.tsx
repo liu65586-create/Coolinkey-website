@@ -33,7 +33,7 @@ export function ProductGallery({ images, productName, fit = "contain", focus = "
           alt={productName}
           fit={fit}
           focus={focus}
-          className="mx-auto max-h-[420px] w-full p-4"
+          className="product-hero-image mx-auto max-h-[300px] w-full p-3"
         />
       </button>
 
@@ -46,7 +46,7 @@ export function ProductGallery({ images, productName, fit = "contain", focus = "
       />
 
       {list.length > 1 ? (
-        <div className="flex justify-center gap-2 overflow-x-auto py-1">
+        <div className="product-thumbs flex justify-center gap-2 overflow-x-auto py-1">
           {list.map((src, i) => (
             <button
               key={src + i}

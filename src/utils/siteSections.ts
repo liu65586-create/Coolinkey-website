@@ -24,5 +24,7 @@ export function scrollToSection(id: SiteSectionId, behavior: ScrollBehavior = "s
   }
   const el = document.getElementById(id);
   if (!el) return;
-  el.scrollIntoView({ behavior, block: "start" });
+  const header = document.querySelector("header")?.getBoundingClientRect().height ?? 80;
+  const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - header);
+  window.scrollTo({ top, behavior });
 }

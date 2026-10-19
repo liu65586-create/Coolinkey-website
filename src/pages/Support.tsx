@@ -45,25 +45,25 @@ export function Support() {
   }));
 
   return (
-    <div>
-      <section className="page-wrap grid items-center gap-10 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
+    <div className="support-stack w-full">
+      <section className="support-hero page-wrap grid items-center gap-6 py-8 lg:grid-cols-[1.15fr_0.85fr] lg:py-8">
         <div>
-          <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-text-muted">{text(page?.kicker, "supportPage.kicker")}</p>
-          <h2 className="mt-3 font-display text-[36px] font-bold leading-tight tracking-tight text-text sm:text-[48px]">
+          <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-text-muted">{text(page?.kicker, "supportPage.kicker")}</p>
+          <h2 className="mt-2 font-display text-[30px] font-semibold leading-tight tracking-tight text-text sm:text-[36px]">
             {text(page?.title, "supportPage.title")}
           </h2>
-          <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-text-muted">{text(page?.subtitle, "supportPage.subtitle")}</p>
+          <p className="mt-3 max-w-xl text-[16px] leading-relaxed text-text-muted">{text(page?.subtitle, "supportPage.subtitle")}</p>
         </div>
-        <div className="overflow-hidden rounded-[28px] bg-surface-muted p-6">
-          <img src={productImg} alt="CLX1" className="mx-auto max-h-[280px] w-full object-contain" />
+        <div className="overflow-hidden rounded-[24px] bg-surface-muted p-4">
+          <img src={productImg} alt="CLX1" className="mx-auto max-h-[180px] w-full object-contain" />
         </div>
       </section>
 
-      <section className="page-wrap grid gap-5 pb-8 lg:grid-cols-3">
-        <article className="rounded-[24px] border border-[var(--color-border)] bg-white p-6 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-xl font-semibold text-text">{text(page?.quickStart, "supportPage.quickStart")}</h2>
+      <section className="support-panels page-wrap grid gap-4 pb-4 lg:grid-cols-3">
+        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
+          <h2 className="text-[17px] font-semibold text-text">{text(page?.quickStart, "supportPage.quickStart")}</h2>
           <p className="mt-1 text-[15px] text-text-muted">{text(page?.quickStartHint, "supportPage.quickStartHint")}</p>
-          <ol className="mt-6 space-y-1">
+          <ol className="mt-4 space-y-0.5">
             {steps.map((s) => (
             <li key={s.id}>
                 <div className="flex items-center gap-3 rounded-xl px-1 py-2.5">
@@ -78,10 +78,10 @@ export function Support() {
           </ol>
         </article>
 
-        <article className="rounded-[24px] border border-[var(--color-border)] bg-white p-6 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-xl font-semibold text-text">{text(page?.guides, "supportPage.guides")}</h2>
+        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
+          <h2 className="text-[17px] font-semibold text-text">{text(page?.guides, "supportPage.guides")}</h2>
           <p className="mt-1 text-[15px] text-text-muted">{text(page?.guidesHint, "supportPage.guidesHint")}</p>
-          <ul className="mt-6 space-y-1">
+          <ul className="mt-4 space-y-0.5">
             {docs.map((m) => (
               <li key={m.id}>
                 <button
@@ -98,10 +98,10 @@ export function Support() {
           </ul>
         </article>
 
-        <article className="rounded-[24px] border border-[var(--color-border)] bg-white p-6 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-xl font-semibold text-text">{text(page?.videos, "supportPage.videos")}</h2>
+        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
+          <h2 className="text-[17px] font-semibold text-text">{text(page?.videos, "supportPage.videos")}</h2>
           <p className="mt-1 text-[15px] text-text-muted">{text(page?.videosHint, "supportPage.videosHint")}</p>
-          <ul className="mt-6 space-y-3">
+          <ul className="mt-4 space-y-2">
             {(videos.length ? videos : docs.slice(0, 3)).map((m) => (
               <li key={m.id}>
                 <button
@@ -109,7 +109,7 @@ export function Support() {
                   onClick={() => setActive(m)}
                   className="flex w-full items-center gap-3 rounded-xl bg-surface-muted p-2 text-left hover:bg-[#e7f8ea]"
                 >
-                  <span className="flex h-14 w-20 items-center justify-center rounded-lg bg-[#dce8e1] text-accent">
+                  <span className="flex h-11 w-16 items-center justify-center rounded-lg bg-[#dce8e1] text-accent">
                     <CirclePlay size={22} />
                   </span>
                   <span className="text-[15px] font-medium text-text">{lang === "zh" ? m.title.zh : m.title.en}</span>
@@ -120,14 +120,14 @@ export function Support() {
         </article>
       </section>
 
-      <section className="page-wrap pb-8">
-        <article className="rounded-[24px] border border-[var(--color-border)] bg-white p-6 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-xl font-semibold text-text">{text(page?.troubleshooting, "supportPage.troubleshooting")}</h2>
+      <section className="support-faq page-wrap pb-4">
+        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
+          <h2 className="text-[17px] font-semibold text-text">{text(page?.troubleshooting, "supportPage.troubleshooting")}</h2>
           <p className="mt-1 text-[15px] text-text-muted">{text(page?.troubleshootingHint, "supportPage.troubleshootingHint")}</p>
-          <div className="mt-4 divide-y divide-[var(--color-border)]">
+          <div className="mt-2 divide-y divide-[var(--color-border)]">
             {faqs.map((item) => (
-              <details key={item.id} className="group py-3">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[16px] font-medium text-text [&::-webkit-details-marker]:hidden">
+              <details key={item.id} className="group py-2.5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-medium text-text [&::-webkit-details-marker]:hidden">
                   {item.q}
                   <ChevronRight size={16} className="shrink-0 text-text-muted transition-transform group-open:rotate-90" />
                 </summary>
@@ -138,10 +138,10 @@ export function Support() {
         </article>
       </section>
 
-      <section className="page-wrap pb-16">
-        <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] bg-surface-muted px-6 py-8 sm:flex-row sm:items-center sm:px-10">
+      <section className="support-cta page-wrap pb-8">
+        <div className="flex flex-col items-start justify-between gap-4 rounded-[20px] bg-surface-muted px-5 py-5 sm:flex-row sm:items-center sm:px-8">
           <div>
-            <h2 className="text-xl font-semibold text-text">{text(page?.helpTitle, "supportPage.helpTitle")}</h2>
+            <h2 className="text-[17px] font-semibold text-text">{text(page?.helpTitle, "supportPage.helpTitle")}</h2>
             <p className="mt-1 text-[15px] text-text-muted">{text(page?.helpBody, "supportPage.helpBody")}</p>
           </div>
           <Button variant="primary" href={`mailto:${email}`} className="!border-transparent !bg-black !text-white hover:!bg-[#222]">

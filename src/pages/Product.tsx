@@ -38,7 +38,7 @@ export function Product() {
     : [];
 
   return (
-    <div className="page-wrap py-12 sm:py-16">
+    <div className="page-wrap py-8 sm:py-10">
       <div className="max-w-md">
         <ProductDropdown
           products={visibleProducts}
@@ -52,16 +52,16 @@ export function Product() {
         <p className="mt-16 text-text-muted">{loading ? "…" : "—"}</p>
       ) : (
         <>
-          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
+          <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">
             <div className="rounded-[28px] bg-surface-muted p-4 sm:p-6">
               <ProductGallery images={gallery} productName={name} fit={active.imageFit} focus={active.focus} />
             </div>
 
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <p className="text-sm font-semibold tracking-wide text-accent">CLX1</p>
-                <h2 className="font-display text-3xl font-bold tracking-tight text-text sm:text-[2.15rem]">{name}</h2>
-                <p className="text-[15px] leading-relaxed text-text-muted">{desc}</p>
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-text-muted">CLX1</p>
+                <h2 className="font-display text-[28px] font-semibold tracking-tight text-text sm:text-[32px]">{name}</h2>
+                <p className="text-[16px] leading-relaxed text-text-muted">{desc}</p>
               </div>
 
               <Button
@@ -72,13 +72,13 @@ export function Product() {
               </Button>
 
               <div>
-                <h2 className="mb-4 text-[15px] font-semibold uppercase tracking-wider text-text-muted">{t("product.specs")}</h2>
+                <h2 className="mb-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-text-muted">{t("product.specs")}</h2>
                 <dl className="overflow-hidden rounded-2xl border border-[var(--color-border)]">
                   {active.specs.map((row, i) => (
                     <div
                       key={i}
                       className={[
-                        "grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 px-4 py-3.5 text-[15px]",
+                        "grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 px-4 py-2.5 text-[15px]",
                         i % 2 === 0 ? "bg-white" : "bg-surface-muted",
                       ].join(" ")}
                     >
@@ -92,8 +92,8 @@ export function Product() {
           </div>
 
           {visibleManuals.length ? (
-            <div className="mt-20 border-t border-[var(--color-border)] pt-16">
-              <h2 className="mb-10 text-center font-display text-2xl font-semibold tracking-tight text-text sm:text-[28px]">
+            <div className="product-manuals mt-8 border-t border-[var(--color-border)] pt-6">
+              <h2 className="mb-5 text-center font-display text-[22px] font-semibold tracking-tight text-text sm:text-[24px]">
                 {manualsHeading}
               </h2>
               <ManualsGrid manuals={visibleManuals} showHeading={false} />
