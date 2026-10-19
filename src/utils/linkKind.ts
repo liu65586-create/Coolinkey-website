@@ -105,6 +105,25 @@ function vimeoEmbed(url: string): string | null {
   }
 }
 
+export type DocumentPreview =
+  | { mode: "pdf" }
+  | { mode: "iframe"; src: string }
+  | { mode: "none" };
+
+/** Local uploads stay on the PDF renderer. A cloud file address opens in a preview frame. */
+export function documentPreview(raw: string): DocumentPreview {
+  const url = raw.trim();
+  if (!url) return { mode: "none" };
+  const info = classifyLink(url);
+  if (info.kind === "drive-folder") return { mode: "none" };
+  if (info.kind === "drive-preview") return { mode: "iframe", src: url };
+  if (info.kind === "drive-file") {
+    const id = driveId(url);
+    return id ? { mode: "iframe", src: `https://drive.google.com/file/d/${id}/preview` } : { mode: "none" };
+  }
+  return { mode: "pdf" };
+}
+
 export function playbackPlan(raw: string): PlaybackPlan {
   const url = raw.trim();
   const info = classifyLink(url);

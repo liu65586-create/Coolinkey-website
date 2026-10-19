@@ -310,8 +310,6 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
     justify-content: flex-start;
     padding-block: var(--frame-gap);
   }
-  #support .support-hero { gap: clamp(10px, 1.6vh, 20px); }
-  #support .support-hero img { max-height: clamp(64px, 9.5vh, 112px); }
   #support .support-hero h2 { font-size: clamp(1.75rem, 3.2vh, 2.75rem); }
   #support .support-panels article,
   #support .support-faq article,

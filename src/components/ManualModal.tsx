@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import type { CmsManual, ManualType } from "../types/cms";
 import { useResolvedMediaUrl } from "../hooks/useResolvedMediaUrl";
+import { documentPreview } from "../utils/linkKind";
 import { Button } from "./Button";
 import { MediaPlayer } from "./MediaPlayer";
 
@@ -35,6 +36,8 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
         : (manual.pdfFileEn as string)
       : null;
   const resolvedPdf = useResolvedMediaUrl(pdfUrl);
+  const cloudPreview = pdfUrl ? documentPreview(pdfUrl) : { mode: "none" as const };
+  const cloudSrc = cloudPreview.mode === "iframe" ? cloudPreview.src : null;
   const videoUrl =
     manual && manual.type === "video"
       ? lang === "zh"
@@ -53,8 +56,8 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
 
   useEffect(() => {
     const host = canvasHostRef.current;
-    if (!open || type === "video" || !resolvedPdf || !host) {
-      setPdfState(open && pdfUrl && !resolvedPdf ? "checking" : "idle");
+    if (!open || type === "video" || cloudSrc || !resolvedPdf || !host) {
+      setPdfState(open && pdfUrl && !resolvedPdf && !cloudSrc ? "checking" : "idle");
       return;
     }
 
@@ -68,7 +71,13 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
       if (!response.ok) throw new Error("http");
       const data = new Uint8Array(await response.arrayBuffer());
       const header = new TextDecoder().decode(data.subarray(0, 5));
-      if (!header.startsWith("%PDF")) throw new Error("not-pdf");
+      if (!header.startsWith("%PDF")) {
+        if (/^https?:/i.test(resolvedPdf)) {
+          setPdfState("failed");
+          return;
+        }
+        throw new Error("not-pdf");
+      }
 
       loadingTask = pdfjsLib.getDocument({
         data,
@@ -109,7 +118,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
       cancelled = true;
       void loadingTask?.destroy();
     };
-  }, [open, pdfUrl, type, resolvedPdf]);
+  }, [open, pdfUrl, type, resolvedPdf, cloudSrc]);
 
   if (!open || !manual) return null;
 
@@ -148,6 +157,8 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
             <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black">
               <MediaPlayer url={videoUrl} title={title} autoPlay className="absolute inset-0 h-full w-full" />
             </div>
+          ) : cloudSrc ? (
+            <iframe title={title} src={cloudSrc} className="h-[min(68vh,760px)] w-full rounded-lg border-0 bg-white" />
           ) : showPdf ? (
             <div>
               {pdfState === "checking" || pdfState === "idle" ? (

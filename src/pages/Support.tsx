@@ -5,7 +5,6 @@ import { Button } from "../components/Button";
 import { ManualModal } from "../components/ManualModal";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
-import { useResolvedMediaUrl } from "../hooks/useResolvedMediaUrl";
 import type { CmsManual } from "../types/cms";
 import { getVisibleManuals } from "../utils/manualsVisibility";
 import { pickBilingual, type Lang } from "../utils/siteCopy";
@@ -19,10 +18,6 @@ export function Support() {
   const email = config?.contact?.email?.trim() || "support@coolinkey.com";
   const text = (field: Parameters<typeof pickBilingual>[1], key: string) => pickBilingual(lang, field, t(key));
   const [active, setActive] = useState<CmsManual | null>(null);
-
-  const productImg = useResolvedMediaUrl(
-    defaultProduct?.mainImage || "/images/defaults/mid-module-a-use-case.png"
-  );
 
   const manuals = useMemo(
     () => getVisibleManuals(defaultProduct?.manuals ?? [], config?.manualsSection?.hiddenManualTypes),
@@ -46,17 +41,11 @@ export function Support() {
 
   return (
     <div className="support-stack w-full">
-      <section className="support-hero page-wrap grid items-center gap-6 py-8 lg:grid-cols-[1.15fr_0.85fr] lg:py-8">
-        <div>
-          <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-text-muted">{text(page?.kicker, "supportPage.kicker")}</p>
-          <h2 className="mt-2 font-display text-[clamp(2rem,3.5vw,3.5rem)] font-semibold leading-tight tracking-tight text-text">
-            {text(page?.title, "supportPage.title")}
-          </h2>
-          <p className="mt-3 max-w-xl text-[16px] leading-relaxed text-text-muted">{text(page?.subtitle, "supportPage.subtitle")}</p>
-        </div>
-        <div className="overflow-hidden rounded-[24px] bg-surface-muted p-4">
-          <img src={productImg} alt="CLX1" className="mx-auto max-h-[180px] w-full object-contain" />
-        </div>
+      <section className="support-hero page-wrap py-8 lg:py-8">
+        <h2 className="font-display text-[clamp(2rem,3.5vw,3.5rem)] font-semibold leading-tight tracking-tight text-text">
+          {text(page?.title, "supportPage.title")}
+        </h2>
+        <p className="mt-3 max-w-xl text-[16px] leading-relaxed text-text-muted">{text(page?.subtitle, "supportPage.subtitle")}</p>
       </section>
 
       <section className="support-panels page-wrap grid gap-4 pb-4 lg:grid-cols-3">
