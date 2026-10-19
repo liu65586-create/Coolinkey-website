@@ -336,7 +336,8 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 .v2-home { background: #f8f8f6; color: #202120; }
 .v2-wrap { width: min(1440px, calc(100% - 96px)); margin-inline: auto; }
 .v2-section { padding-block: clamp(56px, 8vw, 112px); }
-#clx1 .v2-section:has(.v2-design) { padding-block: 24px 0; }
+#clx1 .v2-section:has(.v2-design),
+#clx1 .v2-home:has(.v2-design) { background: #fff; }
 #clx1 .page-wrap { padding-top: 28px; }
 #business.v2-section { min-height: 0; padding-block: 40px; }
 .about-panel { display: grid; justify-items: start; gap: 16px; padding-block: 64px 72px; }
@@ -398,12 +399,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-principles p { margin: 0; color: #686b66; font-size: 1.0625rem; line-height: 1.6; }
 .v2-meet img { width: 100%; max-height: 520px; object-fit: contain; }
 .v2-design { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; align-items: stretch; }
-.v2-design-copy { display: grid; gap: 10px; padding: 28px 28px 0 0; }
+.v2-design-copy { display: grid; gap: 10px; padding: 0 28px 16px 0; }
 .v2-design-copy h2 { margin: 0; color: #202120; font-size: clamp(2rem, 3.2vw, 3.25rem); font-weight: 620; letter-spacing: -0.04em; line-height: 1.08; }
 .v2-design-copy p { margin: 0; max-width: 36rem; color: #686b66; font-size: 1.0625rem; line-height: 1.55; }
 .v2-design-main, .v2-design-grid figure, .v2-cards figure, .v2-video, .v2-specs > img { overflow: hidden; border-radius: 12px; background: #fff; border: 1px solid #e5e6e1; }
 .v2-design-main img, .v2-design-grid img, .v2-cards img, .v2-video img, .v2-specs > img { display: block; width: 100%; object-fit: contain; background: #f4f4f1; }
-.v2-design-main { display: flex; flex-direction: column; min-height: 0; margin: 0; }
+.v2-design-main { display: flex; flex-direction: column; min-height: 0; margin: 0; overflow: visible; border: 0; border-radius: 0; background: transparent; }
 .v2-design-stage { position: relative; flex: 1 1 auto; min-height: 0; }
 .v2-design-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; background: transparent; }
 .v2-design-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; align-content: start; gap: 16px; height: max-content; }
@@ -457,7 +458,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .v2-hero-grid, .v2-hero-brand .v2-hero-grid, .v2-design, .v2-split, .v2-approach, .v2-paths, .v2-footer-grid { grid-template-columns: 1fr; }
   .v2-cards { grid-template-columns: 1fr; }
   .v2-design-stage { flex: none; aspect-ratio: 4 / 3; min-height: 240px; }
-  .v2-design-copy { padding: 20px 20px 0 0; }
+  .v2-design-copy { padding: 0 20px 12px 0; }
   .v2-hero-brand .v2-hero-media img { aspect-ratio: 16 / 10; max-height: 280px; }
   .v2-principles li { grid-template-columns: 1fr; gap: 8px; }
 }
