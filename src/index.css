@@ -391,14 +391,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-principles strong { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.03em; }
 .v2-principles p { margin: 0; color: #686b66; font-size: 1.0625rem; line-height: 1.6; }
 .v2-meet img { width: 100%; max-height: 520px; object-fit: contain; }
-.v2-section-head.v2-design-head { display: flex; align-items: center; justify-content: space-between; gap: 24px 48px; max-width: none; }
-.v2-section-head.v2-design-head h2 { flex: 0 1 auto; }
-.v2-section-head.v2-design-head p { margin: 0; max-width: 28rem; text-align: right; }
 .v2-design { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; align-items: stretch; }
+.v2-design-copy { display: grid; gap: 10px; padding: 28px 28px 0; }
+.v2-design-copy h2 { margin: 0; color: #202120; font-size: clamp(2rem, 3.2vw, 3.25rem); font-weight: 620; letter-spacing: -0.04em; line-height: 1.08; }
+.v2-design-copy p { margin: 0; max-width: 36rem; color: #686b66; font-size: 1.0625rem; line-height: 1.55; }
 .v2-design-main, .v2-design-grid figure, .v2-cards figure, .v2-video, .v2-specs > img { overflow: hidden; border-radius: 12px; background: #fff; border: 1px solid #e5e6e1; }
 .v2-design-main img, .v2-design-grid img, .v2-cards img, .v2-video img, .v2-specs > img { display: block; width: 100%; object-fit: contain; background: #f4f4f1; }
-.v2-design-main { display: flex; min-height: 0; margin: 0; }
-.v2-design-main img { flex: 1; width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.v2-design-main { display: flex; flex-direction: column; min-height: 0; margin: 0; }
+.v2-design-main img { flex: 1; width: 100%; height: 100%; min-height: 0; object-fit: contain; background: transparent; }
 .v2-design-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; min-height: 100%; }
 .v2-design-grid figure { display: flex; flex-direction: column; min-height: 0; margin: 0; overflow: visible; border: 0; border-radius: 0; background: transparent; }
 .v2-design-grid img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; border: 1px solid #e5e6e1; border-radius: 12px; }
@@ -450,8 +450,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .v2-hero-grid, .v2-hero-brand .v2-hero-grid, .v2-design, .v2-split, .v2-approach, .v2-paths, .v2-footer-grid { grid-template-columns: 1fr; }
   .v2-cards { grid-template-columns: 1fr; }
   .v2-design-main, .v2-design-main img { min-height: 320px; }
-  .v2-section-head.v2-design-head { flex-direction: column; align-items: flex-start; }
-  .v2-section-head.v2-design-head p { text-align: left; }
+  .v2-design-copy { padding: 20px 20px 0; }
   .v2-hero-brand .v2-hero-media img { aspect-ratio: 16 / 10; max-height: 280px; }
   .v2-principles li { grid-template-columns: 1fr; gap: 8px; }
 }
