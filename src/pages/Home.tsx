@@ -202,7 +202,9 @@ export function ProductStory() {
                 <h2 id="design-title">{copy("More Than a Lock.", "不只是一把锁。")}</h2>
                 <p>{copy("A thoughtful combination of form, function and everyday practicality.", "形态、功能与日常实用的结合。")}</p>
               </header>
-              <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 product, full view", "CLX1 产品全貌")} />
+              <div className="v2-design-stage">
+                <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 product, full view", "CLX1 产品全貌")} />
+              </div>
             </figure>
             <div className="v2-design-grid">
               {designShots.map((shot) => (
