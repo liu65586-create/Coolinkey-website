@@ -330,32 +330,18 @@ export function BusinessPaths() {
   return (
     <div className="v2-home">
       <section className="v2-section" id="business" aria-labelledby="paths-title">
-        <div className="v2-wrap">
-          <h2 id="paths-title" className="sr-only">{copy("For consumers and business", "面向个人与商务")}</h2>
-          <div className="v2-paths">
-            <article>
-              <p className="v2-eyebrow">{copy("For Consumers", "面向个人")}</p>
-              <ul>
-                <li><Link to="/#clx1">{copy("Explore CLX1", "了解 CLX1")}</Link></li>
-                <li><Link to="/#how-it-works">{copy("How It Works", "如何使用")}</Link></li>
-                <li><Link to="/#support">{copy("Support & FAQ", "支持与常见问题")}</Link></li>
-              </ul>
-              <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore Now", "立即了解")}</Link>
-            </article>
-            <article>
-              <p className="v2-eyebrow">{copy("For Business", "面向商务")}</p>
-              <h3>{copy("Let's Explore What's Possible.", "一起看看能合作什么。")}</h3>
-              <p>
-                {copy(
-                  "We welcome inquiries from distributors, retailers and businesses interested in working with COOLINKEY.",
-                  "欢迎分销商、零售商以及其他有意与 COOLINKEY 合作的企业来信咨询。",
-                )}
-              </p>
-              <Link className="v2-btn v2-btn-primary" to="/business">
-                {copy("Discuss Business Opportunities", "洽谈合作机会")} →
-              </Link>
-            </article>
-          </div>
+        <div className="v2-wrap v2-paths">
+          <p className="v2-eyebrow">{copy("For Business", "面向商务")}</p>
+          <h2 id="paths-title">{copy("Let's Explore What's Possible.", "一起看看能合作什么。")}</h2>
+          <p>
+            {copy(
+              "We welcome inquiries from distributors, retailers and businesses interested in working with COOLINKEY.",
+              "欢迎分销商、零售商以及其他有意与 COOLINKEY 合作的企业来信咨询。",
+            )}
+          </p>
+          <Link className="v2-btn v2-btn-primary" to="/business">
+            {copy("Discuss Business Opportunities", "洽谈合作机会")} →
+          </Link>
         </div>
       </section>
     </div>
