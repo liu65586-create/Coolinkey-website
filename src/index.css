@@ -274,7 +274,6 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
 /* Nav targets fill the space under the header so a click shows the whole module,
    with the same inset above the content and above the next module. */
 :root { --nav-h: 80px; --frame-gap: clamp(28px, 4vh, 56px); }
-#approach,
 #how-it-works,
 #business,
 #contact > .v2-section,
@@ -284,7 +283,6 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
   padding-block: var(--frame-gap);
 }
 @media (min-width: 1000px) {
-  #approach,
   #how-it-works,
   #business,
   #contact > .v2-section,
@@ -295,12 +293,10 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
     justify-content: center;
     min-height: calc(100svh - var(--nav-h));
   }
-  #approach > .v2-wrap,
   #how-it-works > .v2-wrap,
   #business > .v2-wrap,
   #contact > .v2-section > .v2-wrap,
   #clx1 .v2-meet { width: min(1440px, calc(100% - 96px)); }
-  #approach img,
   #how-it-works .v2-video,
   #how-it-works .v2-video img,
   #clx1 .v2-meet img {
@@ -347,6 +343,28 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
 .v2-section-head { display: grid; gap: 16px; max-width: 760px; margin-bottom: 40px; }
 .v2-section-head h2, .v2-split h2, .v2-philosophy h2 { margin: 0; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 620; letter-spacing: -0.04em; line-height: 1.08; }
 .v2-section-head p, .v2-lead { margin: 16px 0 0; max-width: 38rem; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
+.brand-carousel { position: relative; height: calc(100svh - var(--nav-h, 80px)); overflow: hidden; background: #202120; color: #fff; }
+.brand-track { display: flex; height: 100%; transition: transform 0.7s ease; }
+.brand-slide { position: relative; flex: 0 0 100%; height: 100%; }
+.brand-slide[aria-hidden="true"] { visibility: hidden; }
+.brand-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.brand-slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16, 24, 18, 0.78) 0%, rgba(16, 24, 18, 0.42) 42%, rgba(16, 24, 18, 0.08) 72%); }
+.brand-copy { position: absolute; z-index: 1; left: max(32px, calc((100% - 1440px) / 2 + 48px)); bottom: 88px; width: min(640px, calc(100% - 64px)); }
+.brand-copy .v2-eyebrow, .brand-copy h1, .brand-copy h2 { color: #fff; }
+.brand-copy h1, .brand-copy h2 { margin: 12px 0 0; max-width: 14ch; font-size: clamp(2.6rem, 4.6vw, 5rem); font-weight: 650; letter-spacing: -0.05em; line-height: 0.98; }
+.brand-copy .v2-lead { color: rgba(255, 255, 255, 0.86); }
+.brand-copy .v2-btn-secondary { color: #fff; border-color: rgba(255, 255, 255, 0.72); background: transparent; }
+.brand-copy .v2-btn-secondary:hover { border-color: #fff; background: rgba(255, 255, 255, 0.12); }
+.brand-principles { display: grid; gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }
+.brand-principles strong { display: block; font-size: 1.15rem; font-weight: 650; }
+.brand-principles p { margin: 2px 0 0; color: rgba(255, 255, 255, 0.82); font-size: 0.98rem; line-height: 1.45; }
+.brand-controls { position: absolute; z-index: 2; right: max(32px, calc((100% - 1440px) / 2 + 48px)); bottom: 36px; display: flex; align-items: center; gap: 14px; }
+.brand-nav, .brand-dots button { border: 0; background: transparent; color: #fff; }
+.brand-nav { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 999px; background: rgba(16, 24, 18, 0.28); }
+.brand-nav:hover { background: rgba(255, 255, 255, 0.16); }
+.brand-dots { display: flex; align-items: center; gap: 8px; }
+.brand-dots button { width: 8px; height: 8px; padding: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.45); }
+.brand-dots button[aria-current="true"] { width: 28px; background: #fff; }
 .v2-hero { padding-block: clamp(40px, 6vw, 88px); }
 .v2-hero-brand { padding-block: clamp(64px, 9vw, 128px); }
 .v2-hero-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; align-items: center; gap: clamp(32px, 5vw, 80px); }
@@ -365,7 +383,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-hero-brand .v2-hero-media { min-height: 0; background: transparent; }
 .v2-hero-brand .v2-hero-media img { width: 100%; max-height: 460px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center; border-radius: 12px; }
 .v2-approach { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
-.v2-approach h2, #principles-title { margin: 0; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 620; letter-spacing: -0.04em; line-height: 1.08; }
+.v2-approach h2 { margin: 0; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 620; letter-spacing: -0.04em; line-height: 1.08; }
 .v2-approach p { margin: 20px 0 0; max-width: 36rem; color: #686b66; font-size: 1.0625rem; line-height: 1.7; }
 .v2-approach img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
 .v2-principles { display: grid; margin: 48px 0 0; padding: 0; list-style: none; }
@@ -437,7 +455,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .v2-section, .v2-hero-brand { padding-block: 56px; }
   .v2-hero-copy h1, .v2-hero-brand h1 { font-size: clamp(2.4rem, 12vw, 3.4rem); max-width: none; }
 }
+@media (max-width: 700px) {
+  .brand-copy { left: 20px; bottom: 84px; width: calc(100% - 40px); }
+  .brand-copy h1, .brand-copy h2 { font-size: clamp(2.1rem, 10vw, 3rem); max-width: none; }
+  .brand-controls { right: 20px; bottom: 20px; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .button:hover, .v2-btn { transition: none; }
+  .button:hover, .v2-btn, .brand-track { transition: none; }
 }

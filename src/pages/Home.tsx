@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { VideoModal } from "../components/VideoModal";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
@@ -29,62 +30,134 @@ function useHomeCopy() {
   return { config, loading, defaultProduct, lang, copy };
 }
 
+const brandSlides = [
+  {
+    id: "manifesto",
+    image: "/images/lifestyle/hero-cyclists.jpg",
+    position: "72% center",
+    altEn: "Two cyclists riding together along the coast",
+    altZh: "两位骑行者沿海岸并肩骑行",
+    titleEn: "Designed for a More Effortless Life.",
+    titleZh: "为更从容的生活而设计。",
+    bodyEn: "We believe the best technology feels natural — simplifying everyday moments through thoughtful design.",
+    bodyZh: "我们相信，最好的科技是自然的——用细致的设计，让日常时刻更简单。",
+  },
+  {
+    id: "philosophy",
+    image: "/images/listing/bike-locking-wide.jpg",
+    position: "center",
+    altEn: "CLX1 on a bicycle in daylight outside a house",
+    altZh: "日光下，CLX1 锁在住宅外的自行车上",
+    titleEn: "Technology Should Feel Natural.",
+    titleZh: "科技应当自然而然。",
+    bodyEn: "Good design should not make everyday life more complicated. It should remove friction, feel intuitive, and allow people to focus on what matters.",
+    bodyZh: "好的设计不该让日常生活更复杂。它应当减少阻力、直觉易用，让人把注意力留给真正重要的事。",
+  },
+  {
+    id: "principles",
+    image: "/images/listing/ebike-locking-wide.jpg",
+    position: "62% center",
+    altEn: "CLX1 locked around an e-bike frame",
+    altZh: "CLX1 锁在电动自行车车架上",
+    titleEn: "Less Complexity. More Possibility.",
+    titleZh: "更少复杂。更多可能。",
+    bodyEn: "",
+    bodyZh: "",
+    principles: [
+      { en: "Simplicity", zh: "简洁", bodyEn: "Clear design. Intuitive experiences. Only what matters.", bodyZh: "清晰的设计，直觉的体验，只留下真正重要的部分。" },
+      { en: "Freedom", zh: "自由", bodyEn: "Designed to fit naturally into the rhythms of everyday life.", bodyZh: "顺应日常生活的节奏。" },
+      { en: "Thoughtful Design", zh: "细致设计", bodyEn: "Every detail should serve a purpose.", bodyZh: "每一处细节都有其用意。" },
+    ],
+  },
+] as const;
+
 export function HomeHero() {
   const { loading, config, copy } = useHomeCopy();
+  const { hash } = useLocation();
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const count = brandSlides.length;
+
+  useEffect(() => {
+    if (hash === "#approach") setIndex(1);
+  }, [hash]);
+
+  useEffect(() => {
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => setIndex((current) => (current + 1) % count), 7000);
+    return () => window.clearInterval(timer);
+  }, [paused, count]);
+
   if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
 
+  const go = (next: number) => setIndex((next + count) % count);
+
   return (
-    <div className="v2-home">
-      <section className="v2-hero v2-hero-brand">
-        <div className="v2-wrap v2-hero-grid">
-          <div className="v2-hero-copy">
-            <p className="v2-eyebrow">COOLINKEY</p>
-            <h1>{copy("Designed for a More Effortless Life.", "为更从容的生活而设计。")}</h1>
-            <p className="v2-lead">
-              {copy(
-                "We believe the best technology feels natural — simplifying everyday moments through thoughtful design.",
-                "我们相信，最好的科技是自然的——用细致的设计，让日常时刻更简单。",
+    <section
+      id="approach"
+      className="brand-carousel"
+      aria-roledescription="carousel"
+      aria-label="COOLINKEY"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
+      <div className="brand-track" style={{ transform: `translateX(-${index * 100}%)` }}>
+        {brandSlides.map((slide, slideIndex) => (
+          <article key={slide.id} className="brand-slide" aria-hidden={slideIndex !== index}>
+            <img src={slide.image} alt="" style={{ objectPosition: slide.position }} />
+            <div className="brand-copy">
+              {slideIndex === 0 ? <p className="v2-eyebrow">COOLINKEY</p> : null}
+              {slideIndex === 0 ? (
+                <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
+              ) : (
+                <h2 id={slide.id === "philosophy" ? "philosophy-title" : "principles-title"}>{copy(slide.titleEn, slide.titleZh)}</h2>
               )}
-            </p>
-            <div className="v2-actions">
-              <Link className="v2-btn v2-btn-primary" to="/#approach">{copy("Discover Our Approach", "了解我们的方式")}</Link>
-              <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Meet CLX1", "认识 CLX1")}</Link>
+              {slide.bodyEn ? <p className="v2-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
+              {"principles" in slide ? (
+                <ol className="brand-principles">
+                  {slide.principles.map((item) => (
+                    <li key={item.en}>
+                      <strong>{copy(item.en, item.zh)}</strong>
+                      <p>{copy(item.bodyEn, item.bodyZh)}</p>
+                    </li>
+                  ))}
+                </ol>
+              ) : null}
+              {slideIndex === 0 ? (
+                <div className="v2-actions">
+                  <button type="button" className="v2-btn v2-btn-primary" onClick={() => go(1)}>
+                    {copy("Discover Our Approach", "了解我们的方式")}
+                  </button>
+                  <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Meet CLX1", "认识 CLX1")}</Link>
+                </div>
+              ) : null}
             </div>
-          </div>
-          <div className="v2-hero-media">
-            <img src="/images/listing/bike-locking-closeup.jpg" alt={copy("CLX1 locked to a bicycle outside a home", "CLX1 将自行车锁在住宅外")} />
-          </div>
+          </article>
+        ))}
+      </div>
+      <div className="brand-controls">
+        <button type="button" className="brand-nav" onClick={() => go(index - 1)} aria-label={copy("Previous", "上一张")}>
+          <ChevronLeft size={20} />
+        </button>
+        <div className="brand-dots">
+          {brandSlides.map((slide, slideIndex) => (
+            <button
+              key={slide.id}
+              type="button"
+              aria-label={copy(slide.titleEn, slide.titleZh)}
+              aria-current={slideIndex === index ? "true" : undefined}
+              onClick={() => go(slideIndex)}
+            />
+          ))}
         </div>
-      </section>
-    </div>
-  );
-}
-
-export function DesignPrinciples() {
-  const { loading, config, copy } = useHomeCopy();
-  if (loading || !config) return null;
-  const principles = [
-    { en: "Simplicity", zh: "简洁", bodyEn: "Clear design. Intuitive experiences. Only what matters.", bodyZh: "清晰的设计，直觉的体验，只留下真正重要的部分。" },
-    { en: "Freedom", zh: "自由", bodyEn: "Designed to fit naturally into the rhythms of everyday life.", bodyZh: "顺应日常生活的节奏。" },
-    { en: "Thoughtful Design", zh: "细致设计", bodyEn: "Every detail should serve a purpose.", bodyZh: "每一处细节都有其用意。" },
-  ];
-
-  return (
-    <div className="v2-home">
-      <section className="v2-section" aria-labelledby="principles-title">
-        <div className="v2-wrap">
-          <h2 id="principles-title">{copy("Less Complexity. More Possibility.", "更少复杂。更多可能。")}</h2>
-          <ol className="v2-principles">
-            {principles.map((item) => (
-              <li key={item.en}>
-                <strong>{copy(item.en, item.zh)}</strong>
-                <p>{copy(item.bodyEn, item.bodyZh)}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-    </div>
+        <button type="button" className="brand-nav" onClick={() => go(index + 1)} aria-label={copy("Next", "下一张")}>
+          <ChevronRight size={20} />
+        </button>
+      </div>
+      <p className="sr-only">{copy(brandSlides[index].altEn, brandSlides[index].altZh)}</p>
+    </section>
   );
 }
 
@@ -245,29 +318,6 @@ export function HowItWorks() {
         </div>
       </section>
       <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src={videoSrc} />
-    </div>
-  );
-}
-
-export function BrandPhilosophy() {
-  const { loading, config, copy } = useHomeCopy();
-  if (loading || !config) return null;
-  return (
-    <div className="v2-home">
-      <section className="v2-section" id="approach" aria-labelledby="philosophy-title">
-        <div className="v2-wrap v2-approach">
-          <div>
-            <h2 id="philosophy-title">{copy("Technology Should Feel Natural.", "科技应当自然而然。")}</h2>
-            <p>
-              {copy(
-                "Good design should not make everyday life more complicated. It should remove friction, feel intuitive, and allow people to focus on what matters.",
-                "好的设计不该让日常生活更复杂。它应当减少阻力、直觉易用，让人把注意力留给真正重要的事。",
-              )}
-            </p>
-          </div>
-          <img src="/images/listing/bike-locking-wide.jpg" alt={copy("CLX1 on a bicycle in daylight outside a house", "日光下，CLX1 锁在住宅外的自行车上")} />
-        </div>
-      </section>
     </div>
   );
 }
