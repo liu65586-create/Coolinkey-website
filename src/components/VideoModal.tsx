@@ -37,7 +37,7 @@ export function VideoModal({ open, onClose, src }: Props) {
           {t("manualsSection.close")}
         </button>
         <div className="aspect-video w-full">
-          <MediaPlayer url={src} title="coolinkey video" className="h-full w-full" />
+          <MediaPlayer url={src} title="coolinkey video" autoPlay className="h-full w-full" />
         </div>
       </div>
     </div>,

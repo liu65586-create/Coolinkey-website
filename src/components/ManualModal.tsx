@@ -146,7 +146,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
         <div className="min-h-0 flex-1 overflow-auto bg-neutral-100 px-4 py-4">
           {type === "video" && videoUrl ? (
             <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black">
-              <MediaPlayer url={videoUrl} title={title} className="absolute inset-0 h-full w-full" />
+              <MediaPlayer url={videoUrl} title={title} autoPlay className="absolute inset-0 h-full w-full" />
             </div>
           ) : showPdf ? (
             <div>
@@ -166,22 +166,24 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
           )}
         </div>
 
-        <footer className="flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 px-5 py-4">
-          {resolvedPdf ? (
-            <a
-              href={resolvedPdf}
-              download
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-full border-2 border-transparent bg-black px-8 py-3 text-[15px] font-semibold !text-white transition-colors hover:bg-[#222]"
-            >
-              {t("manualsSection.downloadPdf")}
-            </a>
-          ) : null}
-          <Button variant="secondary" onClick={onClose}>
-            {t("manualsSection.close")}
-          </Button>
-        </footer>
+        {type === "video" ? null : (
+          <footer className="flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 px-5 py-4">
+            {resolvedPdf ? (
+              <a
+                href={resolvedPdf}
+                download
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-full border-2 border-transparent bg-black px-8 py-3 text-[15px] font-semibold !text-white transition-colors hover:bg-[#222]"
+              >
+                {t("manualsSection.downloadPdf")}
+              </a>
+            ) : null}
+            <Button variant="secondary" onClick={onClose}>
+              {t("manualsSection.close")}
+            </Button>
+          </footer>
+        )}
       </div>
     </div>,
     document.body
