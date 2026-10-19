@@ -270,6 +270,71 @@ main:not(.home-page) .page-wrap { max-width:1180px; }
 .mid-module-card p { margin: 0; padding: 16px 18px 20px; color: #353b36; font-size: 15px; line-height: 1.65; }
 
 #approach, #how-it-works, #business, #contact, #clx1, #support, #about { scroll-margin-top: 80px; }
+
+/* Nav targets fill the space under the header so a click shows the whole module,
+   with the same inset above the content and above the next module. */
+:root { --nav-h: 80px; --frame-gap: clamp(28px, 4vh, 56px); }
+#approach,
+#how-it-works,
+#business,
+#contact > .v2-section,
+#clx1 > .v2-home:first-child > .v2-section,
+#support > .support-stack {
+  box-sizing: border-box;
+  padding-block: var(--frame-gap);
+}
+@media (min-width: 1000px) {
+  #approach,
+  #how-it-works,
+  #business,
+  #contact > .v2-section,
+  #clx1 > .v2-home:first-child > .v2-section,
+  #support > .support-stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100svh - var(--nav-h));
+  }
+  #approach > .v2-wrap,
+  #how-it-works > .v2-wrap,
+  #business > .v2-wrap,
+  #contact > .v2-section > .v2-wrap,
+  #clx1 .v2-meet { width: min(1440px, calc(100% - 96px)); }
+  #approach img,
+  #how-it-works .v2-video,
+  #how-it-works .v2-video img,
+  #clx1 .v2-meet img {
+    width: 100%;
+    max-height: calc(100svh - var(--nav-h) - var(--frame-gap) * 2);
+    object-fit: cover;
+  }
+  #clx1 .v2-meet img { object-fit: contain; }
+  #support .support-hero,
+  #support .support-panels,
+  #support .support-faq,
+  #support .support-cta { padding-block: 0; }
+  #support > .support-stack {
+    --frame-gap: clamp(20px, 2.6vh, 36px);
+    gap: clamp(8px, 1.1vh, 14px);
+    padding-block: var(--frame-gap);
+  }
+  #support .support-hero { gap: clamp(10px, 1.6vh, 20px); }
+  #support .support-hero img { max-height: clamp(64px, 9.5vh, 112px); }
+  #support .support-hero h2 { font-size: clamp(1.75rem, 3.2vh, 2.75rem); }
+  #support .support-panels article,
+  #support .support-faq article,
+  #support .support-cta > div { padding: clamp(12px, 1.6vh, 18px) clamp(14px, 1.6vw, 22px); }
+  #support .support-panels li > div,
+  #support .support-panels li > button,
+  #support .support-faq details { padding-block: clamp(4px, 0.7vh, 8px); }
+  #support .support-panels h2,
+  #support .support-faq h2,
+  #support .support-cta h2 { margin-top: 0; }
+  #support .support-panels .mt-4,
+  #support .support-panels .mt-1,
+  #support .support-faq .mt-1,
+  #support .support-faq .mt-2 { margin-top: 0.35rem; }
+}
 .home-page { background: #f8f8f6; overflow: visible; }
 #about { min-height: 0; display: block; }
 
