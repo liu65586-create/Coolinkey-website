@@ -181,7 +181,7 @@ export function MeetClx1() {
               <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
             </div>
           </div>
-          <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 fingerprint smart chain lock", "CLX1 指纹智能链条锁")} />
+          <img src="/images/listing/meet-clx1.jpg" alt={copy("CLX1 fingerprint smart chain lock", "CLX1 指纹智能链条锁")} />
         </div>
       </section>
     </div>
