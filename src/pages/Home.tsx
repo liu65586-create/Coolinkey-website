@@ -167,9 +167,10 @@ export function MeetClx1() {
 
   return (
     <div className="v2-home">
-      <section className="v2-section" aria-labelledby="meet-title">
-        <div className="v2-wrap v2-split v2-meet">
-          <div>
+      <section className="v2-section v2-meet" aria-labelledby="meet-title">
+        <img src="/images/listing/meet-clx1.jpg" alt={copy("CLX1 fingerprint smart chain lock", "CLX1 指纹智能链条锁")} />
+        <div className="v2-wrap">
+          <div className="v2-meet-copy">
             <h2 id="meet-title">{copy("Meet CLX1.", "认识 CLX1。")}</h2>
             <p className="v2-lead">
               {copy(
@@ -181,7 +182,6 @@ export function MeetClx1() {
               <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
             </div>
           </div>
-          <img src="/images/listing/meet-clx1.jpg" alt={copy("CLX1 fingerprint smart chain lock", "CLX1 指纹智能链条锁")} />
         </div>
       </section>
     </div>
