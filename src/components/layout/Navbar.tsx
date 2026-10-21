@@ -13,7 +13,7 @@ const NAV_SECTIONS: Record<string, readonly SiteSectionId[]> = {
   "/#clx1": ["clx1", "how-it-works"],
   "/#support": ["support"],
   "/#safety": ["safety"],
-  "/#business": ["business", "about", "contact"],
+  "/#help": ["help", "business", "about", "contact"],
 };
 
 function linkIsActive(to: string, activeSection: SiteSectionId | "") {

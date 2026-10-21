@@ -1,4 +1,4 @@
-export const SITE_SECTION_IDS = ["home", "approach", "clx1", "how-it-works", "safety", "support", "business", "about", "contact"] as const;
+export const SITE_SECTION_IDS = ["home", "approach", "clx1", "how-it-works", "safety", "support", "help", "business", "about", "contact"] as const;
 
 export type SiteSectionId = (typeof SITE_SECTION_IDS)[number];
 

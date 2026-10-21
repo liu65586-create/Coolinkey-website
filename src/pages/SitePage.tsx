@@ -4,6 +4,7 @@ import { About } from "./About";
 import { BusinessPaths, HomeHero, HowItWorks, LifeAndSpecs } from "./Home";
 import { Product } from "./Product";
 import { Support } from "./Support";
+import { SupportDesk } from "./SupportDesk";
 import { scrollToSection, sectionIdFromPath } from "../utils/siteSections";
 
 export function SitePage() {
@@ -48,6 +49,7 @@ export function SitePage() {
       <section id="support" className="site-anchor" tabIndex={-1}>
         <Support />
       </section>
+      <SupportDesk />
       <BusinessPaths />
       <About />
     </div>
