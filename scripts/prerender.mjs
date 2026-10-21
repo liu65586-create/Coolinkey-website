@@ -12,9 +12,8 @@ const serverEntry = resolve(root, ".ssr/entry-server.js");
 const { render } = await import(pathToFileURL(serverEntry).href);
 
 const routes = [
-  { url: "/", title: "COOLINKEY CLX1 | Fingerprint Smart Chain Lock", must: ["Meet CLX1", "Less Complexity"], forbid: ["Working Together"] },
+  { url: "/", title: "COOLINKEY CLX1 | Fingerprint Smart Chain Lock", must: ["Meet CLX1", "Less Complexity", "The Pressure Test"], forbid: ["Working Together", "bolt cutter", "theft-proof"] },
   { url: "/business", title: "Business Partnerships &amp; Inquiries | COOLINKEY", must: ["Working Together"], forbid: [">Meet CLX1.<"] },
-  { url: "/durability-testing", title: "COOLINKEY CLX1 | Durability &amp; Testing", must: ["The Pressure Test", "Structural Integrity"], forbid: [">Meet CLX1.<", "bolt cutter", "theft-proof"] },
   { url: "/privacy", title: "Privacy Policy | COOLINKEY", must: ["Privacy Policy"], forbid: [">Meet CLX1.<"] },
   { url: "/cookie-policy", title: "GDPR &amp; Cookie Statement | COOLINKEY", must: ["Cookie Statement"], forbid: [">Meet CLX1.<"] },
 ];

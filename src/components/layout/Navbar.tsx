@@ -12,6 +12,7 @@ import { scrollToSection, sectionHash, sectionIdFromPath, SITE_SECTION_IDS, type
 const NAV_SECTIONS: Record<string, readonly SiteSectionId[]> = {
   "/#clx1": ["clx1", "how-it-works"],
   "/#support": ["support"],
+  "/#safety": ["safety"],
   "/#help": ["help", "about", "contact"],
 };
 

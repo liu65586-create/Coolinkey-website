@@ -13,11 +13,11 @@ export function Durability() {
   const copy = (en: string, zh: string) => text(lang, en, zh);
 
   return (
-    <article className="durability">
-      <section className="durability-hero page-wrap">
+    <section id="safety" className="durability site-anchor" tabIndex={-1} aria-labelledby="durability-title">
+      <div className="durability-hero page-wrap">
         <div>
           <p className="durability-kicker">{copy("Engineered for everyday use", "为日常使用而设计")}</p>
-          <h1>{copy("Built to Face the Unexpected.", "为意外情况而打造。")}</h1>
+          <h2 id="durability-title" className="durability-title">{copy("Built to Face the Unexpected.", "为意外情况而打造。")}</h2>
           <p>
             {copy(
               "Real-world testing. A closer look at how CLX1 responds to pressure.",
@@ -29,7 +29,7 @@ export function Durability() {
           src="/images/listing/bike-locking-closeup.jpg"
           alt={copy("CLX1 chain and lock body fastened to a bicycle", "固定在自行车上的 CLX1 链条与锁体")}
         />
-      </section>
+      </div>
 
       <section className="durability-block page-wrap" aria-labelledby="pressure-title">
         <p className="durability-kicker">{copy("01 / Featured test", "01 / 重点测试")}</p>
@@ -103,6 +103,6 @@ export function Durability() {
           </Button>
         </div>
       </section>
-    </article>
+    </section>
   );
 }
