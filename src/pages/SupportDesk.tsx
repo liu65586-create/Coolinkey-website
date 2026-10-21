@@ -10,6 +10,7 @@ import { useSiteConfig } from "../context/SiteConfigContext";
 import type { CmsManual } from "../types/cms";
 import { getVisibleManuals } from "../utils/manualsVisibility";
 import { pickBilingual, type Lang } from "../utils/siteCopy";
+import { About } from "./About";
 
 function copy(lang: Lang, en: string, zh: string) {
   return lang === "zh" ? zh : en;
@@ -112,6 +113,7 @@ export function SupportDesk() {
 
   return (
     <section id="help" className="site-anchor" tabIndex={-1}>
+      <About />
       <div className="desk-stack page-wrap">
         <div className="desk-split">
           <div className="desk-copy">

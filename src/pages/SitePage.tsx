@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { About } from "./About";
-import { BusinessPaths, HomeHero, HowItWorks, LifeAndSpecs } from "./Home";
+import { HomeHero, HowItWorks, LifeAndSpecs } from "./Home";
 import { Product } from "./Product";
 import { Support } from "./Support";
 import { SupportDesk } from "./SupportDesk";
@@ -50,8 +49,6 @@ export function SitePage() {
         <Support />
       </section>
       <SupportDesk />
-      <BusinessPaths />
-      <About />
     </div>
   );
 }
