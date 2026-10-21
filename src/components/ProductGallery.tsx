@@ -6,11 +6,10 @@ import { ResolvedImage } from "./ResolvedImage";
 type Props = {
   images: string[];
   productName: string;
-  fit?: "contain" | "cover";
   focus?: string;
 };
 
-export function ProductGallery({ images, productName, fit = "contain", focus = "50% 50%" }: Props) {
+export function ProductGallery({ images, productName, focus = "50% 50%" }: Props) {
   const { t } = useTranslation();
   const list = useMemo(() => images.filter(Boolean), [images]);
   const [idx, setIdx] = useState(0);
@@ -32,7 +31,7 @@ export function ProductGallery({ images, productName, fit = "contain", focus = "
               aria-current={i === idx ? "true" : undefined}
               onClick={() => setIdx(i)}
             >
-              <ResolvedImage src={src} alt="" className="h-full w-full object-contain" />
+              <ResolvedImage src={src} alt="" fit="cover" className="h-full w-full" />
             </button>
           ))}
         </div>
@@ -47,7 +46,7 @@ export function ProductGallery({ images, productName, fit = "contain", focus = "
         <ResolvedImage
           src={current}
           alt={productName}
-          fit={fit}
+          fit="cover"
           focus={focus}
           className="product-hero-image"
         />

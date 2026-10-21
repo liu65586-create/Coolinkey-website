@@ -60,7 +60,7 @@ export function Product() {
         <>
           <div className="product-sheet">
             <div className="product-visual">
-              <ProductGallery images={gallery} productName={name} fit={active.imageFit} focus={active.focus} />
+              <ProductGallery images={gallery} productName={name} focus={active.focus} />
               {visibleManuals.length ? (
                 <div className="product-manuals">
                   <h2>{manualsHeading}</h2>
