@@ -58,7 +58,7 @@ export function ProductGallery({ images, productName, fit = "contain", focus = "
                 i === idx ? "ring-2 ring-accent ring-offset-2" : "opacity-60 hover:opacity-100",
               ].join(" ")}
             >
-              <ResolvedImage src={src} alt="" className="h-full w-full object-cover" />
+              <ResolvedImage src={src} alt={`${productName} ${i + 1}`} className="h-full w-full object-cover" />
             </button>
           ))}
         </div>

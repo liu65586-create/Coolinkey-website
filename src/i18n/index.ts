@@ -1,13 +1,10 @@
 import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import en from "./locales/en.json";
 import zh from "./locales/zh.json";
 
-if (typeof window !== "undefined") i18n.use(LanguageDetector);
-
-void i18n.use(initReactI18next).init({
-    ...(typeof window === "undefined" ? { lng: "en" } : {}),
+export const i18nReady = i18n.use(initReactI18next).init({
+    lng: "en",
     resources: {
       en: { translation: en },
       zh: { translation: zh },
@@ -22,5 +19,22 @@ void i18n.use(initReactI18next).init({
       caches: ["localStorage"],
     },
   });
+
+/** Match the prerendered English HTML first, then apply the visitor's language. */
+export function applyPreferredLanguage() {
+  if (typeof window === "undefined") return;
+  const query = new URLSearchParams(window.location.search).get("lang");
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem("coolinkey_lang");
+  } catch {
+    stored = null;
+  }
+  const pick = query || stored || window.navigator.language || "en";
+  const lng = pick.toLowerCase().startsWith("zh") ? "zh" : "en";
+  if (lng !== i18n.resolvedLanguage && lng !== i18n.language) {
+    void i18n.changeLanguage(lng);
+  }
+}
 
 export default i18n;

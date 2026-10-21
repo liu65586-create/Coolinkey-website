@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -26,15 +27,16 @@ const STORAGE_KEY = "coolinkey_shopping_region";
 
 export function ShoppingRegionProvider({ children }: { children: ReactNode }) {
   const [ipCountryCode, setIpCountryCode] = useState<string | null>(null);
-  const [mode, setModeState] = useState<ShoppingRegionMode>(() => {
+  const [mode, setModeState] = useState<ShoppingRegionMode>("auto");
+
+  useEffect(() => {
     try {
       const v = localStorage.getItem(STORAGE_KEY) as ShoppingRegionMode | null;
-      if (v === "auto" || v === "cn" || v === "global") return v;
+      if (v === "auto" || v === "cn" || v === "global") setModeState(v);
     } catch {
       /* ignore */
     }
-    return "auto";
-  });
+  }, []);
 
   const setMode = useCallback((m: ShoppingRegionMode) => {
     setModeState(m);

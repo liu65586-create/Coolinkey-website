@@ -64,65 +64,73 @@ function jsonLdScript(data: unknown): string {
   return `<script type="application/ld+json">${json}</script>`;
 }
 
+function attr(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
 export function headMarkup(pathname: string): string {
   const seo = seoForPath(pathname);
   const url = absolute(seo.path);
-  const graph: Record<string, unknown>[] = [
-    {
-      "@type": "Organization",
-      "@id": `${SITE_ORIGIN}/#organization`,
-      name: "COOLINKEY",
-      url: `${SITE_ORIGIN}/`,
-      email: "support@coolinkey.com",
-      logo: `${SITE_ORIGIN}/favicon.svg`,
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${SITE_ORIGIN}/#website`,
-      url: `${SITE_ORIGIN}/`,
-      name: "COOLINKEY",
-      inLanguage: ["en", "zh"],
-      publisher: { "@id": `${SITE_ORIGIN}/#organization` },
-    },
-  ];
-  if (seo.path === "/") {
-    graph.push({
-      "@type": "Product",
-      name: "CLX1 Smart Chain Lock",
-      brand: { "@type": "Brand", "name": "COOLINKEY" },
-      category: "Smart chain lock",
-      description: HOME_DESCRIPTION,
-      image: [
-        `${SITE_ORIGIN}/images/listing/meet-clx1.jpg`,
-        `${SITE_ORIGIN}/images/listing/ebike-locking-wide.jpg`,
-      ],
-      url: `${SITE_ORIGIN}/#clx1`,
-    });
-  } else {
-    graph.push({
-      "@type": "WebPage",
-      name: seo.title,
-      description: seo.description,
-      url,
-      isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
-      inLanguage: "en",
-    });
-  }
+  const graph: Record<string, unknown>[] =
+    seo.path === "/"
+      ? [
+          {
+            "@type": "Organization",
+            "@id": `${SITE_ORIGIN}/#organization`,
+            name: "COOLINKEY",
+            url: `${SITE_ORIGIN}/`,
+            email: "support@coolinkey.com",
+            logo: `${SITE_ORIGIN}/favicon.svg`,
+          },
+          {
+            "@type": "WebSite",
+            "@id": `${SITE_ORIGIN}/#website`,
+            url: `${SITE_ORIGIN}/`,
+            name: "COOLINKEY",
+            inLanguage: ["en", "zh"],
+            publisher: { "@id": `${SITE_ORIGIN}/#organization` },
+          },
+          {
+            "@type": "Product",
+            name: "CLX1 Smart Chain Lock",
+            brand: { "@type": "Brand", name: "COOLINKEY" },
+            category: "Smart chain lock",
+            description: HOME_DESCRIPTION,
+            image: [
+              `${SITE_ORIGIN}/images/listing/meet-clx1.jpg`,
+              `${SITE_ORIGIN}/images/listing/ebike-locking-wide.jpg`,
+            ],
+            url: `${SITE_ORIGIN}/#clx1`,
+          },
+        ]
+      : [
+          {
+            "@type": "WebPage",
+            name: seo.title,
+            description: seo.description,
+            url,
+            isPartOf: `${SITE_ORIGIN}/`,
+            inLanguage: "en",
+          },
+        ];
 
   return [
-    `<title>${seo.title}</title>`,
-    `<meta name="description" content="${seo.description}" />`,
+    `<title>${attr(seo.title)}</title>`,
+    `<meta name="description" content="${attr(seo.description)}" />`,
     `<link rel="canonical" href="${url}" />`,
     `<meta name="robots" content="index, follow, max-image-preview:large" />`,
     `<meta property="og:type" content="website" />`,
     `<meta property="og:site_name" content="COOLINKEY" />`,
-    `<meta property="og:title" content="${seo.title}" />`,
-    `<meta property="og:description" content="${seo.description}" />`,
+    `<meta property="og:title" content="${attr(seo.title)}" />`,
+    `<meta property="og:description" content="${attr(seo.description)}" />`,
     `<meta property="og:url" content="${url}" />`,
     `<meta property="og:image" content="${seo.image}" />`,
     `<meta property="og:locale" content="en_US" />`,
     `<meta property="og:locale:alternate" content="zh_CN" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${attr(seo.title)}" />`,
+    `<meta name="twitter:description" content="${attr(seo.description)}" />`,
+    `<meta name="twitter:image" content="${seo.image}" />`,
     `<link rel="alternate" hreflang="en" href="${url}" />`,
     `<link rel="alternate" hreflang="zh" href="${url}${url.includes("?") ? "&" : "?"}lang=zh" />`,
     `<link rel="alternate" hreflang="x-default" href="${url}" />`,
