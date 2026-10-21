@@ -337,7 +337,10 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 #business.v2-section { min-height: 0; padding-block: 40px; }
 .about-panel { display: grid; justify-items: start; gap: 16px; padding-block: 64px 72px; }
 .about-panel h2 { margin: 0; font-size: clamp(2rem, 3vw, 2.75rem); font-weight: 650; letter-spacing: -0.045em; line-height: 1.08; }
-.about-panel .about-body { margin: 0; max-width: 40rem; color: #686b66; font-size: 1.0625rem; line-height: 1.7; }
+.about-panel .about-body { display: grid; gap: 14px; margin: 0; max-width: 46rem; color: #686b66; font-size: 1.0625rem; line-height: 1.7; }
+.about-panel .about-body p { margin: 0; }
+.about-panel .about-signoff { color: #202120; }
+.about-panel .about-signoff strong { font-weight: 700; }
 #help .about-panel { padding-top: 0; padding-bottom: 48px; }
 .v2-section-muted { background: #ecede9; }
 .v2-eyebrow { margin: 0; color: #686b66; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; }
