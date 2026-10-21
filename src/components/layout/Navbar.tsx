@@ -9,6 +9,21 @@ import { pickBilingual } from "../../utils/siteCopy";
 import { useResolvedMediaUrl } from "../../hooks/useResolvedMediaUrl";
 import { scrollToSection, sectionHash, sectionIdFromPath, SITE_SECTION_IDS, type SiteSectionId } from "../../utils/siteSections";
 
+const NAV_SECTIONS: Record<string, readonly SiteSectionId[]> = {
+  "/#clx1": ["clx1", "how-it-works"],
+  "/#support": ["support"],
+  "/#safety": ["safety"],
+  "/#business": ["business", "about", "contact"],
+};
+
+function linkIsActive(to: string, activeSection: SiteSectionId | "") {
+  if (!activeSection) return false;
+  const group = NAV_SECTIONS[to];
+  if (group) return group.includes(activeSection);
+  const section = sectionIdFromPath(to);
+  return section !== null && activeSection === section;
+}
+
 const navCls = (isActive: boolean) =>
   [
     "relative text-[14px] font-medium tracking-wide transition-colors",
@@ -132,8 +147,7 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-9 md:flex">
           {links.map((item) => {
-            const section = sectionIdFromPath(item.to);
-            const isActive = item.to === "/contact" ? pathname === "/contact" : section !== null && activeSection === section;
+            const isActive = linkIsActive(item.to, activeSection);
             return (
               <Link
                 key={item.id}
@@ -168,8 +182,7 @@ export function Navbar() {
         <div id="mobile-nav" className="border-b border-[var(--color-border)] bg-[#f8f8f6] md:hidden">
           <div className="page-wrap flex flex-col gap-1 py-4">
             {links.map((item) => {
-              const section = sectionIdFromPath(item.to);
-              const isActive = item.to === "/contact" ? pathname === "/contact" : section !== null && activeSection === section;
+              const isActive = linkIsActive(item.to, activeSection);
               return (
                 <Link
                   key={item.id}

@@ -508,7 +508,7 @@
   "nav": {
     "links": [
       {
-        "id": "nav-home",
+        "id": "nav-product",
         "label": {
           "en": "Product",
           "zh": "产品"
@@ -516,12 +516,20 @@
         "to": "/#clx1"
       },
       {
-        "id": "nav-how",
+        "id": "nav-use",
         "label": {
-          "en": "How It Works",
+          "en": "How to Use",
           "zh": "如何使用"
         },
-        "to": "/#how-it-works"
+        "to": "/#support"
+      },
+      {
+        "id": "nav-safety",
+        "label": {
+          "en": "Safety & Testing",
+          "zh": "安全与测试"
+        },
+        "to": "/#safety"
       },
       {
         "id": "nav-support",
@@ -529,23 +537,7 @@
           "en": "Support",
           "zh": "支持"
         },
-        "to": "/#support"
-      },
-      {
-        "id": "nav-business",
-        "label": {
-          "en": "Business",
-          "zh": "商务"
-        },
         "to": "/#business"
-      },
-      {
-        "id": "nav-contact",
-        "label": {
-          "en": "Contact",
-          "zh": "联系"
-        },
-        "to": "/#contact"
       }
     ]
   },

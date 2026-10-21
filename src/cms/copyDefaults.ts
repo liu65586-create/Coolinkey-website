@@ -6,10 +6,10 @@ export function bi(en: string, zh: string): Bilingual {
 
 export const copyDefaults = {
   nav: [
-    { id: "nav-home", label: bi("Home", "首页"), to: "/" },
-    { id: "nav-product", label: bi("CLX1", "CLX1"), to: "/#clx1" },
-    { id: "nav-support", label: bi("Support", "支持"), to: "/#support" },
-    { id: "nav-about", label: bi("About", "关于"), to: "/#about" },
+    { id: "nav-product", label: bi("Product", "产品"), to: "/#clx1" },
+    { id: "nav-use", label: bi("How to Use", "如何使用"), to: "/#support" },
+    { id: "nav-safety", label: bi("Safety & Testing", "安全与测试"), to: "/#safety" },
+    { id: "nav-support", label: bi("Support", "支持"), to: "/#business" },
   ],
   footer: {
     tagline: bi("Smart Lock for a Freer You.", "让出行更自由的智能锁。"),

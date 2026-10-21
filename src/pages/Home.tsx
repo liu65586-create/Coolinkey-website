@@ -179,33 +179,6 @@ export function HomeHero() {
   );
 }
 
-export function MeetClx1() {
-  const { loading, config, copy } = useHomeCopy();
-  if (loading || !config) return null;
-
-  return (
-    <div className="v2-home">
-      <section className="v2-section v2-meet" aria-labelledby="meet-title">
-        <img src="/images/listing/meet-clx1.jpg" alt={copy("CLX1 fingerprint smart chain lock", "CLX1 指纹智能链条锁")} />
-        <div className="v2-wrap">
-          <div className="v2-meet-copy">
-            <h2 id="meet-title">{copy("Meet CLX1.", "认识 CLX1。")}</h2>
-            <p className="v2-lead">
-              {copy(
-                "A fingerprint smart chain lock designed to bring a more intuitive access experience to everyday life.",
-                "一款指纹智能链条锁，让日常开锁更直觉。",
-              )}
-            </p>
-            <div className="v2-actions">
-              <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
-
 export function LifeAndSpecs() {
   const { loading, config, defaultProduct, lang, copy } = useHomeCopy();
   if (loading || !config) return null;
@@ -233,7 +206,7 @@ export function LifeAndSpecs() {
         </div>
       </section>
 
-      <section className="v2-section v2-section-muted" aria-labelledby="spec-title">
+      <section id="safety" className="v2-section v2-section-muted site-anchor" tabIndex={-1} aria-labelledby="spec-title">
         <div className="v2-wrap v2-split v2-specs">
           <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 chain and lock body", "CLX1 链条与锁体")} />
           <div>

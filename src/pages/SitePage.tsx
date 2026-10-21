@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { About } from "./About";
-import { BusinessPaths, HomeHero, HowItWorks, LifeAndSpecs, MeetClx1 } from "./Home";
+import { BusinessPaths, HomeHero, HowItWorks, LifeAndSpecs } from "./Home";
 import { Product } from "./Product";
 import { Support } from "./Support";
 import { scrollToSection, sectionIdFromPath } from "../utils/siteSections";
@@ -41,7 +41,6 @@ export function SitePage() {
         <HomeHero />
       </div>
       <section id="clx1" className="site-anchor" tabIndex={-1}>
-        <MeetClx1 />
         <Product />
       </section>
       <HowItWorks />
