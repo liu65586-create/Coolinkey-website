@@ -71,7 +71,7 @@ export function SupportDesk() {
     setErrors(next);
     const first = (Object.keys(next) as (keyof Fields)[])[0];
     if (first) {
-      document.getElementById(`${formId}-${first}`)?.focus();
+      document.getElementById(first === "fullName" ? "support-message-name" : `${formId}-${first}`)?.focus();
       return;
     }
     if (fields.companyFax.trim()) {
@@ -185,7 +185,7 @@ export function SupportDesk() {
           </div>
         </div>
 
-        <div className="desk-ask" aria-labelledby="desk-ask-title">
+        <div id="support-message" className="desk-ask" aria-labelledby="desk-ask-title" tabIndex={-1}>
           <div className="desk-copy">
             <p className="desk-kicker">{copy(lang, "Support", "支持")}</p>
             <h2 id="desk-ask-title">{copy(lang, "Still can't find what you're looking for?", "还是找不到您要找的东西？")}</h2>
@@ -203,10 +203,10 @@ export function SupportDesk() {
           ) : (
             <form className="desk-form-card" onSubmit={onSubmit} noValidate>
               <div className="desk-fields">
-                <label htmlFor={`${formId}-fullName`}>
+                <label htmlFor="support-message-name">
                   <span className="sr-only">{copy(lang, "Name", "姓名")}</span>
                   <input
-                    id={`${formId}-fullName`}
+                    id="support-message-name"
                     name="fullName"
                     autoComplete="name"
                     placeholder={copy(lang, "Name", "姓名")}

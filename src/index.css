@@ -269,7 +269,7 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 .mid-module-card video, .mid-module-image { display: block; width: 100%; max-height: 520px; aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
 .mid-module-card p { margin: 0; padding: 16px 18px 20px; color: #353b36; font-size: 15px; line-height: 1.65; }
 
-#approach, #how-it-works, #business, #contact, #clx1, #support, #help, #about { scroll-margin-top: 80px; }
+#approach, #how-it-works, #business, #contact, #clx1, #support, #help, #about, #support-message { scroll-margin-top: 80px; }
 
 /* Nav targets fill the space under the header so a click shows the whole module,
    with the same inset above the content and above the next module. */
@@ -657,8 +657,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .desk-form-card textarea { min-height: 120px; resize: vertical; }
 .desk-form-card input::placeholder,
 .desk-form-card textarea::placeholder { color: #8b908b; }
+.desk-form-card input:focus,
+.desk-form-card textarea:focus,
 .desk-form-card input:focus-visible,
-.desk-form-card textarea:focus-visible { outline: 2px solid #36b66a; outline-offset: 2px; }
+.desk-form-card textarea:focus-visible {
+  border-color: #36b66a;
+  outline: 2px solid #36b66a;
+  outline-offset: 2px;
+  overflow: visible;
+}
 .desk-form-card [aria-invalid="true"] { border-color: #9b2c2c; }
 .desk-form-card .v2-btn { justify-self: start; }
 .desk-note { margin: 0; color: #686b66; font-size: 0.85rem; line-height: 1.5; }

@@ -11,6 +11,12 @@ export function SitePage() {
   const instant = useRef(true);
 
   useEffect(() => {
+    if (hash === "#support-message") {
+      const behavior: ScrollBehavior = instant.current ? "auto" : "smooth";
+      instant.current = false;
+      document.getElementById("support-message")?.scrollIntoView({ behavior, block: "start" });
+      return;
+    }
     const id = sectionIdFromPath(hash || "/");
     if (!id) return;
     const behavior: ScrollBehavior = instant.current ? "auto" : "smooth";

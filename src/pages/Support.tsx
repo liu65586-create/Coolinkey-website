@@ -1,6 +1,7 @@
 import { ArrowRight, ChevronRight, CirclePlay, FileText } from "lucide-react";
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState, type MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { VideoModal, manualVideoUrl } from "../components/VideoModal";
 
@@ -13,11 +14,12 @@ import { pickBilingual, type Lang } from "../utils/siteCopy";
 
 export function Support() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { defaultProduct } = useCms();
   const { config } = useSiteConfig();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const page = config?.supportPage;
-  const email = config?.contact?.email?.trim() || "support@coolinkey.com";
   const text = (field: Parameters<typeof pickBilingual>[1], key: string) => pickBilingual(lang, field, t(key));
   const [active, setActive] = useState<CmsManual | null>(null);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
@@ -136,7 +138,29 @@ export function Support() {
             <h2 className="text-[17px] font-semibold text-text">{text(page?.helpTitle, "supportPage.helpTitle")}</h2>
             <p className="mt-1 text-[15px] text-text-muted">{text(page?.helpBody, "supportPage.helpBody")}</p>
           </div>
-          <Button variant="primary" href={`mailto:${email}`} className="!border-transparent !bg-black !text-white hover:!bg-[#222]">
+          <Button
+            variant="primary"
+            href="#support-message"
+            className="!border-transparent !bg-black !text-white hover:!bg-[#222]"
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              const panel = document.getElementById("support-message");
+              if (!panel) return;
+              event.preventDefault();
+              const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              const focusName = () => {
+                window.setTimeout(
+                  () => document.getElementById("support-message-name")?.focus({ preventScroll: true }),
+                  reduce ? 0 : 450,
+                );
+              };
+              if (window.location.hash === "#support-message") {
+                panel.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+              } else {
+                navigate({ pathname: location.pathname, search: location.search, hash: "support-message" });
+              }
+              focusName();
+            }}
+          >
             {text(page?.contactCta, "supportPage.contactCta")}
             <ArrowRight size={16} />
           </Button>

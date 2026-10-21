@@ -1,11 +1,11 @@
-﻿import type { ButtonHTMLAttributes, ReactNode } from "react";
+﻿import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
 
 type Variant = "primary" | "secondary" | "ghost";
 
 type Props = {
   variant: Variant;
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
   href?: string;
   className?: string;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "children">;
@@ -24,7 +24,7 @@ export function Button({ variant, children, onClick, href, className = "", ...re
   const cls = `${base} ${variants[variant]} ${className}`.trim();
   if (href) {
     return (
-      <a className={cls} href={href}>
+      <a className={cls} href={href} onClick={onClick}>
         {children}
       </a>
     );
