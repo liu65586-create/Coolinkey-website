@@ -4,10 +4,10 @@ import { initReactI18next } from "react-i18next";
 import en from "./locales/en.json";
 import zh from "./locales/zh.json";
 
-void i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
+if (typeof window !== "undefined") i18n.use(LanguageDetector);
+
+void i18n.use(initReactI18next).init({
+    ...(typeof window === "undefined" ? { lng: "en" } : {}),
     resources: {
       en: { translation: en },
       zh: { translation: zh },

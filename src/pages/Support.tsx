@@ -1,9 +1,10 @@
 import { ArrowRight, ChevronRight, CirclePlay, FileText } from "lucide-react";
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../components/Button";
-import { ManualModal } from "../components/ManualModal";
 import { VideoModal, manualVideoUrl } from "../components/VideoModal";
+
+const ManualModal = lazy(() => import("../components/ManualModal").then((mod) => ({ default: mod.ManualModal })));
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import type { CmsManual } from "../types/cms";
@@ -143,7 +144,11 @@ export function Support() {
       </section>
 
       <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />
-      <ManualModal open={Boolean(active)} onClose={() => setActive(null)} manual={active} lang={lang} />
+      {active ? (
+        <Suspense fallback={null}>
+          <ManualModal open onClose={() => setActive(null)} manual={active} lang={lang} />
+        </Suspense>
+      ) : null}
     </div>
   );
 }

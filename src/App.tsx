@@ -1,4 +1,5 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import type { ReactNode } from "react";
+import { BrowserRouter, MemoryRouter, Navigate, Route, Routes } from "react-router-dom";
 import { CookieConsentBanner } from "./components/CookieConsentBanner";
 import { DraftPreviewSync } from "./components/DraftPreviewSync";
 import { GeoRegionSync } from "./components/GeoRegionSync";
@@ -15,7 +16,7 @@ import { Privacy } from "./pages/Privacy";
 import { Admin } from "./pages/Admin";
 import { SitePage } from "./pages/SitePage";
 
-export default function App() {
+function Providers({ children }: { children: ReactNode }) {
   return (
     <PreviewDraftProvider>
       <GeoIpProvider>
@@ -23,26 +24,52 @@ export default function App() {
           <SiteConfigProvider>
             <ShoppingRegionProvider>
               <GeoRegionSync />
-              <BrowserRouter>
-                <DraftPreviewSync />
-                <PageMeta />
-                <CookieConsentBanner />
-                <Routes>
-                  <Route path="/admin" element={<Admin />} />
-                  <Route element={<Layout />}>
-                    <Route index element={<SitePage />} />
-                    <Route path="contact" element={<Navigate to="/#contact" replace />} />
-                    <Route path="business" element={<BusinessInquiry />} />
-                    <Route path="privacy" element={<Privacy />} />
-                    <Route path="cookie-policy" element={<CookiePolicy />} />
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                  </Route>
-                </Routes>
-              </BrowserRouter>
+              {children}
             </ShoppingRegionProvider>
           </SiteConfigProvider>
         </CmsProvider>
       </GeoIpProvider>
     </PreviewDraftProvider>
+  );
+}
+
+function Routed() {
+  return (
+    <>
+      <DraftPreviewSync />
+      <PageMeta />
+      <CookieConsentBanner />
+      <Routes>
+        <Route path="/admin" element={<Admin />} />
+        <Route element={<Layout />}>
+          <Route index element={<SitePage />} />
+          <Route path="contact" element={<Navigate to="/#contact" replace />} />
+          <Route path="business" element={<BusinessInquiry />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="cookie-policy" element={<CookiePolicy />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <Providers>
+      <BrowserRouter>
+        <Routed />
+      </BrowserRouter>
+    </Providers>
+  );
+}
+
+export function AppServer({ url }: { url: string }) {
+  return (
+    <Providers>
+      <MemoryRouter initialEntries={[url]}>
+        <Routed />
+      </MemoryRouter>
+    </Providers>
   );
 }

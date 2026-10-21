@@ -360,6 +360,13 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 .brand-principles { display: grid; gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }
 .brand-principles strong { display: block; font-size: 1.15rem; font-weight: 650; }
 .brand-principles p { margin: 2px 0 0; color: rgba(255, 255, 255, 0.82); font-size: 0.98rem; line-height: 1.45; }
+.brand-lifestyle .brand-copy { top: 24px; bottom: 72px; display: flex; flex-direction: column; justify-content: flex-end; overflow: auto; }
+.brand-lifestyle .brand-copy h2 { max-width: 13em; font-size: clamp(2.15rem, 3.6vw, 3.75rem); }
+.brand-lifestyle .v2-lead { max-width: 36rem; margin-top: 12px; font-size: 1rem; line-height: 1.45; }
+.brand-lifestyle .brand-principles { gap: 8px; margin-top: 14px; }
+.brand-lifestyle .brand-principles strong { font-size: 1.02rem; }
+.brand-lifestyle .brand-principles p { font-size: 0.92rem; }
+.brand-lifestyle .v2-actions { margin-top: 16px; }
 .brand-controls { position: absolute; z-index: 2; right: max(48px, calc((100% - 1440px) / 2)); bottom: 36px; display: flex; align-items: center; gap: 14px; }
 .brand-nav, .brand-dots button { border: 0; background: transparent; color: #fff; }
 .brand-nav { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 999px; background: rgba(16, 24, 18, 0.28); }
@@ -538,6 +545,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 @media (max-width: 700px) {
   .brand-copy { left: 20px; bottom: 84px; width: calc(100% - 40px); }
   .brand-copy h1, .brand-copy h2 { font-size: clamp(2.1rem, 10vw, 3rem); max-width: none; }
+  .brand-lifestyle .brand-copy h2 { font-size: clamp(1.85rem, 8vw, 2.45rem); }
+  .brand-lifestyle .v2-lead { font-size: 0.92rem; }
   .brand-controls { right: 20px; bottom: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {

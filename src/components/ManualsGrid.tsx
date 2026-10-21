@@ -1,12 +1,13 @@
-﻿import { useMemo, useState } from "react";
+﻿import { lazy, Suspense, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import type { CmsManual } from "../types/cms";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 import { ManualCard } from "./ManualCard";
-import { ManualModal } from "./ManualModal";
 import { VideoModal, manualVideoUrl } from "./VideoModal";
+
+const ManualModal = lazy(() => import("./ManualModal").then((mod) => ({ default: mod.ManualModal })));
 
 type Props = {
   manuals: CmsManual[];
@@ -50,7 +51,11 @@ export function ManualsGrid({ manuals, showHeading = true }: Props) {
       </div>
 
       <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />
-      <ManualModal open={Boolean(active)} onClose={() => setActive(null)} manual={active} lang={lang} />
+      {active ? (
+        <Suspense fallback={null}>
+          <ManualModal open onClose={() => setActive(null)} manual={active} lang={lang} />
+        </Suspense>
+      ) : null}
     </section>
   );
 }

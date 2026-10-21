@@ -11,6 +11,9 @@ import { usePreviewDraft } from "./PreviewDraftContext";
 import type { CmsPayload, CmsProduct } from "../types/cms";
 import { deepMerge } from "../utils/deepMerge";
 import { normalizeProducts } from "../utils/normalizeProducts";
+import productsJson from "../../public/cms/products.json";
+
+const publishedProducts = normalizeProducts((productsJson as CmsPayload).products ?? []);
 
 const PRODUCTS_STORAGE_KEY = "coolinkey_products_override";
 
@@ -45,12 +48,11 @@ function readLocalPayload(): CmsPayload | null {
 
 export function CmsProvider({ children }: { children: ReactNode }) {
   const { previewDraft } = usePreviewDraft();
-  const [products, setProducts] = useState<CmsProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<CmsProduct[]>(publishedProducts);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const refetch = useCallback(async () => {
-    setLoading(true);
     setError(null);
     try {
       const repo = await fetchRepoPayload();
@@ -59,7 +61,6 @@ export function CmsProvider({ children }: { children: ReactNode }) {
       setProducts(normalizeProducts(merged.products ?? []));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unknown error");
-      setProducts([]);
     } finally {
       setLoading(false);
     }

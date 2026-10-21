@@ -8,13 +8,6 @@ import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 import { useTranslation } from "react-i18next";
 
-const designShots = [
-  { src: "/images/listing/one-touch-unlock.jpg", en: "Fingerprint Unlock", zh: "指纹解锁" },
-  { src: "/images/listing/mechanical-key-backup.jpg", en: "Mechanical Key", zh: "机械钥匙" },
-  { src: "/images/listing/heavy-duty-chain.jpg", en: "6 mm Steel Wire", zh: "6 mm 钢丝" },
-  { src: "/images/listing/product-folds-bottle-size.jpg", en: "Compact Form", zh: "便携形态" },
-];
-
 const carryShots = [
   { src: "/images/listing/product-folds-bottle-size.jpg", en: "Easy to Carry", zh: "便于携带", bodyEn: "Folds down for everyday carrying.", bodyZh: "可折叠收纳，方便日常携带。" },
   { src: "/images/listing/bike-locking-closeup.jpg", en: "On Your Bike", zh: "骑行使用", bodyEn: "A chain lock for securing a bicycle.", bodyZh: "链条锁，可用于固定自行车。" },
@@ -30,7 +23,24 @@ function useHomeCopy() {
   return { config, loading, defaultProduct, lang, copy };
 }
 
-const brandSlides = [
+type BrandPrinciple = { en: string; zh: string; bodyEn: string; bodyZh: string };
+
+type BrandSlide = {
+  id: string;
+  image: string;
+  position: string;
+  altEn: string;
+  altZh: string;
+  titleEn: string;
+  titleZh: string;
+  bodyEn: string;
+  bodyZh: string;
+  eyebrowEn?: string;
+  eyebrowZh?: string;
+  principles?: BrandPrinciple[];
+};
+
+const brandSlides: BrandSlide[] = [
   {
     id: "product",
     image: "/images/listing/meet-clx1.jpg",
@@ -43,6 +53,24 @@ const brandSlides = [
     bodyZh: "一款指纹智能链条锁，让日常开锁更直觉。",
   },
   {
+    id: "lifestyle",
+    image: "/images/listing/ebike-locking-wide.jpg",
+    position: "62% center",
+    altEn: "CLX1 locked around a bicycle, part of the ride",
+    altZh: "CLX1 锁在自行车上，成为骑行的一部分",
+    eyebrowEn: "More Than a Lock",
+    eyebrowZh: "不只是一把锁",
+    titleEn: "Less Complexity. More Possibility.",
+    titleZh: "更少复杂。更多可能。",
+    bodyEn: "A thoughtful combination of form, function and everyday practicality. Fingerprint, a mechanical key and a 6 mm steel wire, carried through the day.",
+    bodyZh: "形态、功能与日常实用的结合。指纹、机械钥匙与 6 mm 钢丝，陪你度过一天。",
+    principles: [
+      { en: "Simplicity", zh: "简洁", bodyEn: "Clear design. Intuitive experiences. Only what matters.", bodyZh: "清晰的设计，直觉的体验，只留下真正重要的部分。" },
+      { en: "Freedom", zh: "自由", bodyEn: "Designed to fit naturally into the rhythms of everyday life.", bodyZh: "顺应日常生活的节奏。" },
+      { en: "Thoughtful Design", zh: "细致设计", bodyEn: "Every detail should serve a purpose.", bodyZh: "每一处细节都有其用意。" },
+    ],
+  },
+  {
     id: "manifesto",
     image: "/images/lifestyle/hero-cyclists.jpg",
     position: "72% center",
@@ -53,23 +81,7 @@ const brandSlides = [
     bodyEn: "We believe the best technology feels natural — simplifying everyday moments through thoughtful design.",
     bodyZh: "我们相信，最好的科技是自然的——用细致的设计，让日常时刻更简单。",
   },
-  {
-    id: "principles",
-    image: "/images/listing/ebike-locking-wide.jpg",
-    position: "62% center",
-    altEn: "CLX1 locked around an e-bike frame",
-    altZh: "CLX1 锁在电动自行车车架上",
-    titleEn: "Less Complexity. More Possibility.",
-    titleZh: "更少复杂。更多可能。",
-    bodyEn: "",
-    bodyZh: "",
-    principles: [
-      { en: "Simplicity", zh: "简洁", bodyEn: "Clear design. Intuitive experiences. Only what matters.", bodyZh: "清晰的设计，直觉的体验，只留下真正重要的部分。" },
-      { en: "Freedom", zh: "自由", bodyEn: "Designed to fit naturally into the rhythms of everyday life.", bodyZh: "顺应日常生活的节奏。" },
-      { en: "Thoughtful Design", zh: "细致设计", bodyEn: "Every detail should serve a purpose.", bodyZh: "每一处细节都有其用意。" },
-    ],
-  },
-] as const;
+];
 
 export function HomeHero() {
   const { loading, config, copy } = useHomeCopy();
@@ -105,17 +117,18 @@ export function HomeHero() {
     >
       <div className="brand-track" style={{ transform: `translateX(-${index * 100}%)` }}>
         {brandSlides.map((slide, slideIndex) => (
-          <article key={slide.id} className="brand-slide" aria-hidden={slideIndex !== index}>
-            <img src={slide.image} alt="" style={{ objectPosition: slide.position }} />
+          <article key={slide.id} className={slide.principles ? "brand-slide brand-lifestyle" : "brand-slide"} aria-hidden={slideIndex !== index}>
+            <img src={slide.image} alt={copy(slide.altEn, slide.altZh)} style={{ objectPosition: slide.position }} />
             <div className="brand-copy">
               {slideIndex === 0 ? <p className="v2-eyebrow">COOLINKEY</p> : null}
+              {slide.eyebrowEn ? <p className="v2-eyebrow">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
               {slideIndex === 0 ? (
                 <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
               ) : (
-                <h2 id={slide.id === "principles" ? "principles-title" : undefined}>{copy(slide.titleEn, slide.titleZh)}</h2>
+                <h2 id={slide.id === "lifestyle" ? "lifestyle-title" : undefined}>{copy(slide.titleEn, slide.titleZh)}</h2>
               )}
               {slide.bodyEn ? <p className="v2-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
-              {"principles" in slide ? (
+              {slide.principles ? (
                 <ol className="brand-principles">
                   {slide.principles.map((item) => (
                     <li key={item.en}>
@@ -131,6 +144,11 @@ export function HomeHero() {
                     {copy("Discover Our Approach", "了解我们的方式")}
                   </button>
                   <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Meet CLX1", "认识 CLX1")}</Link>
+                </div>
+              ) : null}
+              {slide.principles ? (
+                <div className="v2-actions">
+                  <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
                 </div>
               ) : null}
             </div>
@@ -180,39 +198,6 @@ export function MeetClx1() {
             </p>
             <div className="v2-actions">
               <Link className="v2-btn v2-btn-primary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
-
-export function ProductStory() {
-  const { loading, config, copy } = useHomeCopy();
-  if (loading || !config) return null;
-
-  return (
-    <div className="v2-home">
-      <section className="v2-section" aria-labelledby="design-title">
-        <div className="v2-wrap">
-          <div className="v2-design">
-            <figure className="v2-design-main">
-              <header className="v2-design-copy">
-                <h2 id="design-title">{copy("More Than a Lock.", "不只是一把锁。")}</h2>
-                <p>{copy("A thoughtful combination of form, function and everyday practicality.", "形态、功能与日常实用的结合。")}</p>
-              </header>
-              <div className="v2-design-stage">
-                <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 product, full view", "CLX1 产品全貌")} />
-              </div>
-            </figure>
-            <div className="v2-design-grid">
-              {designShots.map((shot) => (
-                <figure key={shot.src}>
-                  <img src={shot.src} alt={copy(shot.en, shot.zh)} />
-                  <figcaption>{copy(shot.en, shot.zh)}</figcaption>
-                </figure>
-              ))}
             </div>
           </div>
         </div>

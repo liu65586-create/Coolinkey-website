@@ -11,6 +11,9 @@ import { usePreviewDraft } from "./PreviewDraftContext";
 import type { SiteConfig } from "../types/siteConfig";
 import { deepMerge } from "../utils/deepMerge";
 import { normalizeSiteConfig } from "../utils/normalizeSiteConfig";
+import siteConfigJson from "../../public/cms/site.config.json";
+
+const publishedConfig = normalizeSiteConfig(siteConfigJson as unknown as SiteConfig);
 
 const STORAGE_KEY = "coolinkey_site_config_full";
 
@@ -46,12 +49,11 @@ function readLocalOverride(): SiteConfig | null {
 
 export function SiteConfigProvider({ children }: { children: ReactNode }) {
   const { previewDraft } = usePreviewDraft();
-  const [config, setConfig] = useState<SiteConfig | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [config, setConfig] = useState<SiteConfig | null>(publishedConfig);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const reload = useCallback(async () => {
-    setLoading(true);
     setError(null);
     try {
       const repo = await fetchRepoConfig();
@@ -59,7 +61,6 @@ export function SiteConfigProvider({ children }: { children: ReactNode }) {
       setConfig(normalizeSiteConfig(local ? deepMerge(repo, local) : repo));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unknown error");
-      setConfig(null);
     } finally {
       setLoading(false);
     }
