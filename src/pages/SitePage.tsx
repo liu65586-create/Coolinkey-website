@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { HomeHero, HowItWorks, LifeAndSpecs } from "./Home";
 import { Product } from "./Product";
 import { Support } from "./Support";
@@ -8,9 +8,14 @@ import { scrollToSection, sectionIdFromPath } from "../utils/siteSections";
 
 export function SitePage() {
   const { hash } = useLocation();
+  const navigate = useNavigate();
   const instant = useRef(true);
 
   useEffect(() => {
+    if (hash === "#safety") {
+      navigate("/durability-testing", { replace: true });
+      return;
+    }
     if (hash === "#support-message") {
       const behavior: ScrollBehavior = instant.current ? "auto" : "smooth";
       instant.current = false;
@@ -39,7 +44,7 @@ export function SitePage() {
       observer.disconnect();
       window.clearTimeout(timer);
     };
-  }, [hash]);
+  }, [hash, navigate]);
 
   return (
     <div className="home-page">

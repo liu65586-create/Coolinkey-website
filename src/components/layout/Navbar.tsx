@@ -12,11 +12,12 @@ import { scrollToSection, sectionHash, sectionIdFromPath, SITE_SECTION_IDS, type
 const NAV_SECTIONS: Record<string, readonly SiteSectionId[]> = {
   "/#clx1": ["clx1", "how-it-works"],
   "/#support": ["support"],
-  "/#safety": ["safety"],
   "/#help": ["help", "about", "contact"],
 };
 
-function linkIsActive(to: string, activeSection: SiteSectionId | "") {
+function linkIsActive(to: string, pathname: string, activeSection: SiteSectionId | "") {
+  const path = to.split("#")[0].replace(/\/+$/, "") || "/";
+  if (!to.includes("#") && path === pathname) return true;
   if (!activeSection) return false;
   const group = NAV_SECTIONS[to];
   if (group) return group.includes(activeSection);
@@ -147,7 +148,7 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-9 md:flex">
           {links.map((item) => {
-            const isActive = linkIsActive(item.to, activeSection);
+            const isActive = linkIsActive(item.to, pathname, activeSection);
             return (
               <Link
                 key={item.id}
@@ -182,7 +183,7 @@ export function Navbar() {
         <div id="mobile-nav" className="border-b border-[var(--color-border)] bg-[#f8f8f6] md:hidden">
           <div className="page-wrap flex flex-col gap-1 py-4">
             {links.map((item) => {
-              const isActive = linkIsActive(item.to, activeSection);
+              const isActive = linkIsActive(item.to, pathname, activeSection);
               return (
                 <Link
                   key={item.id}

@@ -8,7 +8,7 @@ export const copyDefaults = {
   nav: [
     { id: "nav-product", label: bi("Product", "产品"), to: "/#clx1" },
     { id: "nav-use", label: bi("How to Use", "如何使用"), to: "/#support" },
-    { id: "nav-safety", label: bi("Safety & Testing", "安全与测试"), to: "/#safety" },
+    { id: "nav-safety", label: bi("Safety & Testing", "安全与测试"), to: "/durability-testing" },
     { id: "nav-support", label: bi("Support", "支持"), to: "/#help" },
   ],
   footer: {

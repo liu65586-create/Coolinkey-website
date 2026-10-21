@@ -180,9 +180,8 @@ export function HomeHero() {
 }
 
 export function LifeAndSpecs() {
-  const { loading, config, defaultProduct, lang, copy } = useHomeCopy();
+  const { loading, config, copy } = useHomeCopy();
   if (loading || !config) return null;
-  const specs = defaultProduct?.specs ?? [];
 
   return (
     <div className="v2-home">
@@ -202,25 +201,6 @@ export function LifeAndSpecs() {
                 </figcaption>
               </figure>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="safety" className="v2-section v2-section-muted site-anchor" tabIndex={-1} aria-labelledby="spec-title">
-        <div className="v2-wrap v2-split v2-specs">
-          <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 chain and lock body", "CLX1 链条与锁体")} />
-          <div>
-            <h2 id="spec-title">{copy("Details That Matter.", "关键细节。")}</h2>
-            <p className="v2-lead">{copy("Confirmed CLX1 specifications.", "已确认的 CLX1 规格。")}</p>
-            <dl>
-              <div><dt>{copy("Product Model", "产品型号")}</dt><dd>CLX1</dd></div>
-              {specs.map((row, index) => (
-                <div key={index}>
-                  <dt>{lang === "zh" ? row.key.zh : row.key.en}</dt>
-                  <dd>{lang === "zh" ? row.value.zh : row.value.en}</dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </div>
       </section>

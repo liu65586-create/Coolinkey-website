@@ -69,26 +69,30 @@ export function Product() {
               >
                 {t("hero.buy")}
               </Button>
+            </div>
+          </div>
 
+          <section className="product-details" aria-labelledby="spec-title">
+            <div className="v2-split v2-specs">
+              <img src="/images/listing/product-clx1-isolated.jpg" alt={lang === "zh" ? "CLX1 链条与锁体" : "CLX1 chain and lock body"} />
               <div>
-                <h2 className="mb-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-text-muted">{t("product.specs")}</h2>
-                <dl className="overflow-hidden rounded-2xl border border-[var(--color-border)]">
-                  {active.specs.map((row, i) => (
-                    <div
-                      key={i}
-                      className={[
-                        "grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-4 px-4 py-2.5 text-[15px]",
-                        i % 2 === 0 ? "bg-white" : "bg-surface-muted",
-                      ].join(" ")}
-                    >
-                      <dt className="font-medium text-text">{lang === "zh" ? row.key.zh : row.key.en}</dt>
-                      <dd className="text-text-muted">{lang === "zh" ? row.value.zh : row.value.en}</dd>
+                <h2 id="spec-title">{lang === "zh" ? "关键细节。" : "Details That Matter."}</h2>
+                <p className="v2-lead">{lang === "zh" ? "已确认的 CLX1 规格。" : "Confirmed CLX1 specifications."}</p>
+                <dl>
+                  <div>
+                    <dt>{lang === "zh" ? "产品型号" : "Product Model"}</dt>
+                    <dd>CLX1</dd>
+                  </div>
+                  {active.specs.map((row, index) => (
+                    <div key={index}>
+                      <dt>{lang === "zh" ? row.key.zh : row.key.en}</dt>
+                      <dd>{lang === "zh" ? row.value.zh : row.value.en}</dd>
                     </div>
                   ))}
                 </dl>
               </div>
             </div>
-          </div>
+          </section>
 
           {visibleManuals.length ? (
             <div className="product-manuals mt-8">

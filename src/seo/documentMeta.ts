@@ -32,6 +32,14 @@ export const ROUTE_SEO: RouteSeo[] = [
     image: `${SITE_ORIGIN}/images/listing/meet-clx1.jpg`,
   },
   {
+    path: "/durability-testing",
+    title: "COOLINKEY CLX1 | Durability & Testing",
+    titleZh: "COOLINKEY CLX1 | 耐久与测试",
+    description: "Explore COOLINKEY CLX1 durability testing. The tire-pressure demonstration appears here when the recording is available.",
+    descriptionZh: "了解 COOLINKEY CLX1 的耐久测试。轮胎碾压演示会在录像放入项目后显示。",
+    image: `${SITE_ORIGIN}/images/listing/bike-locking-closeup.jpg`,
+  },
+  {
     path: "/privacy",
     title: "Privacy Policy | COOLINKEY",
     titleZh: "隐私政策 | COOLINKEY",
