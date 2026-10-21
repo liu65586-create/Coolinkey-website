@@ -59,7 +59,15 @@ export function Product() {
       ) : (
         <>
           <div className="product-sheet">
-            <ProductGallery images={gallery} productName={name} fit={active.imageFit} focus={active.focus} />
+            <div className="product-visual">
+              <ProductGallery images={gallery} productName={name} fit={active.imageFit} focus={active.focus} />
+              {visibleManuals.length ? (
+                <div className="product-manuals">
+                  <h2>{manualsHeading}</h2>
+                  <ManualsGrid manuals={visibleManuals} showHeading={false} />
+                </div>
+              ) : null}
+            </div>
 
             <div className="product-copy">
               <ProductDropdown
@@ -101,15 +109,6 @@ export function Product() {
               </Button>
             </div>
           </div>
-
-          {visibleManuals.length ? (
-            <div className="product-manuals mt-8">
-              <h2 className="mb-5 text-center font-display text-[22px] font-semibold tracking-tight text-text sm:text-[24px]">
-                {manualsHeading}
-              </h2>
-              <ManualsGrid manuals={visibleManuals} showHeading={false} />
-            </div>
-          ) : null}
         </>
       )}
     </div>
