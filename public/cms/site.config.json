@@ -565,12 +565,12 @@
       "zh": "支持"
     },
     "title": {
-      "en": "Get started. Stay confident.",
-      "zh": "轻松上手。始终安心。"
+      "en": "Quick Start Guide",
+      "zh": "快速入门指南"
     },
     "subtitle": {
-      "en": "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place.",
-      "zh": "设置、使用与排查 coolinkey 所需的一切都在这里。说明书、视频与分步指南，集中查阅。"
+      "en": "Download the setup steps, user manual and video.",
+      "zh": "下载设置步骤、说明书与视频。"
     },
     "quickStart": {
       "en": "Quick Start",
@@ -601,16 +601,16 @@
       "zh": "常见问题"
     },
     "troubleshootingHint": {
-      "en": "Solve common issues quickly.",
-      "zh": "快速解决常见状况。"
+      "en": "Answers for the situations we can confirm.",
+      "zh": "这里是目前可以确认的处理方式。"
     },
     "helpTitle": {
-      "en": "Still need help?",
-      "zh": "还需要帮助？"
+      "en": "Still can't find what you're looking for?",
+      "zh": "还是找不到您要找的东西？"
     },
     "helpBody": {
-      "en": "Our support team is here for you.",
-      "zh": "支持团队随时为你服务。"
+      "en": "If the questions above don't cover it, leave a message here.",
+      "zh": "如果常见问题里没有你要找的答案，可以在这里留言。"
     },
     "contactCta": {
       "en": "Contact Support",

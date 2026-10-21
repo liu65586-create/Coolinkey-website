@@ -61,10 +61,10 @@ export const copyDefaults = {
   },
   support: {
     kicker: bi("Support", "支持"),
-    title: bi("Get started. Stay confident.", "轻松上手。始终安心。"),
+    title: bi("Quick Start Guide", "快速入门指南"),
     subtitle: bi(
-      "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place.",
-      "设置、使用与排查 coolinkey 所需的一切都在这里。说明书、视频与分步指南，集中查阅。"
+      "Download the setup steps, user manual and video.",
+      "下载设置步骤、说明书与视频。"
     ),
     quickStart: bi("Quick Start", "快速开始"),
     quickStartHint: bi("Get up and running in minutes.", "几分钟完成设置。"),
@@ -73,9 +73,12 @@ export const copyDefaults = {
     videos: bi("Video Guides", "视频指南"),
     videosHint: bi("Watch and learn, in real time.", "跟着演示一步到位。"),
     troubleshooting: bi("Troubleshooting", "常见问题"),
-    troubleshootingHint: bi("Solve common issues quickly.", "快速解决常见状况。"),
-    helpTitle: bi("Still need help?", "还需要帮助？"),
-    helpBody: bi("Our support team is here for you.", "支持团队随时为你服务。"),
+    troubleshootingHint: bi("Answers for the situations we can confirm.", "这里是目前可以确认的处理方式。"),
+    helpTitle: bi("Still can't find what you're looking for?", "还是找不到您要找的东西？"),
+    helpBody: bi(
+      "If the questions above don't cover it, leave a message here.",
+      "如果常见问题里没有你要找的答案，可以在这里留言。"
+    ),
     contactCta: bi("Contact Support", "联系支持"),
     steps: [
       { id: "support-step-1", title: bi("Charge first", "先充电"), hint: bi("Set up and learning in minutes.", "几分钟完成开机准备。") },

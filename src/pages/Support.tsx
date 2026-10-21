@@ -1,7 +1,7 @@
-import { ArrowRight, ChevronRight, CirclePlay, FileText } from "lucide-react";
-import { lazy, Suspense, useMemo, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { lazy, Suspense, useId, useMemo, useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button } from "../components/Button";
 import { VideoModal, manualVideoUrl } from "../components/VideoModal";
 
 const ManualModal = lazy(() => import("../components/ManualModal").then((mod) => ({ default: mod.ManualModal })));
@@ -11,6 +11,14 @@ import type { CmsManual } from "../types/cms";
 import { getVisibleManuals } from "../utils/manualsVisibility";
 import { pickBilingual, type Lang } from "../utils/siteCopy";
 
+function copy(lang: Lang, en: string, zh: string) {
+  return lang === "zh" ? zh : en;
+}
+
+type Fields = { fullName: string; email: string; message: string; companyFax: string };
+const EMPTY: Fields = { fullName: "", email: "", message: "", companyFax: "" };
+type Status = "idle" | "submitting" | "sent" | "draft" | "error";
+
 export function Support() {
   const { t, i18n } = useTranslation();
   const { defaultProduct } = useCms();
@@ -18,129 +26,263 @@ export function Support() {
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const page = config?.supportPage;
   const email = config?.contact?.email?.trim() || "support@coolinkey.com";
+  const endpoint = import.meta.env.VITE_INQUIRY_ENDPOINT?.trim() || "";
   const text = (field: Parameters<typeof pickBilingual>[1], key: string) => pickBilingual(lang, field, t(key));
   const [active, setActive] = useState<CmsManual | null>(null);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
+  const formId = useId();
+  const [fields, setFields] = useState<Fields>(EMPTY);
+  const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
+  const [status, setStatus] = useState<Status>("idle");
 
   const manuals = useMemo(
     () => getVisibleManuals(defaultProduct?.manuals ?? [], config?.manualsSection?.hiddenManualTypes),
-    [defaultProduct, config]
+    [defaultProduct, config],
   );
-  const docs = manuals.filter((m) => m.type !== "video");
-  const videos = manuals.filter((m) => m.type === "video");
+  const docs = manuals.filter((item) => item.type !== "video");
+  const videos = manuals.filter((item) => item.type === "video");
+  const productName = defaultProduct ? (lang === "zh" ? defaultProduct.name.zh : defaultProduct.name.en) : "CLX1";
 
-  const steps = (page?.steps?.length ? page.steps : []).map((step, index) => ({
-    n: String(index + 1),
+  const steps = (page?.steps ?? []).map((step) => ({
+    id: step.id,
     title: pickBilingual(lang, step.title, ""),
     hint: pickBilingual(lang, step.hint, ""),
-    id: step.id,
   }));
-
-  const faqs = (page?.faqs?.length ? page.faqs : []).map((item) => ({
+  const faqs = (page?.faqs ?? []).map((item) => ({
     id: item.id,
     q: pickBilingual(lang, item.question, ""),
     a: pickBilingual(lang, item.answer, ""),
   }));
 
+  const set = (key: keyof Fields, value: string) => {
+    setFields((current) => ({ ...current, [key]: value }));
+    setErrors((current) => ({ ...current, [key]: undefined }));
+    if (status === "error" || status === "draft") setStatus("idle");
+  };
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const next: Partial<Record<keyof Fields, string>> = {};
+    if (!fields.fullName.trim()) next.fullName = copy(lang, "Please enter your name.", "请填写姓名。");
+    if (!fields.email.trim()) next.email = copy(lang, "Please enter an email address.", "请填写电子邮箱。");
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.trim())) {
+      next.email = copy(lang, "Please enter a valid email address.", "请填写有效的邮箱地址。");
+    }
+    if (!fields.message.trim()) next.message = copy(lang, "Please enter a message.", "请填写信息。");
+    setErrors(next);
+    const first = (Object.keys(next) as (keyof Fields)[])[0];
+    if (first) {
+      document.getElementById(`${formId}-${first}`)?.focus();
+      return;
+    }
+    if (fields.companyFax.trim()) {
+      setStatus("error");
+      return;
+    }
+
+    const payload = {
+      fullName: fields.fullName.trim(),
+      email: fields.email.trim(),
+      message: fields.message.trim(),
+      source: "coolinkey_website",
+      sourcePage: "/#support",
+      lang,
+      topic: "support",
+    };
+
+    setStatus("submitting");
+    if (endpoint) {
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { Accept: "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) throw new Error("http");
+        setStatus("sent");
+      } catch {
+        setStatus("error");
+      }
+      return;
+    }
+
+    const subject = "COOLINKEY support message";
+    const body = [`Name: ${payload.fullName}`, `Email: ${payload.email}`, "", payload.message].join("\n");
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("draft");
+  };
+
   return (
-    <div className="support-stack w-full">
-      <section className="support-hero page-wrap py-8 lg:py-8">
-        <h2 className="font-display text-[clamp(2rem,3.5vw,3.5rem)] font-semibold leading-tight tracking-tight text-text">
-          {text(page?.title, "supportPage.title")}
-        </h2>
-        <p className="mt-3 max-w-xl text-[16px] leading-relaxed text-text-muted">{text(page?.subtitle, "supportPage.subtitle")}</p>
-      </section>
-
-      <section className="support-panels page-wrap grid gap-4 pb-4 lg:grid-cols-3">
-        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-[17px] font-semibold text-text">{text(page?.quickStart, "supportPage.quickStart")}</h2>
-          <p className="mt-1 text-[15px] text-text-muted">{text(page?.quickStartHint, "supportPage.quickStartHint")}</p>
-          <ol className="mt-4 space-y-0.5">
-            {steps.map((s) => (
-            <li key={s.id}>
-                <div className="flex items-center gap-3 rounded-xl px-1 py-2.5">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#e7f8ea] text-xs font-bold text-accent">
-                    {s.n}
-                  </span>
-                  <span className="flex-1 text-[15px] font-medium text-text">{s.title}</span>
-                  <ChevronRight size={16} className="text-text-muted" />
-                </div>
-              </li>
-            ))}
-          </ol>
-        </article>
-
-        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-[17px] font-semibold text-text">{text(page?.guides, "supportPage.guides")}</h2>
-          <p className="mt-1 text-[15px] text-text-muted">{text(page?.guidesHint, "supportPage.guidesHint")}</p>
-          <ul className="mt-4 space-y-0.5">
-            {docs.map((m) => (
-              <li key={m.id}>
-                <button
-                  type="button"
-                  onClick={() => setActive(m)}
-                  className="flex w-full items-center gap-3 rounded-xl px-1 py-2.5 text-left hover:bg-surface-muted"
-                >
-                  <FileText size={18} className="text-accent" />
-                  <span className="flex-1 text-[15px] font-medium text-text">{lang === "zh" ? m.title.zh : m.title.en}</span>
-                  <ChevronRight size={16} className="text-text-muted" />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </article>
-
-        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-[17px] font-semibold text-text">{text(page?.videos, "supportPage.videos")}</h2>
-          <p className="mt-1 text-[15px] text-text-muted">{text(page?.videosHint, "supportPage.videosHint")}</p>
-          <ul className="mt-4 space-y-2">
-            {(videos.length ? videos : docs.slice(0, 3)).map((m) => (
-              <li key={m.id}>
-                <button
-                  type="button"
-                  onClick={() => (m.type === "video" ? setVideoSrc(manualVideoUrl(m, lang)) : setActive(m))}
-                  className="flex w-full items-center gap-3 rounded-xl bg-surface-muted p-2 text-left hover:bg-[#e7f8ea]"
-                >
-                  <span className="flex h-11 w-16 items-center justify-center rounded-lg bg-[#dce8e1] text-accent">
-                    <CirclePlay size={22} />
-                  </span>
-                  <span className="text-[15px] font-medium text-text">{lang === "zh" ? m.title.zh : m.title.en}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </section>
-
-      <section className="support-faq page-wrap pb-4">
-        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-[17px] font-semibold text-text">{text(page?.troubleshooting, "supportPage.troubleshooting")}</h2>
-          <p className="mt-1 text-[15px] text-text-muted">{text(page?.troubleshootingHint, "supportPage.troubleshootingHint")}</p>
-          <div className="mt-2 divide-y divide-[var(--color-border)]">
-            {faqs.map((item) => (
-              <details key={item.id} className="group py-2.5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-medium text-text [&::-webkit-details-marker]:hidden">
-                  {item.q}
-                  <ChevronRight size={16} className="shrink-0 text-text-muted transition-transform group-open:rotate-90" />
-                </summary>
-                <p className="mt-2 max-w-3xl text-[15px] leading-relaxed text-text-muted">{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </article>
-      </section>
-
-      <section className="support-cta page-wrap pb-8">
-        <div className="flex flex-col items-start justify-between gap-4 rounded-[20px] bg-surface-muted px-5 py-5 sm:flex-row sm:items-center sm:px-8">
-          <div>
-            <h2 className="text-[17px] font-semibold text-text">{text(page?.helpTitle, "supportPage.helpTitle")}</h2>
-            <p className="mt-1 text-[15px] text-text-muted">{text(page?.helpBody, "supportPage.helpBody")}</p>
-          </div>
-          <Button variant="primary" href={`mailto:${email}`} className="!border-transparent !bg-black !text-white hover:!bg-[#222]">
-            {text(page?.contactCta, "supportPage.contactCta")}
-            <ArrowRight size={16} />
-          </Button>
+    <div className="support-stack page-wrap">
+      <section className="support-split">
+        <div className="support-copy">
+          <p className="support-kicker">{text(page?.kicker, "supportPage.kicker")}</p>
+          <h2>{text(page?.title, "supportPage.title")}</h2>
+          <p>{text(page?.subtitle, "supportPage.subtitle")}</p>
         </div>
+        <div className="support-panel">
+          {steps.length ? (
+            <details>
+              <summary>
+                {productName}
+                <ChevronDown size={16} aria-hidden="true" />
+              </summary>
+              <ol>
+                {steps.map((step, index) => (
+                  <li key={step.id}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <strong>{step.title}</strong>
+                      <p>{step.hint}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </details>
+          ) : null}
+          {docs.map((manual) => (
+            <details key={manual.id}>
+              <summary>
+                {lang === "zh" ? manual.title.zh : manual.title.en}
+                <ChevronDown size={16} aria-hidden="true" />
+              </summary>
+              <button type="button" onClick={() => setActive(manual)}>
+                {t("manualsSection.preview")}
+              </button>
+            </details>
+          ))}
+          {videos.map((manual) => (
+            <details key={manual.id}>
+              <summary>
+                {lang === "zh" ? manual.title.zh : manual.title.en}
+                <ChevronDown size={16} aria-hidden="true" />
+              </summary>
+              <button type="button" onClick={() => setVideoSrc(manualVideoUrl(manual, lang))}>
+                {copy(lang, "Play", "播放")}
+              </button>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="support-split">
+        <div className="support-copy">
+          <p className="support-kicker">{text(page?.kicker, "supportPage.kicker")}</p>
+          <h2>{text(page?.troubleshooting, "supportPage.troubleshooting")}</h2>
+          <p>{text(page?.troubleshootingHint, "supportPage.troubleshootingHint")}</p>
+        </div>
+        <div className="support-panel">
+          {faqs.map((item) => (
+            <details key={item.id}>
+              <summary>
+                {item.q}
+                <ChevronDown size={16} aria-hidden="true" />
+              </summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="support-ask" aria-labelledby="support-ask-title">
+        <div className="support-copy">
+          <p className="support-kicker">{text(page?.kicker, "supportPage.kicker")}</p>
+          <h2 id="support-ask-title">{text(page?.helpTitle, "supportPage.helpTitle")}</h2>
+          <p>{text(page?.helpBody, "supportPage.helpBody")}</p>
+          <p>
+            {copy(lang, "For anything about CLX1, email ", "对 CLX1 有任何疑问，请发送邮件至 ")}
+            <a href={`mailto:${email}`}>{email}</a>
+            {copy(lang, ".", "。")}
+          </p>
+        </div>
+        {status === "sent" ? (
+          <div className="support-form-card">
+            <p role="status">{copy(lang, "Your message has been submitted.", "你的留言已提交。")}</p>
+          </div>
+        ) : (
+          <form className="support-form-card" onSubmit={onSubmit} noValidate>
+            <div className="support-fields">
+              <label htmlFor={`${formId}-fullName`}>
+                <span className="sr-only">{copy(lang, "Name", "姓名")}</span>
+                <input
+                  id={`${formId}-fullName`}
+                  name="fullName"
+                  autoComplete="name"
+                  placeholder={copy(lang, "Name", "姓名")}
+                  value={fields.fullName}
+                  aria-invalid={Boolean(errors.fullName)}
+                  aria-describedby={errors.fullName ? `${formId}-fullName-error` : undefined}
+                  onChange={(event) => set("fullName", event.target.value)}
+                />
+                {errors.fullName ? <span id={`${formId}-fullName-error`}>{errors.fullName}</span> : null}
+              </label>
+              <label htmlFor={`${formId}-email`}>
+                <span className="sr-only">{copy(lang, "Email", "电子邮箱")}</span>
+                <input
+                  id={`${formId}-email`}
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder={copy(lang, "Email", "电子邮箱")}
+                  value={fields.email}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? `${formId}-email-error` : undefined}
+                  onChange={(event) => set("email", event.target.value)}
+                />
+                {errors.email ? <span id={`${formId}-email-error`}>{errors.email}</span> : null}
+              </label>
+              <label className="support-message" htmlFor={`${formId}-message`}>
+                <span className="sr-only">{copy(lang, "Message", "信息")}</span>
+                <textarea
+                  id={`${formId}-message`}
+                  name="message"
+                  placeholder={copy(lang, "Message", "信息")}
+                  value={fields.message}
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? `${formId}-message-error` : undefined}
+                  onChange={(event) => set("message", event.target.value)}
+                />
+                {errors.message ? <span id={`${formId}-message-error`}>{errors.message}</span> : null}
+              </label>
+            </div>
+            <div className="hp" aria-hidden="true">
+              <label htmlFor={`${formId}-companyFax`}>Fax</label>
+              <input
+                id={`${formId}-companyFax`}
+                name="companyFax"
+                tabIndex={-1}
+                autoComplete="off"
+                value={fields.companyFax}
+                onChange={(event) => set("companyFax", event.target.value)}
+              />
+            </div>
+            <button className="v2-btn v2-btn-primary" type="submit" disabled={status === "submitting"}>
+              {copy(lang, "Send message", "发送消息")}
+            </button>
+            {endpoint ? null : (
+              <p className="support-note">
+                {copy(
+                  lang,
+                  `Submitting opens an email to ${email}. This page cannot confirm delivery.`,
+                  `提交后会打开写给 ${email} 的邮件。此页面无法确认是否已发出。`,
+                )}
+              </p>
+            )}
+            {status === "draft" ? (
+              <p className="support-note" role="status">
+                {copy(lang, "Your email app should now have this message ready. Send it to complete the request.", "邮件应用中应已准备好这封留言。发送后即完成。")}
+              </p>
+            ) : null}
+            {status === "error" ? (
+              <p className="support-error" role="alert">
+                {copy(lang, "The message could not be submitted. Please try again.", "留言未能提交，请再试一次。")}
+              </p>
+            ) : null}
+            <p className="support-note">
+              <Link to="/privacy">{copy(lang, "Privacy Policy", "隐私政策")}</Link>
+            </p>
+          </form>
+        )}
       </section>
 
       <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />
