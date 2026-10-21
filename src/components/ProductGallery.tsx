@@ -1,6 +1,6 @@
-﻿import { useMemo, useState } from "react";
+﻿import { ZoomIn } from "lucide-react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CarouselControls } from "./CarouselControls";
 import { ResolvedImage } from "./ResolvedImage";
 
 type Props = {
@@ -21,11 +21,27 @@ export function ProductGallery({ images, productName, fit = "contain", focus = "
   const current = list[Math.min(idx, list.length - 1)];
 
   return (
-    <div className="space-y-4">
+    <div className="product-gallery">
+      {list.length > 1 ? (
+        <div className="product-thumbs">
+          {list.map((src, i) => (
+            <button
+              key={src + i}
+              type="button"
+              aria-label={`${productName} ${i + 1}`}
+              aria-current={i === idx ? "true" : undefined}
+              onClick={() => setIdx(i)}
+            >
+              <ResolvedImage src={src} alt="" className="h-full w-full object-contain" />
+            </button>
+          ))}
+        </div>
+      ) : null}
+
       <button
         type="button"
         onClick={() => setLightbox(current)}
-        className="relative w-full overflow-hidden rounded-2xl bg-white"
+        className="product-frame"
         aria-label={t("product.zoomHint")}
       >
         <ResolvedImage
@@ -33,36 +49,12 @@ export function ProductGallery({ images, productName, fit = "contain", focus = "
           alt={productName}
           fit={fit}
           focus={focus}
-          className="product-hero-image mx-auto max-h-[300px] w-full p-3"
+          className="product-hero-image"
         />
+        <span className="product-zoom" aria-hidden="true">
+          <ZoomIn size={18} strokeWidth={1.75} />
+        </span>
       </button>
-
-      <CarouselControls
-        index={idx}
-        total={list.length}
-        onPrev={() => setIdx((i) => Math.max(0, i - 1))}
-        onNext={() => setIdx((i) => Math.min(list.length - 1, i + 1))}
-        onSelect={setIdx}
-      />
-
-      {list.length > 1 ? (
-        <div className="product-thumbs flex justify-center gap-2 overflow-x-auto py-1">
-          {list.map((src, i) => (
-            <button
-              key={src + i}
-              type="button"
-              aria-label={`${t("product.zoomHint")} ${i + 1}`}
-              onClick={() => setIdx(i)}
-              className={[
-                "h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-md bg-surface-muted transition-opacity",
-                i === idx ? "ring-2 ring-accent ring-offset-2" : "opacity-60 hover:opacity-100",
-              ].join(" ")}
-            >
-              <ResolvedImage src={src} alt={`${productName} ${i + 1}`} className="h-full w-full object-cover" />
-            </button>
-          ))}
-        </div>
-      ) : null}
 
       {lightbox ? (
         <button

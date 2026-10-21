@@ -32,53 +32,54 @@ export function Product() {
 
   const name = active ? (lang === "zh" ? active.name.zh : active.name.en) : "";
   const desc = active ? (lang === "zh" ? active.shortDescription.zh : active.shortDescription.en) : "";
-  const gallery = active ? [active.mainImage, ...active.galleryImages].filter(Boolean) : [];
+  const gallery = active
+    ? [...new Set([active.mainImage, ...active.galleryImages].filter(Boolean))]
+    : [];
+  const pills = active?.slug === "smart-chain-lock"
+    ? [lang === "zh" ? "指纹" : "Fingerprint", "App", lang === "zh" ? "机械钥匙" : "Mechanical key", "IP67", "USB-C"]
+    : [];
   const visibleManuals = active
     ? getVisibleManuals(active.manuals, config?.manualsSection?.hiddenManualTypes)
     : [];
 
   return (
     <div className="page-wrap py-8 sm:py-10">
-      <div className="max-w-md">
-        <ProductDropdown
-          products={visibleProducts}
-          valueSlug={active?.slug ?? ""}
-          disabled={loading}
-          onChangeSlug={setSlug}
-        />
-      </div>
-
       {!active ? (
-        <p className="mt-16 text-text-muted">{loading ? "…" : "—"}</p>
+        <>
+          <div className="max-w-md">
+            <ProductDropdown
+              products={visibleProducts}
+              valueSlug=""
+              disabled={loading}
+              onChangeSlug={setSlug}
+            />
+          </div>
+          <p className="mt-16 text-text-muted">{loading ? "…" : "—"}</p>
+        </>
       ) : (
         <>
-          <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">
-            <div className="rounded-[28px] bg-surface-muted p-4 sm:p-6">
-              <ProductGallery images={gallery} productName={name} fit={active.imageFit} focus={active.focus} />
-            </div>
+          <div className="product-sheet">
+            <ProductGallery images={gallery} productName={name} fit={active.imageFit} focus={active.focus} />
 
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <h2 className="font-display text-[clamp(2.2rem,4vw,4rem)] font-semibold leading-none tracking-tight text-text">{name}</h2>
-                <p className="text-[16px] leading-relaxed text-text-muted">{desc}</p>
-              </div>
-
-              <Button
-                variant="primary"
-                onClick={() => openPurchase(active, { useChinaStores, i18nLang: i18n.language })}
-              >
-                {t("hero.buy")}
-              </Button>
-            </div>
-          </div>
-
-          <section className="product-details" aria-labelledby="spec-title">
-            <div className="v2-split v2-specs">
-              <img src="/images/listing/product-clx1-isolated.jpg" alt={lang === "zh" ? "CLX1 链条与锁体" : "CLX1 chain and lock body"} />
-              <div>
-                <h2 id="spec-title">{lang === "zh" ? "关键细节。" : "Details That Matter."}</h2>
-                <p className="v2-lead">{lang === "zh" ? "已确认的 CLX1 规格。" : "Confirmed CLX1 specifications."}</p>
-                <dl>
+            <div className="product-copy">
+              <ProductDropdown
+                products={visibleProducts}
+                valueSlug={active.slug}
+                disabled={loading}
+                onChangeSlug={setSlug}
+              />
+              <h2>{name}</h2>
+              {pills.length ? (
+                <ul className="product-pills">
+                  {pills.map((pill) => (
+                    <li key={pill}>{pill}</li>
+                  ))}
+                </ul>
+              ) : null}
+              <p className="product-lead">{desc}</p>
+              <section aria-labelledby="spec-title">
+                <h3 id="spec-title">{lang === "zh" ? "关键细节" : "Details That Matter"}</h3>
+                <dl className="product-specs">
                   <div>
                     <dt>{lang === "zh" ? "产品型号" : "Product Model"}</dt>
                     <dd>CLX1</dd>
@@ -90,9 +91,16 @@ export function Product() {
                     </div>
                   ))}
                 </dl>
-              </div>
+              </section>
+              <Button
+                variant="primary"
+                className="product-buy"
+                onClick={() => openPurchase(active, { useChinaStores, i18nLang: i18n.language })}
+              >
+                {t("hero.buy")}
+              </Button>
             </div>
-          </section>
+          </div>
 
           {visibleManuals.length ? (
             <div className="product-manuals mt-8">
