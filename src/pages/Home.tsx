@@ -32,6 +32,17 @@ function useHomeCopy() {
 
 const brandSlides = [
   {
+    id: "product",
+    image: "/images/listing/meet-clx1.jpg",
+    position: "62% center",
+    altEn: "CLX1 fingerprint smart chain lock",
+    altZh: "CLX1 指纹智能链条锁",
+    titleEn: "Meet CLX1.",
+    titleZh: "认识 CLX1。",
+    bodyEn: "A fingerprint smart chain lock designed to bring a more intuitive access experience to everyday life.",
+    bodyZh: "一款指纹智能链条锁，让日常开锁更直觉。",
+  },
+  {
     id: "manifesto",
     image: "/images/lifestyle/hero-cyclists.jpg",
     position: "72% center",
@@ -41,17 +52,6 @@ const brandSlides = [
     titleZh: "为更从容的生活而设计。",
     bodyEn: "We believe the best technology feels natural — simplifying everyday moments through thoughtful design.",
     bodyZh: "我们相信，最好的科技是自然的——用细致的设计，让日常时刻更简单。",
-  },
-  {
-    id: "philosophy",
-    image: "/images/listing/bike-locking-wide.jpg",
-    position: "center",
-    altEn: "CLX1 on a bicycle in daylight outside a house",
-    altZh: "日光下，CLX1 锁在住宅外的自行车上",
-    titleEn: "Technology Should Feel Natural.",
-    titleZh: "科技应当自然而然。",
-    bodyEn: "Good design should not make everyday life more complicated. It should remove friction, feel intuitive, and allow people to focus on what matters.",
-    bodyZh: "好的设计不该让日常生活更复杂。它应当减少阻力、直觉易用，让人把注意力留给真正重要的事。",
   },
   {
     id: "principles",
@@ -79,7 +79,7 @@ export function HomeHero() {
   const count = brandSlides.length;
 
   useEffect(() => {
-    if (hash === "#approach") setIndex(1);
+    if (hash === "#approach") setIndex(0);
   }, [hash]);
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export function HomeHero() {
               {slideIndex === 0 ? (
                 <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
               ) : (
-                <h2 id={slide.id === "philosophy" ? "philosophy-title" : "principles-title"}>{copy(slide.titleEn, slide.titleZh)}</h2>
+                <h2 id={slide.id === "principles" ? "principles-title" : undefined}>{copy(slide.titleEn, slide.titleZh)}</h2>
               )}
               {slide.bodyEn ? <p className="v2-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
               {"principles" in slide ? (
