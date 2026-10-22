@@ -318,18 +318,6 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 #help .about-panel { justify-items: start; padding: 0; text-align: left; }
 #help .about-panel h2 { max-width: 18em; font-size: clamp(2rem, 3vw, 2.75rem); }
 #help .about-panel .about-body { max-width: 40rem; font-size: 1.0625rem; line-height: 1.7; }
-.support-entry { display: grid; gap: 40px; }
-.support-hero { display: grid; justify-items: start; gap: 12px; max-width: 46rem; }
-.support-hero h2 { margin: 0; color: #202120; font-size: clamp(2.4rem, 4vw, 3.5rem); font-weight: 650; letter-spacing: -0.045em; line-height: 1.08; }
-.support-hero p:last-child { margin: 0; color: #686b66; font-size: 1.0625rem; line-height: 1.6; }
-.support-quick { display: grid; gap: 16px; }
-.support-quick h2 { margin: 0; color: #202120; font-size: clamp(1.35rem, 2vw, 1.75rem); font-weight: 650; letter-spacing: -0.03em; }
-.support-quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 880px; }
-.support-card { display: grid; align-content: start; gap: 8px; min-height: 100%; border: 1px solid #e5e6e1; border-radius: 16px; background: #fff; padding: 22px 20px 24px; color: inherit; text-decoration: none; }
-.support-card:hover { border-color: #36b66a; }
-.support-card svg { color: #36b66a; }
-.support-card strong { color: #202120; font-size: 1.2rem; font-weight: 650; letter-spacing: -0.03em; line-height: 1.3; }
-.support-card span { color: #686b66; font-size: 0.95rem; font-weight: 450; line-height: 1.55; }
 .desk-ask .desk-copy h2 { color: #202120; }
 .v2-section-muted { background: #ecede9; }
 .v2-eyebrow { margin: 0; color: #686b66; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; }
@@ -761,7 +749,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .use-guide { width: min(100% - 40px, 1440px); gap: 36px; }
   .use-steps, .use-videos ul { grid-template-columns: 1fr; }
   .use-videos { padding: 22px 18px; }
-  .support-quick-grid { grid-template-columns: 1fr; }
 }
 .desk-stack { display: grid; gap: 88px; }
 .desk-split, .desk-ask {

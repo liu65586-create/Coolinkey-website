@@ -1,5 +1,4 @@
 import { useId, useState, type FormEvent } from "react";
-import { BookOpen, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSiteConfig } from "../context/SiteConfigContext";
@@ -103,35 +102,6 @@ export function SupportDesk() {
 
   return (
     <section id="help" className="site-anchor" tabIndex={-1}>
-      <div className="page-wrap support-entry">
-        <header className="support-hero">
-          <p className="use-kicker">{copy(lang, "Support", "支持")}</p>
-          <h2>{copy(lang, "How Can We Help?", "需要什么帮助？")}</h2>
-          <p>
-            {copy(
-              lang,
-              "Questions about your CLX1? Find the help you need or get in touch with our team.",
-              "对 CLX1 有疑问？在这里找到需要的帮助，或直接联系我们。",
-            )}
-          </p>
-        </header>
-        <section className="support-quick" aria-labelledby="support-quick-title">
-          <h2 id="support-quick-title">{copy(lang, "Quick Help", "快速帮助")}</h2>
-          <div className="support-quick-grid">
-            <Link className="support-card" to="/#support">
-              <BookOpen size={22} aria-hidden="true" />
-              <strong>{copy(lang, "Setup & User Guide", "设置与使用指南")}</strong>
-              <span>{copy(lang, "Find setup instructions, video tutorials, and product guidance.", "查看设置说明、视频教程和产品指引。")}</span>
-            </Link>
-            <Link className="support-card" to="/#troubleshooting">
-              <Wrench size={22} aria-hidden="true" />
-              <strong>{copy(lang, "Troubleshooting", "故障排查")}</strong>
-              <span>{copy(lang, "Find help with common CLX1 issues.", "查看 CLX1 常见问题的处理办法。")}</span>
-            </Link>
-          </div>
-        </section>
-      </div>
-
       <div className="desk-stack page-wrap">
         <div id="contact" className="site-anchor" tabIndex={-1}>
           <div id="support-message" className="desk-ask" aria-labelledby="desk-ask-title" tabIndex={-1}>
