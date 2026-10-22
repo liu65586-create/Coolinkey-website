@@ -121,10 +121,10 @@ type BrandSlide = {
 const brandSlides: BrandSlide[] = [
   {
     id: "product",
-    image: "/images/listing/meet-clx1-hero.png",
-    position: "center center",
-    altEn: "CLX1 fingerprint smart chain lock",
-    altZh: "CLX1 指纹智能链条锁",
+    image: "/images/listing/clx1-hands-lock.jpg",
+    position: "62% center",
+    altEn: "Hands holding the two ends of the CLX1 lock",
+    altZh: "双手握住 CLX1 锁的两端",
     eyebrowEn: "CLX1 / FINGERPRINT SMART CHAIN LOCK",
     eyebrowZh: "CLX1 / 指纹智能链条锁",
     titleEn: "Unlock with\na touch.",
