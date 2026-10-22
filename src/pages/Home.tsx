@@ -78,13 +78,13 @@ const detailAngles = [
 ];
 
 const lifeHero = {
-  src: "/images/listing/bike-locking-wide.jpg",
+  src: "/images/listing/-3.jpg",
   en: "For Your Bike",
   zh: "用于自行车",
   bodyEn: "Make a quick stop. Stay in your flow.",
   bodyZh: "短暂停留，节奏不断。",
-  altEn: "CLX1 locking a bicycle to a pole on a residential street",
-  altZh: "CLX1 把自行车锁在街边的一根柱子上",
+  altEn: "A rider paused with a bicycle outside a street café",
+  altZh: "骑行者在街边咖啡馆外把自行车停下",
 };
 
 const lifeCards = [

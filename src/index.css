@@ -640,7 +640,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-cards figcaption span { color: #686b66; font-size: 0.95rem; font-weight: 450; }
 .life-stage { display: grid; gap: 28px; }
 .life-hero { margin: 0; }
-.life-hero img { display: block; width: 100%; aspect-ratio: 2.4 / 1; object-fit: cover; object-position: center; border-radius: 16px; background: #202120; }
+.life-hero img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; border-radius: 16px; background: #202120; }
 .life-hero figcaption { max-width: 36rem; padding-top: 16px; }
 .life-hero strong { display: block; color: #202120; font-size: 1.5rem; font-weight: 650; letter-spacing: -0.03em; }
 .life-hero figcaption p { margin: 8px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.55; }
