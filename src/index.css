@@ -269,7 +269,8 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 .mid-module-card video, .mid-module-image { display: block; width: 100%; max-height: 520px; aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
 .mid-module-card p { margin: 0; padding: 16px 18px 20px; color: #353b36; font-size: 15px; line-height: 1.65; }
 
-#approach, #how-it-works, #business, #contact, #clx1, #support, #help, #about, #support-message, #troubleshooting { scroll-margin-top: 80px; }
+#approach, #how-it-works, #business, #contact, #clx1, #help, #about, #support-message, #troubleshooting { scroll-margin-top: 80px; }
+#support { scroll-margin-top: 50px; }
 
 /* Nav targets fill the space under the header so a click shows the whole module,
    with the same inset above the content and above the next module. */

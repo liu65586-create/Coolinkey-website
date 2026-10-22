@@ -29,6 +29,11 @@ export function scrollToSection(id: SiteSectionId, behavior: ScrollBehavior = "s
   const el = document.getElementById(id);
   if (!el) return;
   const header = document.querySelector("header")?.getBoundingClientRect().height ?? 80;
-  const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - header);
+  let clearance = header;
+  if (id === "support") {
+    const margin = Number.parseFloat(getComputedStyle(el).scrollMarginTop);
+    if (Number.isFinite(margin)) clearance = margin;
+  }
+  const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - clearance);
   window.scrollTo({ top, behavior });
 }
