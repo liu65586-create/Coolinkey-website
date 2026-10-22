@@ -145,7 +145,7 @@ type BrandSlide = {
 const brandSlides: BrandSlide[] = [
   {
     id: "product",
-    image: "/images/listing/clx1-hands-open-v2.jpg",
+    image: "/images/listing/slide-1.jpg",
     position: "center center",
     altEn: "Hands holding the two ends of the CLX1 lock",
     altZh: "双手握住 CLX1 锁的两端",
@@ -158,7 +158,7 @@ const brandSlides: BrandSlide[] = [
   },
   {
     id: "lifestyle",
-    image: "/images/listing/clx1-lock-detail-v3.jpg",
+    image: "/images/listing/slide-2.jpg",
     position: "center center",
     altEn: "Close view of the CLX1 lock body and fingerprint sensor",
     altZh: "CLX1 锁体与指纹传感器的近景",
