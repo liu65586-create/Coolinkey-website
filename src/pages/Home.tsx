@@ -10,46 +10,70 @@ import { useTranslation } from "react-i18next";
 
 const detailAngles = [
   {
-    src: "/images/listing/detail-lock-body.jpg",
-    en: "Lock body",
-    zh: "锁体",
-    bodyEn: "The fingerprint window and USB-C port sit on the body, with the mechanical keys beside it.",
-    bodyZh: "指纹窗和 USB-C 接口在锁体上，机械钥匙放在旁边。",
-  },
-  {
-    src: "/images/listing/detail-coiled-chain.jpg",
-    en: "Coiled chain",
-    zh: "盘起的链条",
-    bodyEn: "The sleeved chain can sit in a coil, with the lock body and the open end in view.",
-    bodyZh: "包覆链条可以盘起，锁体和开口端都看得到。",
-  },
-  {
-    src: "/images/listing/detail-two-ends.jpg",
-    en: "Two ends",
-    zh: "两端",
-    bodyEn: "One end is the locking pin. The other is the socket it closes into.",
-    bodyZh: "一端是锁销，另一端是它扣入的锁孔。",
-  },
-  {
-    src: "/images/listing/detail-chain-cutters.jpg",
-    en: "A 6 mm stainless steel chain that hydraulic cutters cannot cut.",
-    zh: "液压钳不可剪断的6mm不锈钢链条",
-    bodyEn: "",
-    bodyZh: "",
-  },
-  {
-    src: "/images/listing/detail-stainless-body.jpg",
-    en: "All-stainless-steel lock body.",
-    zh: "纯不锈钢锁体",
-    bodyEn: "",
-    bodyZh: "",
-  },
-  {
-    src: "/images/listing/detail-compact.jpg",
+    src: "/images/listing/angle-compact.jpg",
+    kickerEn: "Carry",
+    kickerZh: "携带",
     en: "Compact enough to pack away easily.",
     zh: "极易收纳的体积",
-    bodyEn: "",
-    bodyZh: "",
+    bodyEn: "The sleeved chain coils beside the lock body.",
+    bodyZh: "包覆链条盘在锁体旁边。",
+    altEn: "Folded CLX1 with the chain coiled around the lock body",
+    altZh: "收拢的 CLX1，链条盘在锁体周围",
+  },
+  {
+    src: "/images/listing/angle-cutter.jpg",
+    kickerEn: "Chain",
+    kickerZh: "链条",
+    en: "A 6 mm stainless steel chain that hydraulic cutters cannot cut.",
+    zh: "液压钳不可剪断的6mm不锈钢链条",
+    bodyEn: "Shown here with a hydraulic cutter on the chain.",
+    bodyZh: "画面中，液压钳夹在链条上。",
+    altEn: "Hydraulic cutter on the CLX1 stainless steel chain",
+    altZh: "液压钳夹在 CLX1 不锈钢链条上",
+  },
+  {
+    src: "/images/listing/angle-key.jpg",
+    kickerEn: "Mechanical key",
+    kickerZh: "机械钥匙",
+    en: "A mechanical key for the lock.",
+    zh: "锁上的机械钥匙。",
+    bodyEn: "Fingerprint, the app, or this key can open CLX1.",
+    bodyZh: "可用指纹、App 或这把钥匙打开 CLX1。",
+    altEn: "Mechanical key inserted into the CLX1 lock body",
+    altZh: "机械钥匙插入 CLX1 锁体",
+  },
+  {
+    src: "/images/listing/angle-coil.jpg",
+    kickerEn: "Coiled",
+    kickerZh: "盘起",
+    en: "Coiled, with the lock body in view.",
+    zh: "盘起时，锁体仍在视线里。",
+    bodyEn: "The sleeved chain forms a coil. The lock body stays at one end.",
+    bodyZh: "包覆链条盘成一圈，锁体留在一端。",
+    altEn: "CLX1 chain coiled beside the lock body",
+    altZh: "CLX1 链条盘在锁体旁边",
+  },
+  {
+    src: "/images/listing/angle-body.jpg",
+    kickerEn: "Lock body",
+    kickerZh: "锁体",
+    en: "All-stainless-steel lock body.",
+    zh: "纯不锈钢锁体",
+    bodyEn: "The fingerprint window and USB-C port sit on this body.",
+    bodyZh: "指纹窗和 USB-C 接口都在这枚锁体上。",
+    altEn: "Close view of the CLX1 stainless steel lock body",
+    altZh: "CLX1 不锈钢锁体近景",
+  },
+  {
+    src: "/images/listing/angle-ends.jpg",
+    kickerEn: "Two ends",
+    kickerZh: "两端",
+    en: "Two ends that meet.",
+    zh: "相扣的两端。",
+    bodyEn: "One end is the locking pin. The other is the socket it closes into.",
+    bodyZh: "一端是锁销，另一端是它扣入的锁孔。",
+    altEn: "Hands holding the two ends of the CLX1 lock",
+    altZh: "双手握住 CLX1 锁的两端",
   },
 ];
 
@@ -279,17 +303,20 @@ export function ProductAngles() {
             <h2 id="detail-angles-title">{copy("Every angle.", "每个角度。")}</h2>
             <p>{copy("Six close views of CLX1.", "CLX1 的六个近景。")}</p>
           </header>
-          <div className="detail-angles">
-            {detailAngles.map((shot) => (
-              <figure key={shot.src}>
-                <img src={shot.src} alt={copy(shot.en, shot.zh)} />
-                <figcaption>
-                  <strong>{copy(shot.en, shot.zh)}</strong>
-                  {shot.bodyEn || shot.bodyZh ? <span>{copy(shot.bodyEn, shot.bodyZh)}</span> : null}
-                </figcaption>
-              </figure>
+          <ul className="angle-rows">
+            {detailAngles.map((shot, index) => (
+              <li key={shot.src} className={index % 2 === 1 ? "angle-row angle-row-flip" : "angle-row"}>
+                <figure className="angle-photo">
+                  <img src={shot.src} alt={copy(shot.altEn, shot.altZh)} />
+                </figure>
+                <div className="angle-copy">
+                  <p>{copy(shot.kickerEn, shot.kickerZh)}</p>
+                  <h3>{copy(shot.en, shot.zh)}</h3>
+                  <p>{copy(shot.bodyEn, shot.bodyZh)}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
     </div>

@@ -625,12 +625,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-steps span { color: #36b66a; font-size: 0.85rem; font-weight: 700; }
 .v2-steps strong { display: block; font-size: 1rem; }
 .v2-steps p { margin: 4px 0 0; color: #686b66; font-size: 0.95rem; line-height: 1.5; }
-.detail-angles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; }
-.detail-angles figure { margin: 0; }
-.detail-angles img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid #e5e6e1; border-radius: 12px; background: #fff; }
-.detail-angles figcaption { display: grid; gap: 4px; padding: 12px 4px 0; }
-.detail-angles strong { color: #202120; font-size: 1rem; font-weight: 650; line-height: 1.45; }
-.detail-angles span { color: #686b66; font-size: 0.95rem; font-weight: 450; line-height: 1.5; }
+.angle-rows { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+.angle-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
+.angle-photo { margin: 0; overflow: hidden; border-radius: 20px; background: #fff; }
+.angle-photo img { display: block; width: 100%; height: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.angle-copy { display: flex; flex-direction: column; justify-content: center; padding: 40px 48px; border-radius: 20px; background: #ecede9; }
+.angle-copy p { margin: 0; color: #686b66; font-size: 0.95rem; line-height: 1.5; }
+.angle-copy h3 { margin: 12px 0 0; color: #202120; font-size: clamp(1.7rem, 2.3vw, 2.45rem); font-weight: 620; letter-spacing: -0.035em; line-height: 1.15; }
+.angle-copy p + h3 + p { margin-top: 16px; max-width: 34rem; font-size: 1.0625rem; line-height: 1.6; }
+.angle-row-flip .angle-photo { order: 2; }
 .v2-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .v2-cards img { aspect-ratio: 4 / 3; }
 .v2-cards figcaption { display: grid; gap: 4px; }
@@ -666,14 +669,16 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .v2-hero-grid, .v2-hero-brand .v2-hero-grid, .v2-design, .v2-split, .v2-approach, .v2-paths, .v2-footer-grid { grid-template-columns: 1fr; }
   .v2-cards { grid-template-columns: 1fr; }
   .v2-cards.life-cards { grid-template-columns: 1fr 1fr; }
-  .detail-angles { grid-template-columns: 1fr 1fr; }
+  .angle-copy { padding: 32px 28px; }
   .v2-design-stage { flex: none; aspect-ratio: 4 / 3; min-height: 240px; }
   .v2-design-copy { padding: 0 20px 12px 0; }
   .v2-hero-brand .v2-hero-media img { aspect-ratio: 16 / 10; max-height: 280px; }
   .v2-principles li { grid-template-columns: 1fr; gap: 8px; }
 }
 @media (max-width: 700px) {
-  .detail-angles { grid-template-columns: 1fr; }
+  .angle-row { grid-template-columns: 1fr; }
+  .angle-row-flip .angle-photo { order: 0; }
+  .angle-copy { padding: 28px 24px; }
   .v2-cards.life-cards { grid-template-columns: 1fr; }
   .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 40px, 1440px); }
   .v2-section, .v2-hero-brand { padding-block: 56px; }
