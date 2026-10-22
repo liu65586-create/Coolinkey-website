@@ -315,18 +315,11 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 .about-panel .about-signoff { color: #202120; font-size: clamp(1.35rem, 1.9vw, 1.6rem); line-height: 1.4; }
 .about-panel .about-signoff strong { font-weight: 700; }
 #help { display: grid; gap: 72px; }
-#help .about-panel {
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 48px 72px;
-  align-items: start;
-  justify-items: stretch;
-  padding: 0;
-  text-align: left;
-}
-#help .about-panel .about-lead { display: grid; gap: 18px; align-content: start; }
+#help .about-panel { justify-items: stretch; padding: 0; text-align: left; }
+#help .about-panel .use-kicker,
 #help .about-panel h2,
-#help .about-panel .about-body { width: auto; max-width: none; }
-#help .about-panel h2 { font-size: clamp(2rem, 3.2vw, 3rem); }
+#help .about-panel .about-body { width: 100%; max-width: none; margin-inline: 0; }
+#help .about-panel h2 { font-size: clamp(2rem, 3vw, 2.6rem); }
 #help .about-panel .about-body { font-size: 1.0625rem; line-height: 1.7; }
 .desk-ask .desk-copy h2 { color: #202120; }
 .v2-section-muted { background: #ecede9; }
@@ -870,7 +863,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .desk-ask { padding: 28px 20px; }
   .desk-fields { grid-template-columns: 1fr; }
   #help { gap: 48px; }
-  #help .about-panel { grid-template-columns: 1fr; gap: 18px; }
   .desk-form-card .v2-btn { justify-self: stretch; width: 100%; }
 }
 .v2-footer-grid { padding-top: var(--block-gap); }
