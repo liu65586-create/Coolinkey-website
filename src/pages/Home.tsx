@@ -145,7 +145,7 @@ type BrandSlide = {
 const brandSlides: BrandSlide[] = [
   {
     id: "product",
-    image: "/images/listing/clx1-hands-open.jpg",
+    image: "/images/listing/clx1-hands-open-v2.jpg",
     position: "center center",
     altEn: "Hands holding the two ends of the CLX1 lock",
     altZh: "双手握住 CLX1 锁的两端",
