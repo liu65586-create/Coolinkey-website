@@ -49,9 +49,6 @@ const quickSteps = [
     zh: "为 CLX1 充电",
     bodyEn: "Learn how to charge the lock before setup.",
     bodyZh: "了解设置前如何给锁充电。",
-    goEn: "Opens the user manual",
-    goZh: "打开用户手册",
-    video: "",
   },
   {
     id: "pair",
@@ -60,9 +57,6 @@ const quickSteps = [
     zh: "连接 App",
     bodyEn: "Follow the steps to pair your lock.",
     bodyZh: "按步骤完成锁具配对。",
-    goEn: "Plays the pairing video",
-    goZh: "播放配对视频",
-    video: "/videos/how-to/Binding.mp4",
   },
   {
     id: "print",
@@ -71,9 +65,6 @@ const quickSteps = [
     zh: "录入指纹",
     bodyEn: "Learn how to add and manage fingerprints.",
     bodyZh: "了解如何添加和管理指纹。",
-    goEn: "Plays the registration video",
-    goZh: "播放录入视频",
-    video: "/videos/how-to/fingerprint-register.mp4",
   },
   {
     id: "unlock",
@@ -82,9 +73,6 @@ const quickSteps = [
     zh: "试第一次开锁",
     bodyEn: "Test fingerprint access and learn the backup method.",
     bodyZh: "试一次指纹开锁，并了解备用方式。",
-    goEn: "Opens the user manual",
-    goZh: "打开用户手册",
-    video: "",
   },
 ];
 
@@ -193,11 +181,6 @@ export function Support() {
     return manuals.find((item) => item.type === "user_manual") ?? manuals.find((item) => item.type !== "video") ?? null;
   }, [defaultProduct, config]);
 
-  const openStep = (video: string) => {
-    if (video) setVideoSrc(video);
-    else if (manual) setActive(manual);
-  };
-
   const videoTitle = (src: string) => {
     const video = stepVideos.find((item) => item.src === src);
     return video ? copy(video.en, video.zh) : copy("Play video", "播放视频");
@@ -214,12 +197,11 @@ export function Support() {
       <ol className="use-steps">
         {quickSteps.map((step) => (
           <li key={step.id}>
-            <button type="button" onClick={() => openStep(step.video)} disabled={!step.video && !manual}>
+            <div className="use-step">
               <span>{step.n}</span>
               <strong>{copy(step.en, step.zh)}</strong>
               <p>{copy(step.bodyEn, step.bodyZh)}</p>
-              <em>{copy(step.goEn, step.goZh)}</em>
-            </button>
+            </div>
           </li>
         ))}
       </ol>

@@ -722,13 +722,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .use-guide .v2-section-head { margin-bottom: 0; }
 .use-kicker { margin: 0; color: #686b66; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; }
 .use-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
-.use-steps button { display: grid; align-content: start; gap: 8px; width: 100%; min-height: 100%; border: 1px solid #e5e6e1; border-radius: 16px; background: #fff; padding: 22px 20px 24px; text-align: left; color: inherit; cursor: pointer; }
-.use-steps button:hover { border-color: #36b66a; }
-.use-steps button:disabled { cursor: default; opacity: 0.6; }
+.use-steps .use-step { display: grid; align-content: start; gap: 8px; width: 100%; min-height: 100%; border: 1px solid #e5e6e1; border-radius: 16px; background: #fff; padding: 22px 20px 24px; text-align: left; color: inherit; }
 .use-steps span { color: #36b66a; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; }
 .use-steps strong { margin: 0; color: #202120; font-size: 1.2rem; font-weight: 650; letter-spacing: -0.03em; line-height: 1.25; }
-.use-steps p, .use-steps em { margin: 0; color: #686b66; font-size: 0.95rem; font-style: normal; line-height: 1.55; }
-.use-steps em { color: #146c43; font-size: 0.85rem; font-weight: 650; }
+.use-steps p { margin: 0; color: #686b66; font-size: 0.95rem; line-height: 1.55; }
 .use-videos { display: grid; gap: 22px; border-radius: 20px; background: #ecede9; padding: 28px 28px 24px; }
 .use-videos h3 { margin: 10px 0 0; color: #202120; font-size: clamp(1.6rem, 2vw, 2rem); font-weight: 650; letter-spacing: -0.03em; line-height: 1.2; }
 .use-videos > div p { margin: 12px 0 0; max-width: 36rem; color: #686b66; font-size: 0.95rem; line-height: 1.6; }
