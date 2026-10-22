@@ -32,18 +32,12 @@ export function Durability() {
         <figure className="durability-film">
           <div className="durability-stage">
             <img
-              src="/images/listing/product-clx1-isolated.jpg"
-              alt={copy(
-                "CLX1 product photograph standing in for the missing tire-test video",
-                "CLX1 产品照片，用于代替尚未放入项目的轮胎测试视频",
-              )}
+              className="durability-stage-media"
+              src="/images/listing/car-press.gif"
+              alt={copy("Car tire video", "汽车碾压录像")}
+              loading="lazy"
+              decoding="async"
             />
-            <p>
-              {copy(
-                "Tire-test video not in this project. This frame is reserved for the car-tire recording. It is not test footage.",
-                "轮胎碾压测试视频尚未放入本项目。此区域为该录像预留，不是测试画面。",
-              )}
-            </p>
           </div>
           <figcaption>
             {copy(
@@ -58,14 +52,16 @@ export function Durability() {
         <h2 id="pressure-title" className="sr-only">{copy("The Pressure Test.", "压力测试。")}</h2>
         <div className="durability-points">
           <article>
-            <div className="durability-point-media">
-              <p>{copy("Recording pending", "录像待补充")}</p>
-            </div>
-            <h3 id="pressure-card">{copy("Real-World Pressure Testing", "真实受压测试")}</h3>
+            <img
+              src="/images/listing/lock_in_stream.gif"
+              alt={copy("CLX1 lock in water", "浸在水中的 CLX1 锁")}
+              loading="lazy"
+            />
+            <h3 id="pressure-card">{copy("Waterproof Test", "防水测试")}</h3>
             <p>
               {copy(
-                "The frame above is kept for the car-tire recording. It is not a durability or security certification.",
-                "上方画面为汽车轮胎碾压录像预留。它不是耐久性或安全认证。",
+                "The GIF shows the lock in water. It is not a durability or security certification.",
+                "动图展示锁浸在水中。它不是耐久性或安全认证。",
               )}
             </p>
           </article>
