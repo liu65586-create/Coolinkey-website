@@ -77,22 +77,23 @@ const detailAngles = [
   },
 ];
 
-const carryShots = [
-  {
-    src: "/images/listing/life-bike-pole.jpg",
-    en: "For Your Bike",
-    zh: "用于自行车",
-    bodyEn: "A convenient way to secure your bike during everyday stops.",
-    bodyZh: "日常停留时，把自行车锁在固定物上的一种方便方式。",
-    altEn: "CLX1 chain around a bicycle frame and a fixed metal pole",
-    altZh: "CLX1 链条绕过自行车车架和一根固定金属柱",
-  },
+const lifeHero = {
+  src: "/images/listing/bike-locking-wide.jpg",
+  en: "For Your Bike",
+  zh: "用于自行车",
+  bodyEn: "Make a quick stop. Stay in your flow.",
+  bodyZh: "短暂停留，节奏不断。",
+  altEn: "CLX1 locking a bicycle to a pole on a residential street",
+  altZh: "CLX1 把自行车锁在街边的一根柱子上",
+};
+
+const lifeCards = [
   {
     src: "/images/listing/life-ebike-frame.jpg",
     en: "For Your E-Bike",
     zh: "用于电动自行车",
-    bodyEn: "Fastened around an e-bike frame.",
-    bodyZh: "锁在电动自行车车架上。",
+    bodyEn: "A practical fit for your everyday ride.",
+    bodyZh: "贴合每天的骑行。",
     altEn: "CLX1 fastened around the frame of a purple e-bike",
     altZh: "CLX1 锁在一辆紫色电动自行车的车架上",
   },
@@ -100,8 +101,8 @@ const carryShots = [
     src: "/images/listing/life-handlebar-bag.jpg",
     en: "Ready to Go",
     zh: "便于带走",
-    bodyEn: "Compact to carry and easy to bring along.",
-    bodyZh: "体积小巧，方便随身带走。",
+    bodyEn: "Compact to carry. Ready when you need it.",
+    bodyZh: "小巧便携，需要时就在手边。",
     altEn: "Folded CLX1 placed into a bicycle handlebar bag",
     altZh: "收拢的 CLX1 放进自行车车把包",
   },
@@ -109,8 +110,8 @@ const carryShots = [
     src: "/images/listing/life-metal-gate.jpg",
     en: "Beyond the Bike",
     zh: "不只是自行车",
-    bodyEn: "Flexible chain access for compatible everyday locking needs. Not every door or security level.",
-    bodyZh: "链条可以绕过已经适配的日常固定物。并非适用于所有门或所有安防等级。",
+    bodyEn: "Flexible chain access for compatible everyday locking needs.",
+    bodyZh: "链条可以配合已经适配的日常上锁需求。",
     altEn: "CLX1 fastened across the bars of an ornate metal gate",
     altZh: "CLX1 横锁在一扇铁艺门的栏杆上",
   },
@@ -333,24 +334,35 @@ export function LifeAndSpecs() {
         <div className="v2-wrap">
           <header className="v2-section-head">
             <h2 id="carry-title">{copy("Designed for Everyday Life.", "为日常生活而设计。")}</h2>
-            <p>{copy("Compact, portable, and ready for more of your everyday locking needs.", "小巧、便携，覆盖更多日常上锁需求。")}</p>
+            <p>{copy("Thoughtful security that fits the way you move through your day.", "贴合日常节奏的细致防护。")}</p>
           </header>
-          <div className="v2-cards life-cards">
-            {carryShots.map((shot) => (
-              <figure key={shot.en}>
-                {shot.src ? (
-                  <img src={shot.src} alt={copy(shot.altEn, shot.altZh)} />
-                ) : (
-                  <div className="life-pending" role="img" aria-label={copy(shot.altEn, shot.altZh)}>
-                    <p>{copy("Photo pending", "图片待补充")}</p>
-                  </div>
-                )}
-                <figcaption>
-                  <strong>{copy(shot.en, shot.zh)}</strong>
-                  <span>{copy(shot.bodyEn, shot.bodyZh)}</span>
-                </figcaption>
-              </figure>
-            ))}
+          <div className="life-stage">
+            <figure className="life-hero">
+              <img src={lifeHero.src} alt={copy(lifeHero.altEn, lifeHero.altZh)} />
+              <figcaption>
+                <strong>{copy(lifeHero.en, lifeHero.zh)}</strong>
+                <p>{copy(lifeHero.bodyEn, lifeHero.bodyZh)}</p>
+              </figcaption>
+            </figure>
+            <ul className="life-aside">
+              {lifeCards.map((shot) => (
+                <li key={shot.en}>
+                  <figure>
+                    <img src={shot.src} alt={copy(shot.altEn, shot.altZh)} />
+                    <figcaption>
+                      <strong>{copy(shot.en, shot.zh)}</strong>
+                      <p>{copy(shot.bodyEn, shot.bodyZh)}</p>
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+            <p className="life-note">
+              {copy(
+                "For compatible locking points. Always consider fit, attachment strength, and your security needs.",
+                "适用于能够配合的固定点。请自行判断是否贴合、固定是否牢靠，以及是否符合你的安全需求。",
+              )}
+            </p>
           </div>
         </div>
       </section>

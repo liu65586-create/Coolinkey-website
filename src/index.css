@@ -638,10 +638,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-cards img { aspect-ratio: 4 / 3; }
 .v2-cards figcaption { display: grid; gap: 4px; }
 .v2-cards figcaption span { color: #686b66; font-size: 0.95rem; font-weight: 450; }
-.life-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.v2-cards.life-cards img { object-fit: cover; object-position: center; background: #202120; }
-.life-pending { display: grid; place-items: center; aspect-ratio: 4 / 3; padding: 16px; background: #f4f4f1; color: #686b66; text-align: center; }
-.life-pending p { margin: 0; font-size: 0.95rem; font-weight: 650; }
+.life-stage { display: grid; gap: 28px; }
+.life-hero { margin: 0; }
+.life-hero img { display: block; width: 100%; aspect-ratio: 2.4 / 1; object-fit: cover; object-position: center; border-radius: 16px; background: #202120; }
+.life-hero figcaption { max-width: 36rem; padding-top: 16px; }
+.life-hero strong { display: block; color: #202120; font-size: 1.5rem; font-weight: 650; letter-spacing: -0.03em; }
+.life-hero figcaption p { margin: 8px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.55; }
+.life-aside { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
+.life-aside figure { margin: 0; }
+.life-aside img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; border-radius: 12px; background: #202120; }
+.life-aside strong { display: block; margin-top: 12px; color: #202120; font-size: 1.05rem; font-weight: 650; }
+.life-aside figcaption p { margin: 6px 0 0; color: #686b66; font-size: 0.95rem; line-height: 1.5; }
+.life-note { margin: 0; max-width: 42rem; color: #686b66; font-size: 0.875rem; line-height: 1.55; }
 .v2-specs dl { margin: 28px 0 0; }
 .v2-specs dl div { display: grid; grid-template-columns: 1fr 1.1fr; gap: 16px; padding: 14px 0; border-top: 1px solid #e5e6e1; font-size: 1rem; }
 .v2-specs dt { color: #686b66; }
@@ -668,7 +676,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 @media (max-width: 1000px) {
   .v2-hero-grid, .v2-hero-brand .v2-hero-grid, .v2-design, .v2-split, .v2-approach, .v2-paths, .v2-footer-grid { grid-template-columns: 1fr; }
   .v2-cards { grid-template-columns: 1fr; }
-  .v2-cards.life-cards { grid-template-columns: 1fr 1fr; }
+  .life-aside { grid-template-columns: 1fr 1fr; gap: 16px; }
   .angle-copy { padding: 32px 28px; }
   .v2-design-stage { flex: none; aspect-ratio: 4 / 3; min-height: 240px; }
   .v2-design-copy { padding: 0 20px 12px 0; }
@@ -679,7 +687,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .angle-row { grid-template-columns: 1fr; }
   .angle-row-flip .angle-photo { order: 0; }
   .angle-copy { padding: 28px 24px; }
-  .v2-cards.life-cards { grid-template-columns: 1fr; }
+  .life-hero img { aspect-ratio: 4 / 3; }
+  .life-aside { grid-template-columns: 1fr; }
   .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 40px, 1440px); }
   .v2-section, .v2-hero-brand { padding-block: 56px; }
   .v2-hero-copy h1, .v2-hero-brand h1 { font-size: clamp(2.4rem, 12vw, 3.4rem); max-width: none; }
