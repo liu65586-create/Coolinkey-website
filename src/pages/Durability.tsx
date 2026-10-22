@@ -1,6 +1,7 @@
-import { Box, Search } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../components/Button";
+import { VideoModal } from "../components/VideoModal";
 import type { Lang } from "../utils/siteCopy";
 
 function text(lang: Lang, en: string, zh: string) {
@@ -11,6 +12,7 @@ export function Durability() {
   const { i18n } = useTranslation();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const copy = (en: string, zh: string) => text(lang, en, zh);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   return (
     <section id="safety" className="durability site-anchor" tabIndex={-1} aria-labelledby="durability-title">
@@ -20,26 +22,11 @@ export function Durability() {
           <h2 id="durability-title" className="durability-title">{copy("Built to Face the Unexpected.", "为意外情况而打造。")}</h2>
           <p>
             {copy(
-              "Real-world testing. A closer look at how CLX1 responds to pressure.",
-              "真实场景测试。近距离看看 CLX1 在受压时的表现。",
+              "Real-world testing. Thoughtful engineering. A closer look at how CLX1 is designed and tested for everyday use.",
+              "真实场景测试，细致的工程设计。近距离看看 CLX1 如何为日常使用而设计、而测试。",
             )}
           </p>
         </div>
-        <img
-          src="/images/listing/bike-locking-closeup.jpg"
-          alt={copy("CLX1 chain and lock body fastened to a bicycle", "固定在自行车上的 CLX1 链条与锁体")}
-        />
-      </div>
-
-      <section className="durability-block page-wrap" aria-labelledby="pressure-title">
-        <p className="durability-kicker">{copy("01 / Featured test", "01 / 重点测试")}</p>
-        <h2 id="pressure-title">{copy("The Pressure Test.", "压力测试。")}</h2>
-        <p>
-          {copy(
-            "See CLX1 in a real-world tire-pressure demonstration.",
-            "观看 CLX1 的真实轮胎碾压演示。",
-          )}
-        </p>
         <figure className="durability-film">
           <div className="durability-stage">
             <img
@@ -58,43 +45,59 @@ export function Durability() {
           </div>
           <figcaption>
             {copy(
-              "Test conditions and post-test observations should be documented accurately.",
-              "测试条件与测试后的观察应如实记录。",
+              "The Pressure Test. No load, pass count, or certification is published here.",
+              "压力测试。这里不公布载荷、通过次数或认证。",
             )}
           </figcaption>
         </figure>
-      </section>
+      </div>
 
-      <section className="durability-block page-wrap" aria-labelledby="evaluate-title">
-        <p className="durability-kicker">{copy("02 / What we evaluate", "02 / 我们关注什么")}</p>
-        <h2 id="evaluate-title">{copy("More Than What Meets the Eye.", "不止眼前所见。")}</h2>
-        <p className="durability-note">
-          {copy(
-            "These describe what an inspection looks at. They are not completed test results.",
-            "以下是检查时关注的方面，不是已确认的测试结果。",
-          )}
-        </p>
-        <div className="durability-eval">
+      <section className="durability-block page-wrap" aria-labelledby="pressure-title">
+        <h2 id="pressure-title" className="sr-only">{copy("The Pressure Test.", "压力测试。")}</h2>
+        <div className="durability-points">
           <article>
-            <Box aria-hidden="true" size={22} strokeWidth={1.5} />
-            <h3>{copy("Structural Integrity", "结构完整性")}</h3>
-            <p>{copy("Inspect the product for visible structural damage.", "检查产品是否有可见的结构损伤。")}</p>
-          </article>
-          <article>
-            <Search aria-hidden="true" size={22} strokeWidth={1.5} />
-            <h3>{copy("Post-Test Inspection", "测试后检查")}</h3>
+            <div className="durability-point-media">
+              <p>{copy("Recording pending", "录像待补充")}</p>
+            </div>
+            <h3 id="pressure-card">{copy("Real-World Pressure Testing", "真实受压测试")}</h3>
             <p>
               {copy(
-                "Document actual condition and functionality after testing.",
-                "记录测试后的实际状态与功能。",
+                "The frame above is kept for the car-tire recording. It is not a durability or security certification.",
+                "上方画面为汽车轮胎碾压录像预留。它不是耐久性或安全认证。",
+              )}
+            </p>
+          </article>
+          <article>
+            <img
+              src="/images/listing/detail-two-ends.jpg"
+              alt={copy("CLX1 lock body, sleeved chain, and both ends", "CLX1 锁体、带护套的链条与两端")}
+            />
+            <h3>{copy("Built Around the Details", "着眼于细节")}</h3>
+            <p>
+              {copy(
+                "All-stainless-steel lock body, a 6 mm steel wire, and the two ends that close the chain.",
+                "纯不锈钢锁体、6 mm 钢丝，以及扣合链条的两端。",
+              )}
+            </p>
+          </article>
+          <article>
+            <button type="button" className="durability-point-media durability-point-play" onClick={() => setVideoOpen(true)}>
+              <p>{copy("Setup video", "设置视频")}</p>
+            </button>
+            <h3>{copy("Everyday Access, Put to the Test", "日常开锁")}</h3>
+            <p>
+              {copy(
+                "Fingerprint registration is in the setup videos. Repeat-rate, battery, and environment results are not shown.",
+                "设置视频里有指纹录入。这里不展示重复识别、续航或环境测试结果。",
               )}
             </p>
           </article>
         </div>
       </section>
+      <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src="/videos/how-to/fingerprint-register.mp4" />
 
       <section className="durability-cta page-wrap" aria-labelledby="confidence-title">
-        <img src="/images/listing/product-clx1-isolated.jpg" alt={copy("CLX1 smart chain lock", "CLX1 智能链条锁")} />
+        <img src="/images/listing/detail-stainless-body.jpg" alt={copy("CLX1 stainless-steel lock body", "CLX1 不锈钢锁体")} />
         <div>
           <h2 id="confidence-title">{copy("Designed for Everyday Confidence.", "为日常使用中的信心而设计。")}</h2>
           <p>{copy("Explore the design and smart features behind CLX1.", "了解 CLX1 的设计与智能功能。")}</p>

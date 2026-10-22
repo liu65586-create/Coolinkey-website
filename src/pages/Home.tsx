@@ -54,9 +54,42 @@ const detailAngles = [
 ];
 
 const carryShots = [
-  { src: "/images/listing/product-folds-bottle-size.jpg", en: "Easy to Carry", zh: "便于携带", bodyEn: "Folds down for everyday carrying.", bodyZh: "可折叠收纳，方便日常携带。" },
-  { src: "/images/listing/bike-locking-closeup.jpg", en: "On Your Bike", zh: "骑行使用", bodyEn: "A chain lock for securing a bicycle.", bodyZh: "链条锁，可用于固定自行车。" },
-  { src: "/images/listing/product-clx1-isolated.jpg", en: "Ready When You Are", zh: "随时可用", bodyEn: "Fingerprint, app, or mechanical key.", bodyZh: "指纹、App 或机械钥匙。" },
+  {
+    src: "/images/listing/product-bike-use.jpg",
+    en: "For Your Bike",
+    zh: "用于自行车",
+    bodyEn: "A convenient way to secure your bike during everyday stops.",
+    bodyZh: "日常停留时，把自行车锁在固定物上的一种方便方式。",
+    altEn: "CLX1 chain around a bicycle frame and a fixed metal pole",
+    altZh: "CLX1 链条绕过自行车车架和一根固定金属柱",
+  },
+  {
+    src: "",
+    en: "For Your Scooter",
+    zh: "用于滑板车",
+    bodyEn: "Photo pending. The 100 cm chain perimeter has not been checked on a scooter, so this is not a verified use.",
+    bodyZh: "图片待补充。100 cm 链条周长尚未在滑板车上核对，因此这里不是已验证用途。",
+    altEn: "Scooter photo pending. This scene is not a verified use.",
+    altZh: "滑板车图片待补充。此场景不是已验证用途。",
+  },
+  {
+    src: "/images/listing/detail-compact.jpg",
+    en: "Ready to Go",
+    zh: "便于带走",
+    bodyEn: "Compact to carry and easy to bring along.",
+    bodyZh: "体积小巧，方便随身带走。",
+    altEn: "CLX1 coiled into a compact shape",
+    altZh: "盘成小巧体积的 CLX1",
+  },
+  {
+    src: "/images/listing/metal-gate-locking.jpg",
+    en: "Beyond the Bike",
+    zh: "不只是自行车",
+    bodyEn: "Flexible chain access for compatible everyday locking needs. Not every door or security level.",
+    bodyZh: "链条可以绕过已经适配的日常固定物。并非适用于所有门或所有安防等级。",
+    altEn: "CLX1 fastened around a metal fence post",
+    altZh: "CLX1 锁在金属围栏立柱上",
+  },
 ];
 
 function useHomeCopy() {
@@ -273,12 +306,18 @@ export function LifeAndSpecs() {
         <div className="v2-wrap">
           <header className="v2-section-head">
             <h2 id="carry-title">{copy("Designed for Everyday Life.", "为日常生活而设计。")}</h2>
-            <p>{copy("Lightweight, portable and easy to carry wherever your day takes you.", "轻便、可携带，陪你度过一天。")}</p>
+            <p>{copy("Compact, portable, and ready for more of your everyday locking needs.", "小巧、便携，覆盖更多日常上锁需求。")}</p>
           </header>
-          <div className="v2-cards">
+          <div className="v2-cards life-cards">
             {carryShots.map((shot) => (
               <figure key={shot.en}>
-                <img src={shot.src} alt={copy(shot.en, shot.zh)} />
+                {shot.src ? (
+                  <img src={shot.src} alt={copy(shot.altEn, shot.altZh)} />
+                ) : (
+                  <div className="life-pending" role="img" aria-label={copy(shot.altEn, shot.altZh)}>
+                    <p>{copy("Photo pending", "图片待补充")}</p>
+                  </div>
+                )}
                 <figcaption>
                   <strong>{copy(shot.en, shot.zh)}</strong>
                   <span>{copy(shot.bodyEn, shot.bodyZh)}</span>
