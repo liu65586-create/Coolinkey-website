@@ -247,7 +247,7 @@ export function Support() {
         </ul>
       </section>
 
-      <div className="desk-split use-trouble">
+      <div id="troubleshooting" className="desk-split use-trouble" tabIndex={-1}>
         <div className="desk-copy">
           <p className="desk-kicker">{copy("How to Use", "如何使用")}</p>
           <h2>{text(page?.troubleshooting, "supportPage.troubleshooting")}</h2>

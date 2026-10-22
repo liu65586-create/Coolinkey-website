@@ -269,7 +269,7 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 .mid-module-card video, .mid-module-image { display: block; width: 100%; max-height: 520px; aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
 .mid-module-card p { margin: 0; padding: 16px 18px 20px; color: #353b36; font-size: 15px; line-height: 1.65; }
 
-#approach, #how-it-works, #business, #contact, #clx1, #support, #help, #about, #support-message { scroll-margin-top: 80px; }
+#approach, #how-it-works, #business, #contact, #clx1, #support, #help, #about, #support-message, #troubleshooting { scroll-margin-top: 80px; }
 
 /* Nav targets fill the space under the header so a click shows the whole module,
    with the same inset above the content and above the next module. */
@@ -314,7 +314,23 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 .about-panel .about-body p { margin: 0; }
 .about-panel .about-signoff { color: #202120; font-size: clamp(1.35rem, 1.9vw, 1.6rem); line-height: 1.4; }
 .about-panel .about-signoff strong { font-weight: 700; }
-#help .about-panel { padding-top: 0; padding-bottom: 48px; }
+#help { display: grid; gap: 72px; }
+#help .about-panel { justify-items: start; padding: 0; text-align: left; }
+#help .about-panel h2 { max-width: 18em; font-size: clamp(2rem, 3vw, 2.75rem); }
+#help .about-panel .about-body { max-width: 40rem; font-size: 1.0625rem; line-height: 1.7; }
+.support-entry { display: grid; gap: 40px; }
+.support-hero { display: grid; justify-items: start; gap: 12px; max-width: 46rem; }
+.support-hero h2 { margin: 0; color: #202120; font-size: clamp(2.4rem, 4vw, 3.5rem); font-weight: 650; letter-spacing: -0.045em; line-height: 1.08; }
+.support-hero p:last-child { margin: 0; color: #686b66; font-size: 1.0625rem; line-height: 1.6; }
+.support-quick { display: grid; gap: 16px; }
+.support-quick h2 { margin: 0; color: #202120; font-size: clamp(1.35rem, 2vw, 1.75rem); font-weight: 650; letter-spacing: -0.03em; }
+.support-quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 880px; }
+.support-card { display: grid; align-content: start; gap: 8px; min-height: 100%; border: 1px solid #e5e6e1; border-radius: 16px; background: #fff; padding: 22px 20px 24px; color: inherit; text-decoration: none; }
+.support-card:hover { border-color: #36b66a; }
+.support-card svg { color: #36b66a; }
+.support-card strong { color: #202120; font-size: 1.2rem; font-weight: 650; letter-spacing: -0.03em; line-height: 1.3; }
+.support-card span { color: #686b66; font-size: 0.95rem; font-weight: 450; line-height: 1.55; }
+.desk-ask .desk-copy h2 { color: #202120; }
 .v2-section-muted { background: #ecede9; }
 .v2-eyebrow { margin: 0; color: #686b66; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; }
 .v2-section-head .v2-eyebrow { margin: 0; color: #686b66; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; }
@@ -748,6 +764,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .use-guide { width: min(100% - 40px, 1440px); gap: 36px; }
   .use-steps, .use-videos ul { grid-template-columns: 1fr; }
   .use-videos, .use-help { padding: 22px 18px; }
+  .support-quick-grid { grid-template-columns: 1fr; }
 }
 .desk-stack { display: grid; gap: 88px; }
 .desk-split, .desk-ask {
@@ -821,9 +838,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   padding: 28px 24px 24px;
 }
 .desk-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.desk-fields .desk-message { grid-column: 1 / -1; }
-.desk-fields label { display: grid; gap: 6px; }
+.desk-fields .desk-message,
+.desk-fields .desk-inquiry { grid-column: 1 / -1; }
+.desk-fields label { display: grid; gap: 6px; color: #202120; font-size: 0.85rem; font-weight: 650; }
 .desk-form-card input,
+.desk-form-card select,
 .desk-form-card textarea {
   width: 100%;
   border: 1px solid #e5e6e1;
@@ -831,14 +850,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   background: #fff;
   color: #202120;
   font: inherit;
+  font-weight: 450;
   padding: 12px 14px;
 }
 .desk-form-card textarea { min-height: 120px; resize: vertical; }
 .desk-form-card input::placeholder,
 .desk-form-card textarea::placeholder { color: #8b908b; }
 .desk-form-card input:focus,
+.desk-form-card select:focus,
 .desk-form-card textarea:focus,
 .desk-form-card input:focus-visible,
+.desk-form-card select:focus-visible,
 .desk-form-card textarea:focus-visible {
   border-color: #36b66a;
   outline: 2px solid #36b66a;
@@ -856,6 +878,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .desk-split, .desk-ask { grid-template-columns: 1fr; gap: 24px; }
   .desk-ask { padding: 28px 20px; }
   .desk-fields { grid-template-columns: 1fr; }
+  #help { gap: 48px; }
   .desk-form-card .v2-btn { justify-self: stretch; width: 100%; }
 }
 .v2-footer-grid { padding-top: var(--block-gap); }
