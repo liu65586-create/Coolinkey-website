@@ -198,17 +198,24 @@ export function Support() {
         <p>{copy("From the first charge to your first fingerprint unlock.", "从第一次充电，到第一次指纹开锁。")}</p>
       </header>
 
-      <ol className="use-steps">
-        {quickSteps.map((step) => (
-          <li key={step.id}>
-            <div className="use-step">
-              <span>{step.n}</span>
-              <strong>{copy(step.en, step.zh)}</strong>
-              <p>{copy(step.bodyEn, step.bodyZh)}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <div className="use-start">
+        <ol className="use-steps">
+          {quickSteps.map((step) => (
+            <li key={step.id}>
+              <div className="use-step">
+                <span>{step.n}</span>
+                <strong>{copy(step.en, step.zh)}</strong>
+                <p>{copy(step.bodyEn, step.bodyZh)}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        {manual ? (
+          <button type="button" className="v2-btn v2-btn-primary" onClick={() => setActive(manual)}>
+            {copy("User Manual", "用户手册")}
+          </button>
+        ) : null}
+      </div>
 
       <section className="use-videos" aria-labelledby="use-videos-title">
         <div>
@@ -262,22 +269,6 @@ export function Support() {
           ))}
         </div>
       </div>
-
-      <section className="use-resources" aria-labelledby="use-resources-title">
-        <header className="v2-section-head">
-          <p className="v2-eyebrow">{text(page?.guides, "supportPage.guides")}</p>
-          <h2 id="use-resources-title">{copy("Product Resources", "产品资料")}</h2>
-        </header>
-        {manual ? (
-          <article>
-            <h3>{lang === "zh" ? manual.title.zh : manual.title.en}</h3>
-            <p>{copy("The CLX1 manual for setup and everyday use.", "CLX1 的设置与日常使用说明。")}</p>
-            <button type="button" className="v2-btn v2-btn-primary" onClick={() => setActive(manual)}>
-              {t("manualsSection.preview")}
-            </button>
-          </article>
-        ) : null}
-      </section>
 
       <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />
       {active ? (
