@@ -516,20 +516,20 @@
         "to": "/#clx1"
       },
       {
-        "id": "nav-use",
-        "label": {
-          "en": "How to Use",
-          "zh": "如何使用"
-        },
-        "to": "/#support"
-      },
-      {
         "id": "nav-safety",
         "label": {
           "en": "Safety & Testing",
           "zh": "安全与测试"
         },
         "to": "/#safety"
+      },
+      {
+        "id": "nav-use",
+        "label": {
+          "en": "How to Use",
+          "zh": "如何使用"
+        },
+        "to": "/#support"
       },
       {
         "id": "nav-support",
