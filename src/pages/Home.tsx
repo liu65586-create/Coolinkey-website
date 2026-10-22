@@ -55,7 +55,7 @@ const detailAngles = [
 
 const carryShots = [
   {
-    src: "/images/listing/product-bike-use.jpg",
+    src: "/images/listing/life-bike-pole.jpg",
     en: "For Your Bike",
     zh: "用于自行车",
     bodyEn: "A convenient way to secure your bike during everyday stops.",
@@ -64,31 +64,31 @@ const carryShots = [
     altZh: "CLX1 链条绕过自行车车架和一根固定金属柱",
   },
   {
-    src: "",
-    en: "For Your Scooter",
-    zh: "用于滑板车",
-    bodyEn: "Photo pending. The 100 cm chain perimeter has not been checked on a scooter, so this is not a verified use.",
-    bodyZh: "图片待补充。100 cm 链条周长尚未在滑板车上核对，因此这里不是已验证用途。",
-    altEn: "Scooter photo pending. This scene is not a verified use.",
-    altZh: "滑板车图片待补充。此场景不是已验证用途。",
+    src: "/images/listing/life-ebike-frame.jpg",
+    en: "For Your E-Bike",
+    zh: "用于电动自行车",
+    bodyEn: "Fastened around an e-bike frame.",
+    bodyZh: "锁在电动自行车车架上。",
+    altEn: "CLX1 fastened around the frame of a purple e-bike",
+    altZh: "CLX1 锁在一辆紫色电动自行车的车架上",
   },
   {
-    src: "/images/listing/detail-compact.jpg",
+    src: "/images/listing/life-handlebar-bag.jpg",
     en: "Ready to Go",
     zh: "便于带走",
     bodyEn: "Compact to carry and easy to bring along.",
     bodyZh: "体积小巧，方便随身带走。",
-    altEn: "CLX1 coiled into a compact shape",
-    altZh: "盘成小巧体积的 CLX1",
+    altEn: "Folded CLX1 placed into a bicycle handlebar bag",
+    altZh: "收拢的 CLX1 放进自行车车把包",
   },
   {
-    src: "/images/listing/metal-gate-locking.jpg",
+    src: "/images/listing/life-metal-gate.jpg",
     en: "Beyond the Bike",
     zh: "不只是自行车",
     bodyEn: "Flexible chain access for compatible everyday locking needs. Not every door or security level.",
     bodyZh: "链条可以绕过已经适配的日常固定物。并非适用于所有门或所有安防等级。",
-    altEn: "CLX1 fastened around a metal fence post",
-    altZh: "CLX1 锁在金属围栏立柱上",
+    altEn: "CLX1 fastened across the bars of an ornate metal gate",
+    altZh: "CLX1 横锁在一扇铁艺门的栏杆上",
   },
 ];
 
