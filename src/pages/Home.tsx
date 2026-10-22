@@ -107,8 +107,8 @@ const brandSlides: BrandSlide[] = [
     altZh: "CLX1 锁在自行车上，成为骑行的一部分",
     eyebrowEn: "More Than a Lock",
     eyebrowZh: "不只是一把锁",
-    titleEn: "Less Complexity. More Possibility.",
-    titleZh: "更少复杂。更多可能。",
+    titleEn: "Less Complexity.\nMore Possibility.",
+    titleZh: "更少复杂。\n更多可能。",
     bodyEn: "A thoughtful combination of form, function and everyday practicality. Fingerprint, a mechanical key and a 6 mm steel wire, carried through the day.",
     bodyZh: "形态、功能与日常实用的结合。指纹、机械钥匙与 6 mm 钢丝，陪你度过一天。",
     principles: [
@@ -123,8 +123,8 @@ const brandSlides: BrandSlide[] = [
     position: "72% center",
     altEn: "Two cyclists riding together along the coast",
     altZh: "两位骑行者沿海岸并肩骑行",
-    titleEn: "Designed for a More Effortless Life.",
-    titleZh: "为更从容的生活而设计。",
+    titleEn: "Designed for a\nMore Effortless Life.",
+    titleZh: "为更从容的生活\n而设计。",
     bodyEn: "We believe the best technology feels natural — simplifying everyday moments through thoughtful design.",
     bodyZh: "我们相信，最好的科技是自然的——用细致的设计，让日常时刻更简单。",
   },
@@ -166,51 +166,47 @@ export function HomeHero() {
         {brandSlides.map((slide, slideIndex) => (
           <article
             key={slide.id}
-            className={[
-              "brand-slide",
-              slide.id === "product" ? "brand-slide-product" : "",
-              slide.principles ? "brand-lifestyle" : "",
-            ].filter(Boolean).join(" ")}
+            className={slide.id === "product" ? "brand-slide brand-slide-product" : "brand-slide"}
             aria-hidden={slideIndex !== index}
           >
             <img src={slide.image} alt={copy(slide.altEn, slide.altZh)} style={{ objectPosition: slide.position }} />
-            {slideIndex === 0 ? (
-              <div className="brand-product-copy">
-                  <p className="brand-product-kicker">{copy(slide.eyebrowEn ?? "", slide.eyebrowZh ?? "")}</p>
-                  <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
-                  <p className="brand-product-lead">{copy(slide.bodyEn, slide.bodyZh)}</p>
-                  <div className="brand-product-actions">
-                    <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
-                      <span>{copy("Explore CLX1", "探索 CLX1")}</span>
-                      <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
-                    </Link>
-                    <Link className="brand-product-btn brand-product-btn-secondary" to="/#how-it-works">
-                      {copy("How it works", "了解使用方式")}
-                    </Link>
-                  </div>
-              </div>
-            ) : (
-              <div className="brand-copy">
-                {slide.eyebrowEn ? <p className="v2-eyebrow">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
+            <div className="brand-product-copy">
+              {slide.eyebrowEn ? <p className="brand-product-kicker">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
+              {slideIndex === 0 ? (
+                <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
+              ) : (
                 <h2 id={slide.id === "lifestyle" ? "lifestyle-title" : undefined}>{copy(slide.titleEn, slide.titleZh)}</h2>
-                {slide.bodyEn ? <p className="v2-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
-                {slide.principles ? (
-                  <ol className="brand-principles">
-                    {slide.principles.map((item) => (
-                      <li key={item.en}>
-                        <strong>{copy(item.en, item.zh)}</strong>
-                        <p>{copy(item.bodyEn, item.bodyZh)}</p>
-                      </li>
-                    ))}
-                  </ol>
-                ) : null}
-                {slide.principles ? (
-                  <div className="v2-actions">
-                    <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
-                  </div>
-                ) : null}
-              </div>
-            )}
+              )}
+              {slide.bodyEn ? <p className="brand-product-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
+              {slide.principles ? (
+                <ol className="brand-principles">
+                  {slide.principles.map((item) => (
+                    <li key={item.en}>
+                      <strong>{copy(item.en, item.zh)}</strong>
+                      <p>{copy(item.bodyEn, item.bodyZh)}</p>
+                    </li>
+                  ))}
+                </ol>
+              ) : null}
+              {slideIndex === 0 ? (
+                <div className="brand-product-actions">
+                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
+                    <span>{copy("Explore CLX1", "探索 CLX1")}</span>
+                    <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
+                  </Link>
+                  <Link className="brand-product-btn brand-product-btn-secondary" to="/#how-it-works">
+                    {copy("How it works", "了解使用方式")}
+                  </Link>
+                </div>
+              ) : slide.principles ? (
+                <div className="brand-product-actions">
+                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
+                    <span>{copy("Explore CLX1", "探索 CLX1")}</span>
+                    <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
+                  </Link>
+                </div>
+              ) : null}
+            </div>
           </article>
         ))}
       </div>
