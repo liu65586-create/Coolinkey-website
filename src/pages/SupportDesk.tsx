@@ -1,15 +1,8 @@
-import { ChevronDown } from "lucide-react";
-import { lazy, Suspense, useId, useMemo, useState, type FormEvent } from "react";
+import { useId, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { VideoModal, manualVideoUrl } from "../components/VideoModal";
-
-const ManualModal = lazy(() => import("../components/ManualModal").then((mod) => ({ default: mod.ManualModal })));
-import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
-import type { CmsManual } from "../types/cms";
-import { getVisibleManuals } from "../utils/manualsVisibility";
-import { pickBilingual, type Lang } from "../utils/siteCopy";
+import type { Lang } from "../utils/siteCopy";
 import { About } from "./About";
 
 function copy(lang: Lang, en: string, zh: string) {
@@ -21,32 +14,15 @@ const EMPTY: Fields = { fullName: "", email: "", message: "", companyFax: "" };
 type Status = "idle" | "submitting" | "sent" | "draft" | "error";
 
 export function SupportDesk() {
-  const { t, i18n } = useTranslation();
-  const { defaultProduct } = useCms();
+  const { i18n } = useTranslation();
   const { config } = useSiteConfig();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
-  const page = config?.supportPage;
   const email = config?.contact?.email?.trim() || "support@coolinkey.com";
   const endpoint = import.meta.env.VITE_INQUIRY_ENDPOINT?.trim() || "";
-  const [active, setActive] = useState<CmsManual | null>(null);
-  const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const formId = useId();
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
-
-  const manuals = useMemo(
-    () => getVisibleManuals(defaultProduct?.manuals ?? [], config?.manualsSection?.hiddenManualTypes),
-    [defaultProduct, config],
-  );
-  const docs = manuals.filter((item) => item.type !== "video");
-  const videos = manuals.filter((item) => item.type === "video");
-  const productName = defaultProduct ? (lang === "zh" ? defaultProduct.name.zh : defaultProduct.name.en) : "CLX1";
-  const steps = (page?.steps ?? []).map((step) => ({
-    id: step.id,
-    title: pickBilingual(lang, step.title, ""),
-    hint: pickBilingual(lang, step.hint, ""),
-  }));
 
   const set = (key: keyof Fields, value: string) => {
     setFields((current) => ({ ...current, [key]: value }));
@@ -110,57 +86,6 @@ export function SupportDesk() {
     <section id="help" className="site-anchor" tabIndex={-1}>
       <About />
       <div className="desk-stack page-wrap">
-        <div className="desk-split">
-          <div className="desk-copy">
-            <p className="desk-kicker">{copy(lang, "Support", "支持")}</p>
-            <h2>{copy(lang, "Quick Start Guide", "快速入门指南")}</h2>
-            <p>{copy(lang, "Download the setup steps, user manual and video.", "下载设置步骤、说明书与视频。")}</p>
-          </div>
-          <div className="desk-panel">
-            {steps.length ? (
-              <details>
-                <summary>
-                  {productName}
-                  <ChevronDown size={16} aria-hidden="true" />
-                </summary>
-                <ol>
-                  {steps.map((step, index) => (
-                    <li key={step.id}>
-                      <span>{String(index + 1).padStart(2, "0")}</span>
-                      <div>
-                        <strong>{step.title}</strong>
-                        <p>{step.hint}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </details>
-            ) : null}
-            {docs.map((manual) => (
-              <details key={manual.id}>
-                <summary>
-                  {lang === "zh" ? manual.title.zh : manual.title.en}
-                  <ChevronDown size={16} aria-hidden="true" />
-                </summary>
-                <button type="button" onClick={() => setActive(manual)}>
-                  {t("manualsSection.preview")}
-                </button>
-              </details>
-            ))}
-            {videos.map((manual) => (
-              <details key={manual.id}>
-                <summary>
-                  {lang === "zh" ? manual.title.zh : manual.title.en}
-                  <ChevronDown size={16} aria-hidden="true" />
-                </summary>
-                <button type="button" onClick={() => setVideoSrc(manualVideoUrl(manual, lang))}>
-                  {copy(lang, "Play", "播放")}
-                </button>
-              </details>
-            ))}
-          </div>
-        </div>
-
         <div id="support-message" className="desk-ask" aria-labelledby="desk-ask-title" tabIndex={-1}>
           <div className="desk-copy">
             <p className="desk-kicker">{copy(lang, "Support", "支持")}</p>
@@ -259,12 +184,6 @@ export function SupportDesk() {
           )}
         </div>
       </div>
-      <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />
-      {active ? (
-        <Suspense fallback={null}>
-          <ManualModal open onClose={() => setActive(null)} manual={active} lang={lang} />
-        </Suspense>
-      ) : null}
     </section>
   );
 }

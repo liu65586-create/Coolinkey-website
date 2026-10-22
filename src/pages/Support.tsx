@@ -1,8 +1,6 @@
-import { ArrowRight, ChevronDown, CirclePlay } from "lucide-react";
-import { lazy, Suspense, useMemo, useState, type MouseEvent } from "react";
+import { ChevronDown, CirclePlay } from "lucide-react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
 import { VideoModal } from "../components/VideoModal";
 
 const ManualModal = lazy(() => import("../components/ManualModal").then((mod) => ({ default: mod.ManualModal })));
@@ -21,8 +19,6 @@ const stepVideos = [
 
 export function Support() {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
-  const location = useLocation();
   const { defaultProduct } = useCms();
   const { config } = useSiteConfig();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
@@ -118,39 +114,6 @@ export function Support() {
             </details>
           ))}
         </div>
-      </div>
-
-      <div className="use-help">
-        <div>
-          <h2>{text(page?.helpTitle, "supportPage.helpTitle")}</h2>
-          <p>{text(page?.helpBody, "supportPage.helpBody")}</p>
-        </div>
-        <Button
-          variant="primary"
-          href="#support-message"
-          className="!border-transparent !bg-black !text-white hover:!bg-[#222]"
-          onClick={(event: MouseEvent<HTMLElement>) => {
-            const panel = document.getElementById("support-message");
-            if (!panel) return;
-            event.preventDefault();
-            const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            const focusName = () => {
-              window.setTimeout(
-                () => document.getElementById("support-message-name")?.focus({ preventScroll: true }),
-                reduce ? 0 : 450,
-              );
-            };
-            if (window.location.hash === "#support-message") {
-              panel.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-            } else {
-              navigate({ pathname: location.pathname, search: location.search, hash: "support-message" });
-            }
-            focusName();
-          }}
-        >
-          {text(page?.contactCta, "supportPage.contactCta")}
-          <ArrowRight size={16} />
-        </Button>
       </div>
 
       <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />

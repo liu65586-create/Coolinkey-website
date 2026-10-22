@@ -724,18 +724,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .use-play { display: grid; place-items: center; flex: 0 0 48px; width: 48px; height: 48px; border-radius: 999px; background: #ecede9; color: #36b66a; }
 .use-videos strong { font-size: 1rem; font-weight: 650; letter-spacing: -0.02em; line-height: 1.35; }
 .use-trouble { margin: 0; }
-.use-help { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-radius: 20px; background: #ecede9; padding: 28px 32px; }
-.use-help h2 { margin: 0; color: #202120; font-size: 1.35rem; font-weight: 650; letter-spacing: -0.03em; }
-.use-help p { margin: 8px 0 0; color: #686b66; font-size: 0.95rem; }
 @media (max-width: 1000px) {
   .use-steps, .use-library, .use-videos ul { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 700px) {
   .use-guide { width: min(100% - 40px, 1440px); gap: 36px; }
   .use-steps, .use-library, .use-videos ul { grid-template-columns: 1fr; }
-  .use-manual, .use-videos, .use-help { padding: 22px 18px; }
-  .use-help { align-items: stretch; flex-direction: column; }
-  .use-help .button, .use-help a { width: 100%; }
+  .use-manual, .use-videos { padding: 22px 18px; }
 }
 .desk-stack { display: grid; gap: 88px; }
 .desk-split, .desk-ask {
