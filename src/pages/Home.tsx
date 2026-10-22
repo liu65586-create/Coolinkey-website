@@ -21,7 +21,7 @@ const detailAngles = [
     altZh: "收拢的 CLX1，链条盘在锁体周围",
   },
   {
-    src: "/images/listing/angle-cutter.jpg",
+    src: "/images/listing/angle-cutter-v2.jpg",
     kickerEn: "Chain",
     kickerZh: "链条",
     en: "A 6 mm stainless steel chain that hydraulic cutters cannot cut.",
