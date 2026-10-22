@@ -292,16 +292,6 @@ export function Support() {
         ) : null}
       </section>
 
-      <section className="use-help">
-        <div>
-          <h2>{copy("Still Need Help?", "还需要帮助？")}</h2>
-          <p>{copy("We're here to help you get the most out of your CLX1.", "我们会帮你用好 CLX1。")}</p>
-        </div>
-        <a className="v2-btn v2-btn-primary" href={`mailto:${email}`}>
-          {text(page?.contactCta, "supportPage.contactCta")}
-        </a>
-      </section>
-
       <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />
       {active ? (
         <Suspense fallback={null}>
