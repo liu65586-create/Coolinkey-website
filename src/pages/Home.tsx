@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { VideoModal } from "../components/VideoModal";
@@ -43,14 +43,16 @@ type BrandSlide = {
 const brandSlides: BrandSlide[] = [
   {
     id: "product",
-    image: "/images/listing/meet-clx1.jpg",
-    position: "62% center",
+    image: "/images/listing/meet-clx1-hero.png",
+    position: "center center",
     altEn: "CLX1 fingerprint smart chain lock",
     altZh: "CLX1 指纹智能链条锁",
-    titleEn: "Meet CLX1.",
-    titleZh: "认识 CLX1。",
-    bodyEn: "A fingerprint smart chain lock designed to bring a more intuitive access experience to everyday life.",
-    bodyZh: "一款指纹智能链条锁，让日常开锁更直觉。",
+    eyebrowEn: "CLX1 / FINGERPRINT SMART CHAIN LOCK",
+    eyebrowZh: "CLX1 / 指纹智能链条锁",
+    titleEn: "Unlock with\na touch.",
+    titleZh: "轻触，\n即开。",
+    bodyEn: "Fingerprint access, made for everyday security.",
+    bodyZh: "指纹解锁，为日常安全而生。",
   },
   {
     id: "lifestyle",
@@ -117,41 +119,59 @@ export function HomeHero() {
     >
       <div className="brand-track" style={{ transform: `translateX(-${index * 100}%)` }}>
         {brandSlides.map((slide, slideIndex) => (
-          <article key={slide.id} className={slide.principles ? "brand-slide brand-lifestyle" : "brand-slide"} aria-hidden={slideIndex !== index}>
+          <article
+            key={slide.id}
+            className={[
+              "brand-slide",
+              slide.id === "product" ? "brand-slide-product" : "",
+              slide.principles ? "brand-lifestyle" : "",
+            ].filter(Boolean).join(" ")}
+            aria-hidden={slideIndex !== index}
+          >
             <img src={slide.image} alt={copy(slide.altEn, slide.altZh)} style={{ objectPosition: slide.position }} />
-            <div className="brand-copy">
-              {slideIndex === 0 ? <p className="v2-eyebrow">COOLINKEY</p> : null}
-              {slide.eyebrowEn ? <p className="v2-eyebrow">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
-              {slideIndex === 0 ? (
-                <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
-              ) : (
+            {slideIndex === 0 ? (
+              <>
+                <div className="brand-product-signature" aria-hidden="true">
+                  <img src="/brand/coolinkey-logo.png" alt="" />
+                  <span />
+                </div>
+                <div className="brand-product-copy">
+                  <p className="brand-product-kicker">{copy(slide.eyebrowEn ?? "", slide.eyebrowZh ?? "")}</p>
+                  <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
+                  <p className="brand-product-lead">{copy(slide.bodyEn, slide.bodyZh)}</p>
+                  <div className="brand-product-actions">
+                    <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
+                      <span>{copy("Explore CLX1", "探索 CLX1")}</span>
+                      <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
+                    </Link>
+                    <Link className="brand-product-btn brand-product-btn-secondary" to="/#how-it-works">
+                      {copy("How it works", "了解使用方式")}
+                    </Link>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="brand-copy">
+                {slide.eyebrowEn ? <p className="v2-eyebrow">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
                 <h2 id={slide.id === "lifestyle" ? "lifestyle-title" : undefined}>{copy(slide.titleEn, slide.titleZh)}</h2>
-              )}
-              {slide.bodyEn ? <p className="v2-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
-              {slide.principles ? (
-                <ol className="brand-principles">
-                  {slide.principles.map((item) => (
-                    <li key={item.en}>
-                      <strong>{copy(item.en, item.zh)}</strong>
-                      <p>{copy(item.bodyEn, item.bodyZh)}</p>
-                    </li>
-                  ))}
-                </ol>
-              ) : null}
-              {slideIndex === 0 ? (
-                <div className="v2-actions">
-                  <button type="button" className="v2-btn v2-btn-primary" onClick={() => go(1)}>
-                    {copy("Discover Our Approach", "了解我们的方式")}
-                  </button>
-                  <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Meet CLX1", "认识 CLX1")}</Link>
-                </div>
-              ) : null}
-              {slide.principles ? (
-                <div className="v2-actions">
-                  <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
-                </div>
-              ) : null}
-            </div>
+                {slide.bodyEn ? <p className="v2-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
+                {slide.principles ? (
+                  <ol className="brand-principles">
+                    {slide.principles.map((item) => (
+                      <li key={item.en}>
+                        <strong>{copy(item.en, item.zh)}</strong>
+                        <p>{copy(item.bodyEn, item.bodyZh)}</p>
+                      </li>
+                    ))}
+                  </ol>
+                ) : null}
+                {slide.principles ? (
+                  <div className="v2-actions">
+                    <Link className="v2-btn v2-btn-secondary" to="/#clx1">{copy("Explore CLX1", "探索 CLX1")}</Link>
+                  </div>
+                ) : null}
+              </div>
+            )}
           </article>
         ))}
       </div>
