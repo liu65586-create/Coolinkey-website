@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Durability } from "./Durability";
-import { HomeHero, HowItWorks, LifeAndSpecs } from "./Home";
+import { HomeHero, HowItWorks, LifeAndSpecs, ProductAngles } from "./Home";
 import { Product } from "./Product";
 import { Support } from "./Support";
 import { SupportDesk } from "./SupportDesk";
@@ -51,6 +51,7 @@ export function SitePage() {
         <Product />
       </section>
       <HowItWorks />
+      <ProductAngles />
       <LifeAndSpecs />
       <Durability />
       <section id="support" className="site-anchor" tabIndex={-1}>

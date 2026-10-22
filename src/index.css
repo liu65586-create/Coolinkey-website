@@ -672,6 +672,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-steps span { color: #36b66a; font-size: 0.85rem; font-weight: 700; }
 .v2-steps strong { display: block; font-size: 1rem; }
 .v2-steps p { margin: 4px 0 0; color: #686b66; font-size: 0.95rem; line-height: 1.5; }
+.detail-angles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; }
+.detail-angles figure { margin: 0; }
+.detail-angles img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid #e5e6e1; border-radius: 12px; background: #fff; }
+.detail-angles figcaption { display: grid; gap: 4px; padding: 12px 4px 0; }
+.detail-angles strong { color: #202120; font-size: 1rem; font-weight: 650; }
+.detail-angles span { color: #686b66; font-size: 0.95rem; font-weight: 450; line-height: 1.5; }
 .v2-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .v2-cards img { aspect-ratio: 4 / 3; }
 .v2-cards figcaption { display: grid; gap: 4px; }
@@ -702,12 +708,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 @media (max-width: 1000px) {
   .v2-hero-grid, .v2-hero-brand .v2-hero-grid, .v2-design, .v2-split, .v2-approach, .v2-paths, .v2-footer-grid { grid-template-columns: 1fr; }
   .v2-cards { grid-template-columns: 1fr; }
+  .detail-angles { grid-template-columns: 1fr 1fr; }
   .v2-design-stage { flex: none; aspect-ratio: 4 / 3; min-height: 240px; }
   .v2-design-copy { padding: 0 20px 12px 0; }
   .v2-hero-brand .v2-hero-media img { aspect-ratio: 16 / 10; max-height: 280px; }
   .v2-principles li { grid-template-columns: 1fr; gap: 8px; }
 }
 @media (max-width: 700px) {
+  .detail-angles { grid-template-columns: 1fr; }
   .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 40px, 1440px); }
   .v2-section, .v2-hero-brand { padding-block: 56px; }
   .v2-hero-copy h1, .v2-hero-brand h1 { font-size: clamp(2.4rem, 12vw, 3.4rem); max-width: none; }

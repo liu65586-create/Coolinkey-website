@@ -8,6 +8,51 @@ import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 import { useTranslation } from "react-i18next";
 
+const detailAngles = [
+  {
+    src: "/images/listing/detail-lock-body.jpg",
+    en: "Lock body",
+    zh: "锁体",
+    bodyEn: "The fingerprint window and USB-C port sit on the body, with the mechanical keys beside it.",
+    bodyZh: "指纹窗和 USB-C 接口在锁体上，机械钥匙放在旁边。",
+  },
+  {
+    src: "/images/listing/detail-coiled-chain.jpg",
+    en: "Coiled chain",
+    zh: "盘起的链条",
+    bodyEn: "The sleeved chain can sit in a coil, with the lock body and the open end in view.",
+    bodyZh: "包覆链条可以盘起，锁体和开口端都看得到。",
+  },
+  {
+    src: "/images/listing/detail-two-ends.jpg",
+    en: "Two ends",
+    zh: "两端",
+    bodyEn: "One end is the locking pin. The other is the socket it closes into.",
+    bodyZh: "一端是锁销，另一端是它扣入的锁孔。",
+  },
+  {
+    src: "/images/listing/product-clx1-isolated.jpg",
+    en: "Closed loop",
+    zh: "闭合状态",
+    bodyEn: "From above, the chain forms a loop with the lock body along one side.",
+    bodyZh: "从上往下看，链条围成一圈，锁体位于一侧。",
+  },
+  {
+    src: "/images/listing/mechanical-key-backup.jpg",
+    en: "Mechanical key",
+    zh: "机械钥匙",
+    bodyEn: "The backup key lines up with the opening on the lock body.",
+    bodyZh: "备用钥匙对准锁体上的钥匙孔。",
+  },
+  {
+    src: "/images/listing/bike-locking-closeup.jpg",
+    en: "Around a frame",
+    zh: "绕在车架上",
+    bodyEn: "The chain wraps a bicycle frame and a fixed post, with the lock body still visible.",
+    bodyZh: "链条绕过自行车架和固定柱，锁体仍留在视线里。",
+  },
+];
+
 const carryShots = [
   { src: "/images/listing/product-folds-bottle-size.jpg", en: "Easy to Carry", zh: "便于携带", bodyEn: "Folds down for everyday carrying.", bodyZh: "可折叠收纳，方便日常携带。" },
   { src: "/images/listing/bike-locking-closeup.jpg", en: "On Your Bike", zh: "骑行使用", bodyEn: "A chain lock for securing a bicycle.", bodyZh: "链条锁，可用于固定自行车。" },
@@ -196,6 +241,35 @@ export function HomeHero() {
       </div>
       <p className="sr-only">{copy(brandSlides[index].altEn, brandSlides[index].altZh)}</p>
     </section>
+  );
+}
+
+export function ProductAngles() {
+  const { loading, config, copy } = useHomeCopy();
+  if (loading || !config) return null;
+
+  return (
+    <div className="v2-home">
+      <section className="v2-section" aria-labelledby="detail-angles-title">
+        <div className="v2-wrap">
+          <header className="v2-section-head">
+            <h2 id="detail-angles-title">{copy("Every angle.", "每个角度。")}</h2>
+            <p>{copy("Six views of the lock body, the sleeved chain, and the two ends.", "锁体、包覆链条和两端的六个视角。")}</p>
+          </header>
+          <div className="detail-angles">
+            {detailAngles.map((shot) => (
+              <figure key={shot.src}>
+                <img src={shot.src} alt={copy(shot.en, shot.zh)} />
+                <figcaption>
+                  <strong>{copy(shot.en, shot.zh)}</strong>
+                  <span>{copy(shot.bodyEn, shot.bodyZh)}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
