@@ -1042,7 +1042,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .durability-make-copy p { max-width: 36rem; margin: 14px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
 .durability-make-copy .durability-kicker { margin-top: 0; }
 .durability-make-stage,
-.durability-make video {
+.durability-make img {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 20px;

@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tailwindcss(), adminApiPlugin()],
     server: {
       watch: {
-        ignored: ["**/*.mp4", "**/*.webm"],
+        ignored: ["**/*.mp4", "**/*.webm", "**/*.gif"],
       },
     },
   optimizeDeps: {

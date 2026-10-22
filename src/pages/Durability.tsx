@@ -8,18 +8,13 @@ function text(lang: Lang, en: string, zh: string) {
   return lang === "zh" ? zh : en;
 }
 
-/** Manufacturing recording. Leave empty until the file is in the repo.
- *  Expected file: public/videos/manufacturing/clx1-assembly.mp4
- *  Public path: /videos/manufacturing/clx1-assembly.mp4
- */
-const MANUFACTURING_VIDEO = "";
+const MANUFACTURING_GIF = "/images/manufacturing/production_process_showcase_640.gif";
 
 export function Durability() {
   const { i18n } = useTranslation();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const copy = (en: string, zh: string) => text(lang, en, zh);
   const [videoOpen, setVideoOpen] = useState(false);
-  const [manufacturingFailed, setManufacturingFailed] = useState(false);
 
   return (
     <section id="safety" className="durability site-anchor" tabIndex={-1} aria-labelledby="durability-title">
@@ -120,27 +115,12 @@ export function Durability() {
             )}
           </p>
         </div>
-        {MANUFACTURING_VIDEO && !manufacturingFailed ? (
-          <video
-            src={MANUFACTURING_VIDEO}
-            controls
-            playsInline
-            muted
-            preload="none"
-            onError={() => setManufacturingFailed(true)}
-          >
-            {copy("Manufacturing recording", "制造过程录像")}
-          </video>
-        ) : (
-          <div className="durability-make-stage">
-            <p>
-              {copy(
-                "Manufacturing recording is not in this project yet. This space is for circuit-board and assembly footage, not a safety test.",
-                "制造过程录像尚未放入本项目。这里预留给电路板与组装画面，不是安全测试。",
-              )}
-            </p>
-          </div>
-        )}
+        <img
+          src={MANUFACTURING_GIF}
+          alt={copy("CLX1 production process", "CLX1 生产过程")}
+          loading="lazy"
+          decoding="async"
+        />
       </section>
 
       <section className="durability-cta page-wrap" aria-labelledby="confidence-title">
