@@ -1004,10 +1004,31 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .durability-eval svg { color: #146c43; }
 .durability-eval h3 { margin: 0; font-size: 1.15rem; font-weight: 650; letter-spacing: -0.02em; }
 .durability-eval p { margin: 0; color: #686b66; font-size: 1rem; line-height: 1.6; }
+.durability-make {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+  padding-block: 48px 16px;
+}
+.durability .durability-make h2 { max-width: 12em; font-size: clamp(2rem, 3.2vw, 3rem); }
+.durability-make-copy { display: grid; gap: 0; }
+.durability-make-copy p { max-width: 36rem; margin: 14px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
+.durability-make-copy .durability-kicker { margin-top: 0; }
+.durability-make-stage,
+.durability-make video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  background: #ecede9;
+  object-fit: contain;
+}
+.durability-make-stage { display: grid; place-items: center; margin: 0; padding: 24px; text-align: center; }
+.durability-make-stage p { margin: 0; color: #686b66; font-size: 1rem; line-height: 1.6; }
 .durability-cta { padding-block: 64px 80px; }
 .durability-cta .v2-btn, .durability-cta a { margin-top: 20px; }
 @media (max-width: 900px) {
-  .durability-hero, .durability-cta, .durability-eval { grid-template-columns: 1fr; }
+  .durability-hero, .durability-cta, .durability-eval, .durability-make { grid-template-columns: 1fr; }
   .durability-points { grid-template-columns: 1fr 1fr; }
   .durability-hero { padding-top: 40px; }
   .durability .durability-title { max-width: none; }

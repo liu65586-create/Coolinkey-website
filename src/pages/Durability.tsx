@@ -8,11 +8,18 @@ function text(lang: Lang, en: string, zh: string) {
   return lang === "zh" ? zh : en;
 }
 
+/** Manufacturing recording. Leave empty until the file is in the repo.
+ *  Expected file: public/videos/manufacturing/clx1-assembly.mp4
+ *  Public path: /videos/manufacturing/clx1-assembly.mp4
+ */
+const MANUFACTURING_VIDEO = "";
+
 export function Durability() {
   const { i18n } = useTranslation();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const copy = (en: string, zh: string) => text(lang, en, zh);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [manufacturingFailed, setManufacturingFailed] = useState(false);
 
   return (
     <section id="safety" className="durability site-anchor" tabIndex={-1} aria-labelledby="durability-title">
@@ -95,6 +102,46 @@ export function Durability() {
         </div>
       </section>
       <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src="/videos/how-to/fingerprint-register.mp4" />
+
+      <section className="durability-make page-wrap" aria-labelledby="manufacturing-title">
+        <div className="durability-make-copy">
+          <p className="durability-kicker">{copy("Manufacturing Process", "制造过程")}</p>
+          <h2 id="manufacturing-title">{copy("Behind Every Detail.", "每个细节的背后。")}</h2>
+          <p>
+            {copy(
+              "From circuit board assembly to final product assembly, every stage plays a part in bringing CLX1 to life.",
+              "从电路板装配到成品组装，每一个阶段都参与把 CLX1 做出来。",
+            )}
+          </p>
+          <p>
+            {copy(
+              "We pay attention to the details behind the product—not just how it looks, but how its electronic components and physical structure come together.",
+              "我们留意产品背后的细节：不只是它看起来怎样，也包括电子元件和实体结构如何组合到一起。",
+            )}
+          </p>
+        </div>
+        {MANUFACTURING_VIDEO && !manufacturingFailed ? (
+          <video
+            src={MANUFACTURING_VIDEO}
+            controls
+            playsInline
+            muted
+            preload="none"
+            onError={() => setManufacturingFailed(true)}
+          >
+            {copy("Manufacturing recording", "制造过程录像")}
+          </video>
+        ) : (
+          <div className="durability-make-stage">
+            <p>
+              {copy(
+                "Manufacturing recording is not in this project yet. This space is for circuit-board and assembly footage, not a safety test.",
+                "制造过程录像尚未放入本项目。这里预留给电路板与组装画面，不是安全测试。",
+              )}
+            </p>
+          </div>
+        )}
+      </section>
 
       <section className="durability-cta page-wrap" aria-labelledby="confidence-title">
         <img src="/images/listing/detail-stainless-body.jpg" alt={copy("CLX1 stainless-steel lock body", "CLX1 不锈钢锁体")} />
