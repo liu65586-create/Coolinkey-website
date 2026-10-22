@@ -392,7 +392,7 @@ export function HowItWorks() {
             disabled={!videoSrc}
             aria-label={copy("Play CLX1 demonstration", "播放 CLX1 演示")}
           >
-            <img src="/images/listing/one-touch-unlock.jpg" alt={copy("CLX1 fingerprint unlock", "CLX1 指纹解锁")} />
+            <img src="/images/how-to/access-poster.jpg" alt={copy("CLX1 fingerprint unlock", "CLX1 指纹解锁")} />
             {videoSrc ? <span className="v2-play" aria-hidden="true" /> : null}
           </button>
           <div>
