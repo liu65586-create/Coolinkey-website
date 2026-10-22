@@ -127,7 +127,7 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[400] flex items-center justify-center bg-black/70 p-4"
+      className="video-modal-backdrop"
       role="presentation"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
@@ -137,26 +137,34 @@ export function ManualModal({ open, onClose, manual, lang }: Props) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="flex max-h-[86vh] w-[min(960px,92vw)] flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl"
+        className={
+          type === "video"
+            ? "video-modal-dialog"
+            : "flex max-h-[calc(100svh-24px)] w-[min(960px,calc(100vw-24px))] flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl sm:max-h-[86svh] sm:w-[min(960px,92vw)]"
+        }
       >
-        <header className="flex items-center justify-between gap-4 border-b border-slate-200 px-5 py-4">
-          <h2 id={titleId} className="text-lg font-semibold text-slate-900">
+        <header
+          className={
+            type === "video"
+              ? "video-modal-bar"
+              : "flex items-center justify-between gap-4 border-b border-slate-200 px-5 py-4"
+          }
+        >
+          <h2 id={titleId} className={type === "video" ? "video-modal-title" : "text-lg font-semibold text-slate-900"}>
             {title}
           </h2>
           <button
             type="button"
-            className="rounded-full px-3 py-1.5 text-sm font-semibold text-text-muted hover:text-accent"
+            className={type === "video" ? "video-modal-text-close" : "rounded-full px-3 py-1.5 text-sm font-semibold text-text-muted hover:text-accent"}
             onClick={onClose}
           >
             {t("manualsSection.close")}
           </button>
         </header>
 
-        <div className="min-h-0 flex-1 overflow-auto bg-neutral-100 px-4 py-4">
+        <div className={type === "video" ? "video-modal-stage" : "min-h-0 flex-1 overflow-auto bg-neutral-100 px-4 py-4"}>
           {type === "video" && videoUrl ? (
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black">
-              <MediaPlayer url={videoUrl} title={title} autoPlay className="absolute inset-0 h-full w-full" />
-            </div>
+            <MediaPlayer url={videoUrl} title={title} autoPlay className="video-modal-player" />
           ) : cloudSrc ? (
             <iframe title={title} src={cloudSrc} className="h-[min(68vh,760px)] w-full rounded-lg border-0 bg-white" />
           ) : showPdf ? (
