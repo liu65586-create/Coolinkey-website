@@ -16,8 +16,10 @@ export function About() {
   const paragraphs = body.split(/\n{2,}/).map((part) => part.trim()).filter(Boolean);
   return (
     <div id="about" className="v2-wrap about-panel site-anchor" tabIndex={-1}>
-      <p className="use-kicker">{copy(lang, "About COOLINKEY", "关于 COOLINKEY")}</p>
-      <h2>{title}</h2>
+      <div className="about-lead">
+        <p className="use-kicker">{copy(lang, "About COOLINKEY", "关于 COOLINKEY")}</p>
+        <h2>{title}</h2>
+      </div>
       <div className="about-body">
         {paragraphs.map((paragraph, index) => {
           const signoff = index === paragraphs.length - 1 && paragraph.startsWith("COOLINKEY");
