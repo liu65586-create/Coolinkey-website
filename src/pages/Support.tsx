@@ -13,6 +13,7 @@ const ManualModal = lazy(() => import("../components/ManualModal").then((mod) =>
 const stepVideos = [
   {
     src: "/videos/how-to/Binding.mp4",
+    poster: "/images/how-to/pair-clx1.jpg",
     en: "Pair Your CLX1",
     zh: "配对 CLX1",
     noteEn: "The pairing recording for the app.",
@@ -20,6 +21,7 @@ const stepVideos = [
   },
   {
     src: "/videos/how-to/fingerprint-register.mp4",
+    poster: "/images/how-to/add-fingerprint.jpg",
     en: "Add a Fingerprint",
     zh: "录入指纹",
     noteEn: "The fingerprint registration recording.",
@@ -27,6 +29,7 @@ const stepVideos = [
   },
   {
     src: "/videos/how-to/ble-unlock.mp4",
+    poster: "/images/how-to/unlock-app.jpg",
     en: "Unlock with the App",
     zh: "用 App 开锁",
     noteEn: "The Bluetooth unlock recording.",
@@ -34,6 +37,7 @@ const stepVideos = [
   },
   {
     src: "/videos/how-to/delete-fingerprint.mp4",
+    poster: "/images/how-to/remove-fingerprint.jpg",
     en: "Remove a Fingerprint",
     zh: "删除指纹",
     noteEn: "The fingerprint removal recording.",
@@ -210,13 +214,14 @@ export function Support() {
         <div>
           <p className="use-kicker">{text(page?.videos, "supportPage.videos")}</p>
           <h3 id="use-videos-title">{copy("Video Tutorials", "视频教程")}</h3>
-          <p>{copy("Four recordings are ready. Poster frames are not in this project.", "目前有 4 段录像。项目里还没有封面图。")}</p>
+          <p>{copy("Four recordings are ready.", "目前有 4 段录像。")}</p>
         </div>
         <ul>
           {stepVideos.map((video) => (
             <li key={video.src}>
               <button type="button" onClick={() => setVideoSrc(video.src)}>
                 <span className="use-video-still">
+                  <img src={video.poster} alt="" />
                   <span className="use-play" aria-hidden="true">
                     <CirclePlay size={28} />
                   </span>

@@ -736,8 +736,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .use-videos button { display: grid; align-content: start; gap: 10px; width: 100%; border: 0; border-radius: 14px; background: #fff; color: #202120; padding: 12px; text-align: left; font: inherit; cursor: pointer; }
 .use-videos button:hover { background: #f8f8f6; }
 .use-videos button:hover .use-play { color: #146c43; }
-.use-video-still { display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: 12px; background: #ecede9; }
-.use-play { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 999px; background: #fff; color: #36b66a; }
+.use-video-still { position: relative; display: grid; place-items: center; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 12px; background: #202120; }
+.use-video-still img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.use-play { position: relative; z-index: 1; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 999px; background: #fff; color: #36b66a; box-shadow: 0 4px 16px rgba(32, 33, 32, 0.18); }
 .use-videos strong { font-size: 1rem; font-weight: 650; letter-spacing: -0.02em; line-height: 1.35; }
 .use-video-note { color: #686b66; font-size: 0.9rem; font-weight: 450; line-height: 1.45; }
 .use-resources { display: grid; gap: 20px; }
