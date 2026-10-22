@@ -708,31 +708,31 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .use-guide { display: grid; gap: 56px; width: min(1440px, calc(100% - 96px)); margin-inline: auto; }
 .use-guide .v2-section-head { margin-bottom: 0; }
 .use-kicker { margin: 0; color: #686b66; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; }
-.use-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
-.use-steps li { display: grid; align-content: start; gap: 8px; min-height: 100%; border: 1px solid #e5e6e1; border-radius: 16px; background: #fff; padding: 22px 20px 24px; }
-.use-steps span { color: #36b66a; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; }
-.use-steps strong { color: #202120; font-size: 1.2rem; font-weight: 650; letter-spacing: -0.03em; line-height: 1.25; }
-.use-steps p { margin: 0; color: #686b66; font-size: 0.95rem; line-height: 1.55; }
-.use-library { display: grid; grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr); gap: 28px 40px; align-items: start; }
-.use-manual, .use-videos { border-radius: 20px; background: #ecede9; padding: 28px 28px 24px; }
-.use-manual h3, .use-videos h3 { margin: 10px 0 0; color: #202120; font-size: clamp(1.6rem, 2vw, 2rem); font-weight: 650; letter-spacing: -0.03em; line-height: 1.2; }
-.use-manual p:last-of-type, .use-videos > div p { margin: 12px 0 0; max-width: 28rem; color: #686b66; font-size: 0.95rem; line-height: 1.6; }
-.use-manual .v2-btn { margin-top: 22px; }
-.use-videos { display: grid; gap: 22px; }
-.use-videos ul { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.use-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.use-steps { display: contents; margin: 0; padding: 0; list-style: none; }
+.use-steps li, .use-manual { display: grid; align-content: start; gap: 8px; min-height: 100%; border: 1px solid #e5e6e1; border-radius: 16px; background: #fff; padding: 22px 20px 24px; }
+.use-steps span, .use-manual .use-kicker { color: #36b66a; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; }
+.use-steps strong, .use-manual h3 { margin: 0; color: #202120; font-size: 1.2rem; font-weight: 650; letter-spacing: -0.03em; line-height: 1.25; }
+.use-steps p, .use-manual p:last-of-type { margin: 0; color: #686b66; font-size: 0.95rem; line-height: 1.55; }
+.use-manual .v2-btn { margin-top: 4px; justify-self: start; min-height: 40px; padding: 0 16px; }
+.use-videos { display: grid; gap: 22px; border-radius: 20px; background: #ecede9; padding: 28px 28px 24px; }
+.use-videos h3 { margin: 10px 0 0; color: #202120; font-size: clamp(1.6rem, 2vw, 2rem); font-weight: 650; letter-spacing: -0.03em; line-height: 1.2; }
+.use-videos > div p { margin: 12px 0 0; max-width: 28rem; color: #686b66; font-size: 0.95rem; line-height: 1.6; }
+.use-videos ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
 .use-videos button { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 84px; border: 0; border-radius: 14px; background: #fff; color: #202120; padding: 14px 16px; text-align: left; font: inherit; cursor: pointer; }
 .use-videos button:hover { background: #f8f8f6; }
 .use-videos button:hover .use-play { color: #146c43; }
 .use-play { display: grid; place-items: center; flex: 0 0 48px; width: 48px; height: 48px; border-radius: 999px; background: #ecede9; color: #36b66a; }
 .use-videos strong { font-size: 1rem; font-weight: 650; letter-spacing: -0.02em; line-height: 1.35; }
 .use-trouble { margin: 0; }
-@media (max-width: 1000px) {
-  .use-steps, .use-library, .use-videos ul { grid-template-columns: 1fr 1fr; }
+@media (max-width: 1100px) {
+  .use-row, .use-videos ul { grid-template-columns: 1fr 1fr; }
+  .use-manual { grid-column: 1 / -1; }
 }
 @media (max-width: 700px) {
   .use-guide { width: min(100% - 40px, 1440px); gap: 36px; }
-  .use-steps, .use-library, .use-videos ul { grid-template-columns: 1fr; }
-  .use-manual, .use-videos { padding: 22px 18px; }
+  .use-row, .use-videos ul { grid-template-columns: 1fr; }
+  .use-videos { padding: 22px 18px; }
 }
 .desk-stack { display: grid; gap: 88px; }
 .desk-split, .desk-ask {

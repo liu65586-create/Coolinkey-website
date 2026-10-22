@@ -54,17 +54,16 @@ export function Support() {
         <p>{copy("From the first charge to a touch unlock.", "从先充电，到触摸开锁。")}</p>
       </header>
 
-      <ol className="use-steps">
-        {steps.map((step) => (
-          <li key={step.id}>
-            <span>{step.n}</span>
-            <strong>{step.title}</strong>
-            {step.hint ? <p>{step.hint}</p> : null}
-          </li>
-        ))}
-      </ol>
-
-      <div className="use-library">
+      <div className="use-row">
+        <ol className="use-steps">
+          {steps.map((step) => (
+            <li key={step.id}>
+              <span>{step.n}</span>
+              <strong>{step.title}</strong>
+              {step.hint ? <p>{step.hint}</p> : null}
+            </li>
+          ))}
+        </ol>
         <article className="use-manual">
           <p className="use-kicker">{copy("Manual", "说明书")}</p>
           <h3>{manual ? (lang === "zh" ? manual.title.zh : manual.title.en) : copy("User Manual", "用户手册")}</h3>
@@ -75,8 +74,9 @@ export function Support() {
             </button>
           ) : null}
         </article>
+      </div>
 
-        <section className="use-videos" aria-labelledby="use-videos-title">
+      <section className="use-videos" aria-labelledby="use-videos-title">
           <div>
             <p className="use-kicker">{copy("Videos", "视频")}</p>
             <h3 id="use-videos-title">{copy("Step videos", "分步视频")}</h3>
@@ -94,8 +94,7 @@ export function Support() {
               </li>
             ))}
           </ul>
-        </section>
-      </div>
+      </section>
 
       <div className="desk-split use-trouble">
         <div className="desk-copy">
