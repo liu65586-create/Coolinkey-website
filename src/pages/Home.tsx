@@ -31,25 +31,25 @@ const detailAngles = [
     bodyZh: "一端是锁销，另一端是它扣入的锁孔。",
   },
   {
-    src: "/images/listing/product-clx1-isolated.jpg",
-    en: "Closed loop",
-    zh: "闭合状态",
-    bodyEn: "From above, the chain forms a loop with the lock body along one side.",
-    bodyZh: "从上往下看，链条围成一圈，锁体位于一侧。",
+    src: "/images/listing/detail-chain-cutters.jpg",
+    en: "A 6 mm stainless steel chain that hydraulic cutters cannot cut.",
+    zh: "液压钳不可剪断的6mm不锈钢链条",
+    bodyEn: "",
+    bodyZh: "",
   },
   {
-    src: "/images/listing/mechanical-key-backup.jpg",
-    en: "Mechanical key",
-    zh: "机械钥匙",
-    bodyEn: "The backup key lines up with the opening on the lock body.",
-    bodyZh: "备用钥匙对准锁体上的钥匙孔。",
+    src: "/images/listing/detail-stainless-body.jpg",
+    en: "All-stainless-steel lock body.",
+    zh: "纯不锈钢锁体",
+    bodyEn: "",
+    bodyZh: "",
   },
   {
-    src: "/images/listing/bike-locking-closeup.jpg",
-    en: "Around a frame",
-    zh: "绕在车架上",
-    bodyEn: "The chain wraps a bicycle frame and a fixed post, with the lock body still visible.",
-    bodyZh: "链条绕过自行车架和固定柱，锁体仍留在视线里。",
+    src: "/images/listing/detail-compact.jpg",
+    en: "Compact enough to pack away easily.",
+    zh: "极易收纳的体积",
+    bodyEn: "",
+    bodyZh: "",
   },
 ];
 
@@ -254,7 +254,7 @@ export function ProductAngles() {
         <div className="v2-wrap">
           <header className="v2-section-head">
             <h2 id="detail-angles-title">{copy("Every angle.", "每个角度。")}</h2>
-            <p>{copy("Six views of the lock body, the sleeved chain, and the two ends.", "锁体、包覆链条和两端的六个视角。")}</p>
+            <p>{copy("Six close views of CLX1.", "CLX1 的六个近景。")}</p>
           </header>
           <div className="detail-angles">
             {detailAngles.map((shot) => (
@@ -262,7 +262,7 @@ export function ProductAngles() {
                 <img src={shot.src} alt={copy(shot.en, shot.zh)} />
                 <figcaption>
                   <strong>{copy(shot.en, shot.zh)}</strong>
-                  <span>{copy(shot.bodyEn, shot.bodyZh)}</span>
+                  {shot.bodyEn || shot.bodyZh ? <span>{copy(shot.bodyEn, shot.bodyZh)}</span> : null}
                 </figcaption>
               </figure>
             ))}

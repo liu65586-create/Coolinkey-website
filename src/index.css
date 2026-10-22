@@ -676,7 +676,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .detail-angles figure { margin: 0; }
 .detail-angles img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid #e5e6e1; border-radius: 12px; background: #fff; }
 .detail-angles figcaption { display: grid; gap: 4px; padding: 12px 4px 0; }
-.detail-angles strong { color: #202120; font-size: 1rem; font-weight: 650; }
+.detail-angles strong { color: #202120; font-size: 1rem; font-weight: 650; line-height: 1.45; }
 .detail-angles span { color: #686b66; font-size: 0.95rem; font-weight: 450; line-height: 1.5; }
 .v2-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .v2-cards img { aspect-ratio: 4 / 3; }
