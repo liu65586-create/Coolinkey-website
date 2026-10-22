@@ -158,7 +158,7 @@ const brandSlides: BrandSlide[] = [
   },
   {
     id: "lifestyle",
-    image: "/images/listing/clx1-lock-detail-wide.jpg",
+    image: "/images/listing/clx1-lock-detail-v3.jpg",
     position: "center center",
     altEn: "Close view of the CLX1 lock body and fingerprint sensor",
     altZh: "CLX1 锁体与指纹传感器的近景",
