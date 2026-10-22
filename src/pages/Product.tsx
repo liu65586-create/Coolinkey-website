@@ -1,26 +1,19 @@
 ﻿import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../components/Button";
-import { ManualsGrid } from "../components/ManualsGrid";
 import { ProductDropdown } from "../components/ProductDropdown";
 import { ProductGallery } from "../components/ProductGallery";
 import { useCms } from "../context/CmsContext";
-import { useSiteConfig } from "../context/SiteConfigContext";
 import { useShoppingRegion } from "../context/ShoppingRegionContext";
 import type { Lang } from "../utils/siteCopy";
-import { pickBilingual } from "../utils/siteCopy";
-import { getVisibleManuals } from "../utils/manualsVisibility";
 import { openPurchase } from "../utils/purchaseLinks";
 
 export function Product() {
   const { i18n, t } = useTranslation();
   const [slug, setSlug] = useState<string | undefined>();
   const { products, loading, getBySlug, defaultProduct } = useCms();
-  const { config } = useSiteConfig();
   const { useChinaStores } = useShoppingRegion();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
-
-  const manualsHeading = pickBilingual(lang, config?.productPage?.manualsHeading, t("product.manuals"));
 
   const visibleProducts = useMemo(() => products.filter((product) => product.enabled !== false), [products]);
 
@@ -37,9 +30,6 @@ export function Product() {
     : [];
   const pills = active?.slug === "smart-chain-lock"
     ? [lang === "zh" ? "指纹" : "Fingerprint", "App", lang === "zh" ? "机械钥匙" : "Mechanical key", "IP67", "USB-C"]
-    : [];
-  const visibleManuals = active
-    ? getVisibleManuals(active.manuals, config?.manualsSection?.hiddenManualTypes)
     : [];
 
   return (
@@ -61,12 +51,6 @@ export function Product() {
           <div className="product-sheet">
             <div className="product-visual">
               <ProductGallery images={gallery} productName={name} focus={active.focus} />
-              {visibleManuals.length ? (
-                <div className="product-manuals">
-                  <h2>{manualsHeading}</h2>
-                  <ManualsGrid manuals={visibleManuals} showHeading={false} />
-                </div>
-              ) : null}
             </div>
 
             <div className="product-copy">
