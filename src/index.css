@@ -408,7 +408,7 @@ html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.
 .brand-product-copy:has(.brand-principles) h2,
 .brand-product-copy:not(:has(.brand-product-actions)) h2 { font-size: clamp(2.6rem, 3.6vw, 4.15rem); }
 .brand-product-copy:has(.brand-principles) .brand-product-lead,
-.brand-product-copy:not(:has(.brand-product-actions)) .brand-product-lead { margin-top: 16px; font-size: 1.0625rem; line-height: 1.55; }
+.brand-product-copy:not(:has(.brand-product-actions)) .brand-product-lead { margin-top: 16px; font-size: 20px; line-height: 1.55; }
 .brand-product-copy:has(.brand-principles) .brand-product-actions { margin-top: 22px; }
 .brand-product-copy:not(:has(.brand-product-actions)) { width: min(680px, calc(100% - 96px)); }
 .brand-controls { position: absolute; z-index: 2; right: max(48px, calc((100% - 1440px) / 2)); bottom: 36px; display: flex; align-items: center; gap: 14px; }
