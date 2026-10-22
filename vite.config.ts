@@ -27,7 +27,12 @@ export default defineConfig(({ mode }) => {
     if (!process.env[key] && env[key]) process.env[key] = env[key];
   }
   return {
-  plugins: [react(), tailwindcss(), adminApiPlugin()],
+    plugins: [react(), tailwindcss(), adminApiPlugin()],
+    server: {
+      watch: {
+        ignored: ["**/*.mp4", "**/*.webm"],
+      },
+    },
   optimizeDeps: {
     include: ["pdfjs-dist"],
   },

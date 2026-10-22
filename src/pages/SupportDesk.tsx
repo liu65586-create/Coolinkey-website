@@ -47,11 +47,6 @@ export function SupportDesk() {
     title: pickBilingual(lang, step.title, ""),
     hint: pickBilingual(lang, step.hint, ""),
   }));
-  const faqs = (page?.faqs ?? []).map((item) => ({
-    id: item.id,
-    q: pickBilingual(lang, item.question, ""),
-    a: pickBilingual(lang, item.answer, ""),
-  }));
 
   const set = (key: keyof Fields, value: string) => {
     setFields((current) => ({ ...current, [key]: value }));
@@ -161,25 +156,6 @@ export function SupportDesk() {
                 <button type="button" onClick={() => setVideoSrc(manualVideoUrl(manual, lang))}>
                   {copy(lang, "Play", "播放")}
                 </button>
-              </details>
-            ))}
-          </div>
-        </div>
-
-        <div className="desk-split">
-          <div className="desk-copy">
-            <p className="desk-kicker">{copy(lang, "Support", "支持")}</p>
-            <h2>{copy(lang, "Troubleshooting", "常见问题")}</h2>
-            <p>{copy(lang, "Answers for the situations we can confirm.", "这里是目前可以确认的处理方式。")}</p>
-          </div>
-          <div className="desk-panel">
-            {faqs.map((item) => (
-              <details key={item.id}>
-                <summary>
-                  {item.q}
-                  <ChevronDown size={16} aria-hidden="true" />
-                </summary>
-                <p>{item.a}</p>
               </details>
             ))}
           </div>

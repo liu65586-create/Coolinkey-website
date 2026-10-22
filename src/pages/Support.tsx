@@ -1,9 +1,9 @@
-import { ArrowRight, ChevronRight, CirclePlay, FileText } from "lucide-react";
+import { ArrowRight, ChevronDown, CirclePlay } from "lucide-react";
 import { lazy, Suspense, useMemo, useState, type MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
-import { VideoModal, manualVideoUrl } from "../components/VideoModal";
+import { VideoModal } from "../components/VideoModal";
 
 const ManualModal = lazy(() => import("../components/ManualModal").then((mod) => ({ default: mod.ManualModal })));
 import { useCms } from "../context/CmsContext";
@@ -11,6 +11,13 @@ import { useSiteConfig } from "../context/SiteConfigContext";
 import type { CmsManual } from "../types/cms";
 import { getVisibleManuals } from "../utils/manualsVisibility";
 import { pickBilingual, type Lang } from "../utils/siteCopy";
+
+const stepVideos = [
+  { src: "/videos/how-to/Binding.mp4", en: "Bind the lock", zh: "绑定" },
+  { src: "/videos/how-to/fingerprint-register.mp4", en: "Register a fingerprint", zh: "录入指纹" },
+  { src: "/videos/how-to/ble-unlock.mp4", en: "Unlock with Bluetooth", zh: "蓝牙开锁" },
+  { src: "/videos/how-to/delete-fingerprint.mp4", en: "Delete a fingerprint", zh: "删除指纹" },
+];
 
 export function Support() {
   const { t, i18n } = useTranslation();
@@ -20,19 +27,18 @@ export function Support() {
   const { config } = useSiteConfig();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const page = config?.supportPage;
+  const copy = (en: string, zh: string) => (lang === "zh" ? zh : en);
   const text = (field: Parameters<typeof pickBilingual>[1], key: string) => pickBilingual(lang, field, t(key));
   const [active, setActive] = useState<CmsManual | null>(null);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
 
-  const manuals = useMemo(
-    () => getVisibleManuals(defaultProduct?.manuals ?? [], config?.manualsSection?.hiddenManualTypes),
-    [defaultProduct, config]
-  );
-  const docs = manuals.filter((m) => m.type !== "video");
-  const videos = manuals.filter((m) => m.type === "video");
+  const manual = useMemo(() => {
+    const manuals = getVisibleManuals(defaultProduct?.manuals ?? [], config?.manualsSection?.hiddenManualTypes);
+    return manuals.find((item) => item.type === "user_manual") ?? manuals.find((item) => item.type !== "video") ?? null;
+  }, [defaultProduct, config]);
 
   const steps = (page?.steps?.length ? page.steps : []).map((step, index) => ({
-    n: String(index + 1),
+    n: String(index + 1).padStart(2, "0"),
     title: pickBilingual(lang, step.title, ""),
     hint: pickBilingual(lang, step.hint, ""),
     id: step.id,
@@ -45,127 +51,107 @@ export function Support() {
   }));
 
   return (
-    <div className="support-stack w-full">
-      <section className="support-hero page-wrap py-8 lg:py-8">
-        <h2 className="font-display text-[clamp(2rem,3.5vw,3.5rem)] font-semibold leading-tight tracking-tight text-text">
-          {text(page?.title, "supportPage.title")}
-        </h2>
-        <p className="mt-3 max-w-xl text-[16px] leading-relaxed text-text-muted">{text(page?.subtitle, "supportPage.subtitle")}</p>
-      </section>
+    <div className="use-guide">
+      <header className="v2-section-head">
+        <p className="v2-eyebrow">{copy("How to Use", "如何使用")}</p>
+        <h2>{copy("The whole setup is four steps.", "整个流程是四步。")}</h2>
+        <p>{copy("From the first charge to a touch unlock.", "从先充电，到触摸开锁。")}</p>
+      </header>
 
-      <section className="support-panels page-wrap grid gap-4 pb-4 lg:grid-cols-3">
-        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-[17px] font-semibold text-text">{text(page?.quickStart, "supportPage.quickStart")}</h2>
-          <p className="mt-1 text-[15px] text-text-muted">{text(page?.quickStartHint, "supportPage.quickStartHint")}</p>
-          <ol className="mt-4 space-y-0.5">
-            {steps.map((s) => (
-            <li key={s.id}>
-                <div className="flex items-center gap-3 rounded-xl px-1 py-2.5">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#e7f8ea] text-xs font-bold text-accent">
-                    {s.n}
-                  </span>
-                  <span className="flex-1 text-[15px] font-medium text-text">{s.title}</span>
-                  <ChevronRight size={16} className="text-text-muted" />
-                </div>
-              </li>
-            ))}
-          </ol>
+      <ol className="use-steps">
+        {steps.map((step) => (
+          <li key={step.id}>
+            <span>{step.n}</span>
+            <strong>{step.title}</strong>
+            {step.hint ? <p>{step.hint}</p> : null}
+          </li>
+        ))}
+      </ol>
+
+      <div className="use-library">
+        <article className="use-manual">
+          <p className="use-kicker">{copy("Manual", "说明书")}</p>
+          <h3>{manual ? (lang === "zh" ? manual.title.zh : manual.title.en) : copy("User Manual", "用户手册")}</h3>
+          <p>{copy("The CLX1 manual for setup and everyday use.", "CLX1 的设置与日常使用说明。")}</p>
+          {manual ? (
+            <button type="button" className="v2-btn v2-btn-primary" onClick={() => setActive(manual)}>
+              {t("manualsSection.preview")}
+            </button>
+          ) : null}
         </article>
 
-        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-[17px] font-semibold text-text">{text(page?.guides, "supportPage.guides")}</h2>
-          <p className="mt-1 text-[15px] text-text-muted">{text(page?.guidesHint, "supportPage.guidesHint")}</p>
-          <ul className="mt-4 space-y-0.5">
-            {docs.map((m) => (
-              <li key={m.id}>
-                <button
-                  type="button"
-                  onClick={() => setActive(m)}
-                  className="flex w-full items-center gap-3 rounded-xl px-1 py-2.5 text-left hover:bg-surface-muted"
-                >
-                  <FileText size={18} className="text-accent" />
-                  <span className="flex-1 text-[15px] font-medium text-text">{lang === "zh" ? m.title.zh : m.title.en}</span>
-                  <ChevronRight size={16} className="text-text-muted" />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </article>
-
-        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-[17px] font-semibold text-text">{text(page?.videos, "supportPage.videos")}</h2>
-          <p className="mt-1 text-[15px] text-text-muted">{text(page?.videosHint, "supportPage.videosHint")}</p>
-          <ul className="mt-4 space-y-2">
-            {(videos.length ? videos : docs.slice(0, 3)).map((m) => (
-              <li key={m.id}>
-                <button
-                  type="button"
-                  onClick={() => (m.type === "video" ? setVideoSrc(manualVideoUrl(m, lang)) : setActive(m))}
-                  className="flex w-full items-center gap-3 rounded-xl bg-surface-muted p-2 text-left hover:bg-[#e7f8ea]"
-                >
-                  <span className="flex h-11 w-16 items-center justify-center rounded-lg bg-[#dce8e1] text-accent">
-                    <CirclePlay size={22} />
-                  </span>
-                  <span className="text-[15px] font-medium text-text">{lang === "zh" ? m.title.zh : m.title.en}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </section>
-
-      <section className="support-faq page-wrap pb-4">
-        <article className="rounded-[20px] border border-[var(--color-border)] bg-white p-5 shadow-[0_8px_30px_rgba(11,27,43,0.04)]">
-          <h2 className="text-[17px] font-semibold text-text">{text(page?.troubleshooting, "supportPage.troubleshooting")}</h2>
-          <p className="mt-1 text-[15px] text-text-muted">{text(page?.troubleshootingHint, "supportPage.troubleshootingHint")}</p>
-          <div className="mt-2 divide-y divide-[var(--color-border)]">
-            {faqs.map((item) => (
-              <details key={item.id} className="group py-2.5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-medium text-text [&::-webkit-details-marker]:hidden">
-                  {item.q}
-                  <ChevronRight size={16} className="shrink-0 text-text-muted transition-transform group-open:rotate-90" />
-                </summary>
-                <p className="mt-2 max-w-3xl text-[15px] leading-relaxed text-text-muted">{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </article>
-      </section>
-
-      <section className="support-cta page-wrap pb-8">
-        <div className="flex flex-col items-start justify-between gap-4 rounded-[20px] bg-surface-muted px-5 py-5 sm:flex-row sm:items-center sm:px-8">
+        <section className="use-videos" aria-labelledby="use-videos-title">
           <div>
-            <h2 className="text-[17px] font-semibold text-text">{text(page?.helpTitle, "supportPage.helpTitle")}</h2>
-            <p className="mt-1 text-[15px] text-text-muted">{text(page?.helpBody, "supportPage.helpBody")}</p>
+            <p className="use-kicker">{copy("Videos", "视频")}</p>
+            <h3 id="use-videos-title">{copy("Step videos", "分步视频")}</h3>
+            <p>{copy("Four guides are ready.", "目前先提供 4 段。")}</p>
           </div>
-          <Button
-            variant="primary"
-            href="#support-message"
-            className="!border-transparent !bg-black !text-white hover:!bg-[#222]"
-            onClick={(event: MouseEvent<HTMLElement>) => {
-              const panel = document.getElementById("support-message");
-              if (!panel) return;
-              event.preventDefault();
-              const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-              const focusName = () => {
-                window.setTimeout(
-                  () => document.getElementById("support-message-name")?.focus({ preventScroll: true }),
-                  reduce ? 0 : 450,
-                );
-              };
-              if (window.location.hash === "#support-message") {
-                panel.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-              } else {
-                navigate({ pathname: location.pathname, search: location.search, hash: "support-message" });
-              }
-              focusName();
-            }}
-          >
-            {text(page?.contactCta, "supportPage.contactCta")}
-            <ArrowRight size={16} />
-          </Button>
+          <ul>
+            {stepVideos.map((video) => (
+              <li key={video.src}>
+                <button type="button" onClick={() => setVideoSrc(video.src)}>
+                  <span className="use-play" aria-hidden="true">
+                    <CirclePlay size={28} />
+                  </span>
+                  <strong>{copy(video.en, video.zh)}</strong>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <div className="desk-split use-trouble">
+        <div className="desk-copy">
+          <p className="desk-kicker">{copy("How to Use", "如何使用")}</p>
+          <h2>{text(page?.troubleshooting, "supportPage.troubleshooting")}</h2>
+          <p>{text(page?.troubleshootingHint, "supportPage.troubleshootingHint")}</p>
         </div>
-      </section>
+        <div className="desk-panel">
+          {faqs.map((item) => (
+            <details key={item.id}>
+              <summary>
+                {item.q}
+                <ChevronDown size={16} aria-hidden="true" />
+              </summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <div className="use-help">
+        <div>
+          <h2>{text(page?.helpTitle, "supportPage.helpTitle")}</h2>
+          <p>{text(page?.helpBody, "supportPage.helpBody")}</p>
+        </div>
+        <Button
+          variant="primary"
+          href="#support-message"
+          className="!border-transparent !bg-black !text-white hover:!bg-[#222]"
+          onClick={(event: MouseEvent<HTMLElement>) => {
+            const panel = document.getElementById("support-message");
+            if (!panel) return;
+            event.preventDefault();
+            const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const focusName = () => {
+              window.setTimeout(
+                () => document.getElementById("support-message-name")?.focus({ preventScroll: true }),
+                reduce ? 0 : 450,
+              );
+            };
+            if (window.location.hash === "#support-message") {
+              panel.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+            } else {
+              navigate({ pathname: location.pathname, search: location.search, hash: "support-message" });
+            }
+            focusName();
+          }}
+        >
+          {text(page?.contactCta, "supportPage.contactCta")}
+          <ArrowRight size={16} />
+        </Button>
+      </div>
 
       <VideoModal open={Boolean(videoSrc)} onClose={() => setVideoSrc(null)} src={videoSrc} />
       {active ? (
