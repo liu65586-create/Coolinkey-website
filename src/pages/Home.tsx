@@ -175,12 +175,7 @@ export function HomeHero() {
           >
             <img src={slide.image} alt={copy(slide.altEn, slide.altZh)} style={{ objectPosition: slide.position }} />
             {slideIndex === 0 ? (
-              <>
-                <div className="brand-product-signature" aria-hidden="true">
-                  <img src="/brand/coolinkey-logo.png" alt="" />
-                  <span />
-                </div>
-                <div className="brand-product-copy">
+              <div className="brand-product-copy">
                   <p className="brand-product-kicker">{copy(slide.eyebrowEn ?? "", slide.eyebrowZh ?? "")}</p>
                   <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
                   <p className="brand-product-lead">{copy(slide.bodyEn, slide.bodyZh)}</p>
@@ -193,8 +188,7 @@ export function HomeHero() {
                       {copy("How it works", "了解使用方式")}
                     </Link>
                   </div>
-                </div>
-              </>
+              </div>
             ) : (
               <div className="brand-copy">
                 {slide.eyebrowEn ? <p className="v2-eyebrow">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
