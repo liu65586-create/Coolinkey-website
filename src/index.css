@@ -985,7 +985,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .assure { background: #f8f8f6; color: #202120; }
 .assure-hero,
 .assure-copy { display: grid; align-content: start; }
-.assure-hero { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: clamp(28px, 4vw, 72px); align-items: center; padding-block: 72px 36px; }
+.assure-hero { grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; padding-block: 72px 36px; }
 .assure-copy > .assure-kicker,
 .assure-doc > .assure-kicker { margin: 0; color: #686b66; font-size: 12px; font-weight: 650; letter-spacing: 0.16em; line-height: 1.5; text-transform: uppercase; }
 html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
@@ -995,7 +995,7 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 .assure-doc-groups > section > p,
 .assure-note p { max-width: 40rem; margin: 16px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
 .assure-aside { color: #202120; font-weight: 620; }
-.assure-hero-frame { justify-self: end; width: 100%; overflow: hidden; border: 1px solid #e5e6e1; border-radius: 20px; background: #fff; }
+.assure-hero-frame { width: 100%; overflow: hidden; border: 1px solid #e5e6e1; border-radius: 20px; background: #fff; }
 .assure-hero-frame img { display: block; width: 100%; height: auto; aspect-ratio: 3840 / 2000; object-fit: contain; }
 .assure-docs { padding-block: 28px 12px; }
 .assure-doc-groups { display: grid; gap: 36px; margin-top: 36px; }
