@@ -7,6 +7,14 @@ function text(lang: Lang, en: string, zh: string) {
   return lang === "zh" ? zh : en;
 }
 
+function FileLink({ href, label }: { href: string; label: string }) {
+  return (
+    <a className="v2-btn v2-btn-secondary" href={href} target="_blank" rel="noopener">
+      {label}
+    </a>
+  );
+}
+
 type Recording = {
   src: string;
   title: string;
@@ -235,6 +243,29 @@ export function Durability() {
                     "CLX1 已取得 IP67 认证。具体防护等级及适用条件以相关认证文件为准。",
                   )}
                 </p>
+                <FileLink href="/documents/clx1-ip67-test.pdf" label={copy("View file", "查看文件")} />
+              </article>
+              <article className="assure-doc">
+                <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                <h4>{copy("FCC Test Report", "FCC 测试报告")}</h4>
+                <p>
+                  {copy(
+                    "FCC test report for the CLX1 smart chain lock. The stated scope and conditions are those in the document.",
+                    "CLX1 智能链条锁的 FCC 测试报告。报告所述范围与条件以该文件为准。",
+                  )}
+                </p>
+                <FileLink href="/documents/clx1-fcc.pdf" label={copy("View file", "查看文件")} />
+              </article>
+              <article className="assure-doc">
+                <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                <h4>{copy("RoHS Report", "RoHS 报告")}</h4>
+                <p>
+                  {copy(
+                    "RoHS verification of conformity for the tested CLX1 sample. The stated scope and conditions are those in the document.",
+                    "针对所测 CLX1 样品的 RoHS 符合性验证。报告所述范围与条件以该文件为准。",
+                  )}
+                </p>
+                <FileLink href="/documents/clx1-rohs.pdf" label={copy("View file", "查看文件")} />
               </article>
             </div>
           </section>
@@ -247,10 +278,34 @@ export function Durability() {
                 "电池相关文件及运输资料，具体以实际提供的文件为准。",
               )}
             </p>
+            <div className="assure-doc-grid">
+              <article className="assure-doc">
+                <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
+                <h4>{copy("Air Transport Report", "航空运输报告")}</h4>
+                <p>
+                  {copy(
+                    "Identification and classification report for air transport of the goods named in the file. The stated scope and conditions are those in the document.",
+                    "文件所载物品的航空运输危险性鉴别报告。报告所述范围与条件以该文件为准。",
+                  )}
+                </p>
+                <FileLink href="/documents/clx1-transport-air.pdf" label={copy("View file", "查看文件")} />
+              </article>
+              <article className="assure-doc">
+                <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
+                <h4>{copy("Sea Transport Report", "海运运输报告")}</h4>
+                <p>
+                  {copy(
+                    "Identification and classification report marked for transport by sea. The stated scope and conditions are those in the document.",
+                    "标明海运的运输危险性鉴别报告。报告所述范围与条件以该文件为准。",
+                  )}
+                </p>
+                <FileLink href="/documents/clx1-transport-sea.pdf" label={copy("View file", "查看文件")} />
+              </article>
+            </div>
             <p className="assure-pending">
               {copy(
-                "No battery transport report, UN 38.3 report, or SDS is published on this page.",
-                "本页尚未发布电池运输报告、UN 38.3 报告或 SDS。",
+                "No UN 38.3 report or SDS is published on this page.",
+                "本页尚未发布 UN 38.3 报告或 SDS。",
               )}
             </p>
           </section>
