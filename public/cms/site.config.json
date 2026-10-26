@@ -518,8 +518,8 @@
       {
         "id": "nav-safety",
         "label": {
-          "en": "Safety & Testing",
-          "zh": "安全与测试"
+          "en": "Certificates & Testing",
+          "zh": "认证与测试"
         },
         "to": "/#safety"
       },
