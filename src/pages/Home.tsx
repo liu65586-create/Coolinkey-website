@@ -8,72 +8,119 @@ import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
 import { useTranslation } from "react-i18next";
 
-const detailAngles = [
+type AngleCard = {
+  src: string;
+  titleEn: string;
+  titleZh: string;
+  bodyEn: string;
+  bodyZh: string;
+  altEn: string;
+  altZh: string;
+  lead?: boolean;
+  position?: string;
+};
+
+type AngleGroup = {
+  titleEn: string;
+  titleZh: string;
+  leadEn: string;
+  leadZh: string;
+  cards: AngleCard[];
+};
+
+const angleGroups: AngleGroup[] = [
   {
-    src: "/images/listing/angle-compact.jpg",
-    kickerEn: "Carry",
-    kickerZh: "携带",
-    en: "Compact enough to pack away easily.",
-    zh: "极易收纳的体积",
-    bodyEn: "The sleeved chain coils beside the lock body.",
-    bodyZh: "包覆链条盘在锁体旁边。",
-    altEn: "Folded CLX1 with the chain coiled around the lock body",
-    altZh: "收拢的 CLX1，链条盘在锁体周围",
+    titleEn: "Thoughtful Design",
+    titleZh: "细致设计",
+    leadEn: "Considered details for everyday use.",
+    leadZh: "为日常使用想过的细节。",
+    cards: [
+      {
+        src: "/images/listing/angle-compact.jpg",
+        titleEn: "Compact to Carry. Easy to Take Along.",
+        titleZh: "小巧便携，轻松带走。",
+        bodyEn: "The flexible, sleeved chain coils neatly alongside the lock body for easier storage and transport.",
+        bodyZh: "柔软、带护套的链条整齐地盘在锁体旁，收纳和携带都更方便。",
+        altEn: "Folded CLX1 with the sleeved chain coiled beside the lock body",
+        altZh: "收拢的 CLX1，带护套的链条盘在锁体旁",
+      },
+      {
+        src: "/images/listing/bike-locking-closeup.jpg",
+        titleEn: "6 mm Stainless Steel Chain.",
+        titleZh: "6 mm 不锈钢链条。",
+        bodyEn: "Built for everyday security, with a protective sleeve around the chain.",
+        bodyZh: "为日常安防而做，链条外有一层防护套。",
+        altEn: "CLX1 sleeved chain locked around a bicycle frame",
+        altZh: "CLX1 的护套链条锁在自行车车架上",
+        position: "center 42%",
+      },
+      {
+        src: "/images/listing/angle-coil.jpg",
+        titleEn: "Flexible by Design.",
+        titleZh: "柔韧，源于设计。",
+        bodyEn: "The flexible chain coils neatly alongside the lock body.",
+        bodyZh: "柔韧的链条可以整齐地盘在锁体旁。",
+        altEn: "Flexible CLX1 chain coiled beside the lock body",
+        altZh: "柔韧的 CLX1 链条盘在锁体旁",
+      },
+      {
+        src: "/images/listing/angle-body.jpg",
+        titleEn: "Precision in Every Detail.",
+        titleZh: "精密，见于每一处细节。",
+        bodyEn: "A streamlined stainless steel lock body houses the fingerprint sensor and USB-C charging port.",
+        bodyZh: "流线的不锈钢锁体上，集成了指纹传感器和 USB-C 充电口。",
+        altEn: "Stainless steel CLX1 lock body with the fingerprint sensor and USB-C port",
+        altZh: "CLX1 不锈钢锁体，可见指纹传感器和 USB-C 接口",
+        position: "center 46%",
+      },
+    ],
   },
   {
-    src: "/images/listing/angle-cutter-v2.jpg",
-    kickerEn: "Chain",
-    kickerZh: "链条",
-    en: "A 6 mm stainless steel chain that hydraulic cutters cannot cut.",
-    zh: "液压钳不可剪断的6mm不锈钢链条",
-    bodyEn: "Shown here with a hydraulic cutter on the chain.",
-    bodyZh: "画面中，液压钳夹在链条上。",
-    altEn: "Hydraulic cutter on the CLX1 stainless steel chain",
-    altZh: "液压钳夹在 CLX1 不锈钢链条上",
-  },
-  {
-    src: "/images/listing/angle-key.jpg",
-    kickerEn: "Mechanical key",
-    kickerZh: "机械钥匙",
-    en: "A mechanical key for the lock.",
-    zh: "锁上的机械钥匙。",
-    bodyEn: "Fingerprint, the app, or this key can open CLX1.",
-    bodyZh: "可用指纹、App 或这把钥匙打开 CLX1。",
-    altEn: "Mechanical key inserted into the CLX1 lock body",
-    altZh: "机械钥匙插入 CLX1 锁体",
-  },
-  {
-    src: "/images/listing/angle-coil.jpg",
-    kickerEn: "Coiled",
-    kickerZh: "盘起",
-    en: "Coiled, with the lock body in view.",
-    zh: "盘起时，锁体仍在视线里。",
-    bodyEn: "The sleeved chain forms a coil. The lock body stays at one end.",
-    bodyZh: "包覆链条盘成一圈，锁体留在一端。",
-    altEn: "CLX1 chain coiled beside the lock body",
-    altZh: "CLX1 链条盘在锁体旁边",
-  },
-  {
-    src: "/images/listing/angle-body.jpg",
-    kickerEn: "Lock body",
-    kickerZh: "锁体",
-    en: "All-stainless-steel lock body.",
-    zh: "纯不锈钢锁体",
-    bodyEn: "The fingerprint window and USB-C port sit on this body.",
-    bodyZh: "指纹窗和 USB-C 接口都在这枚锁体上。",
-    altEn: "Close view of the CLX1 stainless steel lock body",
-    altZh: "CLX1 不锈钢锁体近景",
-  },
-  {
-    src: "/images/listing/angle-ends.jpg",
-    kickerEn: "Two ends",
-    kickerZh: "两端",
-    en: "Two ends that meet.",
-    zh: "相扣的两端。",
-    bodyEn: "One end is the locking pin. The other is the socket it closes into.",
-    bodyZh: "一端是锁销，另一端是它扣入的锁孔。",
-    altEn: "Hands holding the two ends of the CLX1 lock",
-    altZh: "双手握住 CLX1 锁的两端",
+    titleEn: "Smart Access",
+    titleZh: "智能开锁",
+    leadEn: "Flexible access, designed around the way you use your lock.",
+    leadZh: "开锁方式灵活，顺着你使用这把锁的习惯来设计。",
+    cards: [
+      {
+        src: "/images/listing/clx1-lock-detail.jpg",
+        titleEn: "Your Fingerprint. Instant Access.",
+        titleZh: "你的指纹，即刻解锁。",
+        bodyEn: "Fast, reliable fingerprint recognition unlocks CLX1. You can register up to 60 fingerprints, including for family members.",
+        bodyZh: "指纹识别快速可靠，可打开 CLX1。最多可录入 60 枚指纹，也可以为家人添加。",
+        altEn: "Close view of the CLX1 fingerprint sensor",
+        altZh: "CLX1 指纹传感器近景",
+        lead: true,
+      },
+      {
+        src: "/images/listing/angle-key.jpg",
+        titleEn: "More Than One Way to Unlock.",
+        titleZh: "开锁，不止一种方式。",
+        bodyEn: "Unlock CLX1 with your fingerprint, the app, or the physical key.",
+        bodyZh: "可用指纹、App 或机械钥匙打开 CLX1。",
+        altEn: "Mechanical key inserted into the CLX1 lock",
+        altZh: "机械钥匙插入 CLX1",
+        position: "72% center",
+      },
+      {
+        src: "/images/listing/detail-lock-body.jpg",
+        titleEn: "Out of Battery? Stay in Control.",
+        titleZh: "没电了？仍然可以开锁。",
+        bodyEn: "If the battery runs out, connect a power bank to the Type-C port to supply power to CLX1 and regain access.",
+        bodyZh: "如果电量耗尽，把充电宝接到 Type-C 口，为 CLX1 供电并重新开锁。",
+        altEn: "USB-C port on the CLX1 lock body, with the mechanical keys beside it",
+        altZh: "CLX1 锁体上的 USB-C 接口，旁边是机械钥匙",
+        position: "24% 62%",
+      },
+      {
+        src: "/images/listing/angle-ends.jpg",
+        titleEn: "Share Access. Not Just Keys.",
+        titleZh: "分享的是权限，不只是钥匙。",
+        bodyEn: "Share access from the app on your phone.",
+        bodyZh: "通过手机上的 App 分享访问权限。",
+        altEn: "Hands holding the two ends of the CLX1 lock",
+        altZh: "双手握住 CLX1 的两端",
+      },
+    ],
   },
 ];
 
@@ -302,22 +349,35 @@ export function ProductAngles() {
         <div className="v2-wrap">
           <header className="v2-section-head">
             <h2 id="detail-angles-title">{copy("Every angle.", "每个角度。")}</h2>
-            <p>{copy("Six close views of CLX1.", "CLX1 的六个近景。")}</p>
+            <p>{copy("A closer look at the details designed around you.", "把为你设计的细节，再看近一些。")}</p>
           </header>
-          <ul className="angle-rows">
-            {detailAngles.map((shot, index) => (
-              <li key={shot.src} className={index % 2 === 1 ? "angle-row angle-row-flip" : "angle-row"}>
-                <figure className="angle-photo">
-                  <img src={shot.src} alt={copy(shot.altEn, shot.altZh)} />
-                </figure>
-                <div className="angle-copy">
-                  <p>{copy(shot.kickerEn, shot.kickerZh)}</p>
-                  <h3>{copy(shot.en, shot.zh)}</h3>
-                  <p>{copy(shot.bodyEn, shot.bodyZh)}</p>
-                </div>
-              </li>
+          <div className="angle-groups">
+            {angleGroups.map((group) => (
+              <section key={group.titleEn} className="angle-group" aria-label={copy(group.titleEn, group.titleZh)}>
+                <header className="angle-group-head">
+                  <h3>{copy(group.titleEn, group.titleZh)}</h3>
+                  <p>{copy(group.leadEn, group.leadZh)}</p>
+                </header>
+                <ul className="angle-cards">
+                  {group.cards.map((card) => (
+                    <li key={card.src} className={card.lead ? "angle-card angle-card-lead" : "angle-card"}>
+                      <figure>
+                        <img
+                          src={card.src}
+                          alt={copy(card.altEn, card.altZh)}
+                          style={card.position ? { objectPosition: card.position } : undefined}
+                        />
+                      </figure>
+                      <div className="angle-card-copy">
+                        <h4>{copy(card.titleEn, card.titleZh)}</h4>
+                        <p>{copy(card.bodyEn, card.bodyZh)}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
     </div>
