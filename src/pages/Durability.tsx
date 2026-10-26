@@ -42,7 +42,15 @@ type Recording = {
   src: string;
   title: string;
   alt: string;
+  width: number;
+  height: number;
 };
+
+function TestClip({ src, label, width, height }: { src: string; label: string; width: number; height: number }) {
+  return (
+    <video src={src} aria-label={label} width={width} height={height} controls playsInline preload="metadata" />
+  );
+}
 
 type TestMedia = {
   src: string;
@@ -105,10 +113,15 @@ const TEST_GROUPS: TestGroup[] = [
         id: "immersion",
         titleEn: "Water Immersion Test",
         titleZh: "浸水测试",
-        bodyEn: "No immersion recording is published on this page, and the available files do not confirm the water depth.",
-        bodyZh: "本页尚未发布浸水录像，现有文件也未确认水深。",
-        pendingEn: "This recording is not published on this page.",
-        pendingZh: "这段录像尚未在本页发布。",
+        bodyEn: "The available files do not confirm the water depth.",
+        bodyZh: "现有文件未确认水深。",
+        media: {
+          src: "/videos/testing/water-immersion.mp4",
+          altEn: "CLX1 during a water immersion test",
+          altZh: "浸水测试中的 CLX1",
+          width: 3840,
+          height: 2160,
+        },
       },
       {
         id: "stream",
@@ -117,11 +130,11 @@ const TEST_GROUPS: TestGroup[] = [
         bodyEn: "See CLX1 exposed to a real outdoor stream environment in the recorded test.",
         bodyZh: "通过真实溪流环境测试视频，了解 CLX1 在该场景中的实际表现。",
         media: {
-          src: "/images/listing/lock_in_stream.gif",
+          src: "/videos/testing/stream-test.mp4",
           altEn: "CLX1 in an outdoor stream",
           altZh: "处于户外溪流中的 CLX1",
-          width: 1112,
-          height: 834,
+          width: 960,
+          height: 544,
         },
       },
     ],
@@ -138,11 +151,11 @@ const TEST_GROUPS: TestGroup[] = [
         bodyEn: "Watch the recorded vehicle tire test and observe the product's condition as shown.",
         bodyZh: "观看车辆轮胎碾压测试视频，观察测试过程中视频实际呈现的产品状态。",
         media: {
-          src: "/images/listing/car-press.gif",
+          src: "/videos/testing/tire-test.mp4",
           altEn: "A car tire rolling over CLX1",
           altZh: "汽车轮胎碾过 CLX1",
-          width: 480,
-          height: 270,
+          width: 3840,
+          height: 2160,
         },
       },
     ],
@@ -189,7 +202,7 @@ function RecordingDialog({
             {closeLabel}
           </button>
         </div>
-        <img src={recording.src} alt={recording.alt} />
+        <TestClip src={recording.src} label={recording.alt} width={recording.width} height={recording.height} />
       </div>
     </div>,
     document.body,
@@ -402,15 +415,20 @@ export function Durability() {
                   const alt = item.media ? copy(item.media.altEn, item.media.altZh) : "";
                   return (
                     <article key={item.id} className="assure-test">
-                      <div className="assure-media">
+                      <div
+                        className="assure-media"
+                        style={
+                          item.media
+                            ? { aspectRatio: `${item.media.width} / ${item.media.height}` }
+                            : undefined
+                        }
+                      >
                         {item.media ? (
-                          <img
+                          <TestClip
                             src={item.media.src}
-                            alt={alt}
+                            label={alt}
                             width={item.media.width}
                             height={item.media.height}
-                            loading="lazy"
-                            decoding="async"
                           />
                         ) : (
                           <p>{copy(item.pendingEn ?? "", item.pendingZh ?? "")}</p>
@@ -422,7 +440,15 @@ export function Durability() {
                         <button
                           type="button"
                           className="v2-btn v2-btn-secondary"
-                          onClick={() => setRecording({ src: item.media!.src, title, alt })}
+                          onClick={() =>
+                            setRecording({
+                              src: item.media!.src,
+                              title,
+                              alt,
+                              width: item.media!.width,
+                              height: item.media!.height,
+                            })
+                          }
                         >
                           {copy("View recording", "查看录像")}
                         </button>
