@@ -194,10 +194,13 @@ export function Durability() {
           <p className="assure-aside">{copy("Designed with care. Tested in real conditions.", "用心设计。在真实条件下测试。")}</p>
         </div>
         <img
-          src="/images/listing/product-clx1-isolated.jpg"
-          alt={copy("CLX1 smart chain lock", "CLX1 智能链条锁")}
-          width={1600}
-          height={1600}
+          src="/images/listing/Certificate&Testing.png"
+          alt={copy(
+            "Annotated CLX1 showing the braided steel cable, TPU lock body, fingerprint module, and woven sleeve",
+            "带标注的 CLX1，标出编织钢缆、TPU 锁体、指纹模块和编织护套",
+          )}
+          width={3840}
+          height={2000}
           loading="lazy"
           decoding="async"
         />
