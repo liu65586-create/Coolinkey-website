@@ -18,6 +18,7 @@ type AngleCard = {
   altZh: string;
   lead?: boolean;
   position?: string;
+  fit?: "contain";
 };
 
 type AngleGroup = {
@@ -102,14 +103,14 @@ const angleGroups: AngleGroup[] = [
         position: "72% center",
       },
       {
-        src: "/images/listing/Type-C.png",
+        src: "/images/listing/usb-c-emergency-power.jpg",
         titleEn: "Out of Battery? Stay in Control.",
         titleZh: "没电了？仍然可以开锁。",
         bodyEn: "If the battery runs out, connect a power bank to the Type-C port to supply power to CLX1 and regain access.",
         bodyZh: "如果电量耗尽，把充电宝接到 Type-C 口，为 CLX1 供电并重新开锁。",
-        altEn: "Annotated CLX1 showing the braided steel cable, TPU lock body, fingerprint module, and woven sleeve",
-        altZh: "带标注的 CLX1，标出编织钢缆、TPU 锁体、指纹模块和编织护套",
-        position: "center",
+        altEn: "Type-C cable connected to the CLX1 port for emergency power",
+        altZh: "Type-C 线接入 CLX1 接口，用于应急供电",
+        fit: "contain",
       },
       {
         src: "/images/listing/angle-ends.jpg",
@@ -365,6 +366,7 @@ export function ProductAngles() {
                         <img
                           src={card.src}
                           alt={copy(card.altEn, card.altZh)}
+                          className={card.fit === "contain" ? "angle-card-contain" : undefined}
                           style={card.position ? { objectPosition: card.position } : undefined}
                         />
                       </figure>
