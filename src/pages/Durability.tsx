@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import type { Lang } from "../utils/siteCopy";
@@ -12,6 +12,29 @@ function FileLink({ href, label }: { href: string; label: string }) {
     <a className="v2-btn v2-btn-secondary" href={href} target="_blank" rel="noopener">
       {label}
     </a>
+  );
+}
+
+function DocumentCard({
+  href,
+  previewSrc,
+  previewAlt,
+  accent,
+  children,
+}: {
+  href: string;
+  previewSrc: string;
+  previewAlt: string;
+  accent?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <article className={accent ? "assure-doc assure-doc-ip" : "assure-doc"}>
+      <a className="assure-doc-thumb" href={href} target="_blank" rel="noopener">
+        <img src={previewSrc} alt={previewAlt} width={640} height={906} loading="lazy" decoding="async" />
+      </a>
+      <div className="assure-doc-main">{children}</div>
+    </article>
   );
 }
 
@@ -233,7 +256,12 @@ export function Durability() {
             <h3 id="assure-compliance-title">{copy("Product Compliance & Testing", "产品合规与测试")}</h3>
             <p>{copy("Compliance and protection records for CLX1, where a file is published.", "已发布的 CLX1 合规与防护文件。")}</p>
             <div className="assure-doc-grid">
-              <article className="assure-doc assure-doc-ip">
+              <DocumentCard
+                href="/documents/clx1-ip67-test.pdf"
+                previewSrc="/documents/previews/clx1-ip67-test.webp"
+                previewAlt={copy("First page of the IP67 Protection document", "IP67 防护认证文件首页")}
+                accent
+              >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
                   <p className="assure-chip">{copy("IP67 Certified", "IP67 认证")}</p>
@@ -246,8 +274,12 @@ export function Durability() {
                   )}
                 </p>
                 <FileLink href="/documents/clx1-ip67-test.pdf" label={copy("View file", "查看文件")} />
-              </article>
-              <article className="assure-doc">
+              </DocumentCard>
+              <DocumentCard
+                href="/documents/clx1-fcc.pdf"
+                previewSrc="/documents/previews/clx1-fcc.webp"
+                previewAlt={copy("First page of the FCC Test Report", "FCC 测试报告首页")}
+              >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
                 </div>
@@ -259,8 +291,12 @@ export function Durability() {
                   )}
                 </p>
                 <FileLink href="/documents/clx1-fcc.pdf" label={copy("View file", "查看文件")} />
-              </article>
-              <article className="assure-doc">
+              </DocumentCard>
+              <DocumentCard
+                href="/documents/clx1-rohs.pdf"
+                previewSrc="/documents/previews/clx1-rohs.webp"
+                previewAlt={copy("First page of the RoHS Report", "RoHS 报告首页")}
+              >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
                 </div>
@@ -272,7 +308,7 @@ export function Durability() {
                   )}
                 </p>
                 <FileLink href="/documents/clx1-rohs.pdf" label={copy("View file", "查看文件")} />
-              </article>
+              </DocumentCard>
             </div>
           </section>
 
@@ -285,7 +321,11 @@ export function Durability() {
               )}
             </p>
             <div className="assure-doc-grid">
-              <article className="assure-doc">
+              <DocumentCard
+                href="/documents/clx1-transport-air.pdf"
+                previewSrc="/documents/previews/clx1-transport-air.webp"
+                previewAlt={copy("First page of the Air Transport Report", "航空运输报告首页")}
+              >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
                 </div>
@@ -297,8 +337,12 @@ export function Durability() {
                   )}
                 </p>
                 <FileLink href="/documents/clx1-transport-air.pdf" label={copy("View file", "查看文件")} />
-              </article>
-              <article className="assure-doc">
+              </DocumentCard>
+              <DocumentCard
+                href="/documents/clx1-transport-sea.pdf"
+                previewSrc="/documents/previews/clx1-transport-sea.webp"
+                previewAlt={copy("First page of the Sea Transport Report", "海运运输报告首页")}
+              >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
                 </div>
@@ -310,7 +354,7 @@ export function Durability() {
                   )}
                 </p>
                 <FileLink href="/documents/clx1-transport-sea.pdf" label={copy("View file", "查看文件")} />
-              </article>
+              </DocumentCard>
             </div>
             <p className="assure-pending">
               {copy(

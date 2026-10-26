@@ -340,6 +340,7 @@ html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.
 .brand-slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16, 24, 18, 0.78) 0%, rgba(16, 24, 18, 0.42) 42%, rgba(16, 24, 18, 0.08) 72%); }
 .brand-slide-product { background: #181918; }
 .brand-slide-product > img { object-position: center center; }
+.brand-slide-manifesto > img { object-position: 72% center; }
 .brand-product-copy {
   position: absolute;
   z-index: 2;
@@ -710,6 +711,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .brand-copy { left: 20px; bottom: 84px; width: calc(100% - 40px); }
   .brand-copy h1, .brand-copy h2 { font-size: clamp(2.1rem, 10vw, 3rem); max-width: none; }
   .brand-slide-product > img { object-position: 62% center; }
+  .brand-slide-manifesto > img { object-position: 18% center; }
   .brand-product-copy {
     top: auto;
     bottom: 88px;
@@ -1011,6 +1013,10 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
 .assure-doc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .assure-doc,
 .assure-test { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; height: 100%; padding: 22px 24px 20px; border: 1px solid #e5e6e1; border-radius: 18px; background: #fff; }
+.assure-doc:has(.assure-doc-thumb) { flex-direction: row; align-items: stretch; gap: 16px; }
+.assure-doc-thumb { flex: 0 0 104px; width: 104px; align-self: flex-start; overflow: hidden; border: 1px solid #e5e6e1; border-radius: 8px; background: #f4f4f1; line-height: 0; }
+.assure-doc-thumb img { display: block; width: 100%; height: auto; }
+.assure-doc-main { display: flex; flex: 1 1 auto; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; }
 .assure-doc-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; width: 100%; min-height: 32px; }
 .assure-doc-ip { border-color: rgba(54, 182, 106, 0.45); }
 .assure-chip { margin: 0; padding: 4px 10px; border: 1px solid rgba(54, 182, 106, 0.45); border-radius: 999px; color: #146c43; font-size: 12px; font-weight: 650; letter-spacing: 0.08em; line-height: 1.4; text-transform: uppercase; }
@@ -1052,6 +1058,7 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
   .assure-test-grid { grid-template-columns: 1fr; gap: 14px; }
   .assure-doc,
   .assure-test { padding: 18px; }
+  .assure-doc-thumb { flex-basis: 84px; width: 84px; }
   .assure-note { padding-bottom: 56px; }
   .assure-dialog { padding: 12px; }
 }

@@ -272,10 +272,20 @@ export function HomeHero() {
         {brandSlides.map((slide, slideIndex) => (
           <article
             key={slide.id}
-            className={slide.id === "product" ? "brand-slide brand-slide-product" : "brand-slide"}
+            className={
+              slide.id === "product"
+                ? "brand-slide brand-slide-product"
+                : slide.id === "manifesto"
+                  ? "brand-slide brand-slide-manifesto"
+                  : "brand-slide"
+            }
             aria-hidden={slideIndex !== index}
           >
-            <img src={slide.image} alt={copy(slide.altEn, slide.altZh)} style={{ objectPosition: slide.position }} />
+            <img
+              src={slide.image}
+              alt={copy(slide.altEn, slide.altZh)}
+              style={slide.id === "manifesto" ? undefined : { objectPosition: slide.position }}
+            />
             <div className="brand-product-copy">
               {slide.eyebrowEn ? <p className="brand-product-kicker">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
               {slideIndex === 0 ? (
