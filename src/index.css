@@ -707,42 +707,67 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 @media (max-width: 700px) {
   .brand-copy { left: 20px; bottom: 84px; width: calc(100% - 40px); }
   .brand-copy h1, .brand-copy h2 { font-size: clamp(2.1rem, 10vw, 3rem); max-width: none; }
-  .brand-slide::after { background: linear-gradient(180deg, rgba(16, 24, 18, 0.08) 28%, rgba(16, 24, 18, 0.78) 72%); }
-  .brand-slide-product > img { object-position: 68% center; }
-  .brand-slide-manifesto > img { object-position: 18% center; }
+  .brand-carousel { height: auto; background: #141816; }
+  .brand-track { align-items: stretch; height: auto; }
+  .brand-slide { display: flex; flex-direction: column; height: auto; background: #141816; }
+  .brand-slide::after { display: none; }
+  .brand-slide img,
+  .brand-slide-product > img,
+  .brand-slide-manifesto > img {
+    position: relative;
+    inset: auto;
+    flex: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 4;
+    min-height: 0;
+    object-fit: cover;
+    object-position: center 42%;
+  }
+  .brand-slide-manifesto > img { object-position: 34% center; }
   .brand-product-copy,
   .brand-product-copy:has(.brand-principles),
   .brand-product-copy:not(:has(.brand-product-actions)) {
-    bottom: 72px;
-    left: 20px;
-    width: min(22rem, calc(100% - 40px));
-    padding-left: 14px;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    flex: 1 0 auto;
+    width: auto;
+    margin: 0;
+    padding: 18px 20px 76px;
+    border-left: 0;
+    background: #141816;
+    box-shadow: inset 3px 0 0 #65ee27;
   }
-  .brand-product-kicker { font-size: 0.68rem; letter-spacing: 0.06em; }
+  .brand-product-kicker { font-size: 0.68rem; letter-spacing: 0.08em; }
   .brand-product-copy h1,
   .brand-product-copy h2,
   .brand-product-copy:has(.brand-principles) h2,
   .brand-product-copy:not(:has(.brand-product-actions)) h2 {
-    margin-top: 8px;
-    font-size: 1.65rem;
-    line-height: 1.2;
+    margin-top: 6px;
+    font-size: 1.5rem;
+    line-height: 1.18;
     letter-spacing: -0.03em;
   }
   .brand-product-lead,
   .brand-product-copy:has(.brand-principles) .brand-product-lead,
   .brand-product-copy:not(:has(.brand-product-actions)) .brand-product-lead {
+    display: -webkit-box;
     max-width: none;
     margin-top: 8px;
+    overflow: hidden;
     font-size: 0.875rem;
     line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
   }
-  .brand-principles { gap: 4px; margin-top: 10px; }
+  .brand-principles { gap: 2px; margin-top: 10px; }
   .brand-principles strong { font-size: 0.84rem; }
   .brand-principles p { display: none; }
   .brand-product-actions,
-  .brand-product-copy:has(.brand-principles) .brand-product-actions { gap: 8px; margin-top: 14px; }
-  .brand-product-btn { min-height: 42px; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 0.84rem; }
-  .brand-controls { right: 16px; bottom: 16px; }
+  .brand-product-copy:has(.brand-principles) .brand-product-actions { gap: 8px; margin-top: 12px; }
+  .brand-product-btn { min-height: 40px; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 0.84rem; }
+  .brand-controls { right: auto; left: 0; bottom: 12px; width: 100%; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
