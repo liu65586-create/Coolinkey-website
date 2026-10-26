@@ -332,21 +332,15 @@ html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.
 .v2-section-head { display: grid; gap: 16px; max-width: 760px; margin-bottom: 40px; }
 .v2-section-head h2, .v2-split h2, .v2-philosophy h2 { margin: 0; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 620; letter-spacing: -0.04em; line-height: 1.08; }
 .v2-section-head p, .v2-lead { margin: 16px 0 0; max-width: 38rem; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
-.brand-carousel {
-  position: relative;
-  height: clamp(620px, calc(100svh - var(--nav-h, 80px)), 880px);
-  overflow: hidden;
-  background: #202120;
-  color: #fff;
-}
-.brand-track { display: flex; height: 100%; touch-action: pan-y; transition: transform 0.7s ease; }
+.brand-carousel { position: relative; height: calc(100svh - var(--nav-h, 80px)); overflow: hidden; background: #202120; color: #fff; }
+.brand-track { display: flex; height: 100%; transition: transform 0.7s ease; }
 .brand-slide { position: relative; flex: 0 0 100%; height: 100%; }
 .brand-slide[aria-hidden="true"] { visibility: hidden; }
 .brand-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .brand-slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16, 24, 18, 0.62) 0%, rgba(16, 24, 18, 0.22) 36%, rgba(16, 24, 18, 0) 62%); }
 .brand-slide-product { background: #181918; }
 .brand-slide-product > img { object-position: center center; }
-.brand-slide-lifestyle > img { object-position: 72% center; }
+.brand-slide-manifesto > img { object-position: 72% center; }
 .brand-product-copy {
   position: absolute;
   z-index: 2;
@@ -402,14 +396,27 @@ html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.
 .brand-product-btn-primary:hover { background: #5bd41d; }
 .brand-product-btn-secondary { border-color: rgba(255, 255, 255, 0.36); background: rgba(16, 18, 16, 0.12); color: #fff; }
 .brand-product-btn-secondary:hover { border-color: rgba(255, 255, 255, 0.78); background: rgba(255, 255, 255, 0.1); }
-.brand-controls { position: absolute; z-index: 2; right: max(48px, calc((100% - 1440px) / 2)); bottom: 30px; display: flex; align-items: center; gap: 10px; }
+.brand-copy { position: absolute; z-index: 1; left: max(48px, calc((100% - 1440px) / 2)); bottom: 88px; width: min(640px, calc(100% - 96px)); }
+.brand-copy .v2-eyebrow, .brand-copy h1, .brand-copy h2 { color: #fff; }
+.brand-copy h1, .brand-copy h2 { margin: 12px 0 0; max-width: 14ch; font-size: clamp(2.6rem, 4.6vw, 5rem); font-weight: 650; letter-spacing: -0.05em; line-height: 0.98; }
+.brand-copy .v2-lead { color: rgba(255, 255, 255, 0.86); }
+.brand-copy .v2-btn-secondary { color: #fff; border-color: rgba(255, 255, 255, 0.72); background: transparent; }
+.brand-copy .v2-btn-secondary:hover { border-color: #fff; background: rgba(255, 255, 255, 0.12); }
+.brand-principles { display: grid; gap: 12px; margin: 18px 0 0; padding: 0; list-style: none; }
+.brand-principles strong { display: block; color: #fff; font-size: 1rem; font-weight: 650; }
+.brand-principles p { margin: 2px 0 0; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; line-height: 1.5; }
+.brand-product-copy:has(.brand-principles),
+.brand-product-copy:not(:has(.brand-product-actions)) { width: min(30rem, calc(100% - 180px)); }
+.brand-product-copy:has(.brand-principles) h2,
+.brand-product-copy:not(:has(.brand-product-actions)) h2 { font-size: clamp(2.15rem, 2.6vw, 3.25rem); line-height: 1.14; }
+.brand-product-copy:has(.brand-principles) .brand-product-actions { margin-top: 18px; }
+.brand-controls { position: absolute; z-index: 2; right: max(48px, calc((100% - 1440px) / 2)); bottom: 36px; display: flex; align-items: center; gap: 14px; }
 .brand-nav, .brand-dots button { border: 0; background: transparent; color: #fff; }
 .brand-nav { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 999px; background: rgba(16, 24, 18, 0.28); }
 .brand-nav:hover { background: rgba(255, 255, 255, 0.16); }
-.brand-dots { display: flex; align-items: center; }
-.brand-dots button { position: relative; display: grid; width: 40px; height: 40px; place-items: center; padding: 0; border-radius: 999px; }
-.brand-dots button::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.45); transition: width 0.2s ease, background-color 0.2s ease; }
-.brand-dots button[aria-current="true"]::after { width: 24px; background: #fff; }
+.brand-dots { display: flex; align-items: center; gap: 8px; }
+.brand-dots button { width: 8px; height: 8px; padding: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.45); }
+.brand-dots button[aria-current="true"] { width: 28px; background: #fff; }
 .v2-hero { padding-block: clamp(40px, 6vw, 88px); }
 .v2-hero-brand { padding-block: clamp(64px, 9vw, 128px); }
 .v2-hero-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; align-items: center; gap: clamp(32px, 5vw, 80px); }
@@ -697,121 +704,70 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .angle-card p { font-size: 0.92rem; }
   .angle-card-lead h4 { font-size: 1.18rem; }
 }
-@media (max-width: 700px) and (orientation: portrait) {
-  .brand-carousel { height: clamp(590px, 78svh, 700px); background: #141816; }
-  .brand-track { align-items: stretch; height: 100%; touch-action: pan-y; }
-  .brand-slide {
-    display: grid;
-    height: 100%;
-    grid-template-rows: minmax(250px, 44%) minmax(0, 1fr);
-    background: #141816;
-  }
+@media (max-width: 700px) {
+  .brand-copy { left: 20px; bottom: 84px; width: calc(100% - 40px); }
+  .brand-copy h1, .brand-copy h2 { font-size: clamp(2.1rem, 10vw, 3rem); max-width: none; }
+  .brand-carousel { height: auto; background: #141816; }
+  .brand-track { align-items: stretch; height: auto; }
+  .brand-slide { display: flex; flex-direction: column; height: auto; background: #141816; }
   .brand-slide::after { display: none; }
   .brand-slide img,
   .brand-slide-product > img,
-  .brand-slide-lifestyle > img {
+  .brand-slide-manifesto > img {
     position: relative;
     inset: auto;
+    flex: none;
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 5 / 4;
     min-height: 0;
-    aspect-ratio: auto;
     object-fit: cover;
     object-position: center 42%;
   }
-  .brand-slide-lifestyle > img { object-position: 52% center; }
-  .brand-product-copy {
+  .brand-slide-manifesto > img { object-position: 34% center; }
+  .brand-product-copy,
+  .brand-product-copy:has(.brand-principles),
+  .brand-product-copy:not(:has(.brand-product-actions)) {
     position: relative;
     bottom: auto;
     left: auto;
-    display: flex;
+    flex: 1 0 auto;
     width: auto;
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
     margin: 0;
-    padding: 20px 20px 72px;
+    padding: 18px 20px 76px;
     border-left: 0;
     background: #141816;
     box-shadow: inset 3px 0 0 #65ee27;
   }
   .brand-product-kicker { font-size: 0.68rem; letter-spacing: 0.08em; }
   .brand-product-copy h1,
-  .brand-product-copy h2 {
+  .brand-product-copy h2,
+  .brand-product-copy:has(.brand-principles) h2,
+  .brand-product-copy:not(:has(.brand-product-actions)) h2 {
     margin-top: 6px;
-    font-size: 1.55rem;
+    font-size: 1.5rem;
     line-height: 1.18;
     letter-spacing: -0.03em;
   }
-  .brand-product-lead {
+  .brand-product-lead,
+  .brand-product-copy:has(.brand-principles) .brand-product-lead,
+  .brand-product-copy:not(:has(.brand-product-actions)) .brand-product-lead {
     display: -webkit-box;
     max-width: none;
     margin-top: 8px;
     overflow: hidden;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.45;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
-  .brand-product-actions { gap: 8px; margin-top: 16px; }
-  .brand-product-btn { min-height: 42px; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 0.84rem; }
-  .brand-controls { right: auto; bottom: 14px; left: 0; width: 100%; justify-content: center; gap: 8px; }
-  .brand-nav { width: 40px; height: 40px; }
-}
-
-@media (max-height: 640px) and (orientation: landscape) {
-  .brand-carousel { height: calc(100svh - var(--nav-h, 80px)); min-height: 0; }
-  .brand-slide { display: block; height: 100%; }
-  .brand-slide img,
-  .brand-slide-product > img,
-  .brand-slide-lifestyle > img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: auto;
-    object-fit: cover;
-  }
-  .brand-slide-product > img { object-position: center center; }
-  .brand-slide-lifestyle > img { object-position: 72% center; }
-  .brand-slide::after {
-    display: block;
-    background: linear-gradient(90deg, rgba(13, 20, 15, 0.82) 0%, rgba(13, 20, 15, 0.36) 54%, rgba(13, 20, 15, 0.06) 100%);
-  }
-  .brand-product-copy {
-    position: absolute;
-    bottom: 58px;
-    left: 24px;
-    display: block;
-    width: min(34rem, calc(100% - 240px));
-    height: auto;
-    padding: 0 0 0 16px;
-    border-left: 2px solid #65ee27;
-    background: transparent;
-    box-shadow: none;
-  }
-  .brand-product-kicker { font-size: 0.65rem; }
-  .brand-product-copy h1,
-  .brand-product-copy h2 {
-    margin-top: 5px;
-    font-size: 1.9rem;
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-  }
-  .brand-product-lead {
-    display: -webkit-box;
-    max-width: 31rem;
-    margin-top: 8px;
-    overflow: hidden;
-    font-size: 0.85rem;
-    line-height: 1.4;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
-  .brand-product-actions { margin-top: 10px; }
-  .brand-product-btn { min-height: 40px; padding: 0 14px; border-radius: 12px; font-size: 0.82rem; }
-  .brand-product-btn-secondary { display: none; }
-  .brand-controls { right: 18px; bottom: 10px; left: auto; width: auto; justify-content: flex-end; }
+  .brand-principles { gap: 2px; margin-top: 10px; }
+  .brand-principles strong { font-size: 0.84rem; }
+  .brand-principles p { display: none; }
+  .brand-product-actions,
+  .brand-product-copy:has(.brand-principles) .brand-product-actions { gap: 8px; margin-top: 12px; }
+  .brand-product-btn { min-height: 40px; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 0.84rem; }
+  .brand-controls { right: auto; left: 0; bottom: 12px; width: 100%; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
