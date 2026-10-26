@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import type { Lang } from "../utils/siteCopy";
@@ -66,8 +66,31 @@ function TestCover({ src, width, height }: { src: string; width: number; height:
 }
 
 function TestClip({ src, label, width, height }: { src: string; label: string; width: number; height: number }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useLayoutEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const start = video.play();
+    if (!start) return;
+    start.catch(() => {
+      video.muted = true;
+      void video.play();
+    });
+  }, [src]);
+
   return (
-    <video src={src} aria-label={label} width={width} height={height} controls playsInline preload="metadata" />
+    <video
+      ref={videoRef}
+      src={src}
+      aria-label={label}
+      width={width}
+      height={height}
+      controls
+      playsInline
+      autoPlay
+      preload="auto"
+    />
   );
 }
 
