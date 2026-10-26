@@ -195,7 +195,7 @@ const brandSlides: BrandSlide[] = [
   {
     id: "product",
     image: "/images/listing/slide-1.jpg",
-    position: "center center",
+    position: "72% center",
     altEn: "Hands holding the two ends of the CLX1 lock",
     altZh: "双手握住 CLX1 锁的两端",
     eyebrowEn: "CLX1 / FINGERPRINT SMART CHAIN LOCK",
