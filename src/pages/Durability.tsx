@@ -46,6 +46,25 @@ type Recording = {
   height: number;
 };
 
+function TestCover({ src, width, height }: { src: string; width: number; height: number }) {
+  return (
+    <video
+      src={src}
+      width={width}
+      height={height}
+      muted
+      playsInline
+      preload="metadata"
+      aria-hidden="true"
+      tabIndex={-1}
+      onLoadedMetadata={(event) => {
+        const video = event.currentTarget;
+        if (video.currentTime < 0.05) video.currentTime = 0.1;
+      }}
+    />
+  );
+}
+
 function TestClip({ src, label, width, height }: { src: string; label: string; width: number; height: number }) {
   return (
     <video src={src} aria-label={label} width={width} height={height} controls playsInline preload="metadata" />
@@ -287,7 +306,10 @@ export function Durability() {
               >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
-                  <p className="assure-chip">{copy("IP67 Certified", "IP67 认证")}</p>
+                  <div className="assure-doc-side">
+                    <p className="assure-chip">{copy("IP67 Certified", "IP67 认证")}</p>
+                    <FileLink href="/documents/clx1-ip67-test.pdf" label={copy("View file", "查看文件")} />
+                  </div>
                 </div>
                 <h4>{copy("IP67 Protection", "IP67 防护认证")}</h4>
                 <p>
@@ -296,7 +318,6 @@ export function Durability() {
                     "CLX1 已取得 IP67 认证。具体防护等级及适用条件以相关认证文件为准。",
                   )}
                 </p>
-                <FileLink href="/documents/clx1-ip67-test.pdf" label={copy("View file", "查看文件")} />
               </DocumentCard>
               <DocumentCard
                 href="/documents/clx1-fcc.pdf"
@@ -305,6 +326,7 @@ export function Durability() {
               >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                  <FileLink href="/documents/clx1-fcc.pdf" label={copy("View file", "查看文件")} />
                 </div>
                 <h4>{copy("FCC Test Report", "FCC 测试报告")}</h4>
                 <p>
@@ -313,7 +335,6 @@ export function Durability() {
                     "CLX1 智能链条锁的 FCC 测试报告。报告所述范围与条件以该文件为准。",
                   )}
                 </p>
-                <FileLink href="/documents/clx1-fcc.pdf" label={copy("View file", "查看文件")} />
               </DocumentCard>
               <DocumentCard
                 href="/documents/clx1-rohs.pdf"
@@ -322,6 +343,7 @@ export function Durability() {
               >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                  <FileLink href="/documents/clx1-rohs.pdf" label={copy("View file", "查看文件")} />
                 </div>
                 <h4>{copy("RoHS Report", "RoHS 报告")}</h4>
                 <p>
@@ -330,7 +352,6 @@ export function Durability() {
                     "针对所测 CLX1 样品的 RoHS 符合性验证。报告所述范围与条件以该文件为准。",
                   )}
                 </p>
-                <FileLink href="/documents/clx1-rohs.pdf" label={copy("View file", "查看文件")} />
               </DocumentCard>
             </div>
           </section>
@@ -434,35 +455,31 @@ export function Durability() {
                         }
                       >
                         {item.media ? (
-                          <TestClip
-                            src={item.media.src}
-                            label={alt}
-                            width={item.media.width}
-                            height={item.media.height}
-                          />
+                          <>
+                            <TestCover src={item.media.src} width={item.media.width} height={item.media.height} />
+                            <button
+                              type="button"
+                              className="v2-btn v2-btn-secondary assure-media-play"
+                              aria-label={`${copy("View recording", "查看录像")}, ${title}`}
+                              onClick={() =>
+                                setRecording({
+                                  src: item.media!.src,
+                                  title,
+                                  alt,
+                                  width: item.media!.width,
+                                  height: item.media!.height,
+                                })
+                              }
+                            >
+                              {copy("View recording", "查看录像")}
+                            </button>
+                          </>
                         ) : (
                           <p>{copy(item.pendingEn ?? "", item.pendingZh ?? "")}</p>
                         )}
                       </div>
                       <h4>{title}</h4>
                       <p>{copy(item.bodyEn, item.bodyZh)}</p>
-                      {item.media ? (
-                        <button
-                          type="button"
-                          className="v2-btn v2-btn-secondary"
-                          onClick={() =>
-                            setRecording({
-                              src: item.media!.src,
-                              title,
-                              alt,
-                              width: item.media!.width,
-                              height: item.media!.height,
-                            })
-                          }
-                        >
-                          {copy("View recording", "查看录像")}
-                        </button>
-                      ) : null}
                     </article>
                   );
                 })}

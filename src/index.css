@@ -1018,8 +1018,12 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
 .assure-doc-thumb img { display: block; width: 100%; height: auto; }
 .assure-doc-main { display: flex; flex: 1 1 auto; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; }
 .assure-doc-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; width: 100%; min-height: 32px; }
-.assure-doc-top > .assure-kicker { flex: 1 1 12rem; min-width: 0; }
-.assure-doc-top > .v2-btn { flex: 0 0 auto; margin-top: 0; margin-left: auto; white-space: nowrap; }
+.assure-doc-top > .assure-kicker { flex: 1 1 auto; min-width: 0; }
+.assure-doc-top > .v2-btn,
+.assure-doc-side { flex: 0 0 auto; margin-top: 0; margin-left: auto; max-width: 100%; }
+.assure-doc-top > .v2-btn,
+.assure-doc-side > .v2-btn { white-space: nowrap; }
+.assure-doc-side { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px 10px; }
 .assure-doc-ip { border-color: rgba(54, 182, 106, 0.45); }
 .assure-chip { margin: 0; padding: 4px 10px; border: 1px solid rgba(54, 182, 106, 0.45); border-radius: 999px; color: #146c43; font-size: 12px; font-weight: 650; letter-spacing: 0.08em; line-height: 1.4; text-transform: uppercase; }
 .assure-doc h4,
@@ -1037,9 +1041,10 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
 .assure-groups { display: grid; gap: 32px; margin-top: 32px; }
 #safety-tests { scroll-margin-top: 96px; }
 .assure-test-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.assure-media { display: grid; place-items: center; align-self: stretch; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #e5e6e1; border-radius: 12px; background: #f4f4f1; }
+.assure-media { position: relative; display: grid; place-items: center; align-self: stretch; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #e5e6e1; border-radius: 12px; background: #f4f4f1; }
 .assure-media img,
-.assure-media video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.assure-media video { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.assure-media > .assure-media-play { position: absolute; top: 50%; left: 50%; z-index: 1; margin: 0; transform: translate(-50%, -50%); background: #fff; }
 .assure-media p { width: auto; max-width: 22rem; flex: 0 0 auto; padding: 16px; text-align: center; }
 .assure-note { padding-block: 40px 72px; border-top: 1px solid #e5e6e1; }
 @media (min-width: 900px) {
