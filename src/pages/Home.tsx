@@ -1,5 +1,5 @@
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { VideoModal } from "../components/VideoModal";
 import { useCms } from "../context/CmsContext";
@@ -174,12 +174,9 @@ function useHomeCopy() {
   return { config, loading, defaultProduct, lang, copy };
 }
 
-type BrandPrinciple = { en: string; zh: string; bodyEn: string; bodyZh: string };
-
 type BrandSlide = {
-  id: string;
+  id: "product" | "lifestyle";
   image: string;
-  position: string;
   altEn: string;
   altZh: string;
   titleEn: string;
@@ -188,14 +185,12 @@ type BrandSlide = {
   bodyZh: string;
   eyebrowEn?: string;
   eyebrowZh?: string;
-  principles?: BrandPrinciple[];
 };
 
 const brandSlides: BrandSlide[] = [
   {
     id: "product",
     image: "/images/listing/slide-1.jpg",
-    position: "72% center",
     altEn: "Hands holding the two ends of the CLX1 lock",
     altZh: "双手握住 CLX1 锁的两端",
     eyebrowEn: "CLX1 / FINGERPRINT SMART CHAIN LOCK",
@@ -207,32 +202,15 @@ const brandSlides: BrandSlide[] = [
   },
   {
     id: "lifestyle",
-    image: "/images/listing/slide-2.jpg",
-    position: "center center",
-    altEn: "Close view of the CLX1 lock body and fingerprint sensor",
-    altZh: "CLX1 锁体与指纹传感器的近景",
-    eyebrowEn: "More Than a Lock",
-    eyebrowZh: "不只是一把锁",
-    titleEn: "Less Complexity.\nMore Possibility.",
-    titleZh: "更少复杂。\n更多可能。",
-    bodyEn: "A thoughtful combination of form, function and everyday practicality. Fingerprint, a mechanical key and a 6 mm steel wire, carried through the day.",
-    bodyZh: "形态、功能与日常实用的结合。指纹、机械钥匙与 6 mm 钢丝，陪你度过一天。",
-    principles: [
-      { en: "Simplicity", zh: "简洁", bodyEn: "Clear design. Intuitive experiences. Only what matters.", bodyZh: "清晰的设计，直觉的体验，只留下真正重要的部分。" },
-      { en: "Freedom", zh: "自由", bodyEn: "Designed to fit naturally into the rhythms of everyday life.", bodyZh: "顺应日常生活的节奏。" },
-      { en: "Thoughtful Design", zh: "细致设计", bodyEn: "Every detail should serve a purpose.", bodyZh: "每一处细节都有其用意。" },
-    ],
-  },
-  {
-    id: "manifesto",
     image: "/images/lifestyle/hero-cyclists.jpg",
-    position: "72% center",
     altEn: "Two cyclists riding together along the coast",
     altZh: "两位骑行者沿海岸并肩骑行",
+    eyebrowEn: "More Than a Lock",
+    eyebrowZh: "不只是一把锁",
     titleEn: "Designed for a\nMore Effortless Life.",
     titleZh: "为更从容的生活\n而设计。",
-    bodyEn: "We believe the best technology feels natural — simplifying everyday moments through thoughtful design.",
-    bodyZh: "我们相信，最好的科技是自然的——用细致的设计，让日常时刻更简单。",
+    bodyEn: "Thoughtful security that fits the way you move through your day.",
+    bodyZh: "贴合日常节奏的细致防护。",
   },
 ];
 
@@ -241,6 +219,8 @@ export function HomeHero() {
   const { hash } = useLocation();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [userPaused, setUserPaused] = useState(false);
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
   const count = brandSlides.length;
 
   useEffect(() => {
@@ -248,14 +228,39 @@ export function HomeHero() {
   }, [hash]);
 
   useEffect(() => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (paused || userPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => setIndex((current) => (current + 1) % count), 7000);
     return () => window.clearInterval(timer);
-  }, [paused, count]);
+  }, [paused, userPaused, count]);
 
   if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
 
   const go = (next: number) => setIndex((next + count) % count);
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (!event.isPrimary) return;
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      /* Synthetic and unsupported pointer sources can continue without capture. */
+    }
+    swipeStart.current = { x: event.clientX, y: event.clientY };
+    setPaused(true);
+  };
+  const finishSwipe = (event: PointerEvent<HTMLDivElement>) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+    setPaused(false);
+    if (!start) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dx) < 56 || Math.abs(dx) < Math.abs(dy) * 1.25) return;
+    go(dx < 0 ? index + 1 : index - 1);
+  };
+  const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    go(event.key === "ArrowLeft" ? index - 1 : index + 1);
+  };
 
   return (
     <section
@@ -267,61 +272,47 @@ export function HomeHero() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
+      onKeyDown={onKeyDown}
     >
-      <div className="brand-track" style={{ transform: `translateX(-${index * 100}%)` }}>
+      <div
+        className="brand-track"
+        style={{ transform: `translateX(-${index * 100}%)` }}
+        onPointerDown={onPointerDown}
+        onPointerUp={finishSwipe}
+        onPointerCancel={() => {
+          swipeStart.current = null;
+          setPaused(false);
+        }}
+      >
         {brandSlides.map((slide, slideIndex) => (
           <article
             key={slide.id}
-            className={
-              slide.id === "product"
-                ? "brand-slide brand-slide-product"
-                : slide.id === "manifesto"
-                  ? "brand-slide brand-slide-manifesto"
-                  : "brand-slide"
-            }
+            className={`brand-slide brand-slide-${slide.id}`}
             aria-hidden={slideIndex !== index}
           >
             <img
               src={slide.image}
               alt={copy(slide.altEn, slide.altZh)}
-              style={slide.id === "manifesto" ? undefined : { objectPosition: slide.position }}
             />
             <div className="brand-product-copy">
               {slide.eyebrowEn ? <p className="brand-product-kicker">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
               {slideIndex === 0 ? (
                 <h1>{copy(slide.titleEn, slide.titleZh)}</h1>
               ) : (
-                <h2 id={slide.id === "lifestyle" ? "lifestyle-title" : undefined}>{copy(slide.titleEn, slide.titleZh)}</h2>
+                <h2>{copy(slide.titleEn, slide.titleZh)}</h2>
               )}
               {slide.bodyEn ? <p className="brand-product-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
-              {slide.principles ? (
-                <ol className="brand-principles">
-                  {slide.principles.map((item) => (
-                    <li key={item.en}>
-                      <strong>{copy(item.en, item.zh)}</strong>
-                      <p>{copy(item.bodyEn, item.bodyZh)}</p>
-                    </li>
-                  ))}
-                </ol>
-              ) : null}
-              {slideIndex === 0 ? (
-                <div className="brand-product-actions">
-                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
-                    <span>{copy("Explore CLX1", "探索 CLX1")}</span>
-                    <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
-                  </Link>
+              <div className="brand-product-actions">
+                <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
+                  <span>{copy("Explore CLX1", "探索 CLX1")}</span>
+                  <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
+                </Link>
+                {slide.id === "product" ? (
                   <Link className="brand-product-btn brand-product-btn-secondary" to="/#how-it-works">
                     {copy("How it works", "了解使用方式")}
                   </Link>
-                </div>
-              ) : slide.principles ? (
-                <div className="brand-product-actions">
-                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
-                    <span>{copy("Explore CLX1", "探索 CLX1")}</span>
-                    <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
-                  </Link>
-                </div>
-              ) : null}
+                ) : null}
+              </div>
             </div>
           </article>
         ))}
@@ -343,6 +334,15 @@ export function HomeHero() {
         </div>
         <button type="button" className="brand-nav" onClick={() => go(index + 1)} aria-label={copy("Next", "下一张")}>
           <ChevronRight size={20} />
+        </button>
+        <button
+          type="button"
+          className="brand-nav"
+          onClick={() => setUserPaused((current) => !current)}
+          aria-label={copy(userPaused ? "Play carousel" : "Pause carousel", userPaused ? "继续播放" : "暂停轮播")}
+          aria-pressed={userPaused}
+        >
+          {userPaused ? <Play size={17} /> : <Pause size={17} />}
         </button>
       </div>
       <p className="sr-only">{copy(brandSlides[index].altEn, brandSlides[index].altZh)}</p>
