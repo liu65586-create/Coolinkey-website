@@ -90,8 +90,13 @@ const TEST_GROUPS: TestGroup[] = [
         titleZh: "铁锤锤击测试",
         bodyEn: "Watch CLX1 during a hammer impact test and see the result shown in the footage.",
         bodyZh: "通过锤击测试视频，直观了解 CLX1 在该项测试中的实际表现。",
-        pendingEn: "This recording is not published on this page.",
-        pendingZh: "这段录像尚未在本页发布。",
+        media: {
+          src: "/videos/testing/hammer-impact.mp4",
+          altEn: "CLX1 during a hammer impact test",
+          altZh: "锤击测试中的 CLX1",
+          width: 3840,
+          height: 2160,
+        },
       },
       {
         id: "grinder",
@@ -99,8 +104,13 @@ const TEST_GROUPS: TestGroup[] = [
         titleZh: "角磨机切割测试",
         bodyEn: "See the attempted cutting process and the outcome shown in the test footage.",
         bodyZh: "观看角磨机切割测试过程，了解视频中实际呈现的结果。",
-        pendingEn: "This recording is not published on this page.",
-        pendingZh: "这段录像尚未在本页发布。",
+        media: {
+          src: "/videos/testing/angle-grinder.mp4",
+          altEn: "CLX1 during an angle grinder cutting test",
+          altZh: "角磨机切割测试中的 CLX1",
+          width: 3840,
+          height: 2160,
+        },
       },
     ],
   },
@@ -341,6 +351,7 @@ export function Durability() {
               >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
+                  <FileLink href="/documents/clx1-transport-air.pdf" label={copy("View file", "查看文件")} />
                 </div>
                 <h4>{copy("Air Transport Report", "航空运输报告")}</h4>
                 <p>
@@ -349,7 +360,6 @@ export function Durability() {
                     "文件所载物品的航空运输危险性鉴别报告。报告所述范围与条件以该文件为准。",
                   )}
                 </p>
-                <FileLink href="/documents/clx1-transport-air.pdf" label={copy("View file", "查看文件")} />
               </DocumentCard>
               <DocumentCard
                 href="/documents/clx1-transport-sea.pdf"
@@ -358,6 +368,7 @@ export function Durability() {
               >
                 <div className="assure-doc-top">
                   <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
+                  <FileLink href="/documents/clx1-transport-sea.pdf" label={copy("View file", "查看文件")} />
                 </div>
                 <h4>{copy("Sea Transport Report", "海运运输报告")}</h4>
                 <p>
@@ -366,7 +377,6 @@ export function Durability() {
                     "标明海运的运输危险性鉴别报告。报告所述范围与条件以该文件为准。",
                   )}
                 </p>
-                <FileLink href="/documents/clx1-transport-sea.pdf" label={copy("View file", "查看文件")} />
               </DocumentCard>
             </div>
             <p className="assure-pending">
