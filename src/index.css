@@ -986,7 +986,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .assure-hero,
 .assure-copy { display: grid; align-content: start; }
 .assure-hero { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: clamp(28px, 4vw, 72px); align-items: center; padding-block: 72px 36px; }
-.assure-copy > .assure-kicker { margin: 0; color: #686b66; font-size: 12px; font-weight: 650; letter-spacing: 0.16em; line-height: 1.5; text-transform: uppercase; }
+.assure-copy > .assure-kicker,
+.assure-doc > .assure-kicker { margin: 0; color: #686b66; font-size: 12px; font-weight: 650; letter-spacing: 0.16em; line-height: 1.5; text-transform: uppercase; }
 html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 .assure h2 { max-width: 16em; margin: 12px 0 0; color: #202120; font-weight: 620; letter-spacing: -0.045em; line-height: 1.12; font-size: clamp(2rem, 3.4vw, 3.25rem); }
 .assure-hero h2 { max-width: 12em; font-size: clamp(2.5rem, 4.4vw, 4.2rem); }
@@ -994,7 +995,8 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 .assure-doc-groups > section > p,
 .assure-note p { max-width: 40rem; margin: 16px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
 .assure-aside { color: #202120; font-weight: 620; }
-.assure-hero img { justify-self: end; width: min(100%, 520px); height: auto; aspect-ratio: 1; border: 1px solid #e5e6e1; border-radius: 20px; background: #fff; object-fit: contain; }
+.assure-hero-frame { justify-self: end; width: 100%; overflow: hidden; border: 1px solid #e5e6e1; border-radius: 20px; background: #fff; }
+.assure-hero-frame img { display: block; width: 100%; height: auto; aspect-ratio: 3840 / 2000; object-fit: contain; }
 .assure-docs { padding-block: 28px 12px; }
 .assure-doc-groups { display: grid; gap: 36px; margin-top: 36px; }
 .assure-doc-groups h3,
@@ -1008,6 +1010,7 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
 .assure-test { display: grid; align-content: start; gap: 12px; min-width: 0; padding: 20px; border: 1px solid #e5e6e1; border-radius: 18px; background: #fff; }
 .assure-doc-ip { border-color: rgba(54, 182, 106, 0.45); }
 .assure-chip { justify-self: start; margin: 0; padding: 4px 10px; border: 1px solid rgba(54, 182, 106, 0.45); border-radius: 999px; color: #146c43; font-size: 12px; font-weight: 650; letter-spacing: 0.08em; line-height: 1.4; text-transform: uppercase; }
+.assure-doc > .assure-chip { color: #146c43; font-size: 12px; line-height: 1.4; }
 .assure-doc h4,
 .assure-test h4 { margin: 0; color: #202120; font-size: 1.15rem; font-weight: 650; letter-spacing: -0.02em; line-height: 1.3; }
 .assure-doc p,

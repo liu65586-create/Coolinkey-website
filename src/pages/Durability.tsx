@@ -193,17 +193,19 @@ export function Durability() {
           </p>
           <p className="assure-aside">{copy("Designed with care. Tested in real conditions.", "用心设计。在真实条件下测试。")}</p>
         </div>
-        <img
-          src="/images/listing/Certificate&Testing.png"
-          alt={copy(
-            "Annotated CLX1 showing the braided steel cable, TPU lock body, fingerprint module, and woven sleeve",
-            "带标注的 CLX1，标出编织钢缆、TPU 锁体、指纹模块和编织护套",
-          )}
-          width={3840}
-          height={2000}
-          loading="lazy"
-          decoding="async"
-        />
+        <div className="assure-hero-frame">
+          <img
+            src="/images/listing/Certificate&Testing.png"
+            alt={copy(
+              "Annotated CLX1 showing the braided steel cable, TPU lock body, fingerprint module, and woven sleeve",
+              "带标注的 CLX1，标出编织钢缆、TPU 锁体、指纹模块和编织护套",
+            )}
+            width={3840}
+            height={2000}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
 
       <section className="assure-docs page-wrap" aria-labelledby="assure-docs-title">
@@ -224,10 +226,15 @@ export function Durability() {
             <p>{copy("Compliance and protection records for CLX1, where a file is published.", "已发布的 CLX1 合规与防护文件。")}</p>
             <div className="assure-doc-grid">
               <article className="assure-doc assure-doc-ip">
+                <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
                 <p className="assure-chip">{copy("IP67 Certified", "IP67 认证")}</p>
-                <h4>{copy("IP67 Certification", "IP67 防护认证")}</h4>
-                <p>{copy("Documentation for CLX1's IP67-rated protection.", "查看 CLX1 的 IP67 防护认证相关文件。")}</p>
-                <p className="assure-pending">{copy("The certificate file is not published on this page.", "认证文件尚未在本页发布。")}</p>
+                <h4>{copy("IP67 Protection", "IP67 防护认证")}</h4>
+                <p>
+                  {copy(
+                    "CLX1 has obtained IP67 certification. Refer to the relevant documentation for the applicable protection rating and test conditions.",
+                    "CLX1 已取得 IP67 认证。具体防护等级及适用条件以相关认证文件为准。",
+                  )}
+                </p>
               </article>
             </div>
           </section>
