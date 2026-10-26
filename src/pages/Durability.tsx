@@ -234,8 +234,10 @@ export function Durability() {
             <p>{copy("Compliance and protection records for CLX1, where a file is published.", "已发布的 CLX1 合规与防护文件。")}</p>
             <div className="assure-doc-grid">
               <article className="assure-doc assure-doc-ip">
-                <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
-                <p className="assure-chip">{copy("IP67 Certified", "IP67 认证")}</p>
+                <div className="assure-doc-top">
+                  <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                  <p className="assure-chip">{copy("IP67 Certified", "IP67 认证")}</p>
+                </div>
                 <h4>{copy("IP67 Protection", "IP67 防护认证")}</h4>
                 <p>
                   {copy(
@@ -246,7 +248,9 @@ export function Durability() {
                 <FileLink href="/documents/clx1-ip67-test.pdf" label={copy("View file", "查看文件")} />
               </article>
               <article className="assure-doc">
-                <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                <div className="assure-doc-top">
+                  <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                </div>
                 <h4>{copy("FCC Test Report", "FCC 测试报告")}</h4>
                 <p>
                   {copy(
@@ -257,7 +261,9 @@ export function Durability() {
                 <FileLink href="/documents/clx1-fcc.pdf" label={copy("View file", "查看文件")} />
               </article>
               <article className="assure-doc">
-                <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                <div className="assure-doc-top">
+                  <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
+                </div>
                 <h4>{copy("RoHS Report", "RoHS 报告")}</h4>
                 <p>
                   {copy(
@@ -280,7 +286,9 @@ export function Durability() {
             </p>
             <div className="assure-doc-grid">
               <article className="assure-doc">
-                <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
+                <div className="assure-doc-top">
+                  <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
+                </div>
                 <h4>{copy("Air Transport Report", "航空运输报告")}</h4>
                 <p>
                   {copy(
@@ -291,7 +299,9 @@ export function Durability() {
                 <FileLink href="/documents/clx1-transport-air.pdf" label={copy("View file", "查看文件")} />
               </article>
               <article className="assure-doc">
-                <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
+                <div className="assure-doc-top">
+                  <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
+                </div>
                 <h4>{copy("Sea Transport Report", "海运运输报告")}</h4>
                 <p>
                   {copy(
