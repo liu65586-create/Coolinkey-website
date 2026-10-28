@@ -690,15 +690,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .v2-principles li { grid-template-columns: 1fr; gap: 8px; }
 }
 @media (max-width: 700px) {
-  .angle-card h4 { font-size: 0.95rem; }
-  .angle-card p { font-size: 0.84rem; }
-  .angle-card-lead h4 { font-size: 1.05rem; }
-  .angle-card-copy { padding: 12px 12px 14px; }
+  .angle-cards { grid-template-columns: 1fr; gap: 16px; }
+  .angle-card-copy { padding: 12px 0 4px; }
   .life-hero img { aspect-ratio: 4 / 3; }
-  .life-aside { grid-template-columns: 1fr; }
+  .life-aside { grid-template-columns: 1fr; gap: 16px; }
   .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 40px, 1440px); }
-  .v2-section, .v2-hero-brand { padding-block: 56px; }
-  .v2-hero-copy h1, .v2-hero-brand h1 { font-size: clamp(2.4rem, 12vw, 3.4rem); max-width: none; }
+  .v2-section, .v2-hero-brand { padding-block: 40px 0; }
+  .v2-hero-copy h1, .v2-hero-brand h1 { font-size: 26px; max-width: none; }
 }
 @media (max-width: 380px) {
   .angle-cards { grid-template-columns: 1fr; }
@@ -779,7 +777,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 
 /* One gap between the bottom of a block and the top of the next. */
 :root { --block-gap: 80px; --block-end: 16px; }
-@media (max-width: 700px) { :root { --block-gap: 48px; } }
+@media (max-width: 700px) { :root { --block-gap: 40px; } }
 .home-page .v2-section,
 #how-it-works,
 #clx1 > .v2-home:first-child > .v2-section,
@@ -821,9 +819,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .use-videos ul { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 700px) {
-  .use-guide { width: min(100% - 40px, 1440px); gap: 36px; }
+  .use-guide { width: min(100% - 40px, 1440px); gap: 40px; }
   .use-videos ul { grid-template-columns: 1fr; }
-  .use-videos { padding: 22px 18px; }
+  .use-videos { padding: 16px 0; }
   .use-start, .use-steps { gap: 10px; }
   .use-start { overflow-x: auto; }
   .use-steps { width: calc(4 * 148px + 3 * 10px); flex: 0 0 auto; min-width: 0; }
@@ -1130,10 +1128,17 @@ p.assure-note {
   .assure-trial { grid-template-columns: 1fr; gap: 20px; }
 }
 @media (max-width: 700px) {
-  .assure-hero { gap: 20px; padding-block: 36px 28px; }
-  .assure-sheet { overflow: hidden; }
+  .assure-hero,
+  .assure-make,
+  .assure-trial,
+  .assure-tests,
+  .assure-docs { padding-block: 40px 0; }
+  .assure-hero { gap: 16px; }
+  .assure-make,
+  .assure-trial { gap: 16px; }
+  .assure-sheet { overflow: hidden; margin-top: 16px; }
   .assure-sheet img { width: 100%; max-width: 100%; height: auto; }
-  .assure-tests { gap: 14px; padding-block: 0 24px; }
+  .assure-tests { gap: 16px; }
   .assure-clips {
     display: flex;
     gap: 10px;
@@ -1149,8 +1154,32 @@ p.assure-note {
 .business-inquiry .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .business-inquiry .v2-btn { justify-self: start; }
 @media (max-width: 700px) {
-  .business-inquiry { padding-block: 48px; }
+  .business-inquiry { padding-block: 40px 16px; }
   .business-inquiry .v2-btn { justify-self: stretch; width: 100%; }
+  .home-page .v2-section,
+  #how-it-works,
+  #clx1 > .v2-home:first-child > .v2-section,
+  #clx1 .v2-section:has(.v2-design),
+  #business.v2-section,
+  #support > .use-guide,
+  #help,
+  #clx1 .page-wrap,
+  .about-panel {
+    padding-top: 40px;
+    padding-bottom: 0;
+  }
+  .v2-section-head { gap: 16px; margin-bottom: 16px; }
+  .v2-section-head p { margin-top: 0; }
+  .assure h2 { margin-top: 8px; }
+  .assure-copy > p:not(.assure-kicker) { margin-top: 16px; }
+  .desk-stack,
+  #help { gap: 40px; }
+  .desk-ask { padding: 16px 0; border-radius: 20px; }
+  .product-sheet { gap: 16px; }
+  .product-frame { aspect-ratio: 4 / 3; }
+  .product-intro h2,
+  .product-lead,
+  .product-pills { margin-top: 16px; }
   .v2-section-head h2,
   .v2-split h2,
   .v2-philosophy h2,
@@ -1161,18 +1190,66 @@ p.assure-note {
   .desk-copy h2,
   .product-copy h2,
   .business-inquiry h1,
-  .assure h2 { font-size: calc(2rem - 3px); }
-  .use-videos h3 { font-size: calc(1.6rem - 3px); }
-  .assure-hero h2 { font-size: calc(2.6rem - 3px); }
-  .about-panel h2 { font-size: calc(2.5rem - 3px); }
-  #help .about-panel h2 { font-size: calc(2rem - 3px); }
-  html[lang="zh"] #help .about-panel h2 { font-size: calc(2.15rem - 3px); }
+  .assure h2,
+  .assure-hero h2,
+  .about-panel h2,
+  #help .about-panel h2,
+  html[lang="zh"] #help .about-panel h2,
   .v2-hero-copy h1,
-  .v2-hero-brand h1 { font-size: clamp(calc(2.4rem - 3px), calc(12vw - 3px), calc(3.4rem - 3px)); }
+  .v2-hero-brand h1,
   .brand-copy h1,
-  .brand-copy h2 { font-size: clamp(calc(2.1rem - 3px), calc(10vw - 3px), calc(3rem - 3px)); }
+  .brand-copy h2,
   .brand-product-copy h1,
   .brand-product-copy h2,
   .brand-product-copy:has(.brand-principles) h2,
-  .brand-product-copy:not(:has(.brand-product-actions)) h2 { font-size: calc(1.7rem - 3px); }
+  .brand-product-copy:not(:has(.brand-product-actions)) h2 {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+  .angle-group-head h3,
+  .product-copy h3,
+  .use-videos h3,
+  .life-hero strong {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+  .v2-section-head p,
+  .v2-lead,
+  .v2-design-copy p,
+  .v2-paths p:not(.v2-eyebrow),
+  .v2-philosophy p,
+  .assure-copy > p,
+  .product-lead,
+  .desk-copy p,
+  .about-panel .about-body,
+  .angle-card h4,
+  .angle-card-lead h4,
+  .angle-card p,
+  .life-hero figcaption p,
+  .life-aside strong,
+  .life-aside figcaption p,
+  .use-steps strong,
+  .use-steps p,
+  .v2-steps strong,
+  .v2-steps p,
+  .brand-product-lead,
+  .brand-product-copy:has(.brand-principles) .brand-product-lead,
+  .brand-product-copy:not(:has(.brand-product-actions)) .brand-product-lead,
+  .brand-principles strong {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .assure-copy > .assure-kicker,
+  .assure-kicker,
+  .v2-section-head .v2-eyebrow,
+  .use-kicker,
+  .desk-kicker,
+  .brand-product-kicker,
+  .assure-clip h3,
+  p.assure-note,
+  .life-note,
+  .v2-footer h2 {
+    font-size: 13px;
+    line-height: 1.45;
+  }
 }
