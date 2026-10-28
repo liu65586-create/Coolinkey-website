@@ -1125,7 +1125,8 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
 }
 @media (max-width: 700px) {
   .assure-hero { gap: 20px; padding-block: 36px 28px; }
-  .assure-sheet img { width: 880px; max-width: none; }
+  .assure-sheet { overflow: hidden; }
+  .assure-sheet img { width: 100%; max-width: 100%; height: auto; }
   .assure-test-grid { grid-template-columns: 1fr; gap: 14px; }
   .assure-test { padding: 18px; }
   .assure-note { padding-bottom: 56px; }
