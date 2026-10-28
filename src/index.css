@@ -1142,4 +1142,28 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 @media (max-width: 700px) {
   .business-inquiry { padding-block: 48px; }
   .business-inquiry .v2-btn { justify-self: stretch; width: 100%; }
+  .v2-section-head h2,
+  .v2-split h2,
+  .v2-philosophy h2,
+  .v2-approach h2,
+  .v2-meet-copy h2,
+  .v2-design-copy h2,
+  .v2-paths h2,
+  .desk-copy h2,
+  .product-copy h2,
+  .business-inquiry h1,
+  .assure h2 { font-size: calc(2rem - 3px); }
+  .use-videos h3 { font-size: calc(1.6rem - 3px); }
+  .assure-hero h2 { font-size: calc(2.6rem - 3px); }
+  .about-panel h2 { font-size: calc(2.5rem - 3px); }
+  #help .about-panel h2 { font-size: calc(2rem - 3px); }
+  html[lang="zh"] #help .about-panel h2 { font-size: calc(2.15rem - 3px); }
+  .v2-hero-copy h1,
+  .v2-hero-brand h1 { font-size: clamp(calc(2.4rem - 3px), calc(12vw - 3px), calc(3.4rem - 3px)); }
+  .brand-copy h1,
+  .brand-copy h2 { font-size: clamp(calc(2.1rem - 3px), calc(10vw - 3px), calc(3rem - 3px)); }
+  .brand-product-copy h1,
+  .brand-product-copy h2,
+  .brand-product-copy:has(.brand-principles) h2,
+  .brand-product-copy:not(:has(.brand-product-actions)) h2 { font-size: calc(1.7rem - 3px); }
 }
