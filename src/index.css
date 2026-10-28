@@ -1068,7 +1068,7 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
-  padding-block: 0 28px;
+  padding-block: 0 20px;
 }
 #safety-tests { scroll-margin-top: 96px; }
 .assure-clip { display: grid; gap: 8px; min-width: 0; }
@@ -1079,7 +1079,7 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 .assure-media video { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .assure-media > .assure-media-play { position: absolute; top: 50%; left: 50%; z-index: 1; margin: 0; transform: translate(-50%, -50%); background: #fff; }
 .assure-media p { width: auto; max-width: 22rem; flex: 0 0 auto; padding: 16px; text-align: center; }
-.assure-note { padding-block: 40px 72px; border-top: 1px solid #e5e6e1; }
+.assure-note { padding-block: 4px 36px; border-top: 1px solid #e5e6e1; }
 @media (min-width: 900px) {
   .assure-note {
     display: grid;
@@ -1130,10 +1130,10 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
     gap: 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 28px;
+    padding-bottom: 16px;
   }
   .assure-clip { flex: 0 0 148px; scroll-snap-align: start; }
-  .assure-note { padding-bottom: 56px; }
+  .assure-note { padding-bottom: 28px; }
   .assure-dialog { padding: 12px; }
 }
 

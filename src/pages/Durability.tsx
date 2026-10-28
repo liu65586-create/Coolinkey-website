@@ -408,6 +408,16 @@ export function Durability() {
         })}
       </div>
 
+      <section className="assure-note page-wrap" aria-labelledby="assure-note-title">
+        <h2 id="assure-note-title">{copy("Real Tests. Clear Context.", "真实测试，清晰说明")}</h2>
+        <p>
+          {copy(
+            "Each video shows a specific test under the conditions presented. Results apply to the recorded test conditions and should not be interpreted as a guarantee of performance under every possible condition. Refer to the relevant documentation for verified ratings and certifications.",
+            "每段视频展示的是特定测试条件下的实际过程。视频结果仅适用于所呈现的测试条件，不应被理解为对所有使用环境下性能的保证。具体防护等级及认证信息，请以相关正式文件为准。",
+          )}
+        </p>
+      </section>
+
       <section className="assure-docs page-wrap" aria-labelledby="assure-docs-title">
         <div className="assure-copy">
           <p className="assure-kicker">{copy("Documentation", "产品文件")}</p>
@@ -432,16 +442,6 @@ export function Durability() {
             decoding="async"
           />
         </figure>
-      </section>
-
-      <section className="assure-note page-wrap" aria-labelledby="assure-note-title">
-        <h2 id="assure-note-title">{copy("Real Tests. Clear Context.", "真实测试，清晰说明")}</h2>
-        <p>
-          {copy(
-            "Each video shows a specific test under the conditions presented. Results apply to the recorded test conditions and should not be interpreted as a guarantee of performance under every possible condition. Refer to the relevant documentation for verified ratings and certifications.",
-            "每段视频展示的是特定测试条件下的实际过程。视频结果仅适用于所呈现的测试条件，不应被理解为对所有使用环境下性能的保证。具体防护等级及认证信息，请以相关正式文件为准。",
-          )}
-        </p>
       </section>
 
       {recording ? (
