@@ -1063,20 +1063,18 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 .assure-docs { padding-block: 20px 8px; }
 .assure-sheet { margin: 28px 0 0; overflow: auto; border: 1px solid #e5e6e1; border-radius: 20px; background: #fff; }
 .assure-sheet img { display: block; width: 100%; height: auto; }
-.assure-groups h3 { margin: 0; color: #202120; font-size: 0.82rem; font-weight: 650; letter-spacing: 0.12em; line-height: 1.4; text-transform: uppercase; }
-html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
-.assure-test-grid { display: grid; gap: 20px; margin-top: 18px; align-items: stretch; }
-.assure-test { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; height: 100%; padding: 22px 24px 20px; border: 1px solid #e5e6e1; border-radius: 18px; background: #fff; }
-.assure-test h4 { width: 100%; margin: 2px 0 0; color: #202120; font-size: 1.2rem; font-weight: 650; letter-spacing: -0.02em; line-height: 1.3; overflow-wrap: break-word; }
-.assure-test p { margin: 0; color: #686b66; font-size: 1rem; line-height: 1.6; overflow-wrap: break-word; }
-.assure-test > p { width: 100%; flex: 1 1 auto; }
-.assure-test .v2-btn,
 .assure-trial .assure-copy .v2-btn { justify-self: start; margin-top: 8px; }
-.assure-lab { padding-block: 48px 8px; }
-.assure-groups { display: grid; gap: 32px; margin-top: 32px; }
+.assure-clips {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding-block: 0 28px;
+}
 #safety-tests { scroll-margin-top: 96px; }
-.assure-test-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.assure-clip { display: grid; gap: 8px; min-width: 0; }
+.assure-clip h3 { margin: 0; color: #202120; font-size: 0.82rem; font-weight: 650; letter-spacing: -0.01em; line-height: 1.3; }
 .assure-media { position: relative; display: grid; place-items: center; align-self: stretch; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #e5e6e1; border-radius: 12px; background: #f4f4f1; }
+.assure-clip .assure-media-play { min-height: 28px; padding: 0 8px; font-size: 0.72rem; white-space: nowrap; }
 .assure-media img,
 .assure-media video { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .assure-media > .assure-media-play { position: absolute; top: 50%; left: 50%; z-index: 1; margin: 0; transform: translate(-50%, -50%); background: #fff; }
@@ -1127,8 +1125,14 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
   .assure-hero { gap: 20px; padding-block: 36px 28px; }
   .assure-sheet { overflow: hidden; }
   .assure-sheet img { width: 100%; max-width: 100%; height: auto; }
-  .assure-test-grid { grid-template-columns: 1fr; gap: 14px; }
-  .assure-test { padding: 18px; }
+  .assure-clips {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 28px;
+  }
+  .assure-clip { flex: 0 0 148px; scroll-snap-align: start; }
   .assure-note { padding-bottom: 56px; }
   .assure-dialog { padding: 12px; }
 }

@@ -371,6 +371,43 @@ export function Durability() {
         </div>
       </section>
 
+      <div id="safety-tests" className="assure-clips page-wrap" tabIndex={-1}>
+        {TEST_GROUPS.flatMap((group) => group.items).map((item) => {
+          const title = copy(item.titleEn, item.titleZh);
+          const alt = item.media ? copy(item.media.altEn, item.media.altZh) : "";
+          return (
+            <article key={item.id} className="assure-clip">
+              <div className="assure-media">
+                {item.media ? (
+                  <>
+                    <TestCover src={item.media.src} width={item.media.width} height={item.media.height} />
+                    <button
+                      type="button"
+                      className="v2-btn v2-btn-secondary assure-media-play"
+                      aria-label={`${copy("View recording", "查看录像")}, ${title}`}
+                      onClick={() =>
+                        setRecording({
+                          src: item.media!.src,
+                          title,
+                          alt,
+                          width: item.media!.width,
+                          height: item.media!.height,
+                        })
+                      }
+                    >
+                      {copy("View recording", "查看录像")}
+                    </button>
+                  </>
+                ) : (
+                  <p>{copy(item.pendingEn ?? "", item.pendingZh ?? "")}</p>
+                )}
+              </div>
+              <h3>{title}</h3>
+            </article>
+          );
+        })}
+      </div>
+
       <section className="assure-docs page-wrap" aria-labelledby="assure-docs-title">
         <div className="assure-copy">
           <p className="assure-kicker">{copy("Documentation", "产品文件")}</p>
@@ -395,60 +432,6 @@ export function Durability() {
             decoding="async"
           />
         </figure>
-      </section>
-
-      <section className="assure-lab page-wrap" aria-labelledby="assure-trial-title">
-        <div id="safety-tests" className="assure-groups" tabIndex={-1}>
-          {TEST_GROUPS.map((group) => (
-            <section key={group.id} aria-labelledby={`assure-group-${group.id}`}>
-              <h3 id={`assure-group-${group.id}`}>{copy(group.titleEn, group.titleZh)}</h3>
-              <div className="assure-test-grid">
-                {group.items.map((item) => {
-                  const title = copy(item.titleEn, item.titleZh);
-                  const alt = item.media ? copy(item.media.altEn, item.media.altZh) : "";
-                  return (
-                    <article key={item.id} className="assure-test">
-                      <div
-                        className="assure-media"
-                        style={
-                          item.media
-                            ? { aspectRatio: `${item.media.width} / ${item.media.height}` }
-                            : undefined
-                        }
-                      >
-                        {item.media ? (
-                          <>
-                            <TestCover src={item.media.src} width={item.media.width} height={item.media.height} />
-                            <button
-                              type="button"
-                              className="v2-btn v2-btn-secondary assure-media-play"
-                              aria-label={`${copy("View recording", "查看录像")}, ${title}`}
-                              onClick={() =>
-                                setRecording({
-                                  src: item.media!.src,
-                                  title,
-                                  alt,
-                                  width: item.media!.width,
-                                  height: item.media!.height,
-                                })
-                              }
-                            >
-                              {copy("View recording", "查看录像")}
-                            </button>
-                          </>
-                        ) : (
-                          <p>{copy(item.pendingEn ?? "", item.pendingZh ?? "")}</p>
-                        )}
-                      </div>
-                      <h4>{title}</h4>
-                      <p>{copy(item.bodyEn, item.bodyZh)}</p>
-                    </article>
-                  );
-                })}
-              </div>
-            </section>
-          ))}
-        </div>
       </section>
 
       <section className="assure-note page-wrap" aria-labelledby="assure-note-title">
