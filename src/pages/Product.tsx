@@ -54,22 +54,24 @@ export function Product() {
             </div>
 
             <div className="product-copy">
-              <ProductDropdown
-                products={visibleProducts}
-                valueSlug={active.slug}
-                disabled={loading}
-                onChangeSlug={setSlug}
-              />
-              <h2>{name}</h2>
-              {pills.length ? (
-                <ul className="product-pills">
-                  {pills.map((pill) => (
-                    <li key={pill}>{pill}</li>
-                  ))}
-                </ul>
-              ) : null}
-              <p className="product-lead">{desc}</p>
-              <section aria-labelledby="spec-title">
+              <div className="product-intro">
+                <ProductDropdown
+                  products={visibleProducts}
+                  valueSlug={active.slug}
+                  disabled={loading}
+                  onChangeSlug={setSlug}
+                />
+                <h2>{name}</h2>
+                {pills.length ? (
+                  <ul className="product-pills">
+                    {pills.map((pill) => (
+                      <li key={pill}>{pill}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                <p className="product-lead">{desc}</p>
+              </div>
+              <section className="product-details" aria-labelledby="spec-title">
                 <h3 id="spec-title">{lang === "zh" ? "关键细节" : "Details That Matter"}</h3>
                 <dl className="product-specs">
                   <div>
