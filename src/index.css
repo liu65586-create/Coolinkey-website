@@ -1094,8 +1094,7 @@ p.assure-note {
   color: #686b66;
   font-size: 0.95rem;
   line-height: 1.6;
-  text-align: center;
-  text-wrap: balance;
+  text-align: left;
 }
 @media (min-width: 900px) {
   .use-guide > .v2-section-head {
