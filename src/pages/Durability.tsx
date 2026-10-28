@@ -8,6 +8,8 @@ function text(lang: Lang, en: string, zh: string) {
 }
 
 const MANUFACTURING_GIF = "/images/manufacturing/production_process_showcase_640.gif";
+const STREAM_LOOP = "/videos/testing/stream-test.mp4";
+const STREAM_LOOP_POSTER = "/images/listing/clx1-stream-loop.jpg";
 
 type Recording = {
   src: string;
@@ -16,6 +18,50 @@ type Recording = {
   width: number;
   height: number;
 };
+
+function LoopClip({
+  src,
+  poster,
+  label,
+  width,
+  height,
+}: {
+  src: string;
+  poster: string;
+  label: string;
+  width: number;
+  height: number;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useLayoutEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const start = video.play();
+    if (!start) return;
+    start.catch(() => {
+      video.muted = true;
+      void video.play();
+    });
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      poster={poster}
+      width={width}
+      height={height}
+      muted
+      loop
+      autoPlay
+      playsInline
+      preload="metadata"
+      aria-label={label}
+    />
+  );
+}
 
 function TestCover({ src, width, height }: { src: string; width: number; height: number }) {
   return (
@@ -302,6 +348,29 @@ export function Durability() {
         />
       </section>
 
+      <section className="assure-trial page-wrap" aria-labelledby="assure-trial-title">
+        <LoopClip
+          src={STREAM_LOOP}
+          poster={STREAM_LOOP_POSTER}
+          label={copy("CLX1 resting in a flowing outdoor stream", "置于流动溪水中的 CLX1")}
+          width={960}
+          height={540}
+        />
+        <div className="assure-copy">
+          <p className="assure-kicker">{copy("Real-world testing", "真实测试")}</p>
+          <h2 id="assure-trial-title">{copy("Put to the Test.", "直观了解，真实呈现")}</h2>
+          <p>
+            {copy(
+              "From impact and cutting attempts to water exposure and vehicle tire pressure, explore the conditions shown in our CLX1 test footage.",
+              "从锤击、切割尝试，到浸水和车辆轮胎碾压，通过 CLX1 的测试视频了解各项测试中实际呈现的情况。",
+            )}
+          </p>
+          <button type="button" className="v2-btn v2-btn-secondary" onClick={openTests}>
+            {copy("View the five tests", "查看五项测试")}
+          </button>
+        </div>
+      </section>
+
       <section className="assure-docs page-wrap" aria-labelledby="assure-docs-title">
         <div className="assure-copy">
           <p className="assure-kicker">{copy("Documentation", "产品文件")}</p>
@@ -328,21 +397,7 @@ export function Durability() {
         </figure>
       </section>
 
-      <section className="assure-lab page-wrap" aria-labelledby="assure-lab-title">
-        <div className="assure-copy">
-          <p className="assure-kicker">{copy("Real-world testing", "真实测试")}</p>
-          <h2 id="assure-lab-title">{copy("Put to the Test.", "直观了解，真实呈现")}</h2>
-          <p>
-            {copy(
-              "From impact and cutting attempts to water exposure and vehicle tire pressure, explore the conditions shown in our CLX1 test footage.",
-              "从锤击、切割尝试，到浸水和车辆轮胎碾压，通过 CLX1 的测试视频了解各项测试中实际呈现的情况。",
-            )}
-          </p>
-          <button type="button" className="v2-btn v2-btn-secondary" onClick={openTests}>
-            {copy("View the five tests", "查看五项测试")}
-          </button>
-        </div>
-
+      <section className="assure-lab page-wrap" aria-labelledby="assure-trial-title">
         <div id="safety-tests" className="assure-groups" tabIndex={-1}>
           {TEST_GROUPS.map((group) => (
             <section key={group.id} aria-labelledby={`assure-group-${group.id}`}>

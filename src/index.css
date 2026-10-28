@@ -1044,13 +1044,21 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
   align-items: center;
   padding-block: 8px 28px;
 }
-.assure-make img {
+.assure-make img,
+.assure-trial video {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 20px;
   background: #ecede9;
   object-fit: contain;
+}
+.assure-trial {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+  padding-block: 8px 28px;
 }
 .assure-docs { padding-block: 20px 8px; }
 .assure-sheet { margin: 28px 0 0; overflow: auto; border: 1px solid #e5e6e1; border-radius: 20px; background: #fff; }
@@ -1063,7 +1071,7 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
 .assure-test p { margin: 0; color: #686b66; font-size: 1rem; line-height: 1.6; overflow-wrap: break-word; }
 .assure-test > p { width: 100%; flex: 1 1 auto; }
 .assure-test .v2-btn,
-.assure-lab .assure-copy .v2-btn { align-self: flex-start; margin-top: 8px; }
+.assure-trial .assure-copy .v2-btn { justify-self: start; margin-top: 8px; }
 .assure-lab { padding-block: 48px 8px; }
 .assure-groups { display: grid; gap: 32px; margin-top: 32px; }
 #safety-tests { scroll-margin-top: 96px; }
@@ -1112,7 +1120,8 @@ html[lang="zh"] .assure-groups h3 { letter-spacing: 0.06em; }
 }
 @media (max-width: 900px) {
   .assure-hero { padding-top: 40px; }
-  .assure-make { grid-template-columns: 1fr; gap: 20px; }
+  .assure-make,
+  .assure-trial { grid-template-columns: 1fr; gap: 20px; }
 }
 @media (max-width: 700px) {
   .assure-hero { gap: 20px; padding-block: 36px 28px; }
