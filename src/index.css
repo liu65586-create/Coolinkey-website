@@ -670,17 +670,16 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-paths p:not(.v2-eyebrow) { margin: 0; max-width: 36rem; color: #686b66; font-size: 1.0625rem; line-height: 1.6; }
 .v2-paths .v2-btn { margin-top: 8px; }
 .v2-footer { background: #fff; }
-.v2-footer-grid { display: grid; grid-template-columns: 1.3fr repeat(4, 1fr); gap: 28px; padding-block: 48px 28px; }
-.v2-footer h2 { margin: 0 0 12px; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; color: #686b66; }
-.v2-footer ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.v2-footer a, .v2-footer li { color: #202120; font-size: 0.95rem; }
+.v2-footer-brand { padding-bottom: 28px; }
 .v2-footer a:hover { color: #146c43; }
+.v2-footer-legal { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.v2-footer-meta a { color: inherit; font-size: inherit; }
 .v2-footer-logo { height: 28px; width: auto; }
 .v2-wechat { color: #9aa09a; font-size: 0.95rem; }
 .v2-footer-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-bottom: 28px; color: #686b66; font-size: 0.8rem; }
 
 @media (max-width: 1000px) {
-  .v2-hero-grid, .v2-hero-brand .v2-hero-grid, .v2-design, .v2-split, .v2-approach, .v2-paths, .v2-footer-grid { grid-template-columns: 1fr; }
+  .v2-hero-grid, .v2-hero-brand .v2-hero-grid, .v2-design, .v2-split, .v2-approach, .v2-paths { grid-template-columns: 1fr; }
   .v2-cards { grid-template-columns: 1fr; }
   .life-aside { grid-template-columns: 1fr 1fr; gap: 16px; }
   .angle-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -953,7 +952,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   #help { gap: 48px; }
   .desk-form-card .v2-btn { justify-self: stretch; width: 100%; }
 }
-.v2-footer-grid { padding-top: var(--block-gap); }
+.v2-footer-brand { padding-top: var(--block-gap); }
 
 .business-inquiry { padding-block: 72px 80px; }
 .business-inquiry .v2-split { align-items: start; }
@@ -1255,8 +1254,7 @@ p.assure-note {
   .brand-product-kicker,
   .assure-clip h3,
   p.assure-note,
-  .life-note,
-  .v2-footer h2 {
+  .life-note {
     font-size: 13px;
     line-height: 1.45;
   }
