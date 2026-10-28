@@ -43,6 +43,14 @@ const stepVideos = [
     noteEn: "The fingerprint removal recording.",
     noteZh: "删除指纹的操作录像。",
   },
+  {
+    src: "/videos/how-to/physical-key.mp4",
+    poster: "/images/how-to/physical-key.jpg",
+    en: "Use the Mechanical Key",
+    zh: "使用机械钥匙",
+    noteEn: "The mechanical key recording.",
+    noteZh: "机械钥匙的操作录像。",
+  },
 ];
 
 const quickSteps = [
@@ -158,13 +166,13 @@ const faqs: Faq[] = [
     id: "key",
     en: "Using the mechanical key",
     zh: "使用机械钥匙",
-    causeEn: "The backup key is for emergencies. No separate key video is in this project.",
-    causeZh: "备用钥匙仅用于应急。本项目没有单独的钥匙录像。",
+    causeEn: "The backup key is for emergencies. The recording shows how to use it.",
+    causeZh: "备用钥匙仅用于应急。录像演示如何使用。",
     tryEn: "Insert the key fully, turn it firmly, then store the key separately from the lock.",
     tryZh: "把钥匙完全插入并用力转动，平时请与锁分开存放。",
     confirmEn: "The key has worked when the lock opens after that turn.",
     confirmZh: "转动后锁打开，即表示钥匙已经生效。",
-    videos: [],
+    videos: ["/videos/how-to/physical-key.mp4"],
   },
 ];
 
@@ -221,7 +229,7 @@ export function Support() {
         <div>
           <p className="use-kicker">{text(page?.videos, "supportPage.videos")}</p>
           <h3 id="use-videos-title">{copy("Video Tutorials", "视频教程")}</h3>
-          <p>{copy("Four recordings are ready.", "目前有 4 段录像。")}</p>
+          <p>{copy("Five recordings are ready.", "目前有 5 段录像。")}</p>
         </div>
         <ul>
           {stepVideos.map((video) => (

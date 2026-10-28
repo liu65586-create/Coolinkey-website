@@ -804,7 +804,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .use-videos { display: grid; gap: 22px; border-radius: 20px; background: #ecede9; padding: 28px 28px 24px; }
 .use-videos h3 { margin: 10px 0 0; color: #202120; font-size: clamp(1.6rem, 2vw, 2rem); font-weight: 650; letter-spacing: -0.03em; line-height: 1.2; }
 .use-videos > div p { margin: 12px 0 0; max-width: 36rem; color: #686b66; font-size: 0.95rem; line-height: 1.6; }
-.use-videos ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.use-videos ul { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
 .use-videos button { display: grid; align-content: start; gap: 10px; width: 100%; border: 0; border-radius: 14px; background: #fff; color: #202120; padding: 12px; text-align: left; font: inherit; cursor: pointer; }
 .use-videos button:hover { background: #f8f8f6; }
 .use-videos button:hover .use-play { color: #146c43; }
