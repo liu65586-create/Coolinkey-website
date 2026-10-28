@@ -1,4 +1,4 @@
-import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import type { Lang } from "../utils/siteCopy";
@@ -7,36 +7,7 @@ function text(lang: Lang, en: string, zh: string) {
   return lang === "zh" ? zh : en;
 }
 
-function FileLink({ href, label }: { href: string; label: string }) {
-  return (
-    <a className="v2-btn v2-btn-secondary" href={href} target="_blank" rel="noopener">
-      {label}
-    </a>
-  );
-}
-
-function DocumentCard({
-  href,
-  previewSrc,
-  previewAlt,
-  accent,
-  children,
-}: {
-  href: string;
-  previewSrc: string;
-  previewAlt: string;
-  accent?: boolean;
-  children: ReactNode;
-}) {
-  return (
-    <article className={accent ? "assure-doc assure-doc-ip" : "assure-doc"}>
-      <a className="assure-doc-thumb" href={href} target="_blank" rel="noopener">
-        <img src={previewSrc} alt={previewAlt} width={640} height={906} loading="lazy" decoding="async" />
-      </a>
-      <div className="assure-doc-main">{children}</div>
-    </article>
-  );
-}
+const MANUFACTURING_GIF = "/images/manufacturing/production_process_showcase_640.gif";
 
 type Recording = {
   src: string;
@@ -304,144 +275,57 @@ export function Durability() {
         </div>
       </div>
 
-      <section className="assure-docs page-wrap" aria-labelledby="assure-docs-title">
+      <section className="assure-make page-wrap" aria-labelledby="manufacturing-title">
         <div className="assure-copy">
-          <p className="assure-kicker">{copy("Documentation", "产品文件")}</p>
-          <h2 id="assure-docs-title">{copy("Verified Details. Clear Documentation.", "以文件为依据，清晰呈现产品信息")}</h2>
+          <p className="assure-kicker">{copy("Manufacturing Process", "制造过程")}</p>
+          <h2 id="manufacturing-title">{copy("Behind Every Detail.", "每个细节的背后。")}</h2>
           <p>
             {copy(
-              "Explore the available compliance documents, test reports, battery transport documentation, and intellectual property records associated with CLX1.",
-              "查看 CLX1 相关的产品合规文件、测试报告、电池运输资料及知识产权文件。",
+              "From circuit board assembly to final product assembly, every stage plays a part in bringing CLX1 to life.",
+              "从电路板装配到成品组装，每一个阶段都参与把 CLX1 做出来。",
+            )}
+          </p>
+          <p>
+            {copy(
+              "We pay attention to the details behind the product—not just how it looks, but how its electronic components and physical structure come together.",
+              "我们留意产品背后的细节：不只是它看起来怎样，也包括电子元件和实体结构如何组合到一起。",
             )}
           </p>
         </div>
+        <img
+          src={MANUFACTURING_GIF}
+          alt={copy("CLX1 production process", "CLX1 生产过程")}
+          width={640}
+          height={360}
+          loading="lazy"
+          decoding="async"
+        />
+      </section>
 
-        <div className="assure-doc-groups">
-          <section aria-labelledby="assure-compliance-title">
-            <h3 id="assure-compliance-title">{copy("Product Compliance & Testing", "产品合规与测试")}</h3>
-            <p>{copy("Compliance and protection records for CLX1, where a file is published.", "已发布的 CLX1 合规与防护文件。")}</p>
-            <div className="assure-doc-grid">
-              <DocumentCard
-                href="/documents/clx1-ip67-test.pdf"
-                previewSrc="/documents/previews/clx1-ip67-test.webp"
-                previewAlt={copy("First page of the IP67 Protection document", "IP67 防护认证文件首页")}
-                accent
-              >
-                <div className="assure-doc-top">
-                  <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
-                  <div className="assure-doc-side">
-                    <p className="assure-chip">{copy("IP67 Certified", "IP67 认证")}</p>
-                    <FileLink href="/documents/clx1-ip67-test.pdf" label={copy("View file", "查看文件")} />
-                  </div>
-                </div>
-                <h4>{copy("IP67 Protection", "IP67 防护认证")}</h4>
-                <p>
-                  {copy(
-                    "CLX1 has obtained IP67 certification. Refer to the relevant documentation for the applicable protection rating and test conditions.",
-                    "CLX1 已取得 IP67 认证。具体防护等级及适用条件以相关认证文件为准。",
-                  )}
-                </p>
-              </DocumentCard>
-              <DocumentCard
-                href="/documents/clx1-fcc.pdf"
-                previewSrc="/documents/previews/clx1-fcc.webp"
-                previewAlt={copy("First page of the FCC Test Report", "FCC 测试报告首页")}
-              >
-                <div className="assure-doc-top">
-                  <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
-                  <FileLink href="/documents/clx1-fcc.pdf" label={copy("View file", "查看文件")} />
-                </div>
-                <h4>{copy("FCC Test Report", "FCC 测试报告")}</h4>
-                <p>
-                  {copy(
-                    "FCC test report for the CLX1 smart chain lock. The stated scope and conditions are those in the document.",
-                    "CLX1 智能链条锁的 FCC 测试报告。报告所述范围与条件以该文件为准。",
-                  )}
-                </p>
-              </DocumentCard>
-              <DocumentCard
-                href="/documents/clx1-rohs.pdf"
-                previewSrc="/documents/previews/clx1-rohs.webp"
-                previewAlt={copy("First page of the RoHS Report", "RoHS 报告首页")}
-              >
-                <div className="assure-doc-top">
-                  <p className="assure-kicker">{copy("Product compliance", "产品合规")}</p>
-                  <FileLink href="/documents/clx1-rohs.pdf" label={copy("View file", "查看文件")} />
-                </div>
-                <h4>{copy("RoHS Report", "RoHS 报告")}</h4>
-                <p>
-                  {copy(
-                    "RoHS verification of conformity for the tested CLX1 sample. The stated scope and conditions are those in the document.",
-                    "针对所测 CLX1 样品的 RoHS 符合性验证。报告所述范围与条件以该文件为准。",
-                  )}
-                </p>
-              </DocumentCard>
-            </div>
-          </section>
-
-          <section aria-labelledby="assure-battery-title">
-            <h3 id="assure-battery-title">{copy("Battery & Transportation", "电池与运输")}</h3>
-            <p>
-              {copy(
-                "Battery-related documentation and transportation records, where applicable.",
-                "电池相关文件及运输资料，具体以实际提供的文件为准。",
-              )}
-            </p>
-            <div className="assure-doc-grid">
-              <DocumentCard
-                href="/documents/clx1-transport-air.pdf"
-                previewSrc="/documents/previews/clx1-transport-air.webp"
-                previewAlt={copy("First page of the Air Transport Report", "航空运输报告首页")}
-              >
-                <div className="assure-doc-top">
-                  <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
-                  <FileLink href="/documents/clx1-transport-air.pdf" label={copy("View file", "查看文件")} />
-                </div>
-                <h4>{copy("Air Transport Report", "航空运输报告")}</h4>
-                <p>
-                  {copy(
-                    "Identification and classification report for air transport of the goods named in the file. The stated scope and conditions are those in the document.",
-                    "文件所载物品的航空运输危险性鉴别报告。报告所述范围与条件以该文件为准。",
-                  )}
-                </p>
-              </DocumentCard>
-              <DocumentCard
-                href="/documents/clx1-transport-sea.pdf"
-                previewSrc="/documents/previews/clx1-transport-sea.webp"
-                previewAlt={copy("First page of the Sea Transport Report", "海运运输报告首页")}
-              >
-                <div className="assure-doc-top">
-                  <p className="assure-kicker">{copy("Transportation", "运输文件")}</p>
-                  <FileLink href="/documents/clx1-transport-sea.pdf" label={copy("View file", "查看文件")} />
-                </div>
-                <h4>{copy("Sea Transport Report", "海运运输报告")}</h4>
-                <p>
-                  {copy(
-                    "Identification and classification report marked for transport by sea. The stated scope and conditions are those in the document.",
-                    "标明海运的运输危险性鉴别报告。报告所述范围与条件以该文件为准。",
-                  )}
-                </p>
-              </DocumentCard>
-            </div>
-            <p className="assure-pending">
-              {copy(
-                "No UN 38.3 report or SDS is published on this page.",
-                "本页尚未发布 UN 38.3 报告或 SDS。",
-              )}
-            </p>
-          </section>
-
-          <section aria-labelledby="assure-ip-title">
-            <h3 id="assure-ip-title">{copy("Intellectual Property", "知识产权")}</h3>
-            <p>
-              {copy(
-                "Intellectual property documentation associated with the product and its design.",
-                "与产品设计及相关技术有关的知识产权文件。",
-              )}
-            </p>
-            <p className="assure-pending">{copy("No patent document is published on this page.", "本页尚未发布专利文件。")}</p>
-          </section>
+      <section className="assure-docs page-wrap" aria-labelledby="assure-docs-title">
+        <div className="assure-copy">
+          <p className="assure-kicker">{copy("Documentation", "产品文件")}</p>
+          <h2 id="assure-docs-title">{copy("Certificates", "认证文件")}</h2>
+          <p>
+            {copy(
+              "FCC authorization, the IP67 test report, RoHS verification, and the UN38.3 summary for CLX1.",
+              "CLX1 的 FCC 授权、IP67 测试报告、RoHS 符合性验证，以及 UN38.3 概要。",
+            )}
+          </p>
         </div>
+        <figure className="assure-sheet">
+          <img
+            src="/images/listing/clx1-certificates.jpg"
+            alt={copy(
+              "Four CLX1 certificates: FCC Grant of Equipment Authorization, FCC ID 2BWDZ-CLX; IP67 test report IEC 60529, report 1812C60282113101; RoHS verification AT812C602821128; UN38.3 test summary 1812C60277812701.",
+              "四份 CLX1 认证：FCC 设备授权，FCC ID 2BWDZ-CLX；IP67 测试报告 IEC 60529，报告号 1812C60282113101；RoHS 符合性验证 AT812C602821128；UN38.3 测试概要 1812C60277812701。",
+            )}
+            width={1024}
+            height={576}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </section>
 
       <section className="assure-lab page-wrap" aria-labelledby="assure-lab-title">
