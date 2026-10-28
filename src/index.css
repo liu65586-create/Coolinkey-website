@@ -1031,8 +1031,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 .assure h2 { max-width: none; margin: 12px 0 0; color: #202120; font-weight: 620; letter-spacing: -0.045em; line-height: 1.12; font-size: clamp(2rem, 3.2vw, 3.25rem); text-wrap: balance; }
 .assure-hero h2 { max-width: none; font-size: clamp(2.6rem, 4vw, 4.25rem); }
-.assure-copy > p,
-.assure-note p { max-width: 48rem; margin: 14px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
+.assure-copy > p { max-width: 48rem; margin: 14px 0 0; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
 .assure-hero .assure-copy > p:not(.assure-kicker) { max-width: 62rem; }
 .assure-aside { color: #202120; font-weight: 620; }
 .assure-hero-frame { width: 100%; overflow: hidden; border: 1px solid #e5e6e1; border-radius: 20px; background: #fff; }
@@ -1068,7 +1067,7 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
-  padding-block: 0 20px;
+  padding-block: 0 12px;
 }
 #safety-tests { scroll-margin-top: 96px; }
 .assure-clip { display: grid; gap: 8px; min-width: 0; }
@@ -1079,16 +1078,15 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 .assure-media video { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .assure-media > .assure-media-play { position: absolute; top: 50%; left: 50%; z-index: 1; margin: 0; transform: translate(-50%, -50%); background: #fff; }
 .assure-media p { width: auto; max-width: 22rem; flex: 0 0 auto; padding: 16px; text-align: center; }
-.assure-note { padding-block: 4px 36px; border-top: 1px solid #e5e6e1; }
+p.assure-note {
+  max-width: none;
+  margin: 0;
+  padding-block: 2px 28px;
+  color: #686b66;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
 @media (min-width: 900px) {
-  .assure-note {
-    display: grid;
-    grid-template-columns: minmax(16rem, 0.85fr) minmax(0, 1.15fr);
-    column-gap: clamp(32px, 5vw, 80px);
-    align-items: start;
-  }
-  .assure-note h2 { margin-top: 0; }
-  .assure-note p { max-width: none; margin-top: 0; }
   .use-guide > .v2-section-head {
     max-width: none;
     grid-template-columns: minmax(16rem, 0.85fr) minmax(0, 1.15fr);
@@ -1133,7 +1131,6 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
     padding-bottom: 16px;
   }
   .assure-clip { flex: 0 0 148px; scroll-snap-align: start; }
-  .assure-note { padding-bottom: 28px; }
   .assure-dialog { padding: 12px; }
 }
 
