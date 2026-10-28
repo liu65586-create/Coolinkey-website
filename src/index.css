@@ -1073,12 +1073,11 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 .assure-docs { padding-block: 20px 8px; }
 .assure-sheet { margin: 28px 0 0; overflow: auto; border: 1px solid #e5e6e1; border-radius: 20px; background: #fff; }
 .assure-sheet img { display: block; width: 100%; height: auto; }
-.assure-trial .assure-copy .v2-btn { justify-self: start; margin-top: 8px; }
+.assure-tests { display: grid; gap: 12px; padding-block: 0 28px; }
 .assure-clips {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
-  padding-block: 0 12px;
 }
 #safety-tests { scroll-margin-top: 96px; }
 .assure-clip { display: grid; gap: 8px; min-width: 0; }
@@ -1092,10 +1091,11 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
 p.assure-note {
   max-width: none;
   margin: 0;
-  padding-block: 2px 28px;
   color: #686b66;
   font-size: 0.95rem;
   line-height: 1.6;
+  text-align: center;
+  text-wrap: balance;
 }
 @media (min-width: 900px) {
   .use-guide > .v2-section-head {
@@ -1134,14 +1134,16 @@ p.assure-note {
   .assure-hero { gap: 20px; padding-block: 36px 28px; }
   .assure-sheet { overflow: hidden; }
   .assure-sheet img { width: 100%; max-width: 100%; height: auto; }
+  .assure-tests { gap: 14px; padding-block: 0 24px; }
   .assure-clips {
     display: flex;
     gap: 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 16px;
+    padding-bottom: 2px;
   }
   .assure-clip { flex: 0 0 148px; scroll-snap-align: start; }
+  p.assure-note { font-size: 0.86rem; line-height: 1.55; }
   .assure-dialog { padding: 12px; }
 }
 

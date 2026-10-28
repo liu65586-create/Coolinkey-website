@@ -284,14 +284,6 @@ export function Durability() {
   const copy = (en: string, zh: string) => text(lang, en, zh);
   const [recording, setRecording] = useState<Recording | null>(null);
 
-  const openTests = () => {
-    const target = document.getElementById("safety-tests");
-    if (!target) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    target.focus({ preventScroll: true });
-  };
-
   return (
     <section id="safety" className="assure site-anchor" tabIndex={-1} aria-labelledby="durability-title">
       <div className="assure-hero page-wrap">
@@ -365,13 +357,11 @@ export function Durability() {
               "从锤击、切割尝试，到浸水和车辆轮胎碾压，通过 CLX1 的测试视频了解各项测试中实际呈现的情况。",
             )}
           </p>
-          <button type="button" className="v2-btn v2-btn-secondary" onClick={openTests}>
-            {copy("View the five tests", "查看五项测试")}
-          </button>
         </div>
       </section>
 
-      <div id="safety-tests" className="assure-clips page-wrap" tabIndex={-1}>
+      <div id="safety-tests" className="assure-tests page-wrap">
+      <div className="assure-clips">
         {TEST_GROUPS.flatMap((group) => group.items).map((item) => {
           const title = copy(item.titleEn, item.titleZh);
           const alt = item.media ? copy(item.media.altEn, item.media.altZh) : "";
@@ -408,12 +398,13 @@ export function Durability() {
         })}
       </div>
 
-      <p className="assure-note page-wrap">
+      <p className="assure-note">
         {copy(
           "Each video shows a specific test under the conditions presented. Results apply to the recorded test conditions and should not be interpreted as a guarantee of performance under every possible condition. Refer to the relevant documentation for verified ratings and certifications.",
           "每段视频展示的是特定测试条件下的实际过程。视频结果仅适用于所呈现的测试条件，不应被理解为对所有使用环境下性能的保证。具体防护等级及认证信息，请以相关正式文件为准。",
         )}
       </p>
+      </div>
 
       <section className="assure-docs page-wrap" aria-labelledby="assure-docs-title">
         <div className="assure-copy">
