@@ -179,7 +179,6 @@ type BrandPrinciple = { en: string; zh: string; bodyEn: string; bodyZh: string }
 type BrandSlide = {
   id: string;
   image: string;
-  position: string;
   altEn: string;
   altZh: string;
   titleEn: string;
@@ -195,7 +194,6 @@ const brandSlides: BrandSlide[] = [
   {
     id: "product",
     image: "/images/listing/slide-1.jpg",
-    position: "72% center",
     altEn: "Hands holding the two ends of the CLX1 lock",
     altZh: "双手握住 CLX1 锁的两端",
     eyebrowEn: "CLX1 / FINGERPRINT SMART CHAIN LOCK",
@@ -208,7 +206,6 @@ const brandSlides: BrandSlide[] = [
   {
     id: "lifestyle",
     image: "/images/listing/slide-2.jpg",
-    position: "center center",
     altEn: "Close view of the CLX1 lock body and fingerprint sensor",
     altZh: "CLX1 锁体与指纹传感器的近景",
     eyebrowEn: "More Than a Lock",
@@ -226,7 +223,6 @@ const brandSlides: BrandSlide[] = [
   {
     id: "manifesto",
     image: "/images/lifestyle/hero-cyclists.jpg",
-    position: "72% center",
     altEn: "Two cyclists riding together along the coast",
     altZh: "两位骑行者沿海岸并肩骑行",
     titleEn: "Designed for a\nMore Effortless Life.",
@@ -277,15 +273,11 @@ export function HomeHero() {
                 ? "brand-slide brand-slide-product"
                 : slide.id === "manifesto"
                   ? "brand-slide brand-slide-manifesto"
-                  : "brand-slide"
+                  : "brand-slide brand-slide-lifestyle"
             }
             aria-hidden={slideIndex !== index}
           >
-            <img
-              src={slide.image}
-              alt={copy(slide.altEn, slide.altZh)}
-              style={slide.id === "manifesto" ? undefined : { objectPosition: slide.position }}
-            />
+            <img src={slide.image} alt={copy(slide.altEn, slide.altZh)} />
             <div className="brand-product-copy">
               {slide.eyebrowEn ? <p className="brand-product-kicker">{copy(slide.eyebrowEn, slide.eyebrowZh ?? "")}</p> : null}
               {slideIndex === 0 ? (
