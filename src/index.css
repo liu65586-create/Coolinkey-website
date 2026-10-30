@@ -322,7 +322,7 @@ main .home-page .page-wrap { max-width: none; width: min(1440px, calc(100% - 96p
 #help .about-panel .about-body { width: 100%; max-width: none; margin-inline: 0; }
 #help .about-panel h2 { font-size: clamp(2rem, 3vw, 2.6rem); }
 #help .about-panel .about-body { font-size: 1.0625rem; line-height: 1.7; }
-html[lang="zh"] #help .about-panel h2 { font-size: clamp(2.15rem, calc(4.8vw - 2px), calc(5.8rem - 2px)); letter-spacing: -0.04em; }
+html[lang="zh"] #help .about-panel h2 { font-size: clamp(2rem, 3.33vw, 3rem); letter-spacing: -0.04em; }
 html[lang="zh"] #help .about-panel .about-body { font-size: clamp(1.125rem, 1.7vw, 2rem); line-height: 1.65; }
 html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.7vw, 2rem); }
 .desk-ask .desk-copy h2 { color: #202120; }
