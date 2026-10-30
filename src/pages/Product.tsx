@@ -1,7 +1,5 @@
-﻿import { useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 import { Button } from "../components/Button";
-import { ProductDropdown } from "../components/ProductDropdown";
 import { ProductGallery } from "../components/ProductGallery";
 import { useCms } from "../context/CmsContext";
 import { useShoppingRegion } from "../context/ShoppingRegionContext";
@@ -10,18 +8,10 @@ import { openPurchase } from "../utils/purchaseLinks";
 
 export function Product() {
   const { i18n, t } = useTranslation();
-  const [slug, setSlug] = useState<string | undefined>();
-  const { products, loading, getBySlug, defaultProduct } = useCms();
+  const { loading, defaultProduct } = useCms();
   const { useChinaStores } = useShoppingRegion();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
-
-  const visibleProducts = useMemo(() => products.filter((product) => product.enabled !== false), [products]);
-
-  const active = useMemo(() => {
-    const found = slug ? getBySlug(slug) : defaultProduct;
-    if (found && found.enabled === false) return defaultProduct;
-    return found ?? defaultProduct;
-  }, [slug, getBySlug, defaultProduct]);
+  const active = defaultProduct && defaultProduct.enabled !== false ? defaultProduct : undefined;
 
   const name = active ? (lang === "zh" ? active.name.zh : active.name.en) : "";
   const desc = active ? (lang === "zh" ? active.shortDescription.zh : active.shortDescription.en) : "";
@@ -35,17 +25,7 @@ export function Product() {
   return (
     <div className="page-wrap py-8 sm:py-10">
       {!active ? (
-        <>
-          <div className="max-w-md">
-            <ProductDropdown
-              products={visibleProducts}
-              valueSlug=""
-              disabled={loading}
-              onChangeSlug={setSlug}
-            />
-          </div>
-          <p className="mt-16 text-text-muted">{loading ? "…" : "—"}</p>
-        </>
+        <p className="mt-16 text-text-muted">{loading ? "…" : "—"}</p>
       ) : (
         <>
           <div className="product-sheet">
@@ -55,12 +35,6 @@ export function Product() {
 
             <div className="product-copy">
               <div className="product-intro">
-                <ProductDropdown
-                  products={visibleProducts}
-                  valueSlug={active.slug}
-                  disabled={loading}
-                  onChangeSlug={setSlug}
-                />
                 <h2>{name}</h2>
                 {pills.length ? (
                   <ul className="product-pills">
