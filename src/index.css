@@ -766,6 +766,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     transform: none;
   }
   .brand-slide-product .brand-product-copy { top: 152px; }
+  .brand-slide-lifestyle .brand-product-copy,
+  .brand-slide-lifestyle .brand-product-copy:has(.brand-principles) {
+    top: auto;
+    bottom: 30px;
+  }
   .brand-product-kicker { font-size: 0.68rem; letter-spacing: 0.08em; }
   .brand-product-copy h1,
   .brand-product-copy h2,
