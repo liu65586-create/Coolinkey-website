@@ -11,7 +11,6 @@ export function Footer() {
   const { config } = useSiteConfig();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const email = config?.contact?.email?.trim() || "support@coolinkey.com";
-  const logo = config?.brand.logoSrc?.trim() || "/brand/coolinkey-logo-dark.png";
 
   const onRegionChange = (next: ShoppingRegionMode) => {
     setMode(next);
@@ -19,9 +18,6 @@ export function Footer() {
 
   return (
     <footer className="v2-footer">
-      <div className="v2-wrap v2-footer-brand">
-        <img className="v2-footer-logo" src={logo} alt="COOLINKEY" />
-      </div>
       <div className="v2-wrap v2-footer-meta">
         <div>© COOLINKEY · {pickBilingual(lang, config?.footer?.icp, t("footer.icp"))}</div>
         <div className="v2-footer-legal">
