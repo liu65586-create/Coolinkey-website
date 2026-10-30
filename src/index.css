@@ -737,7 +737,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .brand-slide { display: block; height: 100%; }
   .brand-slide::after {
     display: block;
-    background: linear-gradient(to top, rgba(16, 24, 18, 0.92) 0%, rgba(16, 24, 18, 0.84) 24%, rgba(16, 24, 18, 0.42) 42%, rgba(16, 24, 18, 0) 58%);
+    background: linear-gradient(to top, rgba(16, 24, 18, 0.78) 0%, rgba(16, 24, 18, 0.42) 26%, rgba(16, 24, 18, 0) 48%);
   }
   .brand-slide img,
   .brand-slide-product > img,
@@ -750,18 +750,16 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     aspect-ratio: auto;
     object-fit: cover;
   }
-  .brand-slide-product > img,
-  .brand-slide-lifestyle > img {
-    inset: auto;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 56%;
-    transform: none;
-    object-fit: cover;
+  .brand-slide-product > img {
+    object-position: 62% 38%;
+    transform: scale(1.22);
+    transform-origin: 24% 86%;
   }
-  .brand-slide-product > img { object-position: 24% 40%; }
-  .brand-slide-lifestyle > img { object-position: 32% 36%; }
+  .brand-slide-lifestyle > img {
+    object-position: 68% 34%;
+    transform: scale(1.18);
+    transform-origin: 30% 80%;
+  }
   .brand-slide-manifesto > img {
     object-position: 34% 24%;
     transform: none;
