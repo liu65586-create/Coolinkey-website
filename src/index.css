@@ -1085,7 +1085,7 @@ html[lang="zh"] .assure-kicker { letter-spacing: 0.08em; }
   padding-block: 8px 28px;
 }
 .assure-make img,
-.assure-trial video {
+.assure-trial img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;

@@ -8,8 +8,7 @@ function text(lang: Lang, en: string, zh: string) {
 }
 
 const MANUFACTURING_GIF = "/images/manufacturing/production_process_showcase_640.gif";
-const STREAM_LOOP = "/videos/testing/stream-test.mp4";
-const STREAM_LOOP_POSTER = "/images/listing/clx1-stream-loop.jpg";
+const STREAM_LOOP = "/images/listing/coolinkey-clx1-website-loop.gif";
 
 type Recording = {
   src: string;
@@ -18,50 +17,6 @@ type Recording = {
   width: number;
   height: number;
 };
-
-function LoopClip({
-  src,
-  poster,
-  label,
-  width,
-  height,
-}: {
-  src: string;
-  poster: string;
-  label: string;
-  width: number;
-  height: number;
-}) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useLayoutEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const start = video.play();
-    if (!start) return;
-    start.catch(() => {
-      video.muted = true;
-      void video.play();
-    });
-  }, []);
-
-  return (
-    <video
-      ref={videoRef}
-      src={src}
-      poster={poster}
-      width={width}
-      height={height}
-      muted
-      loop
-      autoPlay
-      playsInline
-      preload="metadata"
-      aria-label={label}
-    />
-  );
-}
 
 function TestCover({ src, width, height }: { src: string; width: number; height: number }) {
   return (
@@ -341,12 +296,12 @@ export function Durability() {
       </section>
 
       <section className="assure-trial page-wrap" aria-labelledby="assure-trial-title">
-        <LoopClip
+        <img
           src={STREAM_LOOP}
-          poster={STREAM_LOOP_POSTER}
-          label={copy("CLX1 resting in a flowing outdoor stream", "置于流动溪水中的 CLX1")}
+          alt={copy("CLX1 resting in a flowing outdoor stream", "置于流动溪水中的 CLX1")}
           width={960}
           height={540}
+          decoding="async"
         />
         <div className="assure-copy">
           <p className="assure-kicker">{copy("Real-world testing", "真实测试")}</p>
