@@ -1206,7 +1206,7 @@ p.assure-note {
   .assure-copy > p:not(.assure-kicker) { margin-top: 16px; }
   .desk-stack,
   #help { gap: 40px; }
-  .desk-ask { padding: 16px 0; border-radius: 20px; }
+  .desk-ask { padding: 16px 10px; border-radius: 20px; }
   .desk-form-card { padding: 16px; }
   .product-sheet { gap: 16px; }
   .product-frame { aspect-ratio: 4 / 3; }
