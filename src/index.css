@@ -756,9 +756,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     transform-origin: 24% 86%;
   }
   .brand-slide-lifestyle > img {
-    object-position: 68% 34%;
-    transform: scale(1.18);
-    transform-origin: 30% 80%;
+    object-fit: contain;
+    object-position: center 16%;
+    transform: none;
+    background: #050505;
   }
   .brand-slide-manifesto > img {
     object-position: 34% 24%;
