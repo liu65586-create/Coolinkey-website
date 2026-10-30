@@ -1,11 +1,12 @@
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { VideoModal } from "../components/VideoModal";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
+import { scrollToSection, sectionHash, sectionIdFromPath } from "../utils/siteSections";
 import { useTranslation } from "react-i18next";
 
 type AngleCard = {
@@ -252,6 +253,12 @@ export function HomeHero() {
   if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
 
   const go = (next: number) => setIndex((next + count) % count);
+  const onSlideLink = (event: MouseEvent<HTMLAnchorElement>, to: string) => {
+    const id = sectionIdFromPath(to);
+    if (!id || hash !== sectionHash(id)) return;
+    event.preventDefault();
+    scrollToSection(id);
+  };
 
   return (
     <section
@@ -298,17 +305,17 @@ export function HomeHero() {
               ) : null}
               {slideIndex === 0 ? (
                 <div className="brand-product-actions">
-                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
+                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1" onClick={(event) => onSlideLink(event, "/#clx1")}>
                     <span>{copy("Explore CLX1", "探索 CLX1")}</span>
                     <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
                   </Link>
-                  <Link className="brand-product-btn brand-product-btn-secondary" to="/#how-it-works">
+                  <Link className="brand-product-btn brand-product-btn-secondary" to="/#how-it-works" onClick={(event) => onSlideLink(event, "/#how-it-works")}>
                     {copy("How it works", "了解使用方式")}
                   </Link>
                 </div>
               ) : slide.principles ? (
                 <div className="brand-product-actions">
-                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1">
+                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1" onClick={(event) => onSlideLink(event, "/#clx1")}>
                     <span>{copy("Explore CLX1", "探索 CLX1")}</span>
                     <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
                   </Link>
