@@ -412,6 +412,34 @@ html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.
 .brand-product-copy:has(.brand-principles) h2,
 .brand-product-copy:not(:has(.brand-product-actions)) h2 { font-size: clamp(2.15rem, 2.6vw, 3.25rem); line-height: 1.14; }
 .brand-product-copy:has(.brand-principles) .brand-product-actions { margin-top: 18px; }
+@media (min-width: 701px) {
+  .brand-product-copy,
+  .brand-product-copy:has(.brand-principles),
+  .brand-product-copy:not(:has(.brand-product-actions)) {
+    left: clamp(88px, 8vw, 140px);
+    width: min(42rem, 46vw);
+    transform: translateY(-50%);
+  }
+  .brand-product-copy h1,
+  .brand-product-copy h2,
+  .brand-product-copy:has(.brand-principles) h2,
+  .brand-product-copy:not(:has(.brand-product-actions)) h2 {
+    margin-top: 12px;
+    font-size: clamp(3.5rem, 4.7vw, 4.75rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+  }
+  .brand-product-lead,
+  .brand-product-copy:has(.brand-principles) .brand-product-lead,
+  .brand-product-copy:not(:has(.brand-product-actions)) .brand-product-lead {
+    max-width: 28rem;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+}
 .brand-controls { position: absolute; z-index: 2; right: max(48px, calc((100% - 1440px) / 2)); bottom: 36px; display: flex; align-items: center; gap: 14px; }
 .brand-nav, .brand-dots button { border: 0; background: transparent; color: #fff; }
 .brand-nav { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 999px; background: rgba(16, 24, 18, 0.28); }
