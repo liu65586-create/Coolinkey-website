@@ -716,11 +716,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 @media (max-width: 700px) {
   .angle-groups { gap: 24px; }
   .angle-cards { grid-template-columns: 1fr 1fr; gap: 16px 10px; }
-  .angle-card-copy { gap: 0; padding: 8px 0 0; }
+  .angle-card-copy { gap: 0; padding: 10px 12px 0; }
   .angle-card p { display: none; }
   .life-hero img { aspect-ratio: 4 / 3; }
   .life-aside { grid-template-columns: 1fr; gap: 16px; }
-  .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 40px, 1440px); }
+  .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 48px, 1440px); }
   .v2-section, .v2-hero-brand { padding-block: 40px 0; }
   .v2-hero-copy h1, .v2-hero-brand h1 { font-size: 26px; max-width: none; }
 }
@@ -730,7 +730,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .angle-card-lead h4 { font-size: 1.18rem; }
 }
 @media (max-width: 700px) {
-  .brand-copy { left: 20px; bottom: 84px; width: calc(100% - 40px); }
+  .brand-copy { left: 24px; bottom: 84px; width: calc(100% - 48px); }
   .brand-copy h1, .brand-copy h2 { font-size: clamp(2.1rem, 10vw, 3rem); max-width: none; }
   .brand-carousel { height: calc(100svh - var(--nav-h, 80px)); }
   .brand-track { height: 100%; }
@@ -756,8 +756,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     position: absolute;
     top: 28px;
     bottom: auto;
-    left: 20px;
-    width: min(22rem, calc(100% - 40px));
+    left: 24px;
+    width: min(22rem, calc(100% - 48px));
     margin: 0;
     padding: 0 0 0 14px;
     border-left: 2px solid #65ee27;
@@ -844,9 +844,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .use-videos ul { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 700px) {
-  .use-guide { width: min(100% - 40px, 1440px); gap: 40px; }
+  .use-guide { width: min(100% - 48px, 1440px); gap: 40px; }
   .use-videos ul { grid-template-columns: 1fr; }
-  .use-videos { padding: 16px 0; }
+  .use-videos { padding: 16px; }
   .use-start {
     flex-direction: column;
     align-items: stretch;
@@ -1206,7 +1206,7 @@ p.assure-note {
   .assure-copy > p:not(.assure-kicker) { margin-top: 16px; }
   .desk-stack,
   #help { gap: 40px; }
-  .desk-ask { padding: 16px 0; border-radius: 20px; }
+  .desk-ask { padding: 16px; border-radius: 20px; }
   .product-sheet { gap: 16px; }
   .product-frame { aspect-ratio: 4 / 3; }
   .product-intro h2,
@@ -1235,8 +1235,8 @@ p.assure-note {
   .brand-product-copy h2,
   .brand-product-copy:has(.brand-principles) h2,
   .brand-product-copy:not(:has(.brand-product-actions)) h2 {
-    font-size: 26px;
-    line-height: 1.2;
+    font-size: 22px;
+    line-height: 1.25;
   }
   .angle-group-head h3,
   .product-copy h3,
