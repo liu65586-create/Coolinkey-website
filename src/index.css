@@ -47,7 +47,7 @@ button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 img { max-width: 100%; }
 .page-wrap, .site-container { width: min(1440px, calc(100% - 96px)); margin-inline: auto; }
-@media (max-width: 640px) { .page-wrap, .site-container { width: min(100% - 48px, 1220px); } }
+@media (max-width: 640px) { .page-wrap, .site-container { width: min(100% - 30px, 1220px); } }
 .section-pad, .section-space { padding-block: clamp(48px, 5.5vw, 80px); }
 .site-loading { min-height: 50vh; display:grid; place-items:center; color:var(--muted); letter-spacing:.22em; }
 
@@ -720,7 +720,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .angle-card p { display: none; }
   .life-hero img { aspect-ratio: 4 / 3; }
   .life-aside { grid-template-columns: 1fr; gap: 16px; }
-  .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 43px, 1440px); }
+  .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 30px, 1440px); }
   .v2-section, .v2-hero-brand { padding-block: 40px 0; }
   .v2-hero-copy h1, .v2-hero-brand h1 { font-size: 26px; max-width: none; }
 }
@@ -730,7 +730,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .angle-card-lead h4 { font-size: 1.18rem; }
 }
 @media (max-width: 700px) {
-  .brand-copy { left: 21.5px; bottom: 84px; width: calc(100% - 43px); }
+  .brand-copy { left: 15px; bottom: 84px; width: calc(100% - 30px); }
   .brand-copy h1, .brand-copy h2 { font-size: clamp(2.1rem, 10vw, 3rem); max-width: none; }
   .brand-carousel { height: calc(100svh - var(--nav-h, 80px)); }
   .brand-track { height: 100%; }
@@ -756,8 +756,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     position: absolute;
     top: 28px;
     bottom: auto;
-    left: 21.5px;
-    width: min(22rem, calc(100% - 43px));
+    left: 15px;
+    width: min(22rem, calc(100% - 30px));
     margin: 0;
     padding: 0 0 0 14px;
     border-left: 2px solid #65ee27;
@@ -844,7 +844,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .use-videos ul { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 700px) {
-  .use-guide { width: min(100% - 43px, 1440px); gap: 40px; }
+  .use-guide { width: min(100% - 30px, 1440px); gap: 40px; }
   .use-videos ul { grid-template-columns: 1fr; }
   .use-videos { padding: 16px 0; }
   .use-start {
