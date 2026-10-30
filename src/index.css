@@ -675,7 +675,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .v2-footer-legal { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 .v2-footer-meta a { color: inherit; font-size: inherit; }
 .v2-footer-logo { height: 28px; width: auto; }
-.v2-wechat { color: #9aa09a; font-size: 0.95rem; }
 .v2-footer-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-bottom: 28px; color: #686b66; font-size: 0.8rem; }
 
 @media (max-width: 1000px) {
