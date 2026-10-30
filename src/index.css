@@ -765,6 +765,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     box-shadow: none;
     transform: none;
   }
+  .brand-slide-product .brand-product-copy { top: 152px; }
   .brand-product-kicker { font-size: 0.68rem; letter-spacing: 0.08em; }
   .brand-product-copy h1,
   .brand-product-copy h2,
@@ -846,7 +847,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 @media (max-width: 700px) {
   .use-guide { width: min(100% - 30px, 1440px); gap: 40px; }
   .use-videos ul { grid-template-columns: 1fr; }
-  .use-videos { padding: 16px 0; background: transparent; border-radius: 0; }
+  .use-videos { margin-top: -30px; padding: 0; background: transparent; border-radius: 0; gap: 10px; }
   .use-videos > div { padding-left: 3px; }
   .use-start {
     flex-direction: column;
@@ -1209,6 +1210,9 @@ p.assure-note {
   .assure-copy > p:not(.assure-kicker) { margin-top: 16px; }
   .desk-stack,
   #help { gap: 40px; }
+  .use-trouble { margin-top: -30px; gap: 10px; }
+  .life-note { margin-top: -18px; }
+  .assure-hero { padding-top: 10px; }
   .desk-ask { margin-inline: -3px; padding: 16px 10px; border-radius: 20px; }
   .desk-form-card { background: transparent; border-radius: 0; padding: 0; }
   .desk-panel { padding-left: 0; background: transparent; border-radius: 0; }
