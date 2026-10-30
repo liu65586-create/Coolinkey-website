@@ -888,6 +888,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   padding: 6px 22px;
 }
 .desk-panel details + details { border-top: 1px solid rgba(32, 33, 32, 0.08); }
+.desk-panel details:last-child { border-bottom: 1px solid rgba(32, 33, 32, 0.08); }
 .desk-panel summary {
   display: flex;
   align-items: center;
@@ -1208,7 +1209,7 @@ p.assure-note {
   .assure-copy > p:not(.assure-kicker) { margin-top: 16px; }
   .desk-stack,
   #help { gap: 40px; }
-  .desk-ask { padding: 16px 10px; border-radius: 20px; }
+  .desk-ask { margin-inline: -3px; padding: 16px 10px; border-radius: 20px; }
   .desk-form-card { background: transparent; border-radius: 0; padding: 0; }
   .desk-panel { padding-left: 0; background: transparent; border-radius: 0; }
   #clx1 .page-wrap { padding-top: 25px; }
