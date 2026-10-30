@@ -735,7 +735,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .brand-carousel { height: calc(100svh - var(--nav-h, 80px)); }
   .brand-track { height: 100%; }
   .brand-slide { display: block; height: 100%; }
-  .brand-slide::after { display: block; background: linear-gradient(180deg, rgba(16, 24, 18, 0.78) 0%, rgba(16, 24, 18, 0.34) 30%, rgba(16, 24, 18, 0) 52%); }
+  .brand-slide::after {
+    display: block;
+    background: linear-gradient(to top, rgba(16, 24, 18, 0.92) 0%, rgba(16, 24, 18, 0.84) 24%, rgba(16, 24, 18, 0.42) 42%, rgba(16, 24, 18, 0) 58%);
+  }
   .brand-slide img,
   .brand-slide-product > img,
   .brand-slide-lifestyle > img,
@@ -747,29 +750,36 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     aspect-ratio: auto;
     object-fit: cover;
   }
-  .brand-slide-product > img { object-position: 64% center; }
-  .brand-slide-lifestyle > img { object-position: 72% center; }
-  .brand-slide-manifesto > img { object-position: 30% center; }
+  .brand-slide-product > img,
+  .brand-slide-lifestyle > img {
+    inset: auto;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 56%;
+    transform: none;
+    object-fit: cover;
+  }
+  .brand-slide-product > img { object-position: 24% 40%; }
+  .brand-slide-lifestyle > img { object-position: 32% 36%; }
+  .brand-slide-manifesto > img {
+    object-position: 34% 24%;
+    transform: none;
+  }
   .brand-product-copy,
   .brand-product-copy:has(.brand-principles),
   .brand-product-copy:not(:has(.brand-product-actions)) {
     position: absolute;
-    top: 52px;
-    bottom: auto;
+    top: auto;
+    bottom: 30px;
     left: 15px;
-    width: min(22rem, calc(100% - 30px));
+    width: min(17rem, calc(100% - 210px));
     margin: 0;
     padding: 0 0 0 14px;
     border-left: 2px solid #65ee27;
     background: none;
     box-shadow: none;
     transform: none;
-  }
-  .brand-slide-product .brand-product-copy { top: 152px; }
-  .brand-slide-lifestyle .brand-product-copy,
-  .brand-slide-lifestyle .brand-product-copy:has(.brand-principles) {
-    top: auto;
-    bottom: 30px;
   }
   .brand-product-kicker { font-size: 0.68rem; letter-spacing: 0.08em; }
   .brand-product-copy h1,
