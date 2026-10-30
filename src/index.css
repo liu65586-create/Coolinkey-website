@@ -1213,7 +1213,7 @@ p.assure-note {
   .use-trouble { margin-top: -30px; gap: 10px; }
   .life-note { margin-top: -18px; }
   .assure-hero { padding-top: 10px; }
-  .desk-ask { margin-inline: -3px; padding: 16px 10px; border-radius: 20px; background: transparent; }
+  .desk-ask { margin-inline: 0; padding: 16px 0; border-radius: 0; background: transparent; }
   .desk-form-card { background: transparent; border-radius: 0; padding: 0; }
   .desk-panel { padding-left: 0; background: transparent; border-radius: 0; }
   #clx1 .page-wrap { padding-top: 25px; }
