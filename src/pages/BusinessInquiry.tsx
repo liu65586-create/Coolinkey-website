@@ -158,12 +158,12 @@ export function BusinessInquiry() {
       <div className="v2-split">
         <div>
           <p className="v2-eyebrow">{copy(lang, "For Business", "面向商务")}</p>
-          <h1>{copy(lang, "Let's Talk About Working Together.", "我们来谈谈合作。")}</h1>
+          <h1>{copy(lang, "Let's Talk About Working Together", "我们来谈谈合作")}</h1>
           <p className="v2-lead">
             {copy(
               lang,
-              "Whether you're exploring distribution, retail opportunities, corporate purchasing or another business collaboration, tell us a little about your needs and we'll review your inquiry.",
-              "无论你在了解分销、零售、企业采购，还是其他商务合作，告诉我们你的需求，我们会查看你的咨询。",
+              "Whether you're exploring distribution, retail opportunities, corporate purchasing or another business collaboration, tell us a little about your needs and we'll review your inquiry",
+              "无论你在了解分销、零售、企业采购，还是其他商务合作，告诉我们你的需求，我们会查看你的咨询",
             )}
           </p>
         </div>

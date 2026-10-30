@@ -251,7 +251,7 @@ export function Durability() {
               "了解 CLX1 的产品认证与相关文件，并通过真实测试视频，直观了解产品在不同测试条件下的表现。",
             )}
           </p>
-          <p className="assure-aside">{copy("Designed with care. Tested in real conditions.", "用心设计。在真实条件下测试。")}</p>
+          <p className="assure-aside">{copy("Designed with care. Tested in real conditions", "用心设计。在真实条件下测试")}</p>
         </div>
         <div className="assure-hero-frame">
           <img
@@ -271,7 +271,7 @@ export function Durability() {
       <section className="assure-make page-wrap" aria-labelledby="manufacturing-title">
         <div className="assure-copy">
           <p className="assure-kicker">{copy("Manufacturing Process", "制造过程")}</p>
-          <h2 id="manufacturing-title">{copy("Behind Every Detail.", "每个细节的背后。")}</h2>
+          <h2 id="manufacturing-title">{copy("Behind Every Detail", "每个细节的背后")}</h2>
           <p>
             {copy(
               "From circuit board assembly to final product assembly, every stage plays a part in bringing CLX1 to life.",
@@ -305,7 +305,7 @@ export function Durability() {
         />
         <div className="assure-copy">
           <p className="assure-kicker">{copy("Real-world testing", "真实测试")}</p>
-          <h2 id="assure-trial-title">{copy("Put to the Test.", "直观了解，真实呈现")}</h2>
+          <h2 id="assure-trial-title">{copy("Put to the Test", "直观了解，真实呈现")}</h2>
           <p>
             {copy(
               "From impact and cutting attempts to water exposure and vehicle tire pressure, explore the conditions shown in our CLX1 test footage.",

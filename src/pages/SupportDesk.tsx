@@ -110,8 +110,8 @@ export function SupportDesk() {
               <p>
                 {copy(
                   lang,
-                  "Tell us what you need help with, and we'll do our best to point you in the right direction.",
-                  "告诉我们你需要什么帮助，我们会尽量为你指出方向。",
+                  "Tell us what you need help with, and we'll do our best to point you in the right direction",
+                  "告诉我们你需要什么帮助，我们会尽量为你指出方向",
                 )}
               </p>
               <p>

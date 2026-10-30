@@ -12,7 +12,7 @@ export const copyDefaults = {
     { id: "nav-support", label: bi("Support", "支持"), to: "/#help" },
   ],
   footer: {
-    tagline: bi("Smart Lock for a Freer You.", "让出行更自由的智能锁。"),
+    tagline: bi("Smart Lock for a Freer You", "让出行更自由的智能锁"),
     privacy: bi("Privacy Policy", "隐私政策"),
     cookie: bi("GDPR & Cookie Statement", "GDPR 与 Cookie 声明"),
     icp: bi("ICP备XXXX号", "ICP备XXXX号"),
@@ -61,10 +61,10 @@ export const copyDefaults = {
   },
   support: {
     kicker: bi("Support", "支持"),
-    title: bi("Get started. Stay confident.", "轻松上手。始终安心。"),
+    title: bi("Get started. Stay confident", "轻松上手。始终安心"),
     subtitle: bi(
-      "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place.",
-      "设置、使用与排查 coolinkey 所需的一切都在这里。说明书、视频与分步指南，集中查阅。"
+      "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place",
+      "设置、使用与排查 coolinkey 所需的一切都在这里。说明书、视频与分步指南，集中查阅"
     ),
     quickStart: bi("Quick Start", "快速开始"),
     quickStartHint: bi("Get up and running in minutes.", "几分钟完成设置。"),
@@ -73,7 +73,7 @@ export const copyDefaults = {
     videos: bi("Video Guides", "视频指南"),
     videosHint: bi("Watch and learn, in real time.", "跟着演示一步到位。"),
     troubleshooting: bi("Troubleshooting", "常见问题"),
-    troubleshootingHint: bi("Solve common issues quickly.", "快速解决常见状况。"),
+    troubleshootingHint: bi("Solve common issues quickly", "快速解决常见状况"),
     helpTitle: bi("Still need help?", "还需要帮助？"),
     helpBody: bi("Our support team is here for you.", "支持团队随时为你服务。"),
     contactCta: bi("Contact Support", "联系支持"),

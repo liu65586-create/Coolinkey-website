@@ -202,8 +202,8 @@ export function Support() {
     <div className="use-guide">
       <header className="v2-section-head">
         <p className="v2-eyebrow">{text(page?.quickStart, "supportPage.quickStart")}</p>
-        <h2>{copy("Get Started with CLX1.", "开始使用 CLX1。")}</h2>
-        <p>{copy("From the first charge to your first fingerprint unlock.", "从第一次充电，到第一次指纹开锁。")}</p>
+        <h2>{copy("Get Started with CLX1", "开始使用 CLX1")}</h2>
+        <p>{copy("From the first charge to your first fingerprint unlock", "从第一次充电，到第一次指纹开锁")}</p>
       </header>
 
       <div className="use-start">
@@ -229,7 +229,7 @@ export function Support() {
         <div>
           <p className="use-kicker">{text(page?.videos, "supportPage.videos")}</p>
           <h3 id="use-videos-title">{copy("Video Tutorials", "视频教程")}</h3>
-          <p>{copy("Five recordings are ready.", "目前有 5 段录像。")}</p>
+          <p>{copy("Five recordings are ready", "目前有 5 段录像")}</p>
         </div>
         <ul>
           {stepVideos.map((video) => (

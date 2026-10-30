@@ -13,8 +13,8 @@
     "zh": "中文"
   },
   "hero": {
-    "title": "Unlock Freedom.\nRide with Confidence.",
-    "subtitle": "Smart security for every journey. No keys, no worries — coolinkey keeps what matters to you, safe.",
+    "title": "Unlock Freedom\nRide with Confidence",
+    "subtitle": "Smart security for every journey. No keys, no worries — coolinkey keeps what matters to you, safe",
     "buy": "Buy now",
     "discover": "Discover CLX1",
     "learnMore": "Learn more",
@@ -69,8 +69,8 @@
   },
   "supportPage": {
     "kicker": "Support",
-    "title": "Get started. Stay confident.",
-    "subtitle": "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place.",
+    "title": "Get started. Stay confident",
+    "subtitle": "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place",
     "quickStart": "Quick Start",
     "quickStartHint": "Get up and running in minutes.",
     "guides": "User Guides & Downloads",
@@ -78,7 +78,7 @@
     "videos": "Video Guides",
     "videosHint": "Watch and learn, in real time.",
     "troubleshooting": "Troubleshooting",
-    "troubleshootingHint": "Solve common issues quickly.",
+    "troubleshootingHint": "Solve common issues quickly",
     "helpTitle": "Still need help?",
     "helpBody": "Our support team is here for you.",
     "contactCta": "Contact Support",
@@ -108,7 +108,7 @@
     "videoNote": "YouTube (EN) — add Bilibili embed URL in CMS for ZH when available."
   },
   "footer": {
-    "tagline": "Smart Lock for a Freer You.",
+    "tagline": "Smart Lock for a Freer You",
     "privacy": "Privacy Policy",
     "cookie": "GDPR & Cookie Statement",
     "icp": "ICP备XXXX号",
@@ -118,7 +118,7 @@
     "regionGlobal": "Global (Amazon)"
   },
   "about": {
-    "title": "Thoughtfully Made. So You Can Focus on What Matters.",
+    "title": "Thoughtfully Made. So You Can Focus on What Matters",
     "body": "At COOLINKEY, we believe everyday security should work around people—not the other way around.\n\nWe design locking products around real needs, paying attention to the details that make them easier to use, more convenient in everyday life, and more reassuring when it matters.\n\nBecause better security isn't just about the lock. It's about giving you more confidence to focus on what matters.\n\nCOOLINKEY — Less Complexity. More Possibility."
   },
   "contact": {

@@ -14,12 +14,12 @@
   },
   "hero": {
     "title": {
-      "en": "Unlock Freedom.\nRide with Confidence.",
-      "zh": "解锁自由。\n安心骑行。"
+      "en": "Unlock Freedom\nRide with Confidence",
+      "zh": "解锁自由\n安心骑行"
     },
     "subtitle": {
-      "en": "Smart security for every journey. No keys to carry. More freedom to ride.",
-      "zh": "为每一次出行提供智能守护。少一点钥匙负担，多一点自由骑行。"
+      "en": "Smart security for every journey. No keys to carry. More freedom to ride",
+      "zh": "为每一次出行提供智能守护。少一点钥匙负担，多一点自由骑行"
     },
     "backgroundImageUrl": "/uploads/20261018T162218-10-18-_export.gif",
     "overlayUsesProductImage": false,
@@ -185,8 +185,8 @@
   },
   "about": {
     "title": {
-      "en": "Thoughtfully Made. So You Can Focus on What Matters.",
-      "zh": "用心做好，让你专注真正重要的事。"
+      "en": "Thoughtfully Made. So You Can Focus on What Matters",
+      "zh": "用心做好，让你专注真正重要的事"
     },
     "body": {
       "en": "At COOLINKEY, we believe everyday security should work around people—not the other way around.\n\nWe design locking products around real needs, paying attention to the details that make them easier to use, more convenient in everyday life, and more reassuring when it matters.\n\nBecause better security isn't just about the lock. It's about giving you more confidence to focus on what matters.\n\nCOOLINKEY — Less Complexity. More Possibility.",
@@ -242,8 +242,8 @@
       "zh": "认识 CLX1"
     },
     "title": {
-      "en": "Security that fits your everyday.",
-      "zh": "融入日常的安心守护。"
+      "en": "Security that fits your everyday",
+      "zh": "融入日常的安心守护"
     },
     "body": {
       "en": "A smart chain lock that combines fingerprint access, app management and a physical backup key in a clean, portable design.",
@@ -286,8 +286,8 @@
       "zh": "多种日常场景"
     },
     "title": {
-      "en": "Made for more than one kind of ride.",
-      "zh": "不止适用于一种出行场景。"
+      "en": "Made for more than one kind of ride",
+      "zh": "不止适用于一种出行场景"
     },
     "body": {
       "en": "At the bike rack, outside a café, or securing a gate at home—bring smart access into your routine.",
@@ -340,8 +340,8 @@
       "zh": "智能互联"
     },
     "title": {
-      "en": "Your lock. Your access.",
-      "zh": "你的锁，由你掌控。"
+      "en": "Your lock. Your access",
+      "zh": "你的锁，由你掌控"
     },
     "body": {
       "en": "Pair with the app to manage access and make everyday locking feel simpler.",
@@ -419,7 +419,7 @@
       "zh": "每个细节，都为安心而设计"
     },
     "detailTitle": {
-      "en": "Thoughtful details. Everyday confidence.",
+      "en": "Thoughtful details. Everyday confidence",
       "zh": "每个细节，都为安心而设计"
     },
     "detailIntro": {
@@ -435,7 +435,7 @@
           "zh": "01 / 解锁"
         },
         "title": {
-          "en": "One touch. You're in.",
+          "en": "One touch. You're in",
           "zh": "一触即开"
         },
         "body": {
@@ -501,8 +501,8 @@
       "zh": "准备好开启下一段旅程"
     },
     "closingTitle": {
-      "en": "You focus on freedom.\nWe focus on security.",
-      "zh": "你专注自由。\n我们专注守护。"
+      "en": "You focus on freedom\nWe focus on security",
+      "zh": "你专注自由\n我们专注守护"
     }
   },
   "nav": {
@@ -543,8 +543,8 @@
   },
   "footer": {
     "tagline": {
-      "en": "Smart Lock for a Freer You.",
-      "zh": "让出行更自由的智能锁。"
+      "en": "Smart Lock for a Freer You",
+      "zh": "让出行更自由的智能锁"
     },
     "privacy": {
       "en": "Privacy Policy",
@@ -565,12 +565,12 @@
       "zh": "支持"
     },
     "title": {
-      "en": "Get started. Stay confident.",
-      "zh": "轻松上手。始终安心。"
+      "en": "Get started. Stay confident",
+      "zh": "轻松上手。始终安心"
     },
     "subtitle": {
-      "en": "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place.",
-      "zh": "设置、使用与排查 coolinkey 所需的一切都在这里。说明书、视频与分步指南，集中查阅。"
+      "en": "Everything you need to set up, use and troubleshoot your coolinkey. Find manuals, videos and step-by-step guides — all in one place",
+      "zh": "设置、使用与排查 coolinkey 所需的一切都在这里。说明书、视频与分步指南，集中查阅"
     },
     "quickStart": {
       "en": "Quick Start",
@@ -601,8 +601,8 @@
       "zh": "常见问题"
     },
     "troubleshootingHint": {
-      "en": "Solve common issues quickly.",
-      "zh": "快速解决常见状况。"
+      "en": "Solve common issues quickly",
+      "zh": "快速解决常见状况"
     },
     "helpTitle": {
       "en": "Still need help?",
