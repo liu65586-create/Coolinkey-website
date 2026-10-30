@@ -1210,12 +1210,14 @@ p.assure-note {
   .assure-copy > p:not(.assure-kicker) { margin-top: 16px; }
   .desk-stack,
   #help { gap: 40px; }
+  #help { padding-top: 15px; }
   .use-trouble { margin-top: -30px; gap: 10px; }
   .life-note { margin-top: -18px; }
   .assure-hero { padding-top: 10px; }
-  .desk-ask { margin-inline: 0; padding: 16px 0; border-radius: 0; background: transparent; }
+  .desk-ask { margin-inline: 0; padding: 0 0 16px; border-radius: 0; background: transparent; }
+  #support-message .desk-copy h2 { margin-top: 0; }
   .desk-form-card { background: transparent; border-radius: 0; padding: 0; }
-  .desk-panel { padding-left: 0; background: transparent; border-radius: 0; }
+  .desk-panel { padding-left: 0; padding-bottom: 0; background: transparent; border-radius: 0; }
   #clx1 .page-wrap { padding-top: 25px; }
   .product-intro h2 { margin-top: 0; }
   #how-it-works .v2-video,
