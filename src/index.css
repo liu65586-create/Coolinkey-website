@@ -831,6 +831,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   padding-bottom: var(--block-end);
 }
 #how-it-works { min-height: 0; justify-content: flex-start; }
+@media (min-width: 701px) {
+  #clx1 .page-wrap { padding-top: calc(var(--block-gap) - 20px); }
+}
 .use-guide { display: grid; gap: 56px; width: min(1440px, calc(100% - 96px)); margin-inline: auto; }
 .use-guide .v2-section-head { margin-bottom: 0; }
 .use-kicker { margin: 0; color: #686b66; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; }
