@@ -105,6 +105,68 @@ type Faq = {
 
 const faqs: Faq[] = [
   {
+    id: "app-timeout",
+    en: "The app indicates connection failure or timeout",
+    zh: "App 提示连接失败或超时",
+    solutionsEn: [
+      "Touch the fingerprint identification area and check if the device responds.",
+      "If the device responds abnormally or not at all, the battery may be too low or exhausted. Please charge and try again.",
+      "If the device responds normally, please ensure that the account logged in the app is consistent with the account used during pairing.",
+      "If none of the above issues exist, ensure that the phone and the device are as close as possible, and complete the connection between the mobile phone app and the device within 30 seconds after the device's blue light starts breathing.",
+    ],
+    solutionsZh: [
+      "触摸指纹识别区域，检查设备是否有响应。",
+      "若设备响应异常或完全没有响应，可能是电量过低或已耗尽。请充电后再试。",
+      "若设备响应正常，请确认 App 登录的账号与配对时使用的账号一致。",
+      "若以上情况都不存在，请让手机尽量靠近设备，并在设备蓝灯开始呼吸闪烁后的 30 秒内，完成手机 App 与设备的连接。",
+    ],
+    videos: [],
+  },
+  {
+    id: "add-print-fail",
+    en: "Failed to add a fingerprint",
+    zh: "指纹添加失败",
+    solutionsEn: [
+      "Ensure your fingers are dry and clean, and try using another finger if needed.",
+      "It is recommended to add fingerprints when the device has sufficient power. Charge the device and try again if necessary.",
+    ],
+    solutionsZh: [
+      "请确保手指干燥、清洁，必要时换一根手指再试。",
+      "建议在设备电量充足时录入指纹。如有需要，请先为设备充电后再试。",
+    ],
+    videos: [],
+  },
+  {
+    id: "bind-missing",
+    en: "Cannot find the device when tapping + during binding",
+    zh: "绑定时点击 App「+」找不到设备，无法完成绑定",
+    solutionsEn: [
+      "Touch the fingerprint identification area to ensure the device is in wake-up state, then perform the binding operation.",
+      "Check if the device has already been bound to another account. Note: One device can only be bound to one account.",
+      "Try the following steps: First turn off the phone's Bluetooth, exit the app, then re-enable Bluetooth, restart the app, and try again.",
+    ],
+    solutionsZh: [
+      "触摸指纹识别区域，确认设备处于唤醒状态后，再进行绑定。",
+      "检查设备是否已经绑定到其他账号。注意：一台设备只能绑定一个账号。",
+      "可按以下步骤重试：先关闭手机蓝牙，退出 App，再重新打开蓝牙并重启 App，然后再次尝试。",
+    ],
+    videos: [],
+  },
+  {
+    id: "auto-lock",
+    en: "Auto-lock fails after closing the lock",
+    zh: "关锁后无法自动上锁",
+    solutionsEn: [
+      "Confirm that the Auto-Lock switch is enabled in More Settings of the app.",
+      "You can manually trigger locking via the app or by using an incorrect fingerprint to check if the locking function works normally.",
+    ],
+    solutionsZh: [
+      "请确认已在 App 的「更多设置」中打开自动上锁开关。",
+      "可通过 App 手动触发上锁，或使用一枚错误指纹，检查上锁功能是否正常。",
+    ],
+    videos: [],
+  },
+  {
     id: "print-fail",
     en: "Fingerprint recognition fails",
     zh: "指纹识别失败",
@@ -175,68 +237,6 @@ const faqs: Faq[] = [
     confirmEn: "The key has worked when the lock opens after that turn.",
     confirmZh: "转动后锁打开，即表示钥匙已经生效。",
     videos: ["/videos/how-to/physical-key.mp4"],
-  },
-  {
-    id: "app-timeout",
-    en: "The app indicates connection failure or timeout",
-    zh: "App 提示连接失败或超时",
-    solutionsEn: [
-      "Touch the fingerprint identification area and check if the device responds.",
-      "If the device responds abnormally or not at all, the battery may be too low or exhausted. Please charge and try again.",
-      "If the device responds normally, please ensure that the account logged in the app is consistent with the account used during pairing.",
-      "If none of the above issues exist, ensure that the phone and the device are as close as possible, and complete the connection between the mobile phone app and the device within 30 seconds after the device's blue light starts breathing.",
-    ],
-    solutionsZh: [
-      "触摸指纹识别区域，检查设备是否有响应。",
-      "若设备响应异常或完全没有响应，可能是电量过低或已耗尽。请充电后再试。",
-      "若设备响应正常，请确认 App 登录的账号与配对时使用的账号一致。",
-      "若以上情况都不存在，请让手机尽量靠近设备，并在设备蓝灯开始呼吸闪烁后的 30 秒内，完成手机 App 与设备的连接。",
-    ],
-    videos: [],
-  },
-  {
-    id: "add-print-fail",
-    en: "Failed to add a fingerprint",
-    zh: "指纹添加失败",
-    solutionsEn: [
-      "Ensure your fingers are dry and clean, and try using another finger if needed.",
-      "It is recommended to add fingerprints when the device has sufficient power. Charge the device and try again if necessary.",
-    ],
-    solutionsZh: [
-      "请确保手指干燥、清洁，必要时换一根手指再试。",
-      "建议在设备电量充足时录入指纹。如有需要，请先为设备充电后再试。",
-    ],
-    videos: [],
-  },
-  {
-    id: "bind-missing",
-    en: "Cannot find the device when tapping + during binding",
-    zh: "绑定时点击 App「+」找不到设备，无法完成绑定",
-    solutionsEn: [
-      "Touch the fingerprint identification area to ensure the device is in wake-up state, then perform the binding operation.",
-      "Check if the device has already been bound to another account. Note: One device can only be bound to one account.",
-      "Try the following steps: First turn off the phone's Bluetooth, exit the app, then re-enable Bluetooth, restart the app, and try again.",
-    ],
-    solutionsZh: [
-      "触摸指纹识别区域，确认设备处于唤醒状态后，再进行绑定。",
-      "检查设备是否已经绑定到其他账号。注意：一台设备只能绑定一个账号。",
-      "可按以下步骤重试：先关闭手机蓝牙，退出 App，再重新打开蓝牙并重启 App，然后再次尝试。",
-    ],
-    videos: [],
-  },
-  {
-    id: "auto-lock",
-    en: "Auto-lock fails after closing the lock",
-    zh: "关锁后无法自动上锁",
-    solutionsEn: [
-      "Confirm that the Auto-Lock switch is enabled in More Settings of the app.",
-      "You can manually trigger locking via the app or by using an incorrect fingerprint to check if the locking function works normally.",
-    ],
-    solutionsZh: [
-      "请确认已在 App 的「更多设置」中打开自动上锁开关。",
-      "可通过 App 手动触发上锁，或使用一枚错误指纹，检查上锁功能是否正常。",
-    ],
-    videos: [],
   },
 ];
 
