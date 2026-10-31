@@ -755,10 +755,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     transform: scale(1.22);
     transform-origin: 24% 86%;
   }
+  .brand-slide-lifestyle { container-type: size; }
   .brand-slide-lifestyle > img {
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    width: 100cqh;
+    height: 100cqw;
+    max-width: none;
     object-fit: cover;
-    object-position: 48% center;
-    transform: none;
+    object-position: center;
+    transform: translate(-50%, -50%) rotate(90deg);
   }
   .brand-slide-manifesto > img {
     object-position: 34% 24%;
