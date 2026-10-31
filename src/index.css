@@ -768,7 +768,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
     transform: translate(-50%, -50%) rotate(90deg);
   }
   .brand-slide-manifesto > img {
-    object-position: 34% 24%;
+    object-position: 16% center;
     transform: none;
   }
   .brand-product-copy,
