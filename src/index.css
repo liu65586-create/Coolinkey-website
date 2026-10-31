@@ -923,6 +923,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   cursor: pointer;
   list-style: none;
 }
+.desk-panel summary span { flex: 1; min-width: 0; }
 .desk-panel summary::-webkit-details-marker { display: none; }
 .desk-panel summary svg { flex-shrink: 0; color: #8b908b; transition: transform 0.2s ease; }
 .desk-panel details[open] summary svg { transform: rotate(180deg); }
@@ -930,6 +931,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .desk-panel details > button,
 .desk-panel ol { margin: 0 0 16px; color: #686b66; font-size: 0.92rem; line-height: 1.6; }
 .desk-panel details > p strong { color: #202120; font-weight: 650; }
+.desk-panel details > p.desk-solution-label { margin-bottom: 8px; }
+.desk-panel ul.desk-solution {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding-left: 1.15em;
+  list-style: disc;
+  color: #686b66;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.desk-panel ul.desk-solution li { display: list-item; }
 .desk-panel a { color: #146c43; font-weight: 650; }
 .desk-panel ol { display: grid; gap: 12px; padding: 0; list-style: none; }
 .desk-panel li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; }
