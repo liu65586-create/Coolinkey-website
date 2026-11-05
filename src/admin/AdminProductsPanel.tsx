@@ -19,7 +19,7 @@ function emptyProduct(): CmsProduct {
     mainImage: "",
     galleryImages: [],
     specs: [],
-    purchaseLinkEn: "https://www.amazon.com/",
+    purchaseLinkEn: "https://a.co/d/046JKC0Z",
     purchaseLinkZh: "https://www.jd.com/",
     manuals: [],
   };
