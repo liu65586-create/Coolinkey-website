@@ -139,13 +139,14 @@ const lifeHero = {
 
 const lifeCards = [
   {
-    src: "/images/listing/life-ebike-frame.jpg",
+    src: "/images/listing/life-ebike-purple.jpg",
     en: "For Your E-Bike",
     zh: "用于电动自行车",
     bodyEn: "A practical fit for your everyday ride",
     bodyZh: "贴合每天的骑行",
-    altEn: "CLX1 fastened around the frame of a purple e-bike",
-    altZh: "CLX1 锁在一辆紫色电动自行车的车架上",
+    altEn: "CLX1 locked around the seat tube and rear wheel of a purple e-bike",
+    altZh: "CLX1 锁在一辆紫色电动自行车的座管和后轮上",
+    position: "center 42%",
   },
   {
     src: "/images/listing/life-handlebar-bag.jpg",
@@ -157,13 +158,14 @@ const lifeCards = [
     altZh: "收拢的 CLX1 放进自行车车把包",
   },
   {
-    src: "/images/listing/life-metal-gate.jpg",
+    src: "/images/listing/life-courtyard-gate.jpg",
     en: "Beyond the Bike",
     zh: "不只是自行车",
     bodyEn: "Flexible chain access for compatible everyday locking needs",
     bodyZh: "链条可以配合已经适配的日常上锁需求",
-    altEn: "CLX1 fastened across the bars of an ornate metal gate",
-    altZh: "CLX1 横锁在一扇铁艺门的栏杆上",
+    altEn: "CLX1 fastened around an iron courtyard gate",
+    altZh: "CLX1 锁在庭院铁门上",
+    position: "center 48%",
   },
 ];
 
@@ -462,7 +464,7 @@ export function LifeAndSpecs() {
               {lifeCards.map((shot) => (
                 <li key={shot.en}>
                   <figure>
-                    <img src={shot.src} alt={copy(shot.altEn, shot.altZh)} />
+                    <img src={shot.src} alt={copy(shot.altEn, shot.altZh)} style={"position" in shot ? { objectPosition: shot.position } : undefined} />
                     <figcaption>
                       <strong>{copy(shot.en, shot.zh)}</strong>
                       <p>{copy(shot.bodyEn, shot.bodyZh)}</p>
