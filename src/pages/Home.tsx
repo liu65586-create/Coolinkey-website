@@ -1,6 +1,7 @@
 import { ArrowRight, ChevronLeft, ChevronRight, Fingerprint, Link2, Shield, Smartphone } from "lucide-react";
 import { useEffect, useRef, useState, type MouseEvent, type PointerEvent } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { AppShowcase } from "../components/AppShowcase";
 import { VideoModal } from "../components/VideoModal";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
@@ -168,6 +169,41 @@ const lifeCards = [
     position: "center 48%",
   },
 ];
+
+function AngleGroupBlock({
+  group,
+  copy,
+}: {
+  group: AngleGroup;
+  copy: (en: string, zh: string) => string;
+}) {
+  return (
+    <section className="angle-group" aria-label={copy(group.titleEn, group.titleZh)}>
+      <header className="angle-group-head">
+        <h3>{copy(group.titleEn, group.titleZh)}</h3>
+        <p>{copy(group.leadEn, group.leadZh)}</p>
+      </header>
+      <ul className="angle-cards">
+        {group.cards.map((card) => (
+          <li key={card.src} className={card.lead ? "angle-card angle-card-lead" : "angle-card"}>
+            <figure>
+              <img
+                src={card.src}
+                alt={copy(card.altEn, card.altZh)}
+                className={card.fit === "contain" ? "angle-card-contain" : undefined}
+                style={card.position ? { objectPosition: card.position } : undefined}
+              />
+            </figure>
+            <div className="angle-card-copy">
+              <h4>{copy(card.titleEn, card.titleZh)}</h4>
+              <p>{copy(card.bodyEn, card.bodyZh)}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
 
 function useHomeCopy() {
   const { i18n } = useTranslation();
@@ -404,31 +440,14 @@ export function ProductAngles() {
             <p>{copy("A closer look at the details designed around you", "把为你设计的细节，再看近一些")}</p>
           </header>
           <div className="angle-groups">
-            {angleGroups.map((group) => (
-              <section key={group.titleEn} className="angle-group" aria-label={copy(group.titleEn, group.titleZh)}>
-                <header className="angle-group-head">
-                  <h3>{copy(group.titleEn, group.titleZh)}</h3>
-                  <p>{copy(group.leadEn, group.leadZh)}</p>
-                </header>
-                <ul className="angle-cards">
-                  {group.cards.map((card) => (
-                    <li key={card.src} className={card.lead ? "angle-card angle-card-lead" : "angle-card"}>
-                      <figure>
-                        <img
-                          src={card.src}
-                          alt={copy(card.altEn, card.altZh)}
-                          className={card.fit === "contain" ? "angle-card-contain" : undefined}
-                          style={card.position ? { objectPosition: card.position } : undefined}
-                        />
-                      </figure>
-                      <div className="angle-card-copy">
-                        <h4>{copy(card.titleEn, card.titleZh)}</h4>
-                        <p>{copy(card.bodyEn, card.bodyZh)}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </section>
+            <AngleGroupBlock group={angleGroups[0]} copy={copy} />
+          </div>
+        </div>
+        <AppShowcase />
+        <div className="v2-wrap">
+          <div className="angle-groups">
+            {angleGroups.slice(1).map((group) => (
+              <AngleGroupBlock key={group.titleEn} group={group} copy={copy} />
             ))}
           </div>
         </div>
