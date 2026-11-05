@@ -1,5 +1,5 @@
-import { ChevronDown, CirclePlay } from "lucide-react";
-import { lazy, Suspense, useMemo, useState } from "react";
+import { ChevronDown, ChevronLeft, ChevronRight, CirclePlay } from "lucide-react";
+import { lazy, Suspense, useLayoutEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { VideoModal } from "../components/VideoModal";
 import { useCms } from "../context/CmsContext";
@@ -180,6 +180,130 @@ const faqs: Faq[] = [
   },
 ];
 
+const VIDEO_GAP = 12;
+
+function VideoRail({
+  copy,
+  onPlay,
+}: {
+  copy: (en: string, zh: string) => string;
+  onPlay: (src: string) => void;
+}) {
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const startX = useRef<number | null>(null);
+  const startY = useRef<number | null>(null);
+  const swiped = useRef(false);
+  const [index, setIndex] = useState(0);
+  const [perPage, setPerPage] = useState(4);
+  const [stride, setStride] = useState(0);
+  const maxIndex = Math.max(0, stepVideos.length - perPage);
+
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const measure = () => {
+      const list = viewport.querySelector("ul");
+      const per = Math.max(1, Number(list ? getComputedStyle(list).getPropertyValue("--video-per") : 4) || 4);
+      const width = viewport.clientWidth;
+      const card = (width - VIDEO_GAP * (per - 1)) / per;
+      setPerPage(per);
+      setStride(card + VIDEO_GAP);
+      setIndex((current) => Math.min(current, Math.max(0, stepVideos.length - per)));
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    return () => observer.disconnect();
+  }, []);
+
+  const go = (next: number) => setIndex(Math.min(maxIndex, Math.max(0, next)));
+
+  const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    startX.current = event.clientX;
+    startY.current = event.clientY;
+    swiped.current = false;
+  };
+
+  const onPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (startX.current == null || startY.current == null) return;
+    const dx = event.clientX - startX.current;
+    const dy = event.clientY - startY.current;
+    startX.current = null;
+    startY.current = null;
+    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+    swiped.current = true;
+    go(index + (dx < 0 ? 1 : -1));
+  };
+
+  return (
+    <div className="use-video-rail">
+      <div
+        className="use-video-viewport"
+        ref={viewportRef}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => {
+          startX.current = null;
+          startY.current = null;
+        }}
+      >
+        <ul style={{ transform: `translateX(-${index * stride}px)` }}>
+          {stepVideos.map((video, videoIndex) => {
+            const hidden = videoIndex < index || videoIndex >= index + perPage;
+            return (
+              <li key={video.src} aria-hidden={hidden || undefined}>
+                <button
+                  type="button"
+                  className="use-video-card"
+                  tabIndex={hidden ? -1 : 0}
+                  onClick={() => {
+                    if (swiped.current) {
+                      swiped.current = false;
+                      return;
+                    }
+                    onPlay(video.src);
+                  }}
+                >
+                  <span className="use-video-still">
+                    <img src={video.poster} alt="" />
+                    <span className="use-play" aria-hidden="true">
+                      <CirclePlay size={28} />
+                    </span>
+                  </span>
+                  <strong>{copy(video.en, video.zh)}</strong>
+                  <span className="use-video-note">{copy(video.noteEn, video.noteZh)}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      {maxIndex > 0 ? (
+        <div className="use-video-controls">
+          <button type="button" aria-label={copy("Previous videos", "上一组")} disabled={index === 0} onClick={() => go(index - 1)}>
+            <ChevronLeft size={18} aria-hidden="true" />
+          </button>
+          <div className="use-video-dots">
+            {Array.from({ length: maxIndex + 1 }, (_, dot) => (
+              <button
+                key={dot}
+                type="button"
+                aria-label={copy(stepVideos[dot].en, stepVideos[dot].zh)}
+                aria-current={dot === index ? "true" : undefined}
+                onClick={() => go(dot)}
+              />
+            ))}
+          </div>
+          <button type="button" aria-label={copy("Next videos", "下一组")} disabled={index === maxIndex} onClick={() => go(index + 1)}>
+            <ChevronRight size={18} aria-hidden="true" />
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export function Support() {
   const { t, i18n } = useTranslation();
   const { defaultProduct } = useCms();
@@ -235,22 +359,7 @@ export function Support() {
           <h3 id="use-videos-title">{copy("Video Tutorials", "视频教程")}</h3>
           <p>{copy("Five recordings are ready", "目前有 5 段录像")}</p>
         </div>
-        <ul>
-          {stepVideos.map((video) => (
-            <li key={video.src}>
-              <button type="button" onClick={() => setVideoSrc(video.src)}>
-                <span className="use-video-still">
-                  <img src={video.poster} alt="" />
-                  <span className="use-play" aria-hidden="true">
-                    <CirclePlay size={28} />
-                  </span>
-                </span>
-                <strong>{copy(video.en, video.zh)}</strong>
-                <span className="use-video-note">{copy(video.noteEn, video.noteZh)}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
+        <VideoRail copy={copy} onPlay={setVideoSrc} />
       </section>
 
       <div id="troubleshooting" className="desk-split use-trouble" tabIndex={-1}>

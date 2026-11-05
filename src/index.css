@@ -999,10 +999,50 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 .use-videos { display: grid; gap: 22px; border-radius: 20px; background: #ecede9; padding: 28px 28px 24px; }
 .use-videos h3 { margin: 10px 0 0; color: #202120; font-size: clamp(1.6rem, 2vw, 2rem); font-weight: 650; letter-spacing: -0.03em; line-height: 1.2; }
 .use-videos > div p { margin: 12px 0 0; max-width: 36rem; color: #686b66; font-size: 0.95rem; line-height: 1.6; }
-.use-videos ul { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
-.use-videos button { display: grid; align-content: start; gap: 10px; width: 100%; border: 0; border-radius: 14px; background: #fff; color: #202120; padding: 12px; text-align: left; font: inherit; cursor: pointer; }
-.use-videos button:hover { background: #f8f8f6; }
-.use-videos button:hover .use-play { color: #146c43; }
+.use-video-rail { display: grid; gap: 8px; min-width: 0; }
+.use-video-viewport { container-type: inline-size; overflow: hidden; min-width: 0; touch-action: pan-y; }
+.use-videos ul {
+  --video-per: 4;
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: transform 0.45s ease;
+}
+.use-videos li { flex: 0 0 calc((100% - (var(--video-per) - 1) * 12px) / var(--video-per)); min-width: 0; }
+.use-video-card { display: grid; align-content: start; gap: 10px; width: 100%; border: 0; border-radius: 14px; background: #fff; color: #202120; padding: 12px; text-align: left; font: inherit; cursor: pointer; }
+.use-video-card:hover { background: #f8f8f6; }
+.use-video-card:hover .use-play { color: #146c43; }
+.use-video-controls { display: flex; align-items: center; justify-content: center; gap: 4px; }
+.use-video-controls > button,
+.use-video-dots button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #202120;
+  cursor: pointer;
+}
+.use-video-controls > button { border: 1px solid #e5e6e1; background: #fff; }
+.use-video-controls > button:hover:not(:disabled) { color: #146c43; border-color: #36b66a; }
+.use-video-controls > button:disabled { opacity: 0.35; cursor: default; }
+.use-video-dots { display: flex; align-items: center; }
+.use-video-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: rgba(32, 33, 32, 0.22); }
+.use-video-dots button[aria-current="true"]::before { width: 22px; background: #202120; }
+@container (max-width: 899px) {
+  .use-videos ul { --video-per: 2; }
+}
+@container (max-width: 520px) {
+  .use-videos ul { --video-per: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .use-videos ul { transition: none; }
+}
 .use-video-still { position: relative; display: grid; place-items: center; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 12px; background: #202120; }
 .use-video-still img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .use-play { position: relative; z-index: 1; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 999px; background: #fff; color: #36b66a; box-shadow: 0 4px 16px rgba(32, 33, 32, 0.18); }
@@ -1014,12 +1054,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .use-trouble .desk-copy h2 { font-size: 2rem; line-height: 1.2; }
   .use-trouble .desk-copy p { font-size: 1.0625rem; line-height: 1.6; }
 }
-@media (max-width: 1100px) {
-  .use-videos ul { grid-template-columns: 1fr 1fr; }
-}
 @media (max-width: 700px) {
   .use-guide { width: min(100% - 30px, 1440px); gap: 40px; }
-  .use-videos ul { grid-template-columns: 1fr; }
   .use-videos { margin-top: -30px; padding: 0; background: transparent; border-radius: 0; gap: 10px; }
   .use-videos > div { padding-left: 3px; }
   .use-start {
