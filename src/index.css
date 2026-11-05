@@ -332,7 +332,7 @@ html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.
 .v2-section-head { display: grid; gap: 16px; max-width: 760px; margin-bottom: 40px; }
 .v2-section-head h2, .v2-split h2, .v2-philosophy h2 { margin: 0; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 620; letter-spacing: -0.04em; line-height: 1.08; }
 .v2-section-head p, .v2-lead { margin: 16px 0 0; max-width: 38rem; color: #686b66; font-size: 1.0625rem; line-height: 1.65; }
-.brand-carousel { position: relative; height: calc(100svh - var(--nav-h, 80px)); overflow: hidden; background: #202120; color: #fff; }
+.brand-carousel { position: relative; height: calc(100svh - var(--nav-h, 80px)); overflow: hidden; background: #202120; color: #fff; touch-action: pan-y; }
 .brand-track { display: flex; height: 100%; transition: transform 0.7s ease; }
 .brand-slide { position: relative; flex: 0 0 100%; height: 100%; }
 .brand-slide[aria-hidden="true"] { visibility: hidden; }
@@ -378,6 +378,9 @@ html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.
   font-size: 1.0625rem;
   line-height: 1.6;
 }
+.brand-hero-badges { display: grid; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+.brand-hero-badges li { display: flex; align-items: flex-start; gap: 8px; color: rgba(255, 255, 255, 0.88); font-size: 0.92rem; line-height: 1.35; }
+.brand-hero-badges svg { flex: none; margin-top: 2px; color: #65ee27; }
 .brand-product-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 24px; }
 .brand-product-btn {
   display: inline-flex;
@@ -439,6 +442,7 @@ html[lang="zh"] #help .about-panel .about-signoff { font-size: clamp(1.35rem, 1.
     font-size: 1rem;
     line-height: 1.55;
   }
+  .brand-slide-product .brand-product-copy h1 { font-size: clamp(2.15rem, 3.2vw, 3.4rem); }
 }
 .brand-controls { position: absolute; z-index: 2; right: max(48px, calc((100% - 1440px) / 2)); bottom: 36px; display: flex; align-items: center; gap: 14px; }
 .brand-nav, .brand-dots button { border: 0; background: transparent; color: #fff; }
@@ -716,8 +720,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
 @media (max-width: 700px) {
   .angle-groups { gap: 24px; }
   .angle-cards { grid-template-columns: 1fr 1fr; gap: 16px 10px; }
-  .angle-card-copy { gap: 0; padding: 10px 12px 0; }
-  .angle-card p { display: none; }
+  .angle-card-copy { gap: 6px; padding: 10px 12px 12px; }
   .life-hero img { aspect-ratio: 4 / 3; }
   .life-aside { grid-template-columns: 1fr; gap: 16px; }
   .v2-wrap, .page-wrap, .site-container, main .home-page .page-wrap { width: min(100% - 30px, 1440px); }
@@ -738,6 +741,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .brand-slide::after {
     display: block;
     background: linear-gradient(to top, rgba(16, 24, 18, 0.78) 0%, rgba(16, 24, 18, 0.42) 26%, rgba(16, 24, 18, 0) 48%);
+  }
+  .brand-slide-product::after {
+    background: linear-gradient(to top, rgba(16, 24, 18, 0.88) 0%, rgba(16, 24, 18, 0.62) 46%, rgba(16, 24, 18, 0.28) 70%, rgba(16, 24, 18, 0) 88%);
   }
   .brand-slide img,
   .brand-slide-product > img,
@@ -811,9 +817,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .v2-btn:focus-visi
   .brand-principles { gap: 6px; margin-top: 12px; }
   .brand-principles strong { font-size: 0.9rem; }
   .brand-principles p { display: none; }
+  .brand-slide-product .brand-product-copy { bottom: 72px; width: calc(100% - 30px); }
+  .brand-slide-product .brand-product-lead {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+  .brand-hero-badges { gap: 6px; margin-top: 10px; }
+  .brand-hero-badges li { font-size: 0.78rem; }
   .brand-product-actions,
   .brand-product-copy:has(.brand-principles) .brand-product-actions { gap: 8px; margin-top: 14px; }
-  .brand-product-btn { min-height: 42px; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 0.88rem; }
+  .brand-product-btn { min-height: 48px; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 0.88rem; }
+  .brand-nav { width: 44px; height: 44px; }
   .brand-controls { right: 16px; bottom: 18px; left: auto; width: auto; }
 }
 @media (prefers-reduced-motion: reduce) {

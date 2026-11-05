@@ -26,7 +26,7 @@ export function LanguageSwitcher() {
     >
       <button
         type="button"
-        className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+        className={`min-h-11 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
           !isZh ? "bg-accent text-[#142018]" : "text-text-muted hover:text-accent"
         }`}
         onClick={() => setLang("en")}
@@ -35,7 +35,7 @@ export function LanguageSwitcher() {
       </button>
       <button
         type="button"
-        className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+        className={`min-h-11 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
           isZh ? "bg-accent text-[#142018]" : "text-text-muted hover:text-accent"
         }`}
         onClick={() => setLang("zh")}

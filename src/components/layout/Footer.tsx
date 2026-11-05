@@ -11,6 +11,8 @@ export function Footer() {
   const { config } = useSiteConfig();
   const lang: Lang = i18n.language.startsWith("zh") ? "zh" : "en";
   const email = config?.contact?.email?.trim() || "support@coolinkey.com";
+  // Hide the unfinished filing placeholder until a real ICP number replaces XXXX.
+  const icp = pickBilingual(lang, config?.footer?.icp, t("footer.icp")).replace(/ICP备XXXX号/g, "").trim();
 
   const onRegionChange = (next: ShoppingRegionMode) => {
     setMode(next);
@@ -19,7 +21,7 @@ export function Footer() {
   return (
     <footer className="v2-footer">
       <div className="v2-wrap v2-footer-meta">
-        <div>© COOLINKEY · {pickBilingual(lang, config?.footer?.icp, t("footer.icp"))}</div>
+        <div>© COOLINKEY{icp ? ` · ${icp}` : ""}</div>
         <div className="v2-footer-legal">
           <Link to="/privacy">{pickBilingual(lang, config?.footer?.privacy, t("footer.privacy"))}</Link>
           <Link to="/cookie-policy">{pickBilingual(lang, config?.footer?.cookie, t("footer.cookie"))}</Link>

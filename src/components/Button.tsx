@@ -11,7 +11,7 @@ type Props = {
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "children">;
 
 const base =
-  "inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-7 py-3 text-[15px] font-semibold leading-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full px-7 py-3 text-[15px] font-semibold leading-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
   primary: "border border-transparent bg-accent !text-[#142018] hover:bg-accent-hover",

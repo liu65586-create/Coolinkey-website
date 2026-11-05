@@ -1,5 +1,5 @@
 ﻿import { ZoomIn } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState, type PointerEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { ResolvedImage } from "./ResolvedImage";
 
@@ -14,10 +14,28 @@ export function ProductGallery({ images, productName, focus = "50% 50%" }: Props
   const list = useMemo(() => images.filter(Boolean), [images]);
   const [idx, setIdx] = useState(0);
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const touchX = useRef<number | null>(null);
+  const swiped = useRef(false);
 
   if (list.length === 0) return null;
 
   const current = list[Math.min(idx, list.length - 1)];
+  const onPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
+    touchX.current = event.clientX;
+    swiped.current = false;
+  };
+  const onPointerUp = (event: PointerEvent<HTMLButtonElement>) => {
+    const start = touchX.current;
+    touchX.current = null;
+    if (start == null || list.length < 2) return;
+    const dx = event.clientX - start;
+    if (Math.abs(dx) < 48) return;
+    swiped.current = true;
+    setIdx((value) => {
+      const next = value + (dx < 0 ? 1 : -1);
+      return (next + list.length) % list.length;
+    });
+  };
 
   return (
     <div className="product-gallery">
@@ -39,7 +57,15 @@ export function ProductGallery({ images, productName, focus = "50% 50%" }: Props
 
       <button
         type="button"
-        onClick={() => setLightbox(current)}
+        onClick={() => {
+          if (swiped.current) {
+            swiped.current = false;
+            return;
+          }
+          setLightbox(current);
+        }}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
         className="product-frame"
         aria-label={t("product.zoomHint")}
       >

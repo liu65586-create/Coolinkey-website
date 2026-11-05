@@ -16,7 +16,7 @@ export function CarouselControls({ index, total, onPrev, onNext, onSelect }: Pro
       <div className="flex gap-1">
         <button
           type="button"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-full text-text-muted transition-colors hover:bg-black/[0.04] hover:text-accent disabled:opacity-30"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full text-text-muted transition-colors hover:bg-black/[0.04] hover:text-accent disabled:opacity-30"
           disabled={index === 0}
           onClick={onPrev}
           aria-label="Previous"
@@ -25,7 +25,7 @@ export function CarouselControls({ index, total, onPrev, onNext, onSelect }: Pro
         </button>
         <button
           type="button"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-full text-text-muted transition-colors hover:bg-black/[0.04] hover:text-accent disabled:opacity-30"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full text-text-muted transition-colors hover:bg-black/[0.04] hover:text-accent disabled:opacity-30"
           disabled={index >= total - 1}
           onClick={onNext}
           aria-label="Next"

@@ -15,7 +15,8 @@ export const copyDefaults = {
     tagline: bi("Smart Lock for a Freer You", "让出行更自由的智能锁"),
     privacy: bi("Privacy Policy", "隐私政策"),
     cookie: bi("GDPR & Cookie Statement", "GDPR 与 Cookie 声明"),
-    icp: bi("ICP备XXXX号", "ICP备XXXX号"),
+    // Kept so a real filing number can replace it. Footer hides this XXXX placeholder.
+    icp: bi("", ""),
   },
   heroButtons: {
     discover: bi("Discover CLX1", "了解 CLX1"),

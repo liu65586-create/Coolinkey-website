@@ -1,11 +1,12 @@
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState, type MouseEvent } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, Fingerprint, Link2, Shield, Smartphone } from "lucide-react";
+import { useEffect, useRef, useState, type MouseEvent, type PointerEvent } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { VideoModal } from "../components/VideoModal";
 import { useCms } from "../context/CmsContext";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import type { Lang } from "../utils/siteCopy";
 import { pickBilingual } from "../utils/siteCopy";
+import { buildPurchaseUrl } from "../utils/purchaseLinks";
 import { scrollToSection, sectionHash, sectionIdFromPath } from "../utils/siteSections";
 import { useTranslation } from "react-i18next";
 
@@ -39,40 +40,40 @@ const angleGroups: AngleGroup[] = [
     cards: [
       {
         src: "/images/listing/angle-compact.jpg",
-        titleEn: "Compact to Carry. Easy to Take Along",
-        titleZh: "小巧便携，轻松带走",
-        bodyEn: "The flexible, sleeved chain coils neatly alongside the lock body for easier storage and transport.",
-        bodyZh: "柔软、带护套的链条整齐地盘在锁体旁，收纳和携带都更方便。",
+        titleEn: "Compact & Portable",
+        titleZh: "小巧折叠，随行便携",
+        bodyEn: "Folds neatly into a sleek profile for effortless storage in a backpack, pannier, or frame bag without awkward bulk.",
+        bodyZh: "平整紧凑折叠设计，随身背包、车前包轻松收纳，告别笨重晃动。",
         altEn: "Folded CLX1 with the sleeved chain coiled beside the lock body",
         altZh: "收拢的 CLX1，带护套的链条盘在锁体旁",
       },
       {
         src: "/images/listing/angle-cutter-v2.jpg",
-        titleEn: "6 mm Stainless Steel Chain",
-        titleZh: "6 mm 不锈钢链条",
-        bodyEn: "Built for everyday security, with a protective sleeve around the chain.",
-        bodyZh: "为日常安防而做，链条外有一层防护套。",
+        titleEn: "6 mm Hardened Stainless Steel Chain",
+        titleZh: "6mm 加粗硬化不锈钢链",
+        bodyEn: "Built for heavy-duty security. Engineered links resist bolt cutters, saws, and brute force leverage attacks.",
+        bodyZh: "高强度抗液压剪与锯割破坏，提供扎实可靠的物理防盗屏障。",
         altEn: "Cutter jaws closed on a stainless steel chain link",
         altZh: "剪钳钳口夹在不锈钢链条的链节上",
         position: "center",
       },
       {
         src: "/images/listing/angle-coil.jpg",
-        titleEn: "Flexible by Design",
-        titleZh: "柔韧，源于设计",
-        bodyEn: "The flexible chain coils neatly alongside the lock body.",
-        bodyZh: "柔韧的链条可以整齐地盘在锁体旁。",
+        titleEn: "Flexible & Anti-Scratch Sleeve",
+        titleZh: "柔韧好绕，防刮护套",
+        bodyEn: "Highly pliable chain easily wraps around varied frames and fixed posts, while the wear-resistant textile sleeve prevents paint scratches.",
+        bodyZh: "链身灵活易弯折，适应各种栏杆与车架；加厚耐磨布套全方位保护车漆。",
         altEn: "Flexible CLX1 chain coiled beside the lock body",
         altZh: "柔韧的 CLX1 链条盘在锁体旁",
       },
       {
         src: "/images/listing/angle-body.jpg",
         titleEn: "Precision in Every Detail",
-        titleZh: "精密，见于每一处细节",
-        bodyEn: "A streamlined stainless steel lock body houses the fingerprint sensor and USB-C charging port.",
-        bodyZh: "流线的不锈钢锁体上，集成了指纹传感器和 USB-C 充电口。",
-        altEn: "Stainless steel CLX1 lock body with the fingerprint sensor and USB-C port",
-        altZh: "CLX1 不锈钢锁体，可见指纹传感器和 USB-C 接口",
+        titleZh: "精工细节，智能守护",
+        bodyEn: "Reinforced zinc alloy lock body with an ergonomic sliding cover, 360° biometric sensor, and emergency USB-C jump-start port.",
+        bodyZh: "强化锌合金一体锁体，搭配人体工学推拉防尘盖、360°指纹感应与Type-C应急供电口。",
+        altEn: "Zinc alloy CLX1 lock body with the fingerprint sensor and USB-C port",
+        altZh: "CLX1 锌合金锁体，可见指纹传感器和 USB-C 接口",
         position: "center 46%",
       },
     ],
@@ -191,6 +192,13 @@ type BrandSlide = {
   principles?: BrandPrinciple[];
 };
 
+const heroBadges = [
+  { icon: Fingerprint, en: "0.5s Fast Fingerprint (Up to 60 Users)", zh: "0.5秒极速指纹识别（支持60枚）" },
+  { icon: Link2, en: "6mm Hardened Stainless Steel Chain", zh: "6mm加粗硬化不锈钢链身" },
+  { icon: Shield, en: "IP67 Weatherproof & Type-C Jump-Start", zh: "IP67防尘防水 & Type-C应急供电" },
+  { icon: Smartphone, en: "Tuya Smart App & 2 Backup Keys", zh: "涂鸦智能App管理 & 2把机械备用钥匙" },
+];
+
 const brandSlides: BrandSlide[] = [
   {
     id: "product",
@@ -199,10 +207,10 @@ const brandSlides: BrandSlide[] = [
     altZh: "双手握住 CLX1 锁的两端",
     eyebrowEn: "CLX1 / FINGERPRINT SMART CHAIN LOCK",
     eyebrowZh: "CLX1 / 指纹智能链条锁",
-    titleEn: "Unlock with\na touch",
-    titleZh: "轻触，\n即开",
-    bodyEn: "Fingerprint access, made for everyday security",
-    bodyZh: "指纹解锁，为日常安全而生",
+    titleEn: "Smart Keyless Security, Built for Every Journey",
+    titleZh: "无匙智锁，全场景随行守护",
+    bodyEn: "COOLINKEY CLX Smart Chain Lock — Featuring instant biometric unlock, heavy-duty 6mm hardened stainless steel, and all-weather IP67 protection.",
+    bodyZh: "COOLINKEY CLX 智能指纹链条锁 —— 0.5秒疾速生物识别，6mm高强度不锈钢链条，IP67全天候深度防水。",
   },
   {
     id: "lifestyle",
@@ -234,11 +242,15 @@ const brandSlides: BrandSlide[] = [
 ];
 
 export function HomeHero() {
-  const { loading, config, copy } = useHomeCopy();
+  const { loading, config, defaultProduct, lang, copy } = useHomeCopy();
   const { hash } = useLocation();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const touchX = useRef<number | null>(null);
   const count = brandSlides.length;
+  const amazonUrl = defaultProduct?.purchaseLinkEn
+    ? buildPurchaseUrl(defaultProduct, { useChinaStores: false, i18nLang: lang })
+    : "";
 
   useEffect(() => {
     if (hash === "#approach") setIndex(0);
@@ -253,6 +265,20 @@ export function HomeHero() {
   if (loading || !config) return <div className="site-loading">COOLINKEY</div>;
 
   const go = (next: number) => setIndex((next + count) % count);
+  const onPointerDown = (event: PointerEvent<HTMLElement>) => {
+    if ((event.target as HTMLElement).closest("button, a")) return;
+    touchX.current = event.clientX;
+    setPaused(true);
+  };
+  const onPointerUp = (event: PointerEvent<HTMLElement>) => {
+    const start = touchX.current;
+    touchX.current = null;
+    setPaused(false);
+    if (start == null) return;
+    const dx = event.clientX - start;
+    if (Math.abs(dx) < 48) return;
+    go(dx < 0 ? index + 1 : index - 1);
+  };
   const onSlideLink = (event: MouseEvent<HTMLAnchorElement>, to: string) => {
     const id = sectionIdFromPath(to);
     if (!id || hash !== sectionHash(id)) return;
@@ -270,6 +296,8 @@ export function HomeHero() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
     >
       <div className="brand-track" style={{ transform: `translateX(-${index * 100}%)` }}>
         {brandSlides.map((slide, slideIndex) => (
@@ -293,6 +321,16 @@ export function HomeHero() {
                 <h2 id={slide.id === "lifestyle" ? "lifestyle-title" : undefined}>{copy(slide.titleEn, slide.titleZh)}</h2>
               )}
               {slide.bodyEn ? <p className="brand-product-lead">{copy(slide.bodyEn, slide.bodyZh)}</p> : null}
+              {slideIndex === 0 ? (
+                <ul className="brand-hero-badges">
+                  {heroBadges.map((badge) => (
+                    <li key={badge.en}>
+                      <badge.icon size={16} strokeWidth={1.8} aria-hidden="true" />
+                      <span>{copy(badge.en, badge.zh)}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
               {slide.principles ? (
                 <ol className="brand-principles">
                   {slide.principles.map((item) => (
@@ -305,12 +343,14 @@ export function HomeHero() {
               ) : null}
               {slideIndex === 0 ? (
                 <div className="brand-product-actions">
-                  <Link className="brand-product-btn brand-product-btn-primary" to="/#clx1" onClick={(event) => onSlideLink(event, "/#clx1")}>
-                    <span>{copy("Explore CLX1", "探索 CLX1")}</span>
-                    <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
-                  </Link>
-                  <Link className="brand-product-btn brand-product-btn-secondary" to="/#how-it-works" onClick={(event) => onSlideLink(event, "/#how-it-works")}>
-                    {copy("How it works", "了解使用方式")}
+                  {amazonUrl ? (
+                    <a className="brand-product-btn brand-product-btn-primary" href={amazonUrl} target="_blank" rel="noopener noreferrer">
+                      <span>{copy("Buy on Amazon", "在 Amazon 购买")}</span>
+                      <ArrowRight size={20} strokeWidth={1.8} aria-hidden="true" />
+                    </a>
+                  ) : null}
+                  <Link className="brand-product-btn brand-product-btn-secondary" to="/#features" onClick={(event) => onSlideLink(event, "/#features")}>
+                    {copy("Explore Features", "了解功能")}
                   </Link>
                 </div>
               ) : slide.principles ? (
@@ -355,7 +395,7 @@ export function ProductAngles() {
 
   return (
     <div className="v2-home">
-      <section className="v2-section" aria-labelledby="detail-angles-title">
+      <section className="v2-section" id="features" aria-labelledby="detail-angles-title">
         <div className="v2-wrap">
           <header className="v2-section-head">
             <h2 id="detail-angles-title">{copy("Every angle", "每个角度")}</h2>
@@ -404,8 +444,11 @@ export function LifeAndSpecs() {
       <section className="v2-section" aria-labelledby="carry-title">
         <div className="v2-wrap">
           <header className="v2-section-head">
-            <h2 id="carry-title">{copy("Designed for Everyday Life", "为日常生活而设计")}</h2>
-            <p>{copy("Thoughtful security that fits the way you move through your day", "贴合日常节奏的细致防护")}</p>
+            <h2 id="carry-title">{copy("Versatile Protection Beyond Cycling", "不只骑行，多场景随心防护")}</h2>
+            <p>{copy(
+              "Engineered for bicycles, e-bikes, motorcycles, scooters, cargo trailers, store shutters, and warehouse gates. Wherever dependable security meets smart daily access, COOLINKEY delivers uncompromising defense.",
+              "无论是公路自行车、电动摩托、滑板车，还是户外大门、仓库门闸、拖车货柜，COOLINKEY 随时为你提供坚固可靠的物理防线与智能便捷体验。",
+            )}</p>
           </header>
           <div className="life-stage">
             <figure className="life-hero">

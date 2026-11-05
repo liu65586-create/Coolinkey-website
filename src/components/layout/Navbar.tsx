@@ -10,7 +10,7 @@ import { useResolvedMediaUrl } from "../../hooks/useResolvedMediaUrl";
 import { scrollToSection, sectionHash, sectionIdFromPath, SITE_SECTION_IDS, type SiteSectionId } from "../../utils/siteSections";
 
 const NAV_SECTIONS: Record<string, readonly SiteSectionId[]> = {
-  "/#clx1": ["clx1", "how-it-works"],
+  "/#clx1": ["clx1", "how-it-works", "features"],
   "/#support": ["support"],
   "/#safety": ["safety"],
   "/#help": ["help", "about", "contact"],
@@ -165,16 +165,15 @@ export function Navbar() {
           <LanguageSwitcher />
         </nav>
 
-        <div className="flex items-center gap-3 md:hidden">
-          <LanguageSwitcher />
+        <div className="flex items-center md:hidden">
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-text-muted hover:bg-black/[0.04] hover:text-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-text-muted hover:bg-black/[0.04] hover:text-accent"
             aria-expanded={open}
             aria-controls="mobile-nav"
+            aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
             onClick={() => setOpen((v) => !v)}
           >
-            <span className="sr-only">{open ? t("nav.closeMenu") : t("nav.openMenu")}</span>
             {open ? <IconClose /> : <IconMenu />}
           </button>
         </div>
@@ -191,7 +190,7 @@ export function Navbar() {
                   to={item.to}
                   aria-current={isActive ? "true" : undefined}
                   className={[
-                    "rounded-lg px-2 py-2 text-[15px] font-medium",
+                    "flex min-h-11 items-center rounded-lg px-2 text-[15px] font-medium",
                     isActive ? "text-text" : "text-text-muted hover:bg-black/[0.03] hover:text-accent",
                   ].join(" ")}
                   onClick={(event) => onNavigate(event, item.to)}
@@ -200,6 +199,9 @@ export function Navbar() {
                 </Link>
               );
             })}
+            <div className="mt-3 px-2">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       ) : null}
