@@ -107,6 +107,30 @@
     "noPreview": "No preview available.",
     "videoNote": "YouTube (EN) — add Bilibili embed URL in CMS for ZH when available."
   },
+  "appShowcase": {
+    "badge": "SMART ECOSYSTEM",
+    "headline": "Total Control at Your Fingertips.",
+    "highlight": "Powered by Tuya Smart.",
+    "subtitle": "Seamlessly connected via Bluetooth 5.0. Manage multi-user access, grant recurring E-Keys, and review chronological security logs in real time.",
+    "tabsLabel": "App features",
+    "cards": {
+      "unlock": {
+        "title": "One-Tap Bluetooth Unlock & Live Battery Status",
+        "body": "Responsive in-app slider unlock with zero delay. Monitor accurate battery percentage, auto-lock countdown, and hardware firmware updates directly from the dashboard.",
+        "alt": "Coolinkey app home with one-tap Bluetooth unlock, battery level, and auto lock"
+      },
+      "ekey": {
+        "title": "Flexible Remote E-Key Sharing (Time-Limited / Recurring)",
+        "body": "Grant secure access to family, guests, or couriers without handing over physical keys. Customize effective date windows, recurring weekly schedules, or offline unlock privileges.",
+        "alt": "Shared member screen for a time-limited, recurring E-Key"
+      },
+      "log": {
+        "title": "Full Chronological Audit Trail & Multi-Fingerprint Tracking",
+        "body": "Every single security event is timestamped. Track which member or registered finger unlocked the lock, check Bluetooth commands, and review auto-lock triggers for absolute security.",
+        "alt": "Timestamped activity log with member, fingerprint, and auto-lock events"
+      }
+    }
+  },
   "footer": {
     "tagline": "Smart Lock for a Freer You",
     "privacy": "Privacy Policy",
