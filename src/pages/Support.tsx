@@ -51,6 +51,14 @@ const stepVideos = [
     noteEn: "The mechanical key recording.",
     noteZh: "机械钥匙的操作录像。",
   },
+  {
+    src: "/videos/how-to/smart-chain-share-ekey.mp4",
+    poster: "/images/how-to/share-ekey.jpg",
+    en: "Share an E-Key",
+    zh: "分享电子钥匙",
+    noteEn: "The recording for sharing an E-Key.",
+    noteZh: "分享电子钥匙的操作录像。",
+  },
 ];
 
 const quickSteps = [
@@ -357,7 +365,7 @@ export function Support() {
         <div>
           <p className="use-kicker">{text(page?.videos, "supportPage.videos")}</p>
           <h3 id="use-videos-title">{copy("Video Tutorials", "视频教程")}</h3>
-          <p>{copy("Five recordings are ready", "目前有 5 段录像")}</p>
+          <p>{copy("Six recordings are ready", "目前有 6 段录像")}</p>
         </div>
         <VideoRail copy={copy} onPlay={setVideoSrc} />
       </section>
